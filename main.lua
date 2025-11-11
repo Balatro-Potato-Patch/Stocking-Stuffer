@@ -123,7 +123,6 @@ SMODS.ConsumableType({
 
 -- TODO: Give empty sprite
 -- TODO: Remove particles
--- TODO: Automatically opens after defeating boss blind
 -- TODO: Christmas Tree in palce of G.HUD
 SMODS.Booster({
     key = 'stocking_present_select',
@@ -277,6 +276,35 @@ function CardArea:emplace(card, location, stay_flipped)
         return
     end
     stocking_stuffer_card_area_emplace(self, card, location, stay_flipped)
+end
+
+local igo = Game.init_game_object
+Game.init_game_object = function(self)
+    local ret = igo(self)
+    ret.stocking_last_pack = 1
+    return ret
+end
+
+local update_shopref = Game.update_shop
+function Game.update_shop(self, dt)
+    update_shopref(self, dt)
+    if not G.GAME.stocking_last_pack or G.GAME.round_resets.ante <= G.GAME.stocking_last_pack then return end
+    G.GAME.stocking_last_pack = G.GAME.round_resets.ante
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        func = function()
+            if G.STATE_COMPLETE then
+                local card = Card(G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
+                    G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2, G.CARD_W * 1.27, G.CARD_H * 1.27, G.P_CARDS.empty,
+                    G.P_CENTERS["p_stocking_present_select"],
+                    { bypass_discovery_center = true, bypass_discovery_ui = true })
+                card.cost = 0
+                G.FUNCS.use_card({ config = { ref_table = card } })
+                card:start_materialize()
+                return true
+            end
+        end
+    }))
 end
 
 -- TODO: Calculation of stocking_present area
