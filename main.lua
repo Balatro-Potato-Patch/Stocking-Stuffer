@@ -204,11 +204,13 @@ function Game:start_run(args)
         { card_limit = 100, type = 'stocking_stuffer_hide', highlight_limit = 1 }
     )
 
+    StockingStuffer.states.slot_visible = 1
     StockingStuffer.animate_areas()
 end
 
 G.FUNCS.toggle_jokers_presents = function(e)
     StockingStuffer.states.slot_visible = StockingStuffer.states.slot_visible * -1
+    play_sound('paper1')
     StockingStuffer.animate_areas()
 end
 
