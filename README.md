@@ -16,7 +16,7 @@ Here's a short refresher of how you will participate in this mod:
 3. You are not allowed to change `main.lua`. If you require something to be changed, please contact an event organizer.
   - Pull requests with unauthorized changes to `main.lua` will be rejected
 
-5. Once you are finished making your additions, create a Pull Request to the original repo!
+4. Once you are finished making your additions, create a Pull Request to the original repo!
   - Your PR should contain the following:
     - One `.lua` file containing your objects. The filename should include your username
     - Optional `.toml` files for your lovely patches. The filenames should include your username
