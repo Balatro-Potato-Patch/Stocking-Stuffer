@@ -6,9 +6,9 @@ return {
     misc = {
         dictionary = {
             k_stocking_present = 'Present',
-            k_stocking_present_filler = 'Present',
+            k_stocking_wrapped_present = 'Wrapped Present',
 			b_stocking_present_cards = 'Presents',
-            b_stocking_present_filler_cards = 'Presents',
+            b_stocking_wrapped_present_cards = 'Presents',
             stocking_stuffer_gift_tag = 'From ',
             stocking_stuffer_to_jokers = 'Show Jokers',
             stocking_stuffer_to_presents = 'Show Presents',
@@ -49,10 +49,17 @@ return {
             }
         },
         Other = {
-            undiscovered_stocking_present_filler = {
+            undiscovered_stocking_wrapped_present = {
 				name = 'Unopened Present',
 				text = {
 					'Unwrap this gift in a',
+					'run to find out what it does'
+				}
+			},
+            undiscovered_stocking_present = {
+				name = 'Undiscovered Present',
+				text = {
+					'Find this Present in a',
 					'run to find out what it does'
 				}
 			},
