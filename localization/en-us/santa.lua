@@ -16,6 +16,13 @@ return {
                     'Testing'
                 }
             },
+            ["Santa Claus_stocking_gingerbread"] = {
+                name = 'Gingerbread Man',
+                text = {
+                    'When used, {C:green}reroll{} the shop',
+                    'for free {C:attention}once{} per shop'
+                }
+            },
         },
     }
 }

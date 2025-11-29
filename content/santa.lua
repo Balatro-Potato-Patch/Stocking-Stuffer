@@ -81,3 +81,42 @@ StockingStuffer.Present({
         end
     end
 })
+
+StockingStuffer.Present({
+    developer = display_name, -- DO NOT CHANGE
+
+    key = 'gingerbread', -- keys are prefixed with 'display_name_stocking_' for reference
+    pos = { x = 3, y = 0 },
+    config = { extra = {ready = true} },
+
+    -- Adjusts the hitbox on the item
+    pixel_size = { w = 62, h = 74 },
+
+    use = function(self, card)
+        card.ability.extra.ready = false
+        SMODS.change_free_rerolls(1)
+        G.FUNCS.reroll_shop()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                SMODS.change_free_rerolls(-1)                
+                return true
+            end
+        }))
+    end,
+    keep_on_use = function()
+        return true
+    end,
+    can_use = function(self, card)
+        return G.STATE == G.STATES.SHOP and card.ability.extra.ready
+    end,
+
+    calculate = function(self, card, context)
+        if context.starting_shop and StockingStuffer.first_calculation then
+            card.ability.extra.ready = true
+            return {
+                message = 'Ready!'
+            }
+        end
+    end
+})
