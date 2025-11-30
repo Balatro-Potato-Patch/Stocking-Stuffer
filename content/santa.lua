@@ -166,3 +166,104 @@ StockingStuffer.Present({
     key = 'coal', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 0, y = 0 },
 })
+
+
+StockingStuffer.Present({
+    developer = display_name, -- DO NOT CHANGE
+    key = 'jack_in_box', -- keys are prefixed with 'display_name_stocking_' for reference
+    pos = { x = 4, y = 0 },
+    config = { extra = {state = 1, crank = 0, gain = 1, xmult = 1, denom = 10} },
+
+    -- Adjusts the hitbox on the item
+    pixel_size = { w = 51, h = 76 },
+    disable_use_animation = true,
+    use = function(self, card)
+        card.ability.extra.state = card.ability.extra.state * -1
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()                
+                card.children.center:set_sprite_pos({x = card.ability.extra.state == 1 and 4 or 5, y = 0})
+                return true
+            end
+        }))
+        SMODS.calculate_effect({
+            message = card.ability.extra.state == 1 and localize('santa_claus_pop') or '.'
+        }, card)
+    end,
+    keep_on_use = function()
+        return true
+    end,
+    can_use = function(self, card)
+        return true
+    end,
+
+    calculate = function(self, card, context)
+        if context.final_scoring_step and StockingStuffer.second_calculation then
+            if card.ability.extra.state == 1 and card.ability.extra.crank > 0 then
+                local xmult = card.ability.extra.xmult + (card.ability.extra.crank * card.ability.extra.gain)
+                card.ability.extra.crank = 0
+                return {
+                    xmult = xmult,
+                    extra = {
+                        message = localize('k_reset'),
+                        func = function()
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after', delay = 0.7,
+                                func = function()
+                                    card.ability.extra.state = -1
+                                    card.children.center:set_sprite_pos({x = 5, y = 0}) 
+                                    return true
+                                end
+                            }))
+                        end
+                    }
+                }
+            elseif card.ability.extra.state == -1 then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = 'crank',
+                    scalar_value = 'gain',
+                    scaling_message = {message = localize('santa_claus_crank')},
+                    block_overrides = {message = true} 
+                })
+                return nil, true
+            end
+        end
+        if context.before and card.ability.extra.state == -1 and StockingStuffer.first_calculation then
+            if SMODS.pseudorandom_probability(card, 'santa_jack_in_the_box', 1, card.ability.extra.denom - card.ability.extra.crank) then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after', delay = 0.7,
+                    func = function()
+                        card.children.center:set_sprite_pos({x=4, y=0})
+                        return true
+                    end
+                }))
+                card.ability.extra.state = 1
+                card.ability.extra.crank = 0                
+                return {
+                    message = localize('santa_claus_pop')
+                }
+            else
+                return {
+                    message = '.'
+                }
+            end
+        end
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.denom - card.ability.extra.crank, 'santa_jack_in_the_box')
+        return {key = card.ability.extra.state == 1 and 'Santa Claus_stocking_jack_in_box_A' or 'Santa Claus_stocking_jack_in_box_B', vars = {
+            num, denom, card.ability.extra.gain, card.ability.extra.xmult + (card.ability.extra.crank * card.ability.extra.gain), card.ability.extra.xmult
+        }}
+    end,
+    load = function(self, card, card_table, other_card)
+        card.loaded = true
+    end,
+    update = function(self, card, dt)
+        if card.loaded then
+            card.children.center:set_sprite_pos({x = card.ability.extra.state == 1 and 4 or 5, y = 0})
+            card.loaded = false
+        end
+    end
+})

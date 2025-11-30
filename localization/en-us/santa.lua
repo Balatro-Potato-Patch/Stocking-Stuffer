@@ -1,4 +1,10 @@
 return {
+    misc = {
+        dictionary = {
+            santa_claus_crank = 'Cranked',
+            santa_claus_pop = 'Pop!'
+        }
+    },
     descriptions = {
         stocking_present = {
             ["Santa Claus_stocking_snowglobe"] = {
@@ -35,6 +41,36 @@ return {
                     '{stocking}usable{}'
                 }
             },
+            ['Santa Claus_stocking_jack_in_box_A'] = {
+                name = 'Jack in the Box',
+                text = {
+                    {
+                        '{C:white,X:red}X#4#{} Mult when',
+                        'scoring is complete',
+                        'then {C:attention}reset{} to {C:white,X:red}X#5#',
+                        '{stocking}after'
+                    },{
+                        'Close the box!',
+                        '{stocking}usable{}'
+                    }
+                }
+            },
+            ['Santa Claus_stocking_jack_in_box_B'] = {
+                name = 'Jack in the Box',
+                text = {
+                    {
+                        'Gain {C:white,X:red}X#3#{} Mult',
+                        'when a hand is played',
+                        '{C:inactive,s:0.8}(Currently {X:red,C:white,s:0.8}X#4#{C:inactive,s:0.8})'
+                    },{
+                        '{C:green}#1# in #2#{} chance to {C:attention}open',
+                        'and lose all {C:red}XMult',
+                    },{
+                        'Open the box!',
+                        '{stocking}usable{}'
+                    }
+                }
+            }
         },
     }
 }
