@@ -514,10 +514,7 @@ end
 -- Gives player a Sack of Presents on shop enter when tracking var condition is met
 local update_shopref = Game.update_shop
 function Game.update_shop(self, dt)
-    if not G.GAME.stocking_last_pack or G.GAME.round_resets.ante <= G.GAME.stocking_last_pack then 
-        update_shopref(self, dt)
-        return
-    end
+    if not G.GAME.stocking_last_pack or G.GAME.round_resets.ante <= G.GAME.stocking_last_pack then return end
     G.GAME.stocking_last_pack = G.GAME.round_resets.ante
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
@@ -541,7 +538,7 @@ end
 -- Toggles Present and Joker areas depending on what cards are being juiced
 local stocking_stuffer_card_juice_up = Card.juice_up
 function Card:juice_up(scale, rot)
-    if (self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1) then
+    if self.area and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
         G.FUNCS.toggle_jokers_presents()
         for i=1, 2 do
             G.E_MANAGER:add_event(Event({
