@@ -341,7 +341,9 @@ StockingStuffer.Present({
             card.dummy.added_to_deck = true
             if card.ability.extra.dummy_abil then card.dummy.ability = card.ability.extra.dummy_abil end
         end
-        if card.ability.extra.joker == "j_riff_raff" then
+        if context.setting_blind and card.ability.extra.joker == "j_riff_raff" and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+             local jokers_to_create = math.min(card.dummy.ability.extra,
+                G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
             SMODS.calculate_effect({message = localize('k_plus_joker')}, card)
             G.E_MANAGER:add_event(Event({
                 trigger = 'after', delay = 0.7,
@@ -350,13 +352,15 @@ StockingStuffer.Present({
                     return true
                 end
             }))
+            G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
             G.E_MANAGER:add_event(Event({
                 trigger = 'after', delay = 0.7,
                 func = function()                
-                    for i=1, card.dummy.ability.extra do
+                    for i=1, jokers_to_create do
                         local _c = SMODS.add_card({set = 'Joker', skip_materialize = true})
                         _c:start_materialize()
                     end
+                    G.GAME.joker_buffer = 0
                     return true
                 end
             }))
