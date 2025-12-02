@@ -3,7 +3,7 @@ local display_name = 'BakersDozenBagels'
 SMODS.Atlas {
     key = display_name .. '_presents',
     path = 'bagels_presents.png',
-    px = 71,
+    px = 103,
     py = 95
 }
 
@@ -15,7 +15,10 @@ StockingStuffer.Developer {
 StockingStuffer.WrappedPresent {
     developer = display_name,
     pos = { x = 0, y = 0 },
-    atlas = display_name .. '_presents'
+    atlas = display_name .. '_presents',
+
+    display_size = { w = 71, h = 95 },
+    pixel_size = { w = 71 * 71 / 103, h = 95 },
 }
 
 --#region Gift Receipt
@@ -25,6 +28,9 @@ StockingStuffer.Present {
 
     key = 'GiftReceipt',
     pos = { x = 1, y = 0 },
+
+    display_size = { w = 71, h = 95 },
+    pixel_size = { w = 71 * 71 / 103, h = 95 },
 
     config = { extra = 3 },
     loc_vars = function(self, info_queue, card)
@@ -87,6 +93,9 @@ StockingStuffer.Present {
 
     key = 'Origami',
     pos = { x = 2, y = 0 },
+
+    display_size = { w = 103, h = 95 },
+    pixel_size = { w = 71, h = 95 },
 
     config = { extra = { div = 2, mul = 3 } },
     loc_vars = function(self, info_queue, card)
