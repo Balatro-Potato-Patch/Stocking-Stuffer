@@ -15,12 +15,12 @@ SMODS.Atlas({
 
 SMODS.Atlas({
 	key = display_name .. "_wrapped",
-    path = "snowglobe.png",
-    px = 50,
-    py = 50,
+	path = "snowglobe.png",
+	px = 50,
+	py = 50,
 	frames = 10,
 	atlas_table = "ANIMATION_ATLAS",
-	fps = 10
+	fps = 10,
 })
 
 -- Developer Template
@@ -36,7 +36,7 @@ StockingStuffer.WrappedPresent({
 	developer = display_name, -- DO NOT CHANGE
 	pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
 	atlas = display_name .. "_wrapped",
-	display_size = { w = 71, h = 71 }
+	display_size = { w = 71, h = 71 },
 })
 
 StockingStuffer.Present({
