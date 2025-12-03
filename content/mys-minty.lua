@@ -26,9 +26,9 @@ StockingStuffer.WrappedPresent({
     atlas = "stocking_Santa Claus_presents" --temp; to be removed later probably maybe
 })
 
-StockingStuffer.Present({ --cute little yarn ball
+StockingStuffer.Present({ --cute little jingle ball
     developer = display_name,
-    key = 'yarn',
+    key = 'ball',
     pos = { x = 5, y = 0 },
 
     config = {

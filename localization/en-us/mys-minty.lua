@@ -1,8 +1,8 @@
 return {
     descriptions = {
         stocking_present = {
-            ["mys. minty_stocking_yarn"] = {
-                name = 'Yarn Ball',
+            ["mys. minty_stocking_ball"] = {
+                name = 'JIngly Ball',
                 text = {
                     {
                         "Whoa! You can chase it!"
@@ -12,8 +12,8 @@ return {
                     }
                 }
             },
-            ["mys. minty_stocking_yarn_nomultibox"] = {
-                name = 'Yarn Ball',
+            ["mys. minty_stocking_ball_nomultibox"] = {
+                name = 'Jingly Ball',
                 text = {
                     "Whoa! You can chase it!",
                     " ",
