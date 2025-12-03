@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+match_indent = true
+position = 'before'
+pattern = '''    for _, v in ipairs(info_queue) do'''
+payload = '''if StockingStuffer and StockingStuffer.aikoyori then 
+    StockingStuffer.aikoyori.modify_info_queue(info_queue, _c, card)
+end
+'''
