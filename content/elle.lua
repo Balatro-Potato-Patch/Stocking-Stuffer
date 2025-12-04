@@ -33,8 +33,8 @@ StockingStuffer.Present({
     pos = { x = 2, y = 0 },
     config = { extra = { xmult = 2, mod = 0.1 } },
 
-    pixel_size = { w = 45, h = 28 },
-    display_size = { w = 45 * 1.5, h = 28 * 1.5 },
+    pixel_size = { w = 44, h = 26 },
+    display_size = { w = 44 * 1.5, h = 26 * 1.5 },
 
     loc_vars = function(self, info_queue, card)
         return {
@@ -62,5 +62,183 @@ StockingStuffer.Present({
 				}
 			end
 		end
+    end
+})
+
+StockingStuffer.Present({
+    developer = display_name,
+
+    key = 'console',
+    pos = { x = 1, y = 0 },
+    config = { extra = { xmult = 2, mod = 0.1 } },
+
+    pixel_size = { w = 67, h = 54 },
+    display_size = { w = 67 * 1.3, h = 54 * 1.3 },
+
+    loc_vars = function(self, info_queue, card)
+		local c = G.C.FILTER
+		
+		if card.area == G.stocking_present then
+			local self_pos = 0
+			for i = 1, #G.stocking_present.cards do
+				if G.stocking_present.cards[i] == card then self_pos = i break end
+			end
+			
+			if G.stocking_present.cards[self_pos+1] then
+				local dev = G.stocking_present.cards[self_pos+1].config.center.developer
+				c = StockingStuffer.Developers[dev].colour
+			end
+		end
+		
+        return {
+            vars = { colours = {c} },
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind and StockingStuffer.first_calculation then
+			local self_pos = 0
+			for i = 1, #G.stocking_present.cards do
+				if G.stocking_present.cards[i] == card then self_pos = i break end
+			end
+			
+			if G.stocking_present.cards[self_pos+1] then
+				local right = G.stocking_present.cards[self_pos+1]
+				
+				-- Why is this so convoluted TwT
+				local oldsmodsshowman = SMODS.showman
+				SMODS.showman = function() return true end
+				local pool = get_current_pool('stocking_present')
+				SMODS.showman = oldsmodsshowman
+				
+				local key = pseudorandom_element(pool, 'stocking_elle_console', {in_pool = function(v, args)
+					return G.P_CENTERS[v] and G.P_CENTERS[v].developer == right.config.center.developer and v ~= right.config.center_key
+				end})
+				
+				discover_card(G.P_CENTERS[key])
+				G.E_MANAGER:add_event(Event({
+					trigger = "before",
+					delay = .1,
+					func = function()
+						right:juice_up(0.4,0.4)
+						right:set_ability(key)
+						return true
+				end}))
+			end
+        end
+    end
+})
+
+StockingStuffer.Present({
+    developer = display_name,
+	
+    key = 'choc_box',
+    pos = { x = 3, y = 0 },
+    config = { extra = { card = nil } },
+	
+    pixel_size = { w = 53, h = 54 },
+    display_size = { w = 53 * 1.4, h = 54 * 1.4 },
+	
+	loc_vars = function(self, info_queue, card)
+		local list = {}
+		
+		if card.ability.extra.card then
+			local area = CardArea(0,0,2,1.5,{type = 'title', card_limit = 1})
+			
+			local desc_card = SMODS.create_card({set = card.ability.extra.card.ability.set, skip_materialize = true})
+			desc_card:load(card.ability.extra.card)
+			desc_card:hard_set_T()
+			
+			desc_card.T.w = G.CARD_W*.5
+			desc_card.T.h = G.CARD_H*.5
+			area:emplace(desc_card)
+			desc_card.facing='front'
+			desc_card:juice_up(0.1,0.1)
+			
+			list = {{
+				n = G.UIT.O,
+				config = {
+				object = area
+			}}}
+		end
+		return {
+			vars = { },
+			key = card.ability.extra.card and self.key..'_full' or self.key,
+			main_end = list
+		}
+	end,
+	
+    use = function(self, card)
+		if (card.ability.extra.card) then
+			local newcard = SMODS.create_card({set = card.ability.extra.card.ability.set})
+			newcard:load(card.ability.extra.card)
+			newcard:hard_set_T()
+			
+			G[newcard.playing_card and 'hand' or 'consumeables']:emplace(newcard)
+			if (newcard.playing_card) then
+				table.insert(G.playing_cards, newcard)
+				SMODS.calculate_context({ playing_card_added = true, cards = {newcard} })
+			end
+			
+			card.ability.extra.card = nil
+		else
+			local _c = #G.consumeables.highlighted == 1 and G.consumeables.highlighted[1] or G.hand.highlighted[1]
+			card.ability.extra.card = _c:save()
+			_c:remove()
+		end
+		card:juice_up(0.4,0.4)
+    end,
+	
+    keep_on_use = function()
+        return true
+    end,
+	
+    can_use = function(self, card)
+		local c1 = #G.consumeables.highlighted == 1
+		local c2 = #G.hand.highlighted == 1
+		
+        return (card.ability.extra.card and (not card.ability.extra.card.params.playing_card or G.GAME.blind.in_blind) )or (not(c1 and c2) and (c1 or c2)) -- lua totally needs a proper XOR operand
+    end,
+	
+	update = function(self, card, dt)
+		card.children.center:set_sprite_pos({x = (card.ability.extra.card and 3 or 4), y = 0})
+	end
+})
+
+StockingStuffer.Present({
+    developer = display_name,
+
+    key = 'bootleg',
+    pos = { x = 5, y = 0 },
+    config = { extra = { mult = 0, mod = 5 } },
+
+    pixel_size = { w = 43, h = 57 },
+    display_size = { w = 43 * 1.3, h = 57 * 1.3 },
+
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult, (2^(G.GAME.round_resets.blind_ante-1))*card.ability.extra.mod },
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main and card.ability.extra.mult > 0 and StockingStuffer.first_calculation then
+            return { mult = -card.ability.extra.mult }
+        end
+	end,
+	
+	use = function(self, card)
+		card.ability.extra.mult = card.ability.extra.mult + (2^(G.GAME.round_resets.blind_ante-1))*card.ability.extra.mod
+		SMODS.draw_cards(1)
+		
+		card:juice_up(0.4,0.4)
+    end,
+	
+    keep_on_use = function()
+        return true
+    end,
+	
+    can_use = function(self, card)
+		return #G.deck.cards > 0
     end
 })
