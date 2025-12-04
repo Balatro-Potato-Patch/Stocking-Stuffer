@@ -73,11 +73,12 @@ return {
                 },
                 text = {
                     {
-                        'Face cards give {C:white,X:mult}X#1#{} Mult when played',
+                        'Played face cards give',
+                        ' {C:white,X:mult}X#1#{} Mult when scored',
                     },
                     {
                         '{C:attention}Debuffs{} herself for the round if',
-                        'discard contains {C:attention}no{} face cards',
+                        'discards contain {C:attention}no{} face cards',
                     },
                 },
             },

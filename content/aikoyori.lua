@@ -328,7 +328,7 @@ StockingStuffer.Present({
     pos = { x = 5, y = 0 },
     config = {
         extras = {
-            xmult = 1.6,
+            xmult = 1.55,
         }
     },
     loc_vars = function(self, info_queue, card)
