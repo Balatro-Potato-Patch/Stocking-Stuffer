@@ -340,6 +340,16 @@ G.FUNCS.toggle_jokers_presents = function(e)
     StockingStuffer.animate_areas()
 end
 
+G.FUNCS.can_toggle_presents = function(e)
+    if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT then
+        e.config.colour = G.C.RED
+        e.config.button = 'toggle_jokers_presents'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+end
+
 -- Area toggle helpers
 function StockingStuffer.animate_areas()
     if StockingStuffer.states.slot_visible == -1 then

@@ -15,7 +15,7 @@ card_count
 payload = '''
 card_count,
 (self == G.jokers or self == G.stocking_present) and {n=G.UIT.R, config = {align = 'cr', colour = G.C.CLEAR, padding = -0.5}, nodes = {
-    {n=G.UIT.C, config = {align = 'cm', r = 0.1, colour = G.C.RED, hover = true, button = 'toggle_jokers_presents', padding = 0.05, button_dist = -0.1, area == self}, nodes = {
+    {n=G.UIT.C, config = {align = 'cm', r = 0.1, colour = G.C.RED, hover = true, button = 'toggle_jokers_presents', func = 'can_toggle_presents', padding = 0.05, button_dist = -0.1, area == self}, nodes = {
         {n=G.UIT.T, config = {text = localize(self == G.jokers and 'stocking_stuffer_to_presents' or 'stocking_stuffer_to_jokers'), scale = 0.2, colour = G.C.WHITE}}
     }},
     {n=G.UIT.C, config = {minw = 1.05}}
