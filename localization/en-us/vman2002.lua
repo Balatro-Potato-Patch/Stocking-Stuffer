@@ -1,18 +1,28 @@
+local flavor = "{s:0.75,C:chips}"
+
 return {
 	misc = {
 		labels = {
-			vman_2002_kittyseal_seal = "Kitty Seal"
+			stocking_vman_2002_kittyseal_seal = "Kitty Seal"
+		},
+		dictionary = {
+			vman_2002_plush_ready = 'Ready!',
+			vman_2002_plush_unready = 'Unready',
+			vman_2002_plush_active = '(Active)',
+			vman_2002_plush_inactive = '(Inactive)',
+			vman_2002_plush_gain = '+#1#',
+			vman_2002_stickers_addseal = '+Seal!'
 		}
 	},
     descriptions = {
 		Other = {
-			vman_2002_kittyseal_seal = {
+			stocking_vman_2002_kittyseal_seal = {
 				name = "Kitty Seal",
 				text = {
-					"When played, {C:green}#1# in #2#{} chance to",
-					"convert an {C:attention}enhancement-less{}",
-					"card scored or in hand to",
-					"this card's {C:attention}Enhancement{}"
+					"When played and scoring, {C:green}#1# in #2#{}",
+					"chance to convert a random",
+					"{C:attention}enhancement-less{} scored card ",
+					"to this card's {C:attention}Enhancement{}"
 				}
 			}
 		},
@@ -20,51 +30,77 @@ return {
             VMan_2002_stocking_kittystickers = {
                 name = 'Kitty Stickers',
                 text = {
+					flavor .. "Can you name all 10?",
 					'For the next {C:attention}#1#{} hands,',
-                    'the last scored card',
+					'the last scored card',
 					'without a seal gains',
-					'a {C:kittyseal}Kitty Seal{}'
+					'a {C:vman_kittyseal}Kitty Seal{}',
+					'{stocking}before{}'
                 }
             },
             VMan_2002_stocking_mechanicalpencil = {
-                name = 'Ink Pen',
+                name = 'Fountain Pen',
                 text = {
-                    '{C:attention}Use{} to convert up',
-					"to #1# selected cards",
-					"into ascending ranks,",
+					flavor .. " Limited Edition from the 00's! ",
+                    'Convert up to',
+					"{C:attention}#1#{} selected cards",
+					"into {C:attention}ascending ranks{},",
 					"starting from the",
-					"first card's rank"
+					"first card's rank",
+                    '{stocking}usable{}'
                 }
             },
-            VMan_2002_stocking_star = {
+            VMan_2002_stocking_mysterystar = {
                 name = 'Mystery Star',
                 text = {
-                    '{C:attention}Use{} to convert #1# random',
-					"base edition cards in hand",
-					"to {C:dark_edition}Negative{} edition"
+					flavor .. "Found on a distant planet!",
+                    'Convert #1# random base',
+					"edition cards in hand",
+					"to {C:dark_edition}Negative{} edition",
+                    '{stocking}usable{}'
                 }
             },
-            VMan_2002_stocking_item4 = {
-                name = 'Item 4',
+            VMan_2002_stocking_mossblade = {
+                name = "Moss's Blade",
                 text = {
-                    '{C:attention}Use{} to move 1 selected',
-					"Joker to your hand"
+					{
+						'Gains {C:mult}+0.2{} Mult when played',
+						'hand is a {C:attention}Straight',
+						'Loses {C:mult}-0.5{} Mult when played',
+						'hand {C:attention}doesn\'t{} contain a Straight',
+						'{C:inactive}(Currently {C:mult}+0{C:inactive} Mult)',
+						'{stocking}before{}'
+					}, {
+						flavor .. "Critical Hit to the enemy's Weak Point!",
+						'{C:mult}Mult{} is applied as {X:mult,C:white}XMult{} when',
+						'played hand is a {C:attention}Straight Flush',
+						'{stocking}after{}'
+					}
                 }
             },
-            VMan_2002_stocking_item5 = {
-                name = 'Item 5',
+            VMan_2002_stocking_plush = {
+                name = 'Emki Plushie',
                 text = {
-                    '{C:attention}Use{} to move 1 selected',
-					"Joker to your hand"
+					{
+						'Gains {X:mult,C:white}X#1#{} Mult per round',
+						'{C:attention}Resets{} to {X:mult,C:white}X1{} after use',
+						"{C:inactive}#3#",
+						"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+						'{stocking}after{}',
+					}, {
+						flavor .. "Whack this plushie against the",
+						flavor .. "Blind in your next hand",
+						flavor .. "(It makes a loud thud...?)",
+						'{stocking}usable{}'
+					}
                 }
             }
         },
         stocking_wrapped_present = {
-            display_name_stocking_filler_1 = {
+            VMan_2002_stocking_present = {
                 name = '{V:1}Present',
                 text = {
-                    '  {C:inactive}What could be inside?  ',
-                    '{C:inactive}Open me to find out!'
+                    '  {C:inactive}Happy birthday  '
                 }
             },
         }
