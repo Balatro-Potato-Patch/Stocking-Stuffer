@@ -17,6 +17,14 @@ return {
             },
         },
         stocking_present = {
+            ["[REDACTED]Autumn_stocking_gic"] = {
+                name = {'Generic Isometric', 'Present-shaped Cube'},
+                text = {
+                    "{C:attention}+1 Selection limit{}",
+                    "for selecting",
+                    "{C:attention}wrapped{} presents"
+                }
+            },
             ["[REDACTED]Autumn_stocking_ditto"] = {
                 name = 'Ditto',
                 text = {

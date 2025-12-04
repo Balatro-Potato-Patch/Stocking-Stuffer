@@ -30,7 +30,18 @@ StockingStuffer.WrappedPresent({
 -- ULTIMATUM
 
 local function random_grinch()
-    local g = math.floor(pseudorandom("pingas") + 0.5)
+    local g = math.floor(pseudorandom("pingas") + 0.5) -- this is 50% but like, done in a really fuck ass way
+    --[[
+
+    Number Line:            ------|------|------|------|--
+                                  0      1      2      3
+    Range of possible Numbers:        =======
+    When floored, becomes:            0001111
+    (the extra 1 is not counted because the possibility of random landing on exactly 0.5 is like 0)
+
+    ]]
+
+    -- this is so long and stupid but it wraps back to being funny again so im keeping this comment
     local options = {
         [0] = "Saint",
         [1] = "Grinch",
@@ -201,7 +212,7 @@ function Game:update(dt, ...)
                     end
                 }))
             end
-            StockingStuffer.GlVars.DittoTransform = "Fuck!"
+            StockingStuffer.GlVars.DittoTransform = "Fuck!" -- most meaningful placeholder value
         end
     end
     return ret
@@ -214,4 +225,31 @@ StockingStuffer.Present({
 	add_to_deck = function (self, card, from_debuff)
         card.ditto = true
 	end
+})
+
+local card_save = Card.save
+function Card:save()
+    local st = card_save(self)
+    st.ditto = self.ditto
+    return st
+end
+
+local card_load = Card.load
+function Card:load(cardTable, other_card)
+    local st = card_load(self, cardTable, other_card)
+    self.ditto = cardTable.ditto
+    return st
+end
+-- GIC
+        
+StockingStuffer.Present({
+    developer = display_name,
+    key = 'gic',
+    pos = { x = 5, y = 0 },
+	add_to_deck = function (self, card, from_debuff)
+        G.P_CENTERS.p_stocking_present_select.config.choose = G.P_CENTERS.p_stocking_present_select.config.choose + 1
+    end,
+    remove_from_deck =  function (self, card, from_debuff)
+        G.P_CENTERS.p_stocking_present_select.config.choose = G.P_CENTERS.p_stocking_present_select.config.choose - 1
+    end,
 })
