@@ -10,18 +10,7 @@ pattern = "G.GAME.pack_choices = math.min((self.ability.choose or self.config.ce
 position = "after"
 payload = '''
 if booster_obj.key == "p_stocking_present_select" then
-    local function dedup(t)
-        local res = {}
-        local hm = {}
-        for _, v in ipairs(t) do
-            if not hm[v] then
-                hm[v] = true
-                res[#res + 1] = v
-            end
-        end
-        return res
-    end
-    for _, present in pairs(dedup(SMODS.find_card("notmario_stocking_tungsten_rhombicosidodecahedron"))) do
+    for _, present in pairs(SMODS.find_card("notmario_stocking_tungsten_rhombicosidodecahedron")) do
         self.ability.extra = self.ability.extra + present.ability.extra.present_limit
     end
 end
