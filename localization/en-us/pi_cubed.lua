@@ -29,19 +29,20 @@ return {
             pi_cubed_stocking_victoriabitter = {
                 name = 'Victoria Bitter',
                 text = {
-                    {'{C:attention}Flip{} all cards held in hand',
+                    {'{C:attention}Flip and shuffle{} all',
+                    'cards held in hand',
                     '{s:0.8,C:inactive}Can only be used once per round',
                     '{stocking}usable{}',},
-                    {'{C:attention}Face-down{} cards held in',
-                    'hand give {C:white,X:red}X#1#{} Mult',
+                    {'{C:attention}Right-most face down{} card',
+                    'held in hand gives {C:white,X:red}X#1#{} Mult',
                     '{stocking}after{}',},
                 }
             },
             pi_cubed_stocking_fruitmincepie = {
                 name = 'Fruit Mince Pie',
                 text = {
-                    {'{C:attention}Destroy{} {V:1}Present{} to the',
-                    'right, and gain {C:mult}+#1#{} Mult',
+                    {'{C:attention}Destroy{} left-most held',
+                    'Consumable, and gain {C:mult}+#1#{} Mult',
                     '{stocking}usable{}',},
                     {'{C:mult}+#2#{} Mult',
                     '{stocking}before{}',},

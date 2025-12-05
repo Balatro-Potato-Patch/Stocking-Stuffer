@@ -221,7 +221,7 @@ StockingStuffer.Present({
     key = 'victoriabitter',
     pos = { x = 2, y = 1 },
     pixel_size = { w = 42, h = 83 },
-    config = { extra = { xmult = 1.5, can_activate = true } },
+    config = { extra = { xmult = 3, can_activate = true } },
     loc_vars = function(self, info_queue, card)
         return { vars = {
             card.ability.extra.xmult
@@ -252,6 +252,16 @@ StockingStuffer.Present({
                 end 
             }))
         end
+        if #G.hand.cards > 1 then 
+            G.E_MANAGER:add_event(Event({ trigger = 'after', delay = 0.2, func = function() 
+                G.E_MANAGER:add_event(Event({ func = function() G.hand:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end })) 
+                delay(0.15)
+                G.E_MANAGER:add_event(Event({ func = function() G.hand:shuffle('aajk'); play_sound('cardSlide1', 1.15);return true end })) 
+                delay(0.15)
+                G.E_MANAGER:add_event(Event({ func = function() G.hand:shuffle('aajk'); play_sound('cardSlide1', 1);return true end })) 
+                delay(0.5)
+            return true end })) 
+        end
     end,
     keep_on_use = function(self, card)
         return true
@@ -263,16 +273,25 @@ StockingStuffer.Present({
                 message = localize('k_reset')
             }
         end
-        if StockingStuffer.second_calculation and context.individual and context.cardarea == G.hand and not context.end_of_round and context.other_card.facing == 'back' then
-            if context.other_card.debuff then
-                return {
-                    message = localize('k_debuffed'),
-                    colour = G.C.RED
-                }
-            else
-                return {
-                    x_mult = card.ability.extra.xmult
-                }
+        if StockingStuffer.second_calculation and context.individual and context.cardarea == G.hand and not context.end_of_round then
+            local right_most = nil
+            for i = #G.hand.cards, 1, -1 do
+                if G.hand.cards[i].facing == 'back' then
+                    right_most = G.hand.cards[i]
+                    break
+                end
+            end
+            if context.other_card == right_most then
+                if context.other_card.debuff then
+                    return {
+                        message = localize('k_debuffed'),
+                        colour = G.C.RED
+                    }
+                else
+                    return {
+                        x_mult = card.ability.extra.xmult
+                    }
+                end
             end
         end
     end
@@ -283,33 +302,25 @@ StockingStuffer.Present({
     key = 'fruitmincepie',
     pos = { x = 3, y = 1 },
     pixel_size = { w = 59, h = 49 },
-    config = { extra = { mult_mod = 10, mult = 0 } },
+    config = { extra = { mult_mod = 4, mult = 0 } },
     loc_vars = function(self, info_queue, card)
         return { vars = {
             card.ability.extra.mult_mod, card.ability.extra.mult, colours = {HEX("22A617")}
         } }
     end,
     can_use = function(self, card)
-        if G.stocking_present.cards[#G.stocking_present.cards] ~= card then
+        if G.consumeables.cards[1] then
             return true
         end
         return false
     end,
     use = function(self, card, area, copier) 
-        local my_pos = nil
-        for i = 1, #G.stocking_present.cards do
-            if G.stocking_present.cards[i] == card then
-                my_pos = i
-                break
-            end
-        end
-        if my_pos and G.stocking_present.cards[my_pos + 1] then
-            local sliced_card = G.stocking_present.cards[my_pos + 1]
+        if G.consumeables.cards[1] then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
                     card:juice_up(0.8, 0.8)
-                    sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
+                    G.consumeables.cards[1]:start_dissolve({ HEX("57ecab") }, nil, 1.6)
                     play_sound('tarot1', 0.96 + math.random() * 0.08)
                     play_sound('generic1', 0.96 + math.random() * 0.08)
                     return true
@@ -373,7 +384,10 @@ StockingStuffer.Present({
                     delay = 0.4,
                     func = function()
                         play_sound('timpani')
-                        SMODS.add_card({ set = 'stocking_present' })
+                        local size_mod = 0.55 + math.random()/4
+                        local p = SMODS.add_card({ set = 'stocking_present' })
+                        p.T.h = p.T.h * size_mod
+                        p.T.w = p.T.w * size_mod
                         card:juice_up(0.3, 0.5)
                         return true
                     end
