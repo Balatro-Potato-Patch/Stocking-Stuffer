@@ -77,10 +77,10 @@ return {
         },
         stocking_wrapped_present = {
             ["J8-Bit_stocking_present"] = {
-                name = 'Mystery Sack',
+                name = 'Mystery Gift',
                 text = {
-                    "{C:inactive}How'd he get this",
-                    "{C:inactive}thing in here!?"
+                    "{C:inactive}What could be inside?",
+                    "{C:inactive}Looks very thoughtful!"
                 }
             },
         }
