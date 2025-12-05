@@ -4,7 +4,7 @@ return {
             Jogla_stocking_e_magic = {
                 name = {
                     'M.A.G.I.C Cell',
-                    '{s:0.7}Manufacturable Artificially Generated Induced Crystal'
+                    '{s:0.7}Magnetic Artificially Generated Interdimensional Crystal'
                 },
                 text = {
                     {
@@ -20,20 +20,27 @@ return {
                     },
                 }
             },
-            Jogla_stocking_two = {
+            Jogla_stocking_suffler = {
                 name = 'Card suffler',
                 text = {
                     'Holds 10 cards',
-                    'Use to draw 1 random card',
-                    'Replenishes after boss blind defeated'
+                    'Replenishes after boss blind defeated',
+                    '{C:attention}Use{} to draw 1 random card',
+                    '{stocking}usable{}',
+                    'Cards:'
                 }
             },
-            Jogla_stocking_three = {
-                name = 'Magnet',
+            Jogla_stocking_magnet = {
+                name = 'Polarizer',
                 text = {
-                    'Swaps Chips and Mult.',
-                    'Use to change trigger',
-                    'before scoring, before hand, before jokers, after jokers'
+                    {
+                        'Swaps {C:chips}Chips{} and {C:mult}Mult{}.'
+                    },
+                    {
+                        'Change trigger time',
+                        '{C:inactive}(Currently: {C:attention}#1#{C:inactive}){}',
+                        '{stocking}usable{}'
+                    },
                 }
             },
             Jogla_stocking_four = {
@@ -57,6 +64,12 @@ return {
                     '\\   /\\  \\ \\/'
                 }
             },
+        }
+    },
+    misc = {
+        dictionary = {
+            d_magnet_state_0 = 'Before scoring',
+            d_magnet_state_1 = 'Before jokers'
         }
     }
 }
