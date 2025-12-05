@@ -109,7 +109,7 @@ StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
 
     key = 'magnet', -- keys are prefixed with 'display_name_stocking_' for reference
-    pos = { x = 1, y = 0 },
+    pos = { x = 4, y = 0 },
     config = {
         extra = {
             --[[
@@ -124,6 +124,7 @@ StockingStuffer.Present({
     },
     loc_vars = function (self, info_queue, card)
         return {vars = {
+            --card.ability.extra.mode == 0 and localize('d_magnet_state_0') or
             card.ability.extra.mode == 0 and localize('d_magnet_state_0') or
             card.ability.extra.mode == 1 and localize('d_magnet_state_1')
         }}
@@ -148,8 +149,8 @@ StockingStuffer.Present({
             G.GAME.hands[text].chips = t_mult
             G.GAME.hands[text].mult = t_chips
             G.E_MANAGER:add_event(Event{func = function () 
-                G.GAME.hands[text].chips = t_chips
-                G.GAME.hands[text].mult = t_mult
+                level_up_hand(card,text,true,-1)
+                level_up_hand(card,text,true,1)
             return true end})
             return {
                 chips = mult - hand_chips,
@@ -172,7 +173,7 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
 
-    key = 'suffler', -- keys are prefixed with 'display_name_stocking_' for reference
+    key = 'shuffler', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 1, y = 0 },
     config = {
         extra = {
@@ -223,6 +224,7 @@ StockingStuffer.Present({
 
         return {
             vars = {
+                card.ability.extra.amount
             },
             main_end = {
                 {n = G.UIT.R, config = {colour = G.C.CLEAR, minw = 0, minh = 0}, nodes = ui_areas}
@@ -236,7 +238,7 @@ StockingStuffer.Present({
     end,
     use = function(self, card, area, copier)
         local c = pseudorandom('miku',1,#card.ability.extra.cards)
-        local ca = SMODS.create_card{
+        local ca = SMODS.add_card{
             set = 'Base',
             rank = card.ability.extra.cards[c].value,
             suit = card.ability.extra.cards[c].suit,
@@ -244,7 +246,6 @@ StockingStuffer.Present({
             edition = card.ability.extra.cards[c].extra.edition or 'e_base',
             seal = card.ability.extra.cards[c].extra.seal
         }
-        G.hand:emplace(ca)
         table.remove(card.ability.extra.cards,c)
     end,
     keep_on_use = function(self, card) return true end,

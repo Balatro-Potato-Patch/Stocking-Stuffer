@@ -20,13 +20,13 @@ return {
                     },
                 }
             },
-            Jogla_stocking_suffler = {
-                name = 'Card suffler',
+            Jogla_stocking_shuffler = {
+                name = 'Card shuffler',
                 text = {
-                    'Holds 10 cards',
+                    'Holds #1# cards',
                     'Replenishes after boss blind defeated',
                     '{C:attention}Use{} to draw 1 random card',
-                    '{stocking}usable{}',
+                    --'{stocking}usable{}',
                     'Cards:'
                 }
             },
@@ -60,14 +60,15 @@ return {
             Jogla_stocking_present = {
                 name = '{V:1}\'Encased\' Present',
                 text = {
-                    '_/  V  /\\ \\',
-                    '\\   /\\  \\ \\/'
+                    '{C:inactive}"I do hope you find these',
+                    '{C:inactive} useful. They ain\'t cheap!"'
                 }
             },
         }
     },
     misc = {
         dictionary = {
+            --d_magnet_state_0 = 'Never',
             d_magnet_state_0 = 'Before scoring',
             d_magnet_state_1 = 'Before jokers'
         }
