@@ -176,6 +176,7 @@ StockingStuffer.colours = {
         secondary_colour = HEX("22A617"),
         collection_rows = {6, 6, 6},
         shop_rate = 0,
+        default = 'Santa Claus_stocking_coal',
         create_UIBox_your_collection = function(self)
             local type_buf = {}
             for _, v in ipairs(SMODS.ConsumableType.visible_buffer) do
@@ -186,7 +187,7 @@ StockingStuffer.colours = {
                 table.insert(pool, present)
                 local count = 0
                 for _, filler in ipairs(G.P_CENTER_POOLS.stocking_present) do
-                    if filler.developer == present.developer then
+                    if filler.developer == present.developer and not filler.no_collection then
                         table.insert(pool, filler)
                         count = count + 1
                     end
@@ -251,7 +252,8 @@ StockingStuffer.colours = {
         primary_colour = HEX("22A617"),
         secondary_colour = HEX("22A617"),
         shop_rate = 0,
-        no_collection = true
+        no_collection = true,
+        default = 'Santa Claus_stocking_present',
     })
 
     -- Dummy object for Collection organization
@@ -315,7 +317,7 @@ StockingStuffer.custom_card_areas = function(game)
         game.jokers.T.w, game.jokers.T.h,
         { card_limit = 1, type = 'discard', highlight_limit = 1 })
     
-    local c = SMODS.create_card({key = 'j_stocking_dummy', area = game.stocking_flipper})
+    local c = SMODS.create_card({key = 'j_stocking_dummy', area = game.stocking_flipper, no_edition = true, skip_materialize = true})
     game.stocking_flipper:emplace(c)
     
     game.christmas_tree = UIBox{
@@ -336,6 +338,16 @@ G.FUNCS.toggle_jokers_presents = function(e)
     StockingStuffer.states.slot_visible = StockingStuffer.states.slot_visible * -1
     play_sound('paper1')
     StockingStuffer.animate_areas()
+end
+
+G.FUNCS.can_toggle_presents = function(e)
+    if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT then
+        e.config.colour = G.C.RED
+        e.config.button = 'toggle_jokers_presents'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
 end
 
 -- Area toggle helpers
@@ -538,7 +550,7 @@ end
 -- Toggles Present and Joker areas depending on what cards are being juiced
 local stocking_stuffer_card_juice_up = Card.juice_up
 function Card:juice_up(scale, rot)
-    if self.area and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
+    if self.area and not self.ability.no_stocking and not self.states.hover.is and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
         G.FUNCS.toggle_jokers_presents()
         for i=1, 2 do
             G.E_MANAGER:add_event(Event({
@@ -652,6 +664,15 @@ local function load_files(path)
 end
 local path = SMODS.current_mod.path .. '/content'
 load_files(path)
+
+if Balatest then
+    function Balatest.open_present(key)
+        SMODS.add_card({ area = G.stocking_present, set = 'stocking_present', key = key })
+        Balatest.wait_for_input()
+        Balatest.q(function() end)
+    end
+    load_files(SMODS.current_mod.path .. '/tests')
+end
 
 --#endregion
 
