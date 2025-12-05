@@ -550,7 +550,7 @@ end
 -- Toggles Present and Joker areas depending on what cards are being juiced
 local stocking_stuffer_card_juice_up = Card.juice_up
 function Card:juice_up(scale, rot)
-    if self.area and not self.ability.no_stocking and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
+    if self.area and not self.ability.no_stocking and not self.states.hover.is and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
         G.FUNCS.toggle_jokers_presents()
         for i=1, 2 do
             G.E_MANAGER:add_event(Event({
