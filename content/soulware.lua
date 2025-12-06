@@ -259,24 +259,10 @@ StockingStuffer.Present({
     end,
 })
 
-local function dedup(t)
-    local res = {}
-    local hm = {}
-    for _, v in ipairs(t) do
-        if not hm[v] then
-            hm[v] = true
-            res[#res + 1] = v
-        end
-    end
-    return res
-end
-
 local calcindiveffectref = SMODS.calculate_individual_effect
 ---@diagnostic disable-next-line: duplicate-set-field
 SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
     local glyphs = SMODS.find_card("Soulware1_stocking_glpyh")
-    -- currently for some reason, find_card counts card twice, while this shouldn't do much when that is fixed, should be removed for micro-optimizations 🤑🤑🤑
-    glyphs = dedup(glyphs)
     if next(glyphs) then
         for i = 1, #glyphs do
             local v = glyphs[i]
