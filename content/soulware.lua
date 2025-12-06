@@ -60,8 +60,12 @@ StockingStuffer.Developer({
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
     -- poor attempt at randomizing the present sprite, plz make this better :sob:
-    pos = { x = math.random(0, 2), y = 0 }, -- position of present sprite on your atlas
+    pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
+    set_ability = function(self, card, initial, delay_sprites)
+        -- im pretty sure a raw tostring on a table just returns its memory location, so this is pretty #random
+        card.config.center.pos.x = pseudorandom(tostring(card), 0, 2)
+    end
 
     -- Your present will be given an automatically generated name and description. If you want to customise it you can, though we recommend keeping the {V:1} in the name
     -- You are encouraged to use the localization file for your name and description, this is here as an example
