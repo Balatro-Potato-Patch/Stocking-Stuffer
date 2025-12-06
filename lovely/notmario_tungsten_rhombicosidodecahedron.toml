@@ -13,6 +13,12 @@ if booster_obj.key == "p_stocking_present_select" then
     for _, present in pairs(SMODS.find_card("notmario_stocking_tungsten_rhombicosidodecahedron")) do
         self.ability.extra = self.ability.extra + present.ability.extra.present_limit
     end
+else
+    for _, present in pairs(SMODS.find_card("notmario_stocking_tungsten_rhombicosidodecahedron")) do
+        self.ability.extra = self.ability.extra - present.ability.extra.pack_limit
+    end
+    self.ability.extra = math.max(1, self.ability.extra)
+    G.GAME.pack_choices = math.min(G.GAME.pack_choices, self.ability.extra)
 end
 '''
 match_indent = true

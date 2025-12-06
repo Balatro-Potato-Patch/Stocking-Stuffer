@@ -241,14 +241,8 @@ StockingStuffer.Present({
 
     pos = { x = 6, y = 0 },
     pixel_size = { w = 70, h = 69 },
-    config = { extra = { discard_limit = 1, present_limit = 2 } },
+    config = { extra = { pack_limit = 1, present_limit = 4 } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.discard_limit, card.ability.extra.present_limit, colours = { HEX("22A617") } } }
+        return { vars = { card.ability.extra.pack_limit, card.ability.extra.present_limit, colours = { HEX("22A617") } } }
     end,
-    add_to_deck = function(self, card, from_debuff)
-        SMODS.change_discard_limit(-card.ability.extra.discard_limit)
-    end,
-    remove_from_deck = function(self, card, from_debuff)
-        SMODS.change_discard_limit(card.ability.extra.discard_limit)
-    end
 })

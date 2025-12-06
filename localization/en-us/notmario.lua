@@ -72,7 +72,7 @@ return {
                 name = 'Tungsten Rhombicosidodecahedron',
                 text = {
                     {
-                        "{C:red}-#1#{} Discard selection limit",
+                        "{C:red}-#1#{} choice in {C:attention}Booster Packs",
                         "{C:attention}+#2#{} {V:1}Wrapped Present{} choices",
                     },
                 }
