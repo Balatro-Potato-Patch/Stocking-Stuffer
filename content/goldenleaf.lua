@@ -120,6 +120,7 @@ StockingStuffer.Present({
 
 -- DISCARD BIN
 
+-- shoutout tiwmig the mod where i got the idea from lowk oinite goated
 local gupdate = Game.update
 function Game:update(dt, ...)
     local ret = gupdate(self, dt, ...)
