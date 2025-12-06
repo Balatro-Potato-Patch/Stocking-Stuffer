@@ -1,7 +1,7 @@
 local display_name = 'athebyne'
 SMODS.Atlas({
     key = display_name..'_presents',
-    path = 'presents.png',
+    path = 'athebyne_presents.png',
     px = 71,
     py = 95
 })
@@ -35,6 +35,8 @@ Jolly Ranchers
 The Jolly Roger
 ]]--
 
+--Swap effects of Runic Tablet and Jolly Green Giant?
+
 StockingStuffer.Present({
     developer = display_name,
 
@@ -47,7 +49,7 @@ StockingStuffer.Present({
              {'{C:inactive}You wouldn\'t download a car!'}
          }
      },
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
 
     calculate = function(self, card, context)
         -- check context and return appropriate values
@@ -150,16 +152,37 @@ StockingStuffer.Present({
             '{C:inactive}THOU ART JOLLY'}
         }
     },
-    pos = { x = 1, y = 0 },
+    pos = { x = 2, y = 0 },
 
     calculate = function(self, card, context)
         -- check context and return appropriate values
         -- StockingStuffer.first_calculation is true before jokers are calculated
         -- StockingStuffer.second_calculation is true after jokers are calculated
-        if context.joker_main then
-            return {
-                message = 'example'
-            }
+        local destroyed = false
+        if context.remove_playing_cards and not context.blueprint and StockingStuffer.second_calculation and not destroyed then
+            destroyed = true
+            for _,playingcard in ipairs(context.removed) do
+                if SMODS.has_no_suit(playingcard) or SMODS.has_no_rank(playingcard) then
+
+                else
+                    for _,second_playingcard in ipairs(G.playing_cards) do
+                        --eh good enough
+                        if SMODS.has_no_suit(second_playingcard) or SMODS.has_no_rank(second_playingcard) then
+
+                        elseif(playingcard:get_id() == second_playingcard:get_id() and (second_playingcard:is_suit(playingcard.base.suit,true) or  playingcard:is_suit(second_playingcard.base.suit,true)) and playingcard ~= second_playingcard) then
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    second_playingcard:start_dissolve()
+                                    SMODS.calculate_effect({message = "THOU ART JOLLY"}, card)
+                                    return true
+                                end
+                            }))
+                            delay(0.1)
+                            SMODS.calculate_context({ remove_playing_cards = true, removed = second_playingcard })
+                        end
+                    end
+                end
+            end
         end
     end
 })
@@ -176,7 +199,7 @@ StockingStuffer.Present({
             {'Earn $1 at end of the round per 4 cards remaining in the deck'}
         }
     },
-    pos = { x = 2, y = 0 },
+    pos = { x = 3, y = 0 },
 
     calculate = function(self, card, context)
         -- check context and return appropriate values
@@ -255,7 +278,7 @@ StockingStuffer.Present({
             {'Scored cards give their {C:chips}+Chips{} as {C:mult}+Mult{} as well'}
         }
     },
-    pos = { x = 2, y = 1 },
+    pos = { x = 3, y = 1 },
     no_collection = true,
     calculate = function(self, card, context)
         -- check context and return appropriate values
@@ -334,7 +357,7 @@ StockingStuffer.Present({
             {'The last scoring card of each hand becomes a random Enhancement'}
         }
     },
-    pos = { x = 2, y = 2 },
+    pos = { x = 3, y = 2 },
     no_collection = true,
     calculate = function(self, card, context)
         -- check context and return appropriate values
@@ -413,7 +436,7 @@ StockingStuffer.Present({
             {'Gain a Discard when hand is played'}
         }
     },
-    pos = { x = 2, y = 3 },
+    pos = { x = 3, y = 3 },
     no_collection = true,
     calculate = function(self, card, context)
         if not context.blueprint and context.setting_blind and StockingStuffer.first_calculation then
@@ -480,16 +503,15 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
 
-    --TODO: Jolly the name
-    key = 'journey',
+    key = 'ranchers',
     loc_txt = {
-        name = 'The Joker\'s Journey',
+        name = 'Jolly Ranchers',
         text = {
             'Using a Tarot card has a fixed 25% chance of creating the next tarot card in sequence',
             '{C:inactive}(Must have room)'
         }
     },
-    pos = { x = 3, y = 0 },
+    pos = { x = 4, y = 0 },
 
     calculate = function(self, card, context)
         -- check context and return appropriate values
@@ -506,14 +528,14 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
 
-    key = 'rancher',
+    key = 'giant',
     loc_txt = {
-        name = 'Jolly Rancher',
+        name = 'Jolly Green Giant',
         text = {
             'Swap the base chips and mult of Pairs with Four of a Kinds'
         }
     },
-    pos = { x = 4, y = 0 },
+    pos = { x = 5, y = 0 },
 
     calculate = function(self, card, context)
         -- check context and return appropriate values
