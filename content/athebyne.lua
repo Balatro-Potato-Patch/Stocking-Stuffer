@@ -170,33 +170,28 @@ StockingStuffer.Present({
     pos = { x = 2, y = 0 },
 
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
         local destroyed = false
         if context.remove_playing_cards and not context.blueprint and StockingStuffer.second_calculation and not destroyed then
             destroyed = true
-            for _,playingcard in ipairs(context.removed) do
+            local cards_to_destroy = {}
+            for _,playingcard in ipairs(G.playing_cards) do
                 if SMODS.has_no_suit(playingcard) or SMODS.has_no_rank(playingcard) then
 
                 else
-                    for _,second_playingcard in ipairs(G.playing_cards) do
-                        --eh good enough
+                    for _,second_playingcard in ipairs(context.removed) do
                         if SMODS.has_no_suit(second_playingcard) or SMODS.has_no_rank(second_playingcard) then
 
                         elseif(playingcard:get_id() == second_playingcard:get_id() and (second_playingcard:is_suit(playingcard.base.suit,true) or  playingcard:is_suit(second_playingcard.base.suit,true)) and playingcard ~= second_playingcard) then
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    second_playingcard:start_dissolve()
-                                    SMODS.calculate_effect({message = "THOU ART JOLLY"}, card)
-                                    return true
-                                end
-                            }))
-                            delay(0.1)
-                            SMODS.calculate_context({ remove_playing_cards = true, removed = second_playingcard })
+                            table.insert(cards_to_destroy, playingcard)
+                            SMODS.calculate_effect({message = "THOU ART JOLLY"}, card)
+                            break
                         end
                     end
                 end
+            end
+            --SMODS.destroy_cards(cards_to_destroy)
+            for _,_card in ipairs(cards_to_destroy) do
+                _card:start_dissolve()
             end
         end
     end
@@ -204,7 +199,7 @@ StockingStuffer.Present({
 
 --Needs to be Jolly
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
 
     key = 'pendant_winter',
     loc_txt = {
@@ -216,7 +211,11 @@ StockingStuffer.Present({
         }
     },
     pos = { x = 3, y = 0 },
-
+    config = {
+        extra = {
+            cards_left = 0
+        }
+    },
     calculate = function(self, card, context)
         -- check context and return appropriate values
         -- StockingStuffer.first_calculation is true before jokers are calculated
@@ -274,11 +273,12 @@ StockingStuffer.Present({
                 colour = HEX('0CAE42')
             }
         end
-        if context.joker_main then
-            return {
-                message = 'example'
-            }
+        if context.end_of_round and StockingStuffer.second_calculation then
+            card.ability.extra.cards_left =  #G.deck.cards
         end
+    end,
+    calc_dollar_bonus = function(self,card)
+            return math.floor(card.ability.extra.cards_left/4)
     end
 })
 
@@ -464,7 +464,8 @@ StockingStuffer.Present({
         text = {
             {'Effect changes when Blind is selected',
             '{C:inactive}(Currently attuned to {}{C:stocking_athebyne_autumn}Eurus{}{C:inactive})'},
-            {'Gain {C:red}+1{} discard when {C:blue}hand{} is played'}
+            {'Gain {C:red}+1{} discard when {C:blue}hand{} is played',
+            '{stocking}after{}'}
         }
     },
     pos = { x = 3, y = 3 },
@@ -524,9 +525,11 @@ StockingStuffer.Present({
                 colour = HEX('14B8FF')
             }
         end
-        if context.joker_main then
+        if context.joker_main and StockingStuffer.second_calculation then
+            ease_discard(1)
             return {
-                message = 'example'
+                message = "+1 Discard",
+                colour = G.C.RED
             }
         end
     end
