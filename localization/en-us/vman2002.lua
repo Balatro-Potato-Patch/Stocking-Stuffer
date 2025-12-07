@@ -11,7 +11,8 @@ return {
 			vman_2002_plush_active = '(Active)',
 			vman_2002_plush_inactive = '(Inactive)',
 			vman_2002_plush_gain = '+#1#',
-			vman_2002_stickers_addseal = '+Seal!'
+			vman_2002_stickers_addseal = '+Seal!',
+			vman_2002_kittyseal_enhance = 'Enhanced!'
 		}
 	},
     descriptions = {
