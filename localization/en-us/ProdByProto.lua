@@ -49,6 +49,22 @@ return {
                     }
                 }
             },
+            ProdByProto_stocking_eriinyx = {
+                name = "Vulpix Plushie :3",
+                text = {
+                    {
+                        "{C:green}#1# in #2#{} chance of gaining",
+                        "an extra hand when a",
+                        "{C:planet}Planet{} card is sold",
+                    },
+                    {
+                        "If a {C:planet}Planet{} card was",
+                        "sold this round, there is a {C:green}#3# in #4#{} chance",
+                        "of losing a discard when hand is played",
+                        "{stocking}after{}"
+                    }
+                }
+            }
         },
         -- stocking_wrapped_present = {
         --     template_stocking_present = {

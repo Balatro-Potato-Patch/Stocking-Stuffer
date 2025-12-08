@@ -5,6 +5,9 @@ local display_name = 'ProdByProto'
 
 StockingStuffer.colours.active = mix_colours(G.C.GREEN, G.C.JOKER_GREY, 0.8)
 StockingStuffer.colours.inactive = mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8)
+SMODS.current_mod.optional_features = {
+    retrigger_joker = true
+}
 
 
 -- Present Atlas Template
@@ -220,4 +223,60 @@ StockingStuffer.Present({
         end
 
     end
+})
+
+StockingStuffer.Present({
+    developer = display_name, -- DO NOT CHANGE
+    key = 'eriinyx', -- keys are prefixed with 'display_name_stocking_' for reference
+    -- You are encouraged to use the localization file for your name and description, this is here as an example
+    -- loc_txt = {
+    --     name = 'Example Present',
+    --     text = {
+    --         'Does nothing'
+    --     }
+    -- },
+    pos = { x = 2, y = 0 },
+    -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
+    config = {
+        extra = {
+            numer1 = 1,
+            denom1 = 4,
+            numer2 = 1,
+            denom2 = 3
+        },
+    },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.numer1, card.ability.extra.denom1, card.ability.extra.numer2, card.ability.extra.denom2 } }
+    end,
+
+    -- calculate is completely optional, delete if your present does not need it
+    calculate = function(self, card, context)
+        -- check context and return appropriate values
+        -- StockingStuffer.first_calculation is true before jokers are calculated
+        -- StockingStuffer.second_calculation is true after jokers are calculated
+        ret = {}
+        if context.selling_card and context.card.ability.set == "Planet" and StockingStuffer.first_calculation then
+                    G.GAME.proot_psold = true
+                if SMODS.pseudorandom_probability(card, "shoutouts to aroace vulpienbies", card.ability.extra.numer1, card.ability.extra.denom1, "planet sold") then
+                    G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + 1
+                    ret.message = localize { type = 'variable', key = 'a_hands', vars = { 1 } }
+                    return ret
+                else
+                    ret.message = localize("k_nope_ex")
+                    return ret
+                end
+        end
+
+        if context.joker_main and StockingStuffer.second_calculation then
+            if SMODS.pseudorandom_probability(card, "*paws at you- paws at you- paws at y-*", card.ability.extra.numer2, card.ability.extra.denom2, "lost discard") then
+                ease_discard(-1, nil, nil)
+                card:juice_up()
+            end
+        end
+
+        if context.end_of_round and StockingStuffer.second_calculation then
+            G.GAME.proot_psold = nil
+        end
+    end
+
 })
