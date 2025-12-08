@@ -14,6 +14,16 @@ SMODS.Atlas({
 	py = 95
 })
 
+-- THE BLUNDERCUBE
+SMODS.Atlas({
+	key = display_name .. '_blundercube',
+	path = 'haya_blundercube.png',
+	px = 96,
+	py = 96,
+	atlas_table = "ANIMATION_ATLAS",
+	frames = 60,
+	--fps = 30,
+})
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
@@ -29,6 +39,9 @@ StockingStuffer.Developer({
 -- key defaults to 'display_name_stocking_present'
 StockingStuffer.WrappedPresent({
 	developer = display_name, -- DO NOT CHANGE
+
+	atlas = display_name .. '_blundercube',
+	display_size = { w = 80, h = 80 },
 
 	pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
 	-- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
@@ -147,6 +160,135 @@ StockingStuffer.Present({
 	end
 })
 
+G.FUNCS.draw_from_discard_to_deck_no_event = function(card_count)
+    --G.E_MANAGER:add_event(Event({
+    --    trigger = 'immediate',
+    --    func = function()
+            local discard_count = card_count
+            for i=1, discard_count do --draw cards from deck
+                draw_card(G.discard, G.deck, i*100/discard_count,'up', nil ,nil, 0.005, i%2==0, nil, math.max((21-i)/20,0.7))
+            end
+    --        return true
+    --    end
+    --  }))
+  end
+
+local function ssr_revive(card)
+	if (StockingStuffer.states.slot_visible == 1) then
+		G.FUNCS.toggle_jokers_presents()
+		delay(0.7)
+	end
+	G.CONTROLLER.locked = true
+	--G.E_MANAGER:add_event(Event{
+	--	func = function()
+			G.FUNCS.draw_from_hand_to_discard()
+			G.FUNCS.draw_from_discard_to_deck_no_event(#G.playing_cards)
+	--		return true
+	--end
+	--})
+
+	G.STATE = G.STATES.ROUND_EVAL
+
+	-- Draw this to the center
+	draw_card(G.stocking_present, G.play, nil, nil, nil, card)
+	delay(0.25)
+	G.GAME.haya_stocking_stuffer.rwc_active = true
+
+	G.GAME.chips = G.GAME.blind.chips
+
+	return {
+		message = "You have died.",
+		delay = 1.5 * G.SETTINGS.GAMESPEED,
+		extra = {
+			message = localize({ type = "variable", key = "a_haya_ante", vars = { number_format(card.ability.extra.ante) } }),
+			delay = 1.5 * G.SETTINGS.GAMESPEED,
+			func = function()
+				G.E_MANAGER:add_event(Event {
+					trigger = 'after',
+					delay = 0.5 * G.SETTINGS.GAMESPEED,
+					func = function()
+
+						G.E_MANAGER:clear_queue("base")
+						if (StockingStuffer.states.slot_visible == -1) then
+							G.FUNCS.toggle_jokers_presents()
+							delay(0.7)
+						end
+
+						G.E_MANAGER:add_event(Event {
+							func = function()
+								for k, v in ipairs(G.jokers.cards) do
+									if G.GAME.haya_stocking_stuffer.jokers_added[v.sort_id] then
+										G.GAME.haya_stocking_stuffer.jokers_added[v.sort_id] = nil
+										v:start_dissolve({ G.C.RED })
+									end
+								end
+								for k, v in ipairs(G.consumeables.cards) do
+									if G.GAME.haya_stocking_stuffer.consumables_added[v.sort_id] then
+										G.GAME.haya_stocking_stuffer.consumables_added[v.sort_id] = nil
+										v:start_dissolve({ G.C.RED })
+									end
+								end
+								return true
+									end
+						})
+						draw_card(G.play, G.stocking_present, nil, nil, nil, card)
+
+						G.GAME.haya_stocking_stuffer.rwc_active = nil
+						G.CONTROLLER.locked = nil
+						G.STATE_COMPLETE = false
+						return true
+
+					end
+				})
+			end
+		},
+		func = function()
+			ease_ante(-card.ability.extra.ante)
+		end,
+		saved = true,
+	}
+end
+
+local igo = Game.init_game_object
+---@diagnostic disable-next-line: duplicate-set-field
+function Game:init_game_object()
+	local ret = igo(self)
+	ret.haya_stocking_stuffer = {}
+	ret.haya_stocking_stuffer.jokers_added = {}
+	ret.haya_stocking_stuffer.consumables_added = {}
+	return ret
+end
+
+local atd = Card.add_to_deck
+---@diagnostic disable-next-line: duplicate-set-field
+function Card:add_to_deck(from_debuff)
+	if from_debuff then return atd(self, from_debuff) end
+	local t = {}
+	if self.ability.set == "Joker" then
+		t = G.GAME.haya_stocking_stuffer.jokers_added
+	end
+	if self.ability.consumeable and self.ability.set ~= "stocking_present" then
+		t = G.GAME.haya_stocking_stuffer.consumables_added
+	end
+	t[self.sort_id] = true
+	return atd(self, from_debuff)
+end
+
+local rfd = Card.remove_from_deck
+---@diagnostic disable-next-line: duplicate-set-field
+function Card:remove_from_deck(from_debuff)
+	if from_debuff then return rfd(self, from_debuff) end
+	local t = {}
+	if self.ability.set == "Joker" then
+		t = G.GAME.haya_stocking_stuffer.jokers_added
+	end
+	if self.ability.consumeable and self.ability.set ~= "stocking_present" then
+		t = G.GAME.haya_stocking_stuffer.consumables_added
+	end
+	t[self.sort_id] = nil
+	return rfd(self, from_debuff)
+end
+
 StockingStuffer.Present({
 	developer = display_name,
 	key = "ssr_revival_skill",
@@ -164,16 +306,31 @@ StockingStuffer.Present({
 		local spr = card.children.center
 		spr:draw_shader("booster", nil, card.ARGS.send_to_shader)
 	end,
+	---@param self table
+	---@param card Card|table
+	---@param context CalcContext|table
+	calculate = function(self, card, context)
+		if context.game_over and context.end_of_round then
+			return ssr_revive(card)
+		end
+		if context.ante_end then
+			G.GAME.haya_stocking_stuffer.consumables_added = {}
+			G.GAME.haya_stocking_stuffer.jokers_added = {}
+		end
+	end,
 	update = function(self, card, dt)
-		local ofs = math.sin(G.TIMERS.REAL / 1.5)
-		---@type balatro.Card|table
-		local c = card
-		---@type balatro.Sprite|table
-		local spr = card.children.center
-		spr.og_W = spr.og_W or spr.T.w
-		spr.T.w = math.abs(spr.og_W * ofs)
-	end
+		if G.STATE == G.STATES.GAME_OVER then
+			SMODS.calculate_effect(ssr_revive(card), card)
+		end
+	end,
 })
+
+local u_g_e = Game.update_game_over
+---@diagnostic disable-next-line: duplicate-set-field
+function Game:update_game_over(dt)
+	if next(SMODS.find_card('haya_stocking_ssr_revival_skill')) or G.GAME.haya_stocking_stuffer.rwc_active then return end
+	u_g_e(self, dt)
+end
 
 -- Some of the bullet types from Snap the Sentinel
 local EFFECT_RAPID = 1

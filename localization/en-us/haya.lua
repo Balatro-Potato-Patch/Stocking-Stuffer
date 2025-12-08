@@ -1,5 +1,9 @@
 return {
 	misc = {
+		v_dictionary = {
+			-- RETURNER'S WINDING CLOCK
+			a_haya_ante = { "-#1# Ante" },
+		},
 		dictionary = {
 			-- Irisu's Bat
 			haya_irisu_destroy_1 = "Destroy...",
@@ -9,13 +13,13 @@ return {
 			haya_snap_rapid = "Rapid Fire",
 			haya_snap_spread = "Spread Shot",
 			haya_snap_flame = "Flamethrower",
-			haya_snap_homing = "Homing Gun"
+			haya_snap_homing = "Homing Gun",
 		}
 	},
 	descriptions = {
 		stocking_wrapped_present = {
 			haya_stocking_present = {
-				name = "{V:1}Present?",
+				name = "{V:1}blundencuben",
 				text = {
 					"{C:inactive}Fuck around....",
 					"{C:inactive}and find out."
@@ -46,7 +50,7 @@ return {
 					},
 					{
 						"All obtained jokers, consumables",
-						"and vouchers are {C:red}reversed{} as penalty"
+						"are immediately {C:red}reversed{} as penalty"
 					}
 				}
 			},
