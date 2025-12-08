@@ -2,9 +2,10 @@ return {
     descriptions = {
         stocking_present = {
             ["GlobalPunk LLC_stocking_jimbmas_cartridge"] = {
-                name = 'Example Present',
+                name = '{E:2}12 Days of Jimbmas',
                 text = {
-                    '{C:inactive}Does nothing '
+                    '{C:inactive}On the first day of Jimbmas,',
+                    '{C:inactive}my true love gave to me...',
                 }
             }
         },
@@ -12,7 +13,7 @@ return {
             ["GlobalPunk LLC_stocking_present"] = {
                 name = '{V:1}Present',
                 text = {
-                    '{C:inactive}A gift is waiting to be opened... ',
+                    '{C:inactive}A gift waiting to be opened!',
                 }
             },
         }

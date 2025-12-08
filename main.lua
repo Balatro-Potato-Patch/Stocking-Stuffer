@@ -48,7 +48,7 @@ StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
     inject = function(self)
         self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
             darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(
-        StockingStuffer.Developers[self.developer].colour, 0.5),
+            StockingStuffer.Developers[self.developer].colour, 0.5),
             darken(G.C.RED, 0.2), G.C.GREEN
         }
         SMODS.Consumable.inject(self)
@@ -107,8 +107,12 @@ StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
                     func = function()
                         local pool = get_current_pool('stocking_present')
                         local key = pseudorandom_element(pool, 'stocking_present_open',
-                            { in_pool = function(v, args) return G.P_CENTERS[v] and
-                                G.P_CENTERS[v].developer == self.developer end })
+                            {
+                                in_pool = function(v, args)
+                                    return G.P_CENTERS[v] and
+                                        G.P_CENTERS[v].developer == self.developer
+                                end
+                            })
                         discover_card(G.P_CENTERS[key])
                         gift = SMODS.add_card({ area = G.gift, set = 'stocking_present', key = key })
                         return true
@@ -160,7 +164,7 @@ StockingStuffer.Present = SMODS.Consumable:extend({
     inject = function(self)
         self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
             darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(
-        StockingStuffer.Developers[self.developer].colour, 0.5),
+            StockingStuffer.Developers[self.developer].colour, 0.5),
             darken(G.C.RED, 0.2), G.C.GREEN
         }
         SMODS.Consumable.inject(self)
@@ -193,8 +197,10 @@ SMODS.ConsumableType({
     create_UIBox_your_collection = function(self)
         local type_buf = {}
         for _, v in ipairs(SMODS.ConsumableType.visible_buffer) do
-            if not v.no_collection and (not G.ACTIVE_MOD_UI or modsCollectionTally(G.P_CENTER_POOLS[v]).of > 0) then type_buf[#type_buf + 1] =
-                v end
+            if not v.no_collection and (not G.ACTIVE_MOD_UI or modsCollectionTally(G.P_CENTER_POOLS[v]).of > 0) then
+                type_buf[#type_buf + 1] =
+                    v
+            end
         end
         local pool = {}
         for _, present in ipairs(G.P_CENTER_POOLS.stocking_wrapped_present) do
@@ -525,8 +531,10 @@ end
 local csm = Card.start_materialize
 function Card:start_materialize(dissolve_colours, silent, timefac)
     if self.config.center_key == 'j_stocking_dummy' then dissolve_colours = { G.C.CLEAR } end
-    if self.config.center.set == 'stocking_present' or self.config.center.set == 'stocking_wrapped_present' then dissolve_colours =
-        self.config.center.dissolve_colours end
+    if self.config.center.set == 'stocking_present' or self.config.center.set == 'stocking_wrapped_present' then
+        dissolve_colours =
+            self.config.center.dissolve_colours
+    end
     csm(self, dissolve_colours, silent, timefac)
 end
 
@@ -808,4 +816,21 @@ end
 
 G.FUNCS.stocking_stuffer_help = function()
     PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true, back_func = 'your_collection_stocking_presents' }
+end
+
+--12 Days of Jimbmas
+SMODS.draw_ignore_keys.stocking_gp_floating_sprite = true
+local bdf = Blind.defeat
+function Blind:defeat(silent)
+    StockingStuffer.GlobalPunk_Jimbmas = StockingStuffer.GlobalPunk_Jimbmas or 0
+    if StockingStuffer.GlobalPunk_Jimbmas < 11 then
+        StockingStuffer.GlobalPunk_Jimbmas = StockingStuffer.GlobalPunk_Jimbmas + 1
+    end
+    return bdf(self, silent)
+end
+
+function SMODS.current_mod.reset_game_globals(run_start)
+    if run_start then
+        StockingStuffer.GlobalPunk_Jimbmas = 0
+    end
 end

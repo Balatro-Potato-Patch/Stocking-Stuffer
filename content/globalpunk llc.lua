@@ -47,8 +47,9 @@ StockingStuffer.WrappedPresent({
 -- Present Template - Replace 'template' with your name
 -- Note: You should make up to 5 Presents to fill your Wrapped Present!
 StockingStuffer.Present({
+    artist = { 'display_name' },
+    coder = { 'display_name' },
     developer = display_name,  -- DO NOT CHANGE
-
     key = 'jimbmas_cartridge', -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example
     -- loc_txt = {
@@ -58,6 +59,9 @@ StockingStuffer.Present({
     --     }
     -- },
     pos = { x = 1, y = 0 },
+    config = {
+        trig = false
+    },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
     display_size = { w = 67 * 1.2, h = 71 * 1.2 },
 
@@ -67,10 +71,46 @@ StockingStuffer.Present({
         -- check context and return appropriate values
         -- StockingStuffer.first_calculation is true before jokers are calculated
         -- StockingStuffer.second_calculation is true after jokers are calculated
-        if context.joker_main then
-            return {
-                message = 'example'
-            }
+        if context.setting_blind then
+            card.ability.trig = false
+        end
+        if context.end_of_round and context.main_eval then
+            if self.discovered or card.bypass_discovery_center then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        if StockingStuffer.GlobalPunk_Jimbmas >= 0 then
+                            card.children.stocking_gp_floating_sprite =
+                                Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+                                    G.ASSET_ATLAS['stocking_GlobalPunk LLC_presents'], {
+                                        x = 2 + StockingStuffer.GlobalPunk_Jimbmas,
+                                        y = 0
+                                    })
+                            card.children.stocking_gp_floating_sprite.role.draw_major = card
+                            card.children.stocking_gp_floating_sprite.states.hover.can = false
+                            card.children.stocking_gp_floating_sprite.states.click.can = false
+                            if StockingStuffer.GlobalPunk_Jimbmas == 1 and card.ability.trig == false then
+                                card.ability.trig = true
+                                if HotPotato then
+                                    SMODS.add_card {
+                                        set = 'Joker',
+                                        key_append = 'stocking_globalpunk_jimbmas',
+                                        key = 'j_hpot_retriggered'
+                                    }
+                                else
+                                    SMODS.add_card {
+                                        set = 'Joker',
+                                        key_append = 'stocking_globalpunk_jimbmas',
+                                        key = 'j_hanging_chad'
+                                    }
+                                end
+                            end
+                        end
+                        card:set_sprites(self, card, nil)
+                        return true
+                    end,
+                }))
+            end
+            card:juice_up(0.3, 0.5)
         end
     end
 })
