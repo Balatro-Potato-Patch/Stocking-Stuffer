@@ -38,6 +38,11 @@ StockingStuffer.Developer({
     colour = HEX('FF9FFF')
 })
 
+StockingStuffer.Developer({
+    name = "Lily Felli",
+    colour = HEX('FFAD31')
+})
+
 -- Wrapped Present Template
 -- key defaults to 'display_name_stocking_present'
 StockingStuffer.WrappedPresent({
@@ -78,7 +83,8 @@ StockingStuffer.Present({
                 denominator = d,
             }
         end
-    end
+    end,
+    coder = {"Lily Felli"}
 })
 
 StockingStuffer.Present({
@@ -129,7 +135,8 @@ StockingStuffer.Present({
                 }))
             end
         end
-    end
+    end,
+    coder = {"Lily Felli"}
 })
 
 
@@ -166,7 +173,8 @@ StockingStuffer.Present({
         if context.end_of_round and context.main_eval and (not card.ability.extra.active) then
             SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "xmult", scalar_value = "gain"})
         end
-    end
+    end,
+    coder = {"Lily Felli"}
 })
 
 StockingStuffer.Present({
@@ -205,6 +213,7 @@ StockingStuffer.Present({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percentage, card.ability.extra.uses } }
     end,
+    coder = {"Lily Felli"}
 })
 
 StockingStuffer.Present({
@@ -232,5 +241,6 @@ StockingStuffer.Present({
         if context.joker_main then
             return {xmult = card.ability.extra.current}
         end
-    end
+    end,
+    coder = {"Lily Felli"}
 })
