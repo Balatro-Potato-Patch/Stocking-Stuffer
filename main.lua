@@ -1,6 +1,7 @@
 StockingStuffer = SMODS.current_mod
 SMODS.handle_loc_file(SMODS.current_mod.path, SMODS.current_mod.id)
 assert(SMODS.load_file('PotatoPatchUtils/info_menu.lua'))()
+assert(SMODS.load_file('PotatoPatchUtils/credits.lua'))()
 PotatoPatchUtils.LOC.init()
 
 -- State for Present Area visibility
@@ -22,14 +23,8 @@ StockingStuffer.colours = {
 --#region Objects
 
     --#region Developers
-    StockingStuffer.Developers = {}
-    StockingStuffer.Developer = Object:extend()
-    function StockingStuffer.Developer:init(args)
-        self.name = args.name
-        self.colour = args.colour
-
-        StockingStuffer.Developers[args.name] = self
-    end
+    StockingStuffer.Developers = PotatoPatchUtils.Developers
+    StockingStuffer.Developer = PotatoPatchUtils.Developer
     --#endregion
 
     --#region WrappedPresent
@@ -538,6 +533,7 @@ function Game.update_shop(self, dt)
         func = function()
             if G.STATE_COMPLETE and not G.OVERLAY_MENU then
                 local card = SMODS.add_card({area = G.play, key = 'p_stocking_present_select', skip_materialize = true})
+                card.cost = 0
                 G.FUNCS.use_card({ config = { ref_table = card } })
                 ease_value(G.HUD.alignment.offset, 'x', -7, nil, nil, nil, 1, 'elastic')
                 ease_value(G.christmas_tree.alignment.offset, 'x', 12, nil, nil, nil, 1, 'elastic')
