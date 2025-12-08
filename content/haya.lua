@@ -291,6 +291,7 @@ function Card:remove_from_deck(from_debuff)
 	return rfd(self, from_debuff)
 end
 
+-- Returner's Winding Clock
 StockingStuffer.Present({
 	developer = display_name,
 	key = "ssr_revival_skill",
@@ -398,7 +399,7 @@ StockingStuffer.Present({
 			if card.ability.extra.remaining >= 7 then
 				card.ability.extra.remaining = 0
 				local effect = pseudorandom(G.GAME.round_resets.ante .. "_chameleonblaster_effect", EFFECT_RAPID,
-					EFFECT_FLAME)
+					EFFECT_HOMING)
 				local ret = {
 					message = localize('haya_snap_' .. effects[effect]),
 					sound = 'stocking_haya_snap_' .. effects[effect],
@@ -471,7 +472,29 @@ StockingStuffer.Present({
 					card.ability.extra.remove = true
 					ret.extra = ogr
 				elseif effect == EFFECT_HOMING then -- Homing Gun
-
+					G.playing_card = (G.playing_card or 0) + 1
+					---@type balatro.Card|table
+					local c = copy_card(context.other_card)
+					c:set_edition({polychrome = true}, true, true)
+					c:add_to_deck()
+					c.states.visible = nil
+					c:highlight(true)
+					G.play:emplace(c)
+					context.scoring_hand[#context.scoring_hand+1] = c
+					G.deck.config.card_limit = G.deck.config.card_limit + 1
+                    table.insert(G.playing_cards, c)
+                    ret.func = function()
+                   		G.E_MANAGER:add_event(Event({
+                            func = function()
+                             	c:start_materialize()
+                                return true
+                            end
+                        }))
+                    end
+					ret.extra = {
+						message = "Cloned!", sound = "stocking_haya_snap_revolver_homing", pitch = 1,
+						playing_cards_created = {c}
+					}
 				end
 				return ret
 			else
