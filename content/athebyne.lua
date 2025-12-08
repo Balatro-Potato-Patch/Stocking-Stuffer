@@ -48,11 +48,8 @@ Jolly Ranchers
 The Jolly Roger
 ]]--
 
---Need to Jolly-ify runic tablet and Pendant
-
 StockingStuffer.Present({
     developer = display_name,
-
     key = 'roger',
     loc_txt = {
          name = 'Jolly Roger',
@@ -66,9 +63,6 @@ StockingStuffer.Present({
     pos = { x = 1, y = 0 },
 
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
         if context.selling_card and #G.hand.cards>0 and StockingStuffer.first_calculation then
             for _,playingcard in ipairs(G.hand.cards) do
                 G.E_MANAGER:add_event(Event {
@@ -150,7 +144,7 @@ StockingStuffer.Present({
 })
 
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
 
     key = 'tablet',
     loc_txt = {
@@ -203,7 +197,6 @@ StockingStuffer.Present({
     end
 })
 
---Needs to be Jolly
 StockingStuffer.Present({
     developer = display_name,
 
@@ -224,9 +217,6 @@ StockingStuffer.Present({
         }
     },
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
         if not context.blueprint and context.setting_blind and StockingStuffer.first_calculation then
             G.E_MANAGER:add_event(Event {
                 trigger = 'after',
@@ -290,7 +280,7 @@ StockingStuffer.Present({
 })
 
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
 
     key = 'pendant_spring',
     loc_txt = {
@@ -304,11 +294,8 @@ StockingStuffer.Present({
     },
     pos = { x = 3, y = 1 },
     no_collection = true,
-    in_pool = false,
+    in_pool = function() return false end,
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
         if not context.blueprint and context.setting_blind and StockingStuffer.first_calculation then
             G.E_MANAGER:add_event(Event {
                 trigger = 'after',
@@ -374,7 +361,7 @@ StockingStuffer.Present({
 })
 
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
 
     key = 'pendant_summer',
     loc_txt = {
@@ -388,11 +375,8 @@ StockingStuffer.Present({
     },
     pos = { x = 3, y = 2 },
     no_collection = true,
-    in_pool = false,
+    in_pool = function() return false end,
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
         if not context.blueprint and context.setting_blind and StockingStuffer.first_calculation then
             G.E_MANAGER:add_event(Event {
                 trigger = 'after',
@@ -463,7 +447,7 @@ StockingStuffer.Present({
 })
 
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
 
     key = 'pendant_fall',
     loc_txt = {
@@ -477,7 +461,7 @@ StockingStuffer.Present({
     },
     pos = { x = 3, y = 3 },
     no_collection = true,
-    in_pool = false,
+    in_pool = function() return false end,
     calculate = function(self, card, context)
         if not context.blueprint and context.setting_blind and StockingStuffer.first_calculation then
             G.E_MANAGER:add_event(Event {
@@ -543,14 +527,16 @@ StockingStuffer.Present({
 })
 
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
+
 
     key = 'ranchers',
     loc_txt = {
         name = 'Jolly Ranchers',
         text = {
             'Using a {C:purple}Tarot{} card has a {C:green}fixed 25% chance{} of creating the next {C:purple}Tarot{} card in sequence',
-            '{C:inactive}(Must have room)'
+            '{C:inactive}(Must have room)',
+            '{stocking}after{}'
         }
     },
     pos = { x = 4, y = 0 },
@@ -566,6 +552,7 @@ StockingStuffer.Present({
             tarotOrder = {}
             --TODO: Respect in_pool. except allow it to duplicate held cards. ok so maybe dont respect in_pool?
             --eh who cares this only matters for crossmod and we explicitly aren't doing crossmod.
+            --SOMEBODY ELSE'S PROBLEM
             for i, v in ipairs(G.P_CENTER_POOLS.Tarot) do
                 tarotOrder[v.key] = i
             end
@@ -591,25 +578,52 @@ StockingStuffer.Present({
 })
 
 StockingStuffer.Present({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name,
 
     key = 'giant',
     loc_txt = {
         name = 'Jolly Green Giant',
         text = {
-            'Swap the base chips and mult of Pairs with Four of a Kinds'
+            'Swap the base Chips and Mult of {C:attention}Pair{} with {C:attention}Four of a Kind{}',
+            'when scoring',
+            '{stocking}before{}'
         }
     },
     pos = { x = 5, y = 0 },
 
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
-        if context.joker_main then
-            return {
-                message = 'example'
+        --Thing that might be a Bug, or a Feature: Having two of these starts swapping it back and forth every hand.
+        --This is also visible in the run info screen. It's a Feature Now:tm: you shouldn't be able to get multiple
+        --of these anyways.... except for the part where SOMEBODY decided to add a present duper and also a blueprint...
+        --SOMEBODY ELSE'S PROBLEM
+        if context.before and StockingStuffer.first_calculation then
+            local default_data = {
+                pair = {chips = G.GAME.hands["Pair"].chips, mult = G.GAME.hands["Pair"].mult},
+                foak = {chips = G.GAME.hands["Four of a Kind"].chips, mult = G.GAME.hands["Four of a Kind"].mult}
             }
+
+            -- Change hand values.
+            G.GAME.hands["Pair"].chips = default_data.foak.chips
+            G.GAME.hands["Pair"].mult = default_data.foak.mult
+            G.GAME.hands["Four of a Kind"].chips = default_data.pair.chips
+            G.GAME.hands["Four of a Kind"].mult = default_data.pair.mult
+
+            if context.scoring_name == "Pair" or context.scoring_name == "Four of a Kind" then
+                G.E_MANAGER:add_event(Event{func = function ()
+                    play_sound('gong', 0.94, 0.3)
+                    SMODS.calculate_effect({
+                        message = "Swapped!",
+                        colour  = { 0.8, 0.45, 0.85, 1 },
+                        instant = true
+                    }, card)
+                    return true end})
+            end
+            G.E_MANAGER:add_event(Event{func = function ()
+                G.GAME.hands["Pair"].chips = default_data.pair.chips
+                G.GAME.hands["Pair"].mult = default_data.pair.mult
+                G.GAME.hands["Four of a Kind"].chips = default_data.foak.chips
+                G.GAME.hands["Four of a Kind"].mult = default_data.foak.mult
+                return true end})
         end
     end
 })
