@@ -28,17 +28,7 @@ StockingStuffer.Developer({
 
 StockingStuffer.WrappedPresent({
     developer = display_name,
-
     pos = { x = 0, y = 0 },
-
-     loc_txt = {
-         name = '{V:1}Holly Jollies',
-         text = {
-             '  {C:inactive}He\'s Holly,  ',
-             '{C:inactive}But never Jolly!',
-             '{C:inactive}You can\'t get this from a Pair!'
-         }
-     },
 })
 
 --Jolly Things
@@ -50,16 +40,8 @@ The Jolly Roger
 
 StockingStuffer.Present({
     developer = display_name,
+    artist = {'pangaea47'},
     key = 'roger',
-    loc_txt = {
-         name = 'Jolly Roger',
-         text = {
-             {'Reroll all cards held in hand',
-             'when a card is {C:attention}sold{}',
-             '{stocking}before{}'},
-             {'{C:inactive}You wouldn\'t download a car!'}
-         }
-     },
     pos = { x = 1, y = 0 },
 
     calculate = function(self, card, context)
@@ -147,20 +129,6 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'tablet',
-    loc_txt = {
-        name = 'Runic Tablet',
-        text = {
-            {'When a playing card is {C:attention}destroyed{},',
-            'also destroy all other cards with',
-            'the {C:attention}same Rank and Suit{} as it',
-            '{stocking}after{}'},
-            {'{C:inactive}TO THE ONE WHO TOILS FOR NAUGHT',
-            '{C:inactive}THOU ART JOLLY',
-            '{C:inactive}THOU ART JOLLY',
-            '{C:inactive}THOU ART JOLLY',
-            '{C:inactive}THOU ART JOLLY'}
-        }
-    },
     pos = { x = 2, y = 0 },
     config = {
         extra = {
@@ -201,15 +169,6 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'pendant_winter',
-    loc_txt = {
-        name = 'Pendant of {C:stocking_athebyne_winter}Winds{}',
-        text = {
-            {'Effect changes when Blind is selected',
-            '{C:inactive}(Currently attuned to {}{C:stocking_athebyne_winter}Boreas{}{C:inactive})'},
-            {'Earn {C:money}$1{} at end of the round for every {C:attention}4{} cards remaining in the deck',
-             '{stocking}after{}'}
-        }
-    },
     pos = { x = 3, y = 0 },
     config = {
         extra = {
@@ -283,15 +242,6 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'pendant_spring',
-    loc_txt = {
-        name = 'Pendant of {C:stocking_athebyne_spring}Winds{}',
-        text = {
-            {'Effect changes when Blind is selected',
-            '{C:inactive}(Currently attuned to {}{C:stocking_athebyne_spring}Zephyrus{}{C:inactive})'},
-            {'Scored cards give their {C:chips}+Chips{} as {C:mult}+Mult{} as well',
-            '{stocking}before{}'}
-        }
-    },
     pos = { x = 3, y = 1 },
     no_collection = true,
     in_pool = function() return false end,
@@ -364,15 +314,6 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'pendant_summer',
-    loc_txt = {
-        name = 'Pendant of {C:stocking_athebyne_summer}Winds{}',
-        text = {
-            {'Effect changes when Blind is selected',
-            '{C:inactive}(Currently attuned to {}{C:stocking_athebyne_summer}Notus{}{C:inactive})'},
-            {'The {C:attention}rightmost scoring card{} of each hand becomes a random {C:attention}Enhancement{}',
-             '{stocking}after{}'}
-        }
-    },
     pos = { x = 3, y = 2 },
     no_collection = true,
     in_pool = function() return false end,
@@ -450,15 +391,6 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'pendant_fall',
-    loc_txt = {
-        name = 'Pendant of {C:stocking_athebyne_autumn}Winds{}',
-        text = {
-            {'Effect changes when Blind is selected',
-            '{C:inactive}(Currently attuned to {}{C:stocking_athebyne_autumn}Eurus{}{C:inactive})'},
-            {'Gain {C:red}+1{} discard when {C:blue}hand{} is played',
-            '{stocking}after{}'}
-        }
-    },
     pos = { x = 3, y = 3 },
     no_collection = true,
     in_pool = function() return false end,
@@ -528,17 +460,8 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name,
-
-
+    artist = {'pangaea47'},
     key = 'ranchers',
-    loc_txt = {
-        name = 'Jolly Ranchers',
-        text = {
-            'Using a {C:purple}Tarot{} card has a {C:green}fixed 25% chance{} of creating the next {C:purple}Tarot{} card in sequence',
-            '{C:inactive}(Must have room)',
-            '{stocking}after{}'
-        }
-    },
     pos = { x = 4, y = 0 },
 
     calculate = function(self, card, context)
@@ -579,16 +502,8 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name,
-
+    artist = {'pangaea47'},
     key = 'giant',
-    loc_txt = {
-        name = 'Jolly Green Giant',
-        text = {
-            'Swap the base Chips and Mult of {C:attention}Pair{} with {C:attention}Four of a Kind{}',
-            'when scoring',
-            '{stocking}before{}'
-        }
-    },
     pos = { x = 5, y = 0 },
 
     calculate = function(self, card, context)
