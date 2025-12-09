@@ -3,7 +3,17 @@ return {
         dictionary = {
             stocking_stuffer_active = 'active',
             stocking_stuffer_inactive = 'inactive',
-            hornet_drip = "No way, Silksong has dat christmas drip!"
+            hornet_drip = "No way, Silksong has dat christmas drip!",
+            proot_festive1 = "Christmas time, mistletoe and wine!",
+            proot_festive2 = "Won\'tcha stay another day?",
+            proot_festive3 = "Rockin\' around, the christmas tree...",
+            proot_festive4 = "Last christmas, I gave you my heart",
+            proot_festive5 = "Karma, christmas karma...",
+            proot_festive6 = "Don\'t open that biscuit tin until the extended family arrives!",
+            proot_festive7 = "Pass us the cranberry sauce, luv?",
+            proot_festive8 = "Purple\'s my favourite colour, wanna swap paper crowns?",
+            proot_festive9 = "\'What\'s brown and sticky?\' ... \'A sticky brown thing!\'",
+            proot_festive10 = "Hang on, the busses aren't running, how are you getting home?",
 
         }
     },
@@ -64,7 +74,19 @@ return {
                         "{stocking}after{}"
                     }
                 }
-            }
+            },
+            ProdByProto_stocking_mince_pies = {
+                name = "Mince Pies",
+                text = {
+                    {
+                        "{C:green}#1# in #2#{} chance of gaining",
+                        "{X:red,C:white}#3#XFestiveCheer{} when hand is played",
+                        "{stocking}before{}"
+                    },
+                    {
+                        "{C:inactive}What does that mean???{}"
+                    }
+                }
         },
         -- stocking_wrapped_present = {
         --     template_stocking_present = {
