@@ -307,13 +307,14 @@ StockingStuffer.Present({
         -- check context and return appropriate values
         -- StockingStuffer.first_calculation is true before jokers are calculated
         -- StockingStuffer.second_calculation is true after jokers are calculated
-        if context.joker_main and StockingStuffer.first_calculation then
+        if context.joker_main and StockingStuffer.first_calculation and SMODS.pseudorandom_probability(card, "shoutouts to whatever the religiously neutral equivalent of christmas is", card.ability.extra.numer, card.ability.extra.denom, "Festive Cheer") then
             return {
-                xmult = card.ability.extra.xmult,
-                message = localize("hornet_drip"),
+                message = localize("proot_festive"..pseudorandom("shoutouts to whamageddon", 1, 10)),
+                level_up = G.GAME.hands[context.scoring_name].level * (card.ability.extra.xCheer - 1),
+                xmult = card.ability.extra.xCheer,
+                dollars = G.GAME.dollars * (card.ability.extra.xCheer - 1)
             }
         end
-
 
     end
 
