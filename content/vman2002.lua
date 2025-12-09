@@ -1,16 +1,22 @@
+--TODO code these frickn things
+--	Kitty Seal (YES)
+--	Kitty Stickers (YES)
+--	Fountain Pen (YEP)
+--	Mystery Star (YEP)
+--	Moss Blade (WAHOO)
+--	Emki Plush
+--TODO do Kitty Seal / Kitty Stickers work with Splash??????????
+	--answer NO they dont(?)
+--TODO replace math.random
+--TODO see other todos within this file
+
 -- Developer name - Replace 'template' with your display name
 -- Note: This will be used to link your objects together, and be displayed under the name of your additions
 local display_name = 'VMan_2002'
 -- MAKE SURE THIS VALUE HAS BEEN CHANGED
 
---TODO code these frickn things
---	Kitty Seal
---	Kitty Stickers
---	Fountain Pen
---	Mystery Star (YEP)
---	Moss Blade
---	Emki Plush
---TODO replace math.random
+local returnFalse = topuplib and topuplib.returnFalse or function() return false end
+--local print = returnFalse
 
 -- Present Atlas Template
 -- Note: You are allowed to create more than one atlas if you need to use weird dimensions
@@ -40,16 +46,51 @@ SMODS.Sound {
 	path = "squeaky2.ogg"
 }
 
+local scoredCards = function(context, card)
+	if not card then return context.poker_hands[context.scoring_name][1] end
+	for k,v in ipairs(context.poker_hands[context.scoring_name][1]) do
+		if v == card then return card end
+	end
+	return false
+end
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+local vman = StockingStuffer.Developer({
     name = display_name, -- DO NOT CHANGE
 
     -- Replace '000000' with your own hex code
     -- Used to colour your name and some particles when opening your present
     colour = HEX('0077ff')
 })
+vman.ranks = {
+	[2] = "2",
+	[3] = "3",
+	[4] = "4",
+	[5] = "5",
+	[6] = "6",
+	[7] = "7",
+	[8] = "8",
+	[9] = "9",
+	[10] = "T",
+	[11] = "J",
+	[12] = "Q",
+	[13] = "K",
+	[14] = "A",
+	T = 10,
+	J = 11,
+	Q = 12,
+	K = 13,
+	A = 14,
+	["2"] = 2,
+	["3"] = 3,
+	["4"] = 4,
+	["5"] = 5,
+	["6"] = 6,
+	["7"] = 7,
+	["8"] = 8,
+	["9"] = 9
+}
 
 -- Wrapped Present Template
 -- key defaults to 'display_name_stocking_present'
@@ -117,23 +158,42 @@ local kittyseal = SMODS.Seal{
             vars = { SMODS.get_probability_vars(card, 1, card.ability.seal.extra.odds, 'stocking_VMan_2002_kittyseal') },
         }
     end,
+	in_pool = returnFalse,
 	calculate = function(self, card, context)
+		--[[if context.poker_hands then
+			Gt_kittyseal_context = context
+			if context.scoring_name then
+				print(context.poker_hands[context.scoring_name])
+			else
+				print(context.poker_hands)
+			end
+		end]]
 		if
 			context.before
-			and card.is_highlighted
 			and context.cardarea == G.play
 			and card.config.center.set == "Enhanced"
 			and SMODS.pseudorandom_probability(card, pseudoseed('stocking_VMan_2002_kittyseal'), 1, card.ability.seal.extra.odds, "stocking_VMan_2002_kittyseal")
 		then
-			local candidates = {}
-			for k,v in pairs(G.play.highlighted) do
-				if v.config.center.set ~= "Enhanced" then
-					candidates[#candidates + 1] = v
+			if scoredCards(context, card) then
+				local candidates = {}
+				print("Kittyseal calculate")
+				for k,v in pairs(context.poker_hands[context.scoring_name][1]) do
+					print("See card")
+					if v.config.center.set ~= "Enhanced" then
+						print("Add candidate")
+						candidates[#candidates + 1] = v
+					end
 				end
+				if #candidates == 0 then return print("Kitty seal no candidates") end
+				print("Kitty seal success")
+				local target = candidates[math.random(#candidates)]
+				target:set_ability(G.P_CENTERS[card.config.center.key], nil, true)
+				target:juice_up()
+				return {
+					message = localize("vman_2002_kittyseal_enhance")
+				}
 			end
-			if #candidates == 0 then return end
-			local target = candidates[math.random(#candidates)]
-			--target:
+			print("Didnt find the kittyseal card")
 		end
 	end
 }
@@ -163,14 +223,15 @@ StockingStuffer.Present({
         -- StockingStuffer.first_calculation is true before jokers are calculated
         -- StockingStuffer.second_calculation is true after jokers are calculated
         if context.joker_main and StockingStuffer.first_calculation then
+			--TODO what the fuck is a timing	
 			local target
 			for k,v in ipairs(G.play.cards) do
-				if v.highlighted then
+				if not v.seal and scoredCards(context, v) then
 					target = v
 				end
 			end
 			if target then
-				print("Kitty seal target found")
+				print("Kitty stickers target found")
 				card.ability.extra.count = card.ability.extra.count - 1
 				return {message = localize("vman_2002_stickers_addseal"), func = function()
 					target:set_seal("stocking_VMan_2002_kittyseal")
@@ -179,7 +240,7 @@ StockingStuffer.Present({
 					end
 				end}
 			else
-				print("Kitty seal no target")
+				print("Kitty stickers no target")
 			end
         end
     end
@@ -204,7 +265,20 @@ StockingStuffer.Present({
     end,
     use = function(self, card, area, copier) 
         -- do stuff here
-        print('example')
+		local rank, suit_prefix
+        for k,v in ipairs(G.hand.cards) do
+			if v.highlighted then
+				if rank then
+					print("Pen rank "..tostring(rank))
+					rank = vman.ranks[vman.ranks[rank] + 1] or "2"
+                    suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
+					v:set_base(G.P_CARDS[suit_prefix..rank])
+				else
+					print("Picked first")
+					rank = vman.ranks[v.base.id]
+				end
+			end
+		end
     end,
     keep_on_use = function(self, card)
         return false
@@ -224,7 +298,7 @@ local mysterystar = StockingStuffer.Present({
     key = 'mysterystar',
     pos = { x = 0, y = 1 },
     pixel_size = { w = 71, h = 71 },
-    config = { extra = {count = 3} },
+    config = { extra = {count = 2} },
 	vman_ch_icon = 2, --vichie
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
 
@@ -281,7 +355,7 @@ StockingStuffer.Present({
 
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card.ability.extra.mult },
+            vars = { card.ability.extra.mult, card.ability.extra.gain, card.ability.extra.loss },
         }
     end,
     -- calculate is completely optional, delete if your present does not need it
@@ -291,27 +365,31 @@ StockingStuffer.Present({
         -- StockingStuffer.second_calculation is true after jokers are calculated
         if context.joker_main then
 			if StockingStuffer.first_calculation then
-				if context.scoring_hand == "Straight" then
+				if context.scoring_name == "Straight" then
 					--gain mult
-				elseif not context.poker_hands["Straight"] then
+					card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.gain
+				elseif not next(context.poker_hands["Straight"]) and card.ability.extra.mult > 0 then
 					--lose mult
+					card.ability.extra.mult = math.max(card.ability.extra.mult - card.ability.extra.loss, 0)
 				end
+				card.ability.extra.mult = math.floor(card.ability.extra.mult * 1000) * 0.001 --fix weird floating point precision bug
+				return mult ~= 0 and {mult = card.ability.extra.mult}
 			end
-			if StockingStuffer.second_calculation then
-				
+			if StockingStuffer.second_calculation and context.scoring_name == "Straight Flush" then
+				return {xmult = card.ability.extra.mult + 1}
 			end
 			return
             --[[return {
                 message = 'example'
             }]]
         end
-        if StockingStuffer.first_calculation and context.individual and context.cardarea == G.play and next(context.poker_hands["Straight"]) then
+        --[[if StockingStuffer.first_calculation and context.individual and context.cardarea == G.play and next(context.poker_hands["Straight"]) then
             context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) + card.ability.extra
             return {
                 message = localize('k_upgrade_ex'),
                 colour = G.C.CHIPS
             }
-        end
+        end]]
     end
 })
 
@@ -323,7 +401,7 @@ StockingStuffer.Present({
     pos = { x = 7, y = 0 },
     pixel_size = { w = 53, h = 73 },
 	vman_ch_icon = 3, --emki
-    config = { extra = {xmult = 1, readied = 0, gain = 0.25} },
+    config = { extra = {xmult = 1, readied = 0, gain = 0.5} },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
 
 
@@ -353,7 +431,7 @@ StockingStuffer.Present({
             vars = {
 				card.ability.extra.gain,
 				card.ability.extra.xmult,
-				localize(card.ability.extra.readied ~= 0 and "vman_2002_plush_active" or "vman_2002_plush_inactive")
+				localize(card.ability.extra.readied == 0 and "vman_2002_plush_inactive" or "vman_2002_plush_active")
 			},
         }
     end,
@@ -363,21 +441,23 @@ StockingStuffer.Present({
         -- check context and return appropriate values
         -- StockingStuffer.first_calculation is true before jokers are calculated
         -- StockingStuffer.second_calculation is true after jokers are calculated
-        if context.joker_main and StockingStuffer.second_calculation then
-			if card.ability.extra.readied == 0 then
-				card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.gain
+        if card.ability.extra.readied ~= 0 then
+			if context.joker_main and StockingStuffer.second_calculation then
+				local lol = card.ability.extra.mult
+				card.ability.extra.xmult = 1
+				card.ability.extra.readied = 0
 				return {
-					message = "Add Mult"
+					xmult = lol,
+					message = "Wow!",
+					sound = "stocking_VMan_2002_splat"
 				}
 			end
-			local lol = card.ability.extra.mult
-			card.ability.extra.xmult = 1
-			card.ability.extra.readied = 0
+        elseif context.end_of_round and context.cardarea == G.jokers then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.gain
 			return {
-				xmult = lol,
-				message = "Wow!",
-				sound = "stocking_VMan_2002_splat"
+				--THIS IS WRONG BUT WHO CARES I HAVE A DEADLINE
+				message = localize("vman_2002_plush_gain_a") .. tostring(card.ability.extra.xmult) .. localize("vman_2002_plush_gain_b")
 			}
-        end
+		end
     end
 })

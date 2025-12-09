@@ -10,7 +10,8 @@ return {
 			vman_2002_plush_unready = 'Unready',
 			vman_2002_plush_active = '(Active)',
 			vman_2002_plush_inactive = '(Inactive)',
-			vman_2002_plush_gain = '+#1#',
+			vman_2002_plush_gain_a = 'X',
+			vman_2002_plush_gain_b = ' Mult',
 			vman_2002_stickers_addseal = '+Seal!',
 			vman_2002_kittyseal_enhance = 'Enhanced!'
 		}
@@ -65,15 +66,15 @@ return {
                 name = "Moss's Blade",
                 text = {
 					{
-						'Gains {C:mult}+0.2{} Mult when played',
+						'Gains {C:mult}+#2#{} Mult when played',
 						'hand is a {C:attention}Straight',
-						'Loses {C:mult}-0.5{} Mult when played',
+						'Loses {C:mult}-#3#{} Mult when played',
 						'hand {C:attention}doesn\'t{} contain a Straight',
-						'{C:inactive}(Currently {C:mult}+0{C:inactive} Mult)',
+						'{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)',
 						'{stocking}before{}'
 					}, {
 						flavor .. "Critical Hit to the enemy's Weak Point!",
-						'{C:mult}Mult{} is applied as {X:mult,C:white}XMult{} when',
+						'{C:mult}Mult{} is applied as {X:mult,C:white}XMult{} + 1 when',
 						'played hand is a {C:attention}Straight Flush',
 						'{stocking}after{}'
 					}
