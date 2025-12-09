@@ -246,7 +246,12 @@ local wrapped_models = {{
     33, 39, 40,
 }}
 
-local models_toggle_with_reduced_motion = false
+-- in final build should only turn off with
+-- "disable animations entirely", not
+-- instant cardarea swap
+local function should_draw_3d()
+    return StockingStuffer.disable_animations or true
+end
 
 StockingStuffer.WrappedPresent({
     developer = display_name,
@@ -256,10 +261,13 @@ StockingStuffer.WrappedPresent({
 
     config = { extra = { old_x_tilt = 0, old_y_tilt = 0, } },
     draw = function(self, card, layer)
-        card.children.center:set_sprite_pos({x = 0, y = (StockingStuffer.disable_animations and models_toggle_with_reduced_motion) and 1 or 99})
-        if (card.config.center.discovered or card.bypass_discovery_center) and not (StockingStuffer.disable_animations and models_toggle_with_reduced_motion) then
+        card.children.center:set_sprite_pos({x = 0, y = should_draw_3d() and 99 or 1})
+        if (card.config.center.discovered or card.bypass_discovery_center) and should_draw_3d() then
             draw_3d_model(card, 71, wrapped_verts, wrapped_cols, wrapped_models)
         end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {key = should_draw_3d() and 'notmario_stocking_present_3d' or 'notmario_stocking_present', vars = { colours = { HEX("ff6868") } } }
     end,
 })
 
@@ -695,8 +703,8 @@ StockingStuffer.Present({
         return { vars = { card.ability.extra.pack_limit, card.ability.extra.present_limit, colours = { HEX("22A617") } } }
     end,
     draw = function(self, card, layer)
-        card.children.center:set_sprite_pos({x = 2, y = (StockingStuffer.disable_animations and models_toggle_with_reduced_motion) and 1 or 99})
-        if (card.config.center.discovered or card.bypass_discovery_center) and not (StockingStuffer.disable_animations and models_toggle_with_reduced_motion) then
+        card.children.center:set_sprite_pos({x = 2, y = should_draw_3d() and 99 or 1})
+        if (card.config.center.discovered or card.bypass_discovery_center) and should_draw_3d() then
             draw_3d_model(card, 85, tungsten_verts, tungsten_cols, tungsten_models)
         end
     end,

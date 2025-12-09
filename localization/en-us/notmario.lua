@@ -79,6 +79,22 @@ return {
                     "(Who's Paul?)",
                 },
             },
+        },
+        stocking_wrapped_present = {
+            ["notmario_stocking_present"] = {
+                name = '{V:1}Present',
+                text = {
+                    '{C:inactive}What could be inside?',
+                    '{C:inactive}Open me to find out!'
+                }
+            },
+            ["notmario_stocking_present_3d"] = {
+                name = '{V:1}Present?',
+                text = {
+                    '{C:inactive}It seems as if it is',
+                    '{C:inactive}not from this world...',
+                }
+            },
         }
     }
 }
