@@ -79,17 +79,17 @@ StockingStuffer.Present({
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         if StockingStuffer.GlobalPunk_Jimbmas >= 0 then
-                            card.children.stocking_gp_floating_sprite =
-                                Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
-                                    G.ASSET_ATLAS['stocking_GlobalPunk LLC_presents'], {
-                                        x = 2 + StockingStuffer.GlobalPunk_Jimbmas,
-                                        y = 0
-                                    })
-                            card.children.stocking_gp_floating_sprite.role.draw_major = card
-                            card.children.stocking_gp_floating_sprite.states.hover.can = false
-                            card.children.stocking_gp_floating_sprite.states.click.can = false
-                            if StockingStuffer.GlobalPunk_Jimbmas == 1 and card.ability.trig == false then
+                            --AND A JOKER THAT RETRIGGEREDDDDD
+                            if StockingStuffer.GlobalPunk_Jimbmas == 11 and card.ability.trig == false then
                                 card.ability.trig = true
+                                local rejoke = {
+                                    'j_hanging_chad',
+                                    'j_mime',
+                                    'j_dusk',
+                                    'j_hack',
+                                    'j_selzer',
+                                    'j_sock_and_buskin'
+                                }
                                 if HotPotato then
                                     SMODS.add_card {
                                         set = 'Joker',
@@ -100,12 +100,110 @@ StockingStuffer.Present({
                                     SMODS.add_card {
                                         set = 'Joker',
                                         key_append = 'stocking_globalpunk_jimbmas',
-                                        key = 'j_hanging_chad'
+                                        key = rejoke[math.random(#rejoke)]
                                     }
                                 end
                             end
+                            --2 Mediums
+                            if StockingStuffer.GlobalPunk_Jimbmas == 10 and card.ability.trig == false then
+                                card.ability.trig = true
+                                card:juice_up(0.3, 0.5)
+                                card.children.center:set_sprite_pos({ x = 3, y = 0 })
+                                for i = 1, 2 do
+                                    SMODS.add_card {
+                                        set = 'Spectral',
+                                        key_append = 'stocking_globalpunk_jimbmas',
+                                        key = 'c_medium'
+                                    }
+                                end
+                            end
+                            --3 Fresh Eggs
+                            if StockingStuffer.GlobalPunk_Jimbmas == 9 and card.ability.trig == false then
+                                card.ability.trig = true
+                                card:juice_up(0.3, 0.5)
+                                card.children.center:set_sprite_pos({ x = 5, y = 0 })
+                                for i = 1, 3 do
+                                    SMODS.add_card {
+                                        set = 'Joker',
+                                        key_append = 'stocking_globalpunk_jimbmas',
+                                        key = 'j_egg'
+                                    }
+                                end
+                            end
+                            --4 Tarot Cards
+                            if StockingStuffer.GlobalPunk_Jimbmas == 8 and card.ability.trig == false then
+                                card.ability.trig = true
+                                for i = 1, 4 do
+                                    SMODS.add_card {
+                                        set = 'Tarot',
+                                        key_append = 'stocking_globalpunk_jimbmas',
+                                    }
+                                end
+                            end
+                            --FIIIIIIVE JOKER SLOTTTTSSSSS
+                            if StockingStuffer.GlobalPunk_Jimbmas == 7 and card.ability.trig == false then
+                                card.ability.trig = true
+                                card:juice_up(0.3, 0.5)
+                                card.children.center:set_sprite_pos({ x = 7, y = 0 })
+                                G.jokers.config.card_limit = G.jokers.config.card_limit + 5
+                            end
+                            --6 Wees Replaying
+                            if StockingStuffer.GlobalPunk_Jimbmas == 6 and card.ability.trig == false then
+                                card.ability.trig = true
+                                for i = 1, 6 do
+                                    SMODS.add_card {
+                                        set = 'Joker',
+                                        key_append = 'stocking_gp_jimbmas',
+                                        key = 'j_wee'
+                                    }
+                                end
+                            end
+                            --7 Scholars Acing
+                            if StockingStuffer.GlobalPunk_Jimbmas == 0 and card.ability.trig == false then
+                                card.ability.trig = true
+                                local cards = {}
+                                for i = 1, 7 do
+                                    local _suit, _rank =
+                                        pseudorandom_element(SMODS.Suits, pseudoseed('stocking_gp_jimbmas'))
+                                        .card_key, 'A'
+                                    local additions, cen_pool = {}, {}
+                                    for _, en_cen in pairs(G.P_CENTER_POOLS["Enhanced"]) do
+                                        if en_cen.key ~= 'm_stone' and not en_cen.overrides_base_rank then
+                                            cen_pool[#cen_pool + 1] =
+                                                en_cen
+                                        end
+                                    end
+                                    cards[i] = create_playing_card(
+                                        {
+                                            front = G.P_CARDS[_suit .. '_' .. _rank],
+                                            center = pseudorandom_element(
+                                                cen_pool, pseudoseed('jimbmas_cartridge'))
+                                        },
+                                        G.play, nil, i ~= 1,
+                                        { G.C.SECONDARY_SET.Spectral })
+                                    cards[i]:set_seal(SMODS.poll_seal({ guaranteed = true, type_key = 'jimbmas_seal' }))
+                                    cards[i]:set_edition(poll_edition('jimbmas_edition', nil, true, true))
+                                    G.E_MANAGER:add_event(Event({
+                                        func = function()
+                                            --G.play:emplace(cards[i])
+                                            cards[i]:start_materialize()
+                                            G.GAME.blind:debuff_card(cards[i])
+                                            if context.blueprint_card then
+                                                context.blueprint_card:juice_up()
+                                            else
+                                                card
+                                                    :juice_up()
+                                            end
+                                            SMODS.calculate_context({ playing_card_added = true, cards = { cards[i] } })
+                                            return true
+                                        end
+                                    }))
+                                    draw_card(G.play, G.deck, 90, 'up')
+                                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                                end
+                                SMODS.add_card { set = 'Joker', key_append = 'stocking_gp_jimbmas', key = 'j_scholar' }
+                            end
                         end
-                        card:set_sprites(self, card, nil)
                         return true
                     end,
                 }))
