@@ -6,6 +6,17 @@ local display_name = 'ProdByProto'
 StockingStuffer.colours.active = mix_colours(G.C.GREEN, G.C.JOKER_GREY, 0.8)
 StockingStuffer.colours.inactive = mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8)
 
+SMODS.Gradient{
+    key = "xCheerBack",
+    colours = { G.C.RED,G.C.GREEN,G.C.GOLD,HEX("FFFBF7")},
+    cycle = 8
+}
+
+SMODS.Gradient{
+    key = "xCheerFront",
+    colours = { G.C.WHITE,G.C.WHITE,HEX("FFFBF7"),G.C.UI.TEXT_DARK },
+    cycle = 8
+}
 
 -- Present Atlas Template
 -- Note: You are allowed to create more than one atlas if you need to use weird dimensions
