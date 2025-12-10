@@ -10,7 +10,7 @@ StockingStuffer.ThunderEdge = {}
 -- We recommend you name your atlas with your display_name included
 SMODS.Atlas({
 	key = display_name .. "_presents",
-	path = "santa_presents.png",
+	path = "thunder_presents.png",
 	px = 71,
 	py = 95,
 })
@@ -48,6 +48,7 @@ StockingStuffer.WrappedPresent({
 	pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
 	atlas = display_name .. "_wrapped",
 	display_size = { w = 71, h = 71 },
+	artist = { "George the Rat" },
 })
 
 -- Present Template - Replace 'template' with your name
@@ -56,6 +57,7 @@ StockingStuffer.WrappedPresent({
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "leek", -- keys are prefixed with 'display_name_stocking_' for reference
+	artist = { "missingnumber" },
 	pos = { x = 0, y = 0 },
 	config = { extra = { chips = 25, xmult = 0.25 } },
 	loc_vars = function(self, info_queue, card)
@@ -134,7 +136,8 @@ end
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "cappy", -- keys are prefixed with 'display_name_stocking_' for reference
-	pos = { x = 0, y = 0 },
+	artist = { "missingnumber" },
+	pos = { x = 1, y = 0 },
 	config = { extra = { hand_size_penalty = 1, penalty_increment = 1 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -159,7 +162,8 @@ StockingStuffer.Present({
 				copied:add_to_deck()
 				G.stocking_present:emplace(copied)
 				G.hand:change_size(-card.ability.extra.hand_size_penalty)
-				card.ability.extra.hand_size_penalty = card.ability.extra.hand_size_penalty + card.ability.extra.penalty_increment
+				card.ability.extra.hand_size_penalty = card.ability.extra.hand_size_penalty
+					+ card.ability.extra.penalty_increment
 				SMODS.calculate_effect({ message = localize("k_duplicated_ex") }, card)
 				return true
 			end,
