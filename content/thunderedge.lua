@@ -26,7 +26,7 @@ SMODS.Atlas({
 })
 
 local ThunderEdgeGradient = SMODS.Gradient({
-	key = "transmuted_gradient",
+	key = "ThunderEdgeGradient",
 	colours = {
 		HEX("89C41B"),
 		HEX("C5CC41"),
@@ -57,7 +57,7 @@ StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "leek", -- keys are prefixed with 'display_name_stocking_' for reference
 	pos = { x = 0, y = 0 },
-	config = { extra = { chips = 20, xmult = 0.25 } },
+	config = { extra = { chips = 25, xmult = 0.25 } },
 	loc_vars = function(self, info_queue, card)
 		local sfx_count = 0
 		local music_track_count = 0
@@ -112,16 +112,69 @@ StockingStuffer.Present({
 local start_run_hook = G.start_run
 function G:start_run(args)
 	start_run_hook(self, args)
-	G.GAME.ThunderEdgeData = G.GAME.ThunderEdgeData or {
-		music_played = {},
-		sfx_played = {},
-	}
+	G.E_MANAGER:add_event(Event({
+		func = function()
+			G.GAME.ThunderEdgeData = G.GAME.ThunderEdgeData or {
+				music_played = {},
+				sfx_played = {},
+			}
+			return true
+		end,
+	}))
 end
 
 local play_sound_hook = play_sound
 function play_sound(sound_code, per, vol)
-	if G.STAGE == G.STAGES.RUN and G.GAME.ThunderEdgeData.sfx_played then
+	if G.STAGE == G.STAGES.RUN and G.GAME.ThunderEdgeData then
 		G.GAME.ThunderEdgeData.sfx_played[sound_code] = true
 	end
 	play_sound_hook(sound_code, per, vol)
 end
+
+StockingStuffer.Present({
+	developer = display_name, -- DO NOT CHANGE
+	key = "cappy", -- keys are prefixed with 'display_name_stocking_' for reference
+	pos = { x = 0, y = 0 },
+	config = { extra = { hand_size_penalty = 1, penalty_increment = 1 } },
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.hand_size_penalty,
+				card.ability.extra.penalty_increment,
+			},
+		}
+	end,
+	-- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
+	use = function(self, card)
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				local targets = {}
+				for _, present in ipairs(G.stocking_present.cards) do
+					if present.config.center.key ~= "ThunderEdge_stocking_cappy" then
+						targets[#targets + 1] = present
+					end
+				end
+				local chosen = pseudorandom_element(targets, "ThunderEdge_cappy")
+				local copied = copy_card(chosen)
+				copied:add_to_deck()
+				G.stocking_present:emplace(copied)
+				G.hand:change_size(-card.ability.extra.hand_size_penalty)
+				card.ability.extra.hand_size_penalty = card.ability.extra.hand_size_penalty + card.ability.extra.penalty_increment
+				SMODS.calculate_effect({ message = localize("k_duplicated_ex") }, card)
+				return true
+			end,
+		}))
+	end,
+	can_use = function(self, card)
+		local targets = {}
+		for _, present in ipairs(G.stocking_present.cards) do
+			if present.config.center.key ~= "ThunderEdge_stocking_cappy" then
+				targets[#targets + 1] = present
+			end
+		end
+		return G.hand.config.card_limit > 1 and #targets > 0
+	end,
+	keep_on_use = function()
+		return true
+	end,
+})
