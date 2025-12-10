@@ -107,6 +107,68 @@ return {
                         "{stocking}next{} #1#"
                     }
                 }
+            },
+            ProdByProto_stocking_bath_bomb = {
+                name = "Bath Bomb",
+                text = {
+                    {
+                        "{C:chips}+#1# chips{},",
+                        "cards held in hand gain",
+                        "{C:chips}+#2# chips",
+                        "{stocking}before{}"
+                    },
+                    {
+                        "Bath Bomb {C:red}loses{} {C:chips}#3# chips{}",
+                        "for each card upgraded",
+                        "{stocking}after{}"
+                    },
+                    {
+                        "{C:inactive}Spa Set instruction manual:{}",
+                        "{C:inactive}We here at Jimbo Fast Food hope{}",
+                        "{C:inactive}you enjoy the rest of the set, ideally after{}",
+                        "{C:inactive}the{} {C:attention}Bath Bomb{} {C:inactive}has {}{C:attention}fizzled out{}{C:inactive}!{}",
+                        "{stocking}next{} #4#"
+                    }
+                }
+            },
+            ProdByProto_stocking_jel = {
+                name = "Shower Gel",
+                text = {
+                    {
+                    "{C:blue}Cleanses{} the {C:attention}current blind{} when used.",
+                    "{C:inactive}-It reduces the score requirement by half,{}",
+                    "{C:inactive}or disables the boss blind.{}",
+                    "{C:inactive}- Effect picked at random where applicable.{}",
+                    "{stocking}usable{}"
+                    },
+                    {
+                    "{C:inactive}I'm kinda getting mixed{}",
+                    "{C:inactive}signals from the warning label...{}",
+                    "{stocking}next{} #1#"
+                    }
+                }
+            },
+            ProdByProto_stocking_moist = {
+                name = "Moisturiser",
+                text = {
+                    {
+                        "- Removes {C:attention}perishable{} and/or {C:attention}debuff{}",
+                        "from a random applicable joker",
+                        "- If there are none, a random joker",
+                        "will instead become {C:edition}Foil, Polychrome,{}",
+                        "or {C:dark_edition}Negative{} scented",
+                        "{stocking}usable{}"
+                    },
+                    {
+                        "{C:inactive}We at Jimbo Fast Food{}",
+                        "{C:inactive}sincerely hope you enjoyed{}",
+                        "{C:inactive}your fleeting moments of{}",
+                        "{C:inactive}consumerism with us.{}",
+                        "{C:inactive}As a token of appreciation,{}",
+                        "{C:inactive}we hope you enjoy this relaxation playlist.{}",
+                        "{stocking}next{} #1#"
+                    }
+                }
             }
         -- stocking_wrapped_present = {
         --     template_stocking_present = {
