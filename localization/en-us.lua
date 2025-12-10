@@ -18,7 +18,10 @@ return {
             stocking_stuffer_after = 'after',
             stocking_stuffer_usable = 'usable',
             PotatoPatchUtils_first_time_disable = "Do not show again",
-
+            stocking_stuffer_art_credit = 'Art by ',
+            stocking_stuffer_code_credit = 'Code by ',
+            stocking_stuffer_and_spacer = ' and ',
+            stocking_stuffer_comma_spacer = ', '
         }
     },
     descriptions = {
