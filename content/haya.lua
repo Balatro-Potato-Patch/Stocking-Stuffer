@@ -570,7 +570,7 @@ StockingStuffer.Present({
 			if context.setting_blind then
 				return halvereq()
 			end
-			if context.after then
+			if context.end_of_round and context.main_eval then
 				card.ability.extra.rounds = card.ability.extra.rounds - 1
 				if card.ability.extra.rounds <= 0 then
 					return {
