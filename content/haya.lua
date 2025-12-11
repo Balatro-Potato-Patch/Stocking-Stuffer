@@ -525,3 +525,66 @@ StockingStuffer.Present({
 		end
 	end
 })
+
+-- HF Murasama
+StockingStuffer.Present({
+	developer = display_name,
+	key = "murasama",
+	pos = { x = 4, y = 0 },
+	pixel_size = { w = 37, h = 85 },
+	config = { extra = { rounds = 3 } },
+	artist = { 'Aikoyori' },
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.rounds },
+			key = "haya_stocking_murasama_" .. (card.ability.extra.rounds <= 0 and 2 or 1)
+		}
+	end,
+	draw = function(self, card, layer)
+		---@type balatro.Sprite
+		local spr = card.children.center
+		spr:draw_shader("booster", nil, card.ARGS.send_to_shader)
+	end,
+	---@param self table
+	---@param card balatro.Card|table
+	---@param context CalcContext|table
+	calculate = function(self, card, context)
+		if StockingStuffer.second_calculation then return end
+		local halvereq = function()
+			G.GAME.blind.chips = G.GAME.blind.chips / 2
+			card.blind_chip_buffer = G.GAME.blind.chips
+			G.E_MANAGER:add_event(Event {
+				func = function()
+					G.GAME.blind.chip_text = number_format(card.blind_chip_buffer)
+					card.blind_chip_buffer = nil
+					G.HUD_blind:get_UIE_by_ID("HUD_blind_count"):juice_up()
+					return true
+				end
+			})
+			return {
+				message = localize('haya_murasama'),
+				sound = 'slice1'
+			}
+		end
+		if card.ability.extra.rounds > 0 then
+			if context.setting_blind then
+				return halvereq()
+			end
+			if context.after then
+				card.ability.extra.rounds = card.ability.extra.rounds - 1
+				if card.ability.extra.rounds <= 0 then
+					return {
+						message = localize('k_upgrade_ex')
+					}
+				end
+				return {
+					message = localize({ type = 'variable', key = 'a_haya_countdown', vars = { card.ability.extra.rounds } })
+				}
+			end
+		else
+			if context.before then
+				return halvereq()
+			end
+		end
+	end,
+})
