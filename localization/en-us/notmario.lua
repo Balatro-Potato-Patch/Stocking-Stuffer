@@ -10,7 +10,8 @@ return {
                 text = {
                     {
                         'All hands are considered',
-                        '{C:attention}Three of a Kind{}',
+                        'only {C:attention}Three of a Kind{} and',
+                        'contain no other hands',
                         '{C:inactive}(use to toggle, {C:attention}active{C:inactive}){}',
                         '{stocking}usable{}',
                     },
@@ -21,7 +22,8 @@ return {
                 text = {
                     {
                         '{C:inactive}All hands are considered',
-                        '{C:inactive}Three of a Kind{}',
+                        '{C:inactive}only Three of a Kind and',
+                        '{C:inactive}contain no other hands',
                         '{C:inactive}(use to toggle, {C:attention}inactive{C:inactive}){}',
                         '{stocking}usable{}',
                     },

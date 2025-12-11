@@ -543,7 +543,7 @@ StockingStuffer.Present({
     artist = { "pangaea47" },
     draw = function(self, card, layer)
         local function should_draw_3d() return enable_bonus_models end
-        card.children.center:set_sprite_pos({x = 1, y = should_draw_3d() and 99 or 0})
+        card.children.center:set_sprite_pos({x = card.ability.extra.active and 1 or 7, y = should_draw_3d() and 99 or 0})
         if (card.config.center.discovered or card.bypass_discovery_center) and should_draw_3d() then
             draw_3d_model(card, 71, plushie_verts, plushie_cols, plushie_models)
         end
@@ -555,11 +555,13 @@ StockingStuffer.Present({
     end,
     use = function(self, card)
         card.ability.extra.active = not card.ability.extra.active
-        delay(0.5)
+        card:juice_up(0.3, 0.7)
+        play_sound('tarot2', card.ability.extra.active and 0.76 or 1)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
-            delay = 0.2,
+            delay = 0.06 * G.SETTINGS.GAMESPEED,
             func = function()
+                play_sound('tarot2', card.ability.extra.active and 1 or 0.76)
                 update_hand_text({immediate = true, nopulse = true, delay = 0}, {mult = 0, chips = 0, level = '', handname = ''})
                 G.hand:unhighlight_all()
                 return true
