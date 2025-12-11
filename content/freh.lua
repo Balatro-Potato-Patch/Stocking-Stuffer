@@ -1,12 +1,4 @@
--- Developer name - Replace 'template' with your display name
--- Note: This will be used to link your objects together, and be displayed under the name of your additions
 local display_name = 'Freh'
--- MAKE SURE THIS VALUE HAS BEEN CHANGED
-
-
--- Present Atlas Template
--- Note: You are allowed to create more than one atlas if you need to use weird dimensions
--- We recommend you name your atlas with your display_name included
 SMODS.Atlas({
     key = display_name..'_presents',
     path = 'freh_presents.png',
@@ -14,36 +6,18 @@ SMODS.Atlas({
     py = 95
 })
 
-
--- Developer Template
--- Note: This object is how your WrappedPresent and Presents get linked
 StockingStuffer.Developer({
-    name = display_name, -- DO NOT CHANGE
+    name = display_name,
 
-    -- Replace '000000' with your own hex code
-    -- Used to colour your name and some particles when opening your present
     colour = HEX('6D3EAC')
 })
 
--- Wrapped Present Template
--- key defaults to 'display_name_stocking_present'
 StockingStuffer.WrappedPresent({
-    developer = display_name, -- DO NOT CHANGE
+    developer = display_name, 
 
-    pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
+    pos = { x = 0, y = 0 }, 
 	pixel_size = { w = 43, h = 61 },
 	display_size = { w = 43 * 1.4, h = 61 * 1.4 },
-    -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
-
-    -- Your present will be given an automatically generated name and description. If you want to customise it you can, though we recommend keeping the {V:1} in the name
-    -- You are encouraged to use the localization file for your name and description, this is here as an example
-    -- loc_txt = {
-    --     name = '{V:1}Present',
-    --     text = {
-    --         '  {C:inactive}What could be inside?  ',
-    --         '{C:inactive}Open me to find out!'
-    --     }
-    -- },
 })
 
 StockingStuffer.Present({
@@ -129,7 +103,7 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name,
     key = 'model_kit',
-    pos = { x = 6, y = 0 },
+    pos = { x = 5, y = 0 },
     pixel_size = { w = 71, h = 72 },
 	display_size = { w = 72, h = 72 },
     calculate = function(self, card, context)
