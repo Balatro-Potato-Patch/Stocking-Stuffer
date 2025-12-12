@@ -32,10 +32,8 @@ return {
             ["notmario_stocking_magnifier"] = {
                 name = 'Magnifying Glass',
                 text = {
-                    {'{X:mult,C:white}X#1#{} Mult',
-                    '{stocking}before{}',},
-                    {'{X:mult,C:white}X#2#{} Mult',
-                    '{stocking}after{}',}
+                    {'All {C:mult}+Mult{} effects give',
+                    '{X:mult,C:white}X2{} as much {C:mult}Mult{}'},
                 }
             },
             ["notmario_stocking_hydraulic_press"] = {

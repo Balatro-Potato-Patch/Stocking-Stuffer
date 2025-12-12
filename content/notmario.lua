@@ -611,27 +611,18 @@ StockingStuffer.Present({
     pixel_size = { w = 64, h = 24 },
     display_size = { w = 64 * 1.25, h = 24 * 1.25 },
     artist = { "pangaea47" },
-    blueprint_compat = true,
-
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = { 1 / card.ability.extra, card.ability.extra },
-        }
-    end,
-
-    calculate = function(self, card, context)
-        if context.initial_scoring_step and StockingStuffer.first_calculation then
-            return {
-                xmult = 1 / card.ability.extra,
-            }
-        end
-        if context.joker_main and StockingStuffer.second_calculation then
-            return {
-                xmult = card.ability.extra,
-            }
-        end
-    end
+    blueprint_compat = true
 })
+
+-- apply magnifier
+local scalcieff = SMODS.calculate_individual_effect
+SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
+  local mult_scale = 2 ^ #SMODS.find_card("notmario_stocking_magnifier")
+  if key == "mult" or key == "h_mult" or key == "mult_mod" then
+    amount = amount * mult_scale
+  end
+  return scalcieff(effect, scored_card, key, amount, from_edition)
+end
 
 StockingStuffer.Present({
     developer = display_name,
