@@ -164,7 +164,7 @@ SMODS.current_mod.calculate = function (self, context)
             StockingStuffer.GlVars.DittoTransform = true
         end
     end
-    if context.before then
+    if context.setting_blind then
         StockingStuffer.GlVars.DittoTransform = nil
     end
     return ret
