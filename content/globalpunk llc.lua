@@ -60,7 +60,8 @@ StockingStuffer.Present({
     -- },
     pos = { x = 1, y = 0 },
     config = {
-        trig = false
+        trig = false,
+        rebate = false
     },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
     display_size = { w = 67 * 1.2, h = 71 * 1.2 },
@@ -73,6 +74,29 @@ StockingStuffer.Present({
         -- StockingStuffer.second_calculation is true after jokers are calculated
         if context.setting_blind then
             card.ability.trig = false
+        end
+        if StockingStuffer.GlobalPunk_Jimbmas == 4 and card.ability.trig == false then
+            card.ability.trig = true
+            card.ability.rebate = true
+            card:juice_up(0.3, 0.5)
+            card.children.center:set_sprite_pos({ x = 10, y = 0 })
+        end
+        --8 Rebates Mailing
+        if card.ability.rebate then
+            if context.discard and not context.other_card.debuff and context.other_card:get_id() == 8 then
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 8
+                return {
+                    dollars = 8,
+                    func = function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                G.GAME.dollar_buffer = 0
+                                return true
+                            end
+                        }))
+                    end
+                }
+            end
         end
         if context.end_of_round and context.main_eval then
             if self.discovered or card.bypass_discovery_center then
