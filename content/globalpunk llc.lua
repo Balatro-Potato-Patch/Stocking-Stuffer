@@ -75,13 +75,6 @@ StockingStuffer.Present({
         if context.setting_blind then
             card.ability.trig = false
         end
-        if StockingStuffer.GlobalPunk_Jimbmas == 4 and card.ability.trig == false then
-            card.ability.trig = true
-            card.ability.rebate = true
-            card:juice_up(0.3, 0.5)
-            card.children.center:set_sprite_pos({ x = 10, y = 0 })
-        end
-        --8 Rebates Mailing
         if card.ability.rebate then
             if context.discard and not context.other_card.debuff and context.other_card:get_id() == 8 then
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 8
@@ -224,6 +217,13 @@ StockingStuffer.Present({
                                     G.deck.config.card_limit = G.deck.config.card_limit + 1
                                 end
                                 SMODS.add_card { set = 'Joker', key_append = 'stocking_gp_jimbmas', key = 'j_scholar' }
+                            end
+                            --8 Rebates Mailing
+                            if StockingStuffer.GlobalPunk_Jimbmas == 4 and card.ability.trig == false then
+                                card.ability.trig = true
+                                card.ability.rebate = true
+                                card:juice_up(0.3, 0.5)
+                                card.children.center:set_sprite_pos({ x = 10, y = 0 })
                             end
                         end
                         return true
