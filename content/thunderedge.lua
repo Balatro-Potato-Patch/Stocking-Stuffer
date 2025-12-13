@@ -61,7 +61,7 @@ StockingStuffer.Present({
 	key = "leek", -- keys are prefixed with 'display_name_stocking_' for reference
 	artist = { "missingnumber" },
 	pos = { x = 0, y = 0 },
-	config = { extra = { chips = 25, xmult = 0.25 } },
+	config = { extra = { chips = 15, xmult = 0.5 } },
 	loc_vars = function(self, info_queue, card)
 		local sfx_count = 0
 		local music_track_count = 0
@@ -211,7 +211,7 @@ StockingStuffer.Present({
 				xmult = card.ability.extra.xmult,
 			}
 		end
-		if context.setting_blind and StockingStuffer.first_calculation then
+		if context.setting_blind and StockingStuffer.first_calculation and not context.blueprint then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					StockingStuffer.ThunderEdge.start_attack(card)
@@ -227,7 +227,7 @@ StockingStuffer.Present({
 	end,
 })
 
---#region I apologize in advance to whoever has to debug this chunk of code
+--#region I apologize in advance to whoever has to debug or review this chunk of code
 
 SMODS.Sound({
 	key = "hurt",
@@ -533,7 +533,7 @@ function StockingStuffer.ThunderEdge.start_attack(trigger_card)
 						message = localize("thunderedge_hit"),
 						colour = G.C.RED,
 						instant = true,
-						sound = "stocking_hurt"
+						sound = "stocking_hurt",
 					},
 				})
 				self.invincibility = 1
@@ -557,7 +557,7 @@ function StockingStuffer.ThunderEdge.start_attack(trigger_card)
 						message = localize("thunderedge_graze"),
 						colour = G.C.GREEN,
 						instant = true,
-						sound = "stocking_graze"
+						sound = "stocking_graze",
 					},
 				})
 				p.graze_cd = 0.5
@@ -687,7 +687,7 @@ function StockingStuffer.ThunderEdge.get_angle(origin, target)
 end
 
 function StockingStuffer.ThunderEdge.diamond_rain()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -845,7 +845,7 @@ function StockingStuffer.ThunderEdge.small_spades()
 end
 
 function StockingStuffer.ThunderEdge.spade_circles()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -1075,7 +1075,7 @@ function StockingStuffer.ThunderEdge.devilsknife()
 end
 
 function StockingStuffer.ThunderEdge.heart_bombs()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -1201,7 +1201,7 @@ function StockingStuffer.ThunderEdge.heart_bombs()
 end
 
 function StockingStuffer.ThunderEdge.spade_bombs()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -1296,7 +1296,7 @@ function StockingStuffer.ThunderEdge.spade_bombs()
 end
 
 function StockingStuffer.ThunderEdge.diamond_bombs()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -1390,7 +1390,7 @@ function StockingStuffer.ThunderEdge.diamond_bombs()
 end
 
 function StockingStuffer.ThunderEdge.club_bombs()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -1485,7 +1485,7 @@ function StockingStuffer.ThunderEdge.club_bombs()
 end
 
 function StockingStuffer.ThunderEdge.all_bombs()
-	local voice = math.random(1,3)
+	local voice = math.random(1, 3)
 	if voice == 1 then
 		play_sound("stocking_anything")
 	elseif voice == 2 then
@@ -1895,3 +1895,125 @@ end
 
 --#endregion
 
+StockingStuffer.Present({
+	developer = display_name, -- DO NOT CHANGE
+	key = "void_heart", -- keys are prefixed with 'display_name_stocking_' for reference
+	artist = { "missingnumber" },
+	pos = { x = 3, y = 0 },
+	config = { extra = { used = false } },
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.used and "Has been used" or "Has not been used",
+			},
+		}
+	end,
+	-- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
+	calculate = function(self, card, context)
+		-- StockingStuffer.first_calculation is true before jokers are calculated
+		-- StockingStuffer.second_calculation is true after jokers are calculated
+		if context.ante_change and context.ante_end and StockingStuffer.first_calculation then
+			card.ability.extra.used = false
+		end
+	end,
+	use = function(self, card)
+		card.ability.extra.used = true
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				play_sound("timpani")
+				if pseudorandom("thunderedge_void_heart", 1, 1000) <= 500 then
+					SMODS.add_card({
+						set = "Joker",
+						legendary = true,
+						rarity = "Legendary",
+					})
+				else
+					SMODS.add_card({
+						set = "Joker",
+						rarity = "Rare",
+					})
+				end
+				return true
+			end,
+		}))
+	end,
+	keep_on_use = function()
+		return true
+	end,
+	can_use = function(self, card)
+		return #G.jokers.cards < G.jokers.config.card_limit and not card.ability.extra.used
+	end,
+})
+
+StockingStuffer.Present({
+	developer = display_name, -- DO NOT CHANGE
+	key = "meowmere", -- keys are prefixed with 'display_name_stocking_' for reference
+	artist = { "missingnumber" },
+	pos = { x = 4, y = 0 },
+	config = { extra = { chips = 30 } },
+	loc_vars = function(self, info_queue, card)
+		local count = 0
+		if G.playing_cards then
+			for _, c in ipairs(G.playing_cards) do
+				if SMODS.has_enhancement(c, "m_wild") then
+					count = count + 1
+				end
+			end
+		end
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_wild
+		return {
+			vars = {
+				card.ability.extra.chips,
+				card.ability.extra.chips * count,
+			},
+		}
+	end,
+	-- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
+	calculate = function(self, card, context)
+		-- StockingStuffer.first_calculation is true before jokers are calculated
+		-- StockingStuffer.second_calculation is true after jokers are calculated
+		if context.joker_main and StockingStuffer.first_calculation then
+			local count = 0
+			for _, c in ipairs(G.playing_cards) do
+				if SMODS.has_enhancement(c, "m_wild") then
+					count = count + 1
+				end
+			end
+			return {
+				chips = card.ability.extra.chips * count,
+			}
+		end
+		if context.before and StockingStuffer.second_calculation and not context.blueprint then
+			if #context.scoring_hand >= 1 then
+				local first = context.scoring_hand[1]
+				first:set_ability("m_wild", nil, true)
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						first:juice_up()
+						return true
+					end,
+				}))
+				if #context.scoring_hand ~= 1 then
+					local temp = context.scoring_hand[#context.scoring_hand]
+					temp:set_ability("m_wild", nil, true)
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							temp:juice_up()
+							return true
+						end,
+					}))
+				end
+				local col = pseudorandom_element({
+					G.C.SUITS.Clubs,
+					G.C.SUITS.Diamonds,
+					G.C.SUITS.Hearts,
+					G.C.SUITS.Spades,
+				}, "thunderedge_meowmere")
+				return {
+					message = localize("thunderedge_wild"),
+					colour = col,
+				}
+			end
+		end
+	end,
+})

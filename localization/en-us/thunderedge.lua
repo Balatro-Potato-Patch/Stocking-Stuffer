@@ -63,7 +63,13 @@ return {
 				name = "Void Heart",
 				text = {
 					{
-						""
+						"Creates a random {C:red}Rare{} Joker,",
+						"with an extremely small chance to",
+						"create a {C:purple,E:1}Legendary{} Joker instead",
+						"{C:inactive}(Must have room)",
+						"{C:inactive}(Can only be used once per Ante)",
+						"{C:inactive}(#1# this Ante)",
+						"{stocking}usable{}",
 					},
 				},
 			},
@@ -71,7 +77,16 @@ return {
 				name = "Meowmere",
 				text = {
 					{
-						"",
+						"{C:attention}First{} and {C:attention}last{} played",
+						"cards become {C:attention}Wild Cards{}",
+						"when scored",
+						"{stocking}after{}"
+					},
+					{
+						"{C:chips}+#1#{} Chips per {C:attention}Wild",
+						"{C:attention}Card{} in full deck",
+						"{C:inactive}(Currently {C:blue}+#2#{C:inactive} Chips)",
+						"{stocking}before{}"
 					},
 				},
 			},
@@ -80,7 +95,8 @@ return {
 	misc = {
 		dictionary = {
 			thunderedge_hit = "Hit!",
-			thunderedge_graze = "Grazed!"
+			thunderedge_graze = "Grazed!",
+			thunderedge_wild = "Wild!"
 		},
 	},
 }
