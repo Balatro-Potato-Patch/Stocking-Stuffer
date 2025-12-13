@@ -87,7 +87,7 @@ return {
 				text = {
 					{
 						"{X:attention,C:white}X#1#{} blind requirement",
-						"upon entering a blind",
+						"upon {C:attention}entering{} a blind",
 						"{stocking}before{}"
 					},
 					{
@@ -103,7 +103,7 @@ return {
 				},
 				text = {
 					"{X:attention,C:white}X#1#{} blind requirement",
-					"upon playing a hand",
+					"upon {C:attention}playing{} a hand",
 					"{stocking}before{}"
 				}
 			},
@@ -114,8 +114,8 @@ return {
 				},
 				text = {
 					"{C:attention}Disables{} the Boss Blind and",
-					"{C:red}debuffs{} all cards held in hand",
-					"for the duration of the blind",
+					"{C:red}debuffs{} all cards {C:attention}held in hand",
+					"for the {C:attention}duration{} of the blind",
 					"{stocking}usable{}",
 				}
 			}
