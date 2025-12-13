@@ -2,7 +2,7 @@ return {
 	descriptions = {
 		stocking_wrapped_present = {
 			ThunderEdge_stocking_present = {
-				name = "{V:1}Present?",
+				name = "{V:1}Extradimensional Snowglobe?",
 				text = {
 					"{C:inactive}Break the glass and",
 					"{C:inactive}discover something new...",
@@ -48,13 +48,13 @@ return {
 						"{C:attention}dodge{} some attacks",
 						"Gains {X:mult,C:white}X#1#{} Mult during",
 						"{C:attention}close calls{}",
-						"Lose {X:mult,C:white}X#2#{} when {C:attention}hit",
-						"{stocking}before{}",
+						"Lose {X:mult,C:white}X#2#{} Mult when {C:attention}hit",
+						"{C:inactive}(Use WASD or arrow keys",
+						"{C:inactive}to control your SOUL)",
 					},
 					{
-						"After Jokers score,",
-						"this Present will",
-						"give {X:mult,C:white}X#3#{} Mult",
+						"Currently gives {X:mult,C:white}X#3#{} Mult",
+						"{C:inactive}(Cannot go below {X:mult,C:white}X1{C:inactive} Mult)",
 						"{stocking}after{}",
 					}
 				},
@@ -63,15 +63,7 @@ return {
 				name = "Void Heart",
 				text = {
 					{
-						"While owned, all",
-						"{C:attention}Boss Blinds{} become",
-						"{C:attention}Showdown Blinds",
-						"After {C:attention}#1#{} rounds,",
-						"use this Present",
-						"to create a",
-						"{C:legendary,E:1}Legendary{} Joker",
-						"{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#){}",
-						"{stocking}usable{}",
+						""
 					},
 				},
 			},
@@ -86,6 +78,9 @@ return {
 		},
 	},
 	misc = {
-		dictionary = {},
+		dictionary = {
+			thunderedge_hit = "Hit!",
+			thunderedge_graze = "Grazed!"
+		},
 	},
 }
