@@ -560,6 +560,22 @@ function Card:juice_up(scale, rot)
     stocking_stuffer_card_juice_up(self, scale, rot)
 end
 
+local stocking_stuffer_card_start_dissolve = Card.start_dissolve
+function Card:start_dissolve(...)
+    if self.area and not self.ability.no_stocking and not self.states.hover.is and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
+        G.FUNCS.toggle_jokers_presents()
+        for i=1, 2 do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after', delay = 0.7,
+                func = function()                
+                    return true
+                end
+            }), nil, true)
+        end
+    end
+    stocking_stuffer_card_start_dissolve(self, ...)
+end
+
 local stocking_stuffer_card_eval_status_text = card_eval_status_text
 function card_eval_status_text(card, ...)
     G.E_MANAGER:add_event(Event({
