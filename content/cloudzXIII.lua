@@ -26,6 +26,7 @@ StockingStuffer.WrappedPresent({
     atlas = 'cloudzXIII_cracker',
     pos = { x = 0, y = 0 },
     display_size = { w = 71 * 1.2, h = 95 * 1.2 },
+    pixel_size = { w = 36 * 1.2, h = 89 * 1.2}
 })
 
 StockingStuffer.Present({
