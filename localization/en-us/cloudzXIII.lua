@@ -44,12 +44,13 @@ return {
             cloudzXIII_stocking_jimbostorm = {
                 name = 'Jimbostorm',
                 text = {
-                    {'Scoring cards temporarily gain',
-                    'random {C:attention}Enhancements{}',
+                    {'Scored cards temporarily gain',
+                    'a random {C:attention}Enhancement{}',
                     '{stocking}before{}'},
-                    {'Lose {C:red}$#1#{}',
+                    {'When a hand is played,',
+                    'Lose {C:red}$#1#{}',
                     '{stocking}after{}',
-                    '{C:inactive,s:0.8}buy me bonestorm or go to hell'}
+                    '{C:inactive,s:0.8}Eat my shorts'}
                 }
             },
             cloudzXIII_stocking_orange = {
@@ -59,7 +60,7 @@ return {
                     'every {C:attention}#3#{} {C:inactive}(#4#){} cards',
                     'discarded this round',
                     '{C:inactive}(Currently {C:chips}+#1#{} {C:inactive}Chips)',
-                    "{C:inactive,s:0.8}hey... this is Terry's!"}
+                    "{C:inactive,s:0.8}hey... this was Terry's!"}
 
                 }
             },
@@ -68,8 +69,8 @@ return {
             cloudzXIII_stocking_present = {
                 name = "{V:1}Christmas Cracker",
                 text = {
-                    '{C:inactive}What could be inside?',
-                    '{C:inactive}Open me to find out!'
+                    '{C:inactive}Pull me apart and',
+                    "{C:inactive}see what's inside!"
                 }
             },
         },

@@ -33,7 +33,7 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'yoyo',
-    pos = { x = 1, y = 0 },
+    pos = { x = 0, y = 0 },
 
     calculate = function(self, card, context)
         if StockingStuffer.first_calculation and context.repetition and context.cardarea == G.play then
@@ -101,7 +101,7 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'keyblade',
-    pos = { x = 2, y = 0 },
+    pos = { x = 1, y = 0 },
     config = { extra = { ready = false } },
 
     can_use = function(self, card)
@@ -137,7 +137,7 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'advent',
-    pos = { x = 3, y = 0 },
+    pos = { x = 2, y = 0 },
 
     config = { 
         extra = {
@@ -203,6 +203,7 @@ StockingStuffer.Present({
             }))
         end
         if card.ability.extra.base <= card.ability.extra.odds then
+            SMODS.calculate_effect({ message = localize('k_upgrade_ex') }, card)
             card.ability.extra.base = card.ability.extra.base + card.ability.extra.base_gain
         end
         return true
@@ -229,7 +230,7 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'jimbostorm',
-    pos = { x = 4, y = 0 },
+    pos = { x = 3, y = 0 },
     config = {
         extra = {
             enhancements = {},
@@ -265,11 +266,13 @@ StockingStuffer.Present({
                         scored_card:set_ability(card.ability.extra.enhancements[scored_card], true)
                         card.ability.extra.enhancements[scored_card] = nil
                         scored_card:juice_up()
-                        ease_dollars(-card.ability.extra.dollars)
                         return true
                     end
                 }))
             end
+            return {
+                dollars = -card.ability.extra.dollars,
+            }
         end
     end
 })
@@ -278,7 +281,7 @@ StockingStuffer.Present({
     developer = display_name,
 
     key = 'orange',
-    pos = { x = 5, y = 0 },
+    pos = { x = 4, y = 0 },
 
     config = {
          extra = {
