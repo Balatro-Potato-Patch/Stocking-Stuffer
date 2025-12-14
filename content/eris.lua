@@ -113,7 +113,7 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name,
     key = "air_riders",
-    pos = { x = 0, y = 0 },
+    pos = { x = 4, y = 0 },
     config = { extra = { copies = 30, chips = 0, mult = 0 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.copies, card.ability.extra.chips, card.ability.extra.mult }}
@@ -137,7 +137,8 @@ StockingStuffer.Present({
                 mult = StockingStuffer.second_calculation and card.ability.extra.mult
             }
         end
-    end
+    end,
+    pixel_size = { w = 69, h = 93 }
 })
 
 StockingStuffer.Present({
