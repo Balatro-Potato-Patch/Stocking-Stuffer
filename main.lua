@@ -482,6 +482,7 @@ function G.UIDEF.card_h_popup(card)
     local obj = card.config.center
     if obj and obj.set and (obj.set == 'stocking_present' or obj.set == 'stocking_wrapped_present') then
         ret_val.nodes[1].nodes[1].nodes[1].config.colour = G.C.L_BLACK
+        local dev = StockingStuffer.Developers[obj.developer]
         local tag = {
             n = G.UIT.R,
             config = { align = 'tm' },
@@ -491,8 +492,8 @@ function G.UIDEF.card_h_popup(card)
                     n = G.UIT.O,
                     config = {
                         object = DynaText({
-                            string = StockingStuffer.Developers[obj.developer].name,
-                            colours = { StockingStuffer.Developers[obj.developer].colour or G.C.UI.BACKGROUND_WHITE },
+                            string = dev.loc and localize(dev.loc) or dev.name,
+                            colours = { dev.colour or G.C.UI.BACKGROUND_WHITE },
                             bump = true,
                             silent = true,
                             pop_in = 0,

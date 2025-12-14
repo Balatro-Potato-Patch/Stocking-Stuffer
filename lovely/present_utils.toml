@@ -408,20 +408,69 @@ for _, _c in ipairs(StockingStuffer_calculated) do
     _c.calc_dollar_done = nil
 end
 '''
+
+# Stop duplicate calc_dollar_bonus calls
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
 match_indent = true
-position = 'at'
+position = 'before'
 pattern = '''
--- TARGET: calc_dollar_bonus per card
-if ret then
+local ret = _card:calculate_dollar_bonus()
 '''
 payload = '''
--- TARGET: calc_dollar_bonus per card
-if ret and not _card.calc_dollar_done then
-    if area == G.stocking_present then
-        _card.calc_dollar_done = true
-        table.insert(StockingStuffer_calculated, _card)
-    end
+if not _card.calc_dollar_done then
+    if area == G.stocking_present then _card.calc_dollar_done = true; table.insert(StockingStuffer_calculated, _card) end
+'''
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+match_indent = true
+position = 'after'
+pattern = '''
+    dollars = dollars + ret
+end
+'''
+payload = '''
+end
+'''
+
+# Stop calc_scaling duplicate calls
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+position = 'at'
+pattern = '''
+if obj.calc_scaling and type(obj.calc_scaling) == "function" then
+'''
+payload = '''
+if obj.calc_scaling and type(obj.calc_scaling) == "function" and not _card.calc_scaling_done then
+    _card.calc_scaling_done = true
+    table.insert(StockingStuffer_calculated, _card)
+'''
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+position = 'after'
+pattern = '''
+local scaling_responses = {}
+'''
+payload = '''
+local StockingStuffer_calculated = {}
+'''
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+position = 'before'
+pattern = '''
+if type(args.operation) == 'function' then
+'''
+payload = '''
+for _, _c in ipairs(StockingStuffer_calculated) do
+    _c.calc_dollar_done = nil
+end
+
 '''

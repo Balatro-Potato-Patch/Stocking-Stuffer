@@ -42,6 +42,7 @@ PotatoPatchUtils.Developers = {}
     function PotatoPatchUtils.Developer:init(args)
         self.name = args.name
         self.colour = args.colour
+        self.loc = args.loc and type(args.loc) == 'boolean' and 'PotatoPatchDev_'..args.name or args.loc
 
         PotatoPatchUtils.Developers[args.name] = self
     end
