@@ -25,8 +25,9 @@ return {
                 name = 'Keyblade',
                 text = {
                     {
-                    '{C:green}+1{} level to {C:attention}most played',
+                    'Upgrade {C:attention}most played',
                     '{C:legendary,E:1}poker hand{}',
+                    'by {C:attention}1{} level',
                     '{C:inactive,s:0.9}Can only be used once per round',
                     '{C:money,s:0.75}may your heart be your guiding key',
                     '{stocking}usable{}',
