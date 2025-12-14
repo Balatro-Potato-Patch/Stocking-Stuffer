@@ -1,0 +1,29 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+match_indent = true
+position = 'before'
+pattern = '''    for _, v in ipairs(info_queue) do'''
+payload = '''if StockingStuffer and StockingStuffer.aikoyori then 
+    StockingStuffer.aikoyori.modify_info_queue(info_queue, _c, card)
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+match_indent = true
+position = 'before'
+pattern = '''    local i = 0'''
+payload = '''if G.stocking_present and G.stocking_present.cards then
+    for _, k in ipairs(G.stocking_present.cards) do
+        if k.config.center and k.config.center.stocking_aikoyori_recalc_debuff_at_end then
+            k:set_debuff(false)
+        end
+    end
+end'''
