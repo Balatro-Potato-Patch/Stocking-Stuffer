@@ -19,7 +19,6 @@ return {
                     '{C:money,s:0.75}no strings attached!',
                     '{stocking}after{}',
                     }
-
                 }
             },
             cloudzXIII_stocking_keyblade = {
@@ -72,6 +71,7 @@ return {
                     'discarded this round',
                     '{C:inactive}(Currently {C:chips}+#1#{} {C:inactive}Chips)',
                     "{C:money,s:0.75}...i thought this was Terry's?",
+                    '{stocking}before{}',
                 }
             },
         },
