@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Stop fruitcake from applying on copy_card
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+match_indent = true
+position = "before"
+pattern = "new_card:set_ability(other.config.center)"
+payload = """
+new_card.stocking_copied = true
+"""
+overwrite = false
