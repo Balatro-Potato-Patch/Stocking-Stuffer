@@ -66,8 +66,8 @@ StockingStuffer.Present({
     atlas = 'gote_presents',
     config = {
         state = 1,
-        blind = archyarrayi[state or 1],
-        level = archyarrayii[state or 1]
+        blind = archyarrayi[1],
+        level = archyarrayii[1]
     },
 
     loc_vars = function(self, info_queue, card)
@@ -79,15 +79,74 @@ StockingStuffer.Present({
         card.loaded = true
     end,
 
-    -- calculate is completely optional, delete if your present does not need it
     calculate = function(self, card, context)
-        -- check context and return appropriate values
-        -- StockingStuffer.first_calculation is true before jokers are calculated
-        -- StockingStuffer.second_calculation is true after jokers are calculated
-        if context.joker_main then
-            return {
-                message = 'example'
-            }
+        
+        if context.first_hand_drawn and G.GAME.blind.boss and not card.debuff and StockingStuffer.first_calculation then
+            local randedition
+            local randseal
+            local randenhance
+
+            if card.ability.state == 3 or card.ability.state == 5 or card.ability.state == 6 then
+                if card.ability.state > 3 then
+                    randedition = SMODS.poll_edition({ guaranteed = true, type_key = 'rkeyii', options = {'e_foil','e_holo','e_polychrome'}})
+                end
+                randseal = SMODS.poll_seal({ guaranteed = true, type_key = 'rkeyiii' })
+                local arcard = SMODS.add_card({
+                    set = 'Playing Card',
+                    front = "H_2",
+                    edition = (randedition or 'e_base'),
+                    seal = randseal,
+                    area = G.hand})
+
+                SMODS.calculate_context({ playing_card_added = true, cards = { arcard } })
+                card:juice_up()
+                
+                if card.ability.state < 6 then
+                    card.ability.state = card.ability.state + 1
+                    card.ability.blind = archyarrayi[card.ability.state]
+                    card.ability.level = archyarrayii[card.ability.state]
+                end
+            else
+
+                if card.ability.state == 2 then
+                    randenhance = SMODS.poll_enhancement({ guaranteed = true, type_key = 'rkeyi' })
+                end
+                if card.ability.state == 4 then
+                    randedition = SMODS.poll_edition({ guaranteed = true, type_key = 'rkeyii', options = {'e_foil','e_holo','e_polychrome'}})
+                end
+                local arcard = SMODS.add_card({
+                    set = 'Playing Card',
+                    front = "H_2",
+                    enhancement = (randenhance or 'c_base'),
+                    edition = (randedition or 'e_base'),
+                    area = G.hand})
+
+                SMODS.calculate_context({ playing_card_added = true, cards = { arcard } })
+                card:juice_up()
+                
+                if card.ability.state < 6 then
+                    card.ability.state = card.ability.state + 1
+                    card.ability.blind = archyarrayi[card.ability.state]
+                    card.ability.level = archyarrayii[card.ability.state]
+                end
+
+            end
+        end
+
+        if context.first_hand_drawn and not G.GAME.blind.boss and not card.debuff and StockingStuffer.first_calculation and card.ability.state == 6 then
+
+            local randedition = SMODS.poll_edition({ guaranteed = true, type_key = 'rkeyii', options = {'e_foil','e_holo','e_polychrome'}})
+            local randseal = SMODS.poll_seal({ guaranteed = true, type_key = 'rkeyiii' })
+            local arcard = SMODS.add_card({
+                set = 'Playing Card',
+                front = "H_2",
+                edition = randedition,
+                seal = randseal,
+                area = G.hand})
+
+            SMODS.calculate_context({ playing_card_added = true, cards = { arcard } })
+            card:juice_up()
+
         end
     end
 })

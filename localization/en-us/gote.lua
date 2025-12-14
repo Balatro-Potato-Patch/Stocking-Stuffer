@@ -12,8 +12,8 @@ return {
                 name = 'Questing Goat Figurine',
                 text = {
                     'When a {C:attention}#1#{} is selected, add a',
-                    'permanent {C:attention}#2#2{} of {C:hearts}Hearts{} to your hand,',
-                    'then {C:planet,E:1}upgrade{} this effect',
+                    'permanent {C:attention}#2#2{} of {C:hearts}Hearts{}',
+                    'to your hand, then {C:planet,E:1}upgrade{} this effect',
                     '{stocking}before{}',
                     '{C:inactive,s:0.8}Anthropos sword accessory included!'
                 }
@@ -22,7 +22,8 @@ return {
                 name = 'Questing Goat Figurine',
                 text = {
                     'When a {C:attention}#1#{} is selected, add a',
-                    'permanent {C:attention}#2#2{} of {C:hearts}Hearts{} to your hand',
+                    'permanent {C:attention}#2#{}',
+                    '{C:attention}2{} of {C:hearts}Hearts{} to your hand',
                     '{stocking}before{}',
                     '{C:inactive,s:0.8}This is even its final form!'
                 }
