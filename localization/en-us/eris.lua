@@ -61,6 +61,12 @@ return {
                     "{C:blue}+#1#{} Chips, then",
                     "{C:attention}swaps{} {C:blue}Chips{} and {C:mult}Mult{}"
                 }
+            },
+            Eris_stocking_present = {
+                name = "{V:1}Present?",
+                text = {
+                    "i hope its a ps5"
+                }
             }
         }
     }
