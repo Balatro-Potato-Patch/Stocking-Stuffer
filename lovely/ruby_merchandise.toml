@@ -1,0 +1,59 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+match_indent = true
+position = 'after'
+pattern = '''
+info_boxes = {{n=G.UIT.R, config = {align="cm", padding = 0.05, card_pos = card.T.x }, nodes = info_cols}}
+'''
+payload = '''
+local AUT2
+if card.config.center_key == "Ruby_stocking_merchandise" then
+    if not card.dummy then
+        card.dummy = StockingStuffer.Ruby.get_dummy(G.P_CENTERS[card.ability.extra.joker], G.jokers, card)
+        card.dummy.added_to_deck = true
+        if card.ability.extra.dummy_abil then card.dummy.ability = card.ability.extra.dummy_abil end
+    end
+    AUT2 = Card.generate_UIBox_ability_table(card.dummy)
+end
+'''
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+match_indent = true
+position = 'at'
+pattern = '''
+{n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
+    name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
+    desc_from_rows(AUT.main),
+    badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
+}}
+'''
+payload = '''
+{n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
+    name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
+    desc_from_rows(AUT.main),
+    AUT2 and name_from_rows(AUT2.name, is_playing_card and G.C.WHITE or nil) or nil,
+    AUT2 and desc_from_rows(AUT2.main) or nil,
+    badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
+}},
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+match_indent = true
+position = 'at'
+pattern = '''
+if self.ability.name ~= 'Seeing Double' and self.ability.x_mult > 1 and (self.ability.type == '' or next(context.poker_hands[self.ability.type])) then
+'''
+payload = '''
+if self.ability.name ~= 'Seeing Double' and  self.ability.x_mult and self.ability.x_mult > 1 and (self.ability.type == '' or next(context.poker_hands[self.ability.type] or {})) then
+'''
