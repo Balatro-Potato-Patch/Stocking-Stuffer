@@ -54,7 +54,7 @@ StockingStuffer.Present({
                 card.ability.extra.count = card.ability.extra.count
             end
         end
-        if context.destroy_card and card.ability.extra.count >= card.ability.extra.max then
+        if context.destroy_card and card.ability.extra.count >= card.ability.extra.max and context.cardarea == G.play then
             return { remove = true }
         end
     end,
@@ -65,7 +65,7 @@ StockingStuffer.Present({
     developer = display_name,
     key = "bananas",
     pos = { x = 2, y = 0 },
-    config = { extra = { mult = 20, odds = 6 }},
+    config = { extra = { mult = 20, odds = 10 }},
     loc_vars = function (self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
         return { vars = { card.ability.extra.mult, n, d, card.ability.extra.mult*(1000/self.config.extra.mult) }}
@@ -82,6 +82,12 @@ StockingStuffer.Present({
                 if SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
                     card.ability.extra.mult = card.ability.extra.mult - 1
                 end
+            end
+            if card.ability.extra.mult <= 0 then
+                SMODS.destroy_cards(card, nil, true)
+                return {
+                    message = localize("k_eaten_ex")
+                }
             end
         end
     end
