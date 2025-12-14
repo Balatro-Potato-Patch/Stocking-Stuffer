@@ -284,6 +284,7 @@ return {
             mintymas_admire5 = "Rad!",
             mintymas_whee = "Whee!",
             mintymas_gottem = "Gottem!",
+            mintymas_display_name = "mys. minty"
         }
     }
 }

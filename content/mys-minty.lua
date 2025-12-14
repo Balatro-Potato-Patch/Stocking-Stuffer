@@ -13,6 +13,7 @@ SMODS.Atlas({
 -- Developer object
 StockingStuffer.Developer({
     name = display_name,
+    loc = "mintymas_display_name",
     colour = HEX('CA7CA7')
 })
 
