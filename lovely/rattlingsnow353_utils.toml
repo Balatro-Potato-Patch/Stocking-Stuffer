@@ -1,0 +1,87 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Resets temporary present cards
+[[patches]] 
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "-- TARGET: evaluate your own general effects"
+position = "before"
+match_indent = true
+payload = '''
+if context.cardarea == G.stocking_present then
+    for k, v in pairs(G.stocking_present.cards) do
+        if v.ability and v.ability.rsss_temp_key and context[v.ability.rsss_context] then
+            local key = v.ability.rsss_temp_key
+            v.ability.rsss_temp_key = nil
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                    card_eval_status_text(card, "extra", nil, nil, nil, {message = localize("k_reset"), colour = G.C.FILTER})
+                    RSSS_reroll_card(v, key, v.ability.rsss_temp_set, nil, nil, v.ability.rsss_temp_ability_table, true)
+                    return true
+                end)
+            }))
+        end
+    end
+end
+'''
+
+# rsss_birthright - scored cards act as in hand
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+position = 'after'
+pattern = '''
+card.lucky_trigger = nil
+'''
+payload = '''
+local birthrights = SMODS.find_card('RattlingSnow353_stocking_birthright')
+if next(birthrights) and context.cardarea == G.play and SMODS.pseudorandom_probability(birthrights[1], 'birthright', 1, birthrights[1].ability.extra) then
+    context.cardarea = G.hand
+    card.rsss_birthright = birthrights[1]
+    SMODS.score_card(card, context)
+    context.cardarea = G.play
+end
+'''
+# rsss_birthright - scored cards trigger end of round in hand effects
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+match_indent = true
+position = 'after'
+pattern = '''
+hand_chips = mod_chips(nu_chip or hand_chips)
+'''
+payload = '''
+local birthrights = SMODS.find_card('RattlingSnow353_stocking_birthright')
+if next(birthrights) then
+    StockingStuffer.rsss_birthright_end_of_round({cardarea = G.hand, end_of_round = true, beat_boss = G.GAME.blind.boss }, G.play.cards, birthrights[1])
+end
+'''
+
+
+# rsss_birthright/Raised Fist compat
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+match_indent = true
+position = 'before'
+pattern = '''
+if raised_card == context.other_card then 
+'''
+payload = '''
+if next(SMODS.find_card('RattlingSnow353_stocking_birthright')) then
+    for i=1, #G.play.cards do
+        if temp_ID >= G.play.cards[i].base.id and not SMODS.has_no_rank(G.play.cards[i]) and card.rsss_birthright then 
+            temp_Mult = G.play.cards[i].base.nominal
+            temp_ID = G.play.cards[i].base.id
+            raised_card = G.play.cards[i]
+        end
+    end
+end
+'''

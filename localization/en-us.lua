@@ -31,13 +31,7 @@ return {
                     '{s:0.5}From {V:1,s:0.5}#1#'
                 }
             },
-            default_text = {
-                name = '{V:1}Present',
-                text = {
-                    '  {C:inactive}What could be inside?  ',
-                    '{C:inactive}Open me to find out!'
-                }
-            },
+                
             theAstra_stocking_present = {
                 name = '{V:1}Gift!',
                 text = {
@@ -54,7 +48,7 @@ return {
                     'Use {C:red}key{} above in',
                     'loc file :)'
                 }
-            }
+            },
         },
         Other = {
             undiscovered_stocking_wrapped_present = {
