@@ -61,8 +61,8 @@ return {
             ["BarrierTrio/Gote_stocking_commander"] = {
                 name = 'Commanding Figurine',
                 text = {
-                    '{C:eternal}Use{} to replace all {C:green}Presents{} with',
-                    'random {C:green}Presents{}, including this one',
+                    '{C:eternal}Use{} to replace all {C:stocking_present}Presents{} with',
+                    'random {C:stocking_present}Presents{}, including this one',
                     '{stocking}usable{}',
                     '{C:inactive,s:0.8}Feel the POWER!',
                     '{C:inactive,s:0.8}(Yes, you opened it. He just looks like that.)'

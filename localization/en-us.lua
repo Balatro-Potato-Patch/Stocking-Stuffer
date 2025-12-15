@@ -90,7 +90,7 @@ return {
                         text = {
                             {
                                 "The {C:purple}Potato Patch{} has been busy and generous for the {C:green}Festive Season{}!",
-                                "Under the {C:green}Christmas Tree{} lay a variety of {C:green}Presents{},",
+                                "Under the {C:green}Christmas Tree{} lay a variety of {C:stocking_present}Presents{},",
                                 "lovingly wrapped and prepared by your favourite community members!"
                             },
                             {
@@ -98,8 +98,8 @@ return {
                                 "every time you defeat a {C:attention}Boss Blind{}."
                             },
                             {
-                                "{C:green}Presents{} are stored in their own area, and you can hold as many as you like!",
-                                "{C:red}Be careful though! {C:green}Presents{} are {C:attention}not{} able to be sold."
+                                "{C:stocking_present}Presents{} are stored in their own area, and you can hold as many as you like!",
+                                "{C:red}Be careful though! {C:stocking_present}Presents{} are {C:attention}not{} able to be sold."
                             }
                         }
                     },
