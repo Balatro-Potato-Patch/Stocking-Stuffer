@@ -31,7 +31,7 @@ StockingStuffer.WrappedPresent({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-
+    artist = {'WilsontheWolf'},
     key = 'snowglobe', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 1, y = 0 },
     config = { extra = 3 },
@@ -59,7 +59,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-
+    artist = {'WilsontheWolf'},
     key = 'toy_train', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 2, y = 0 },
     config = { extra = 10 },
@@ -90,6 +90,7 @@ StockingStuffer.Present({
     key = 'gingerbread', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 3, y = 0 },
     config = { extra = {ready = true} },
+    artist = {'Eremel'},
 
     -- Adjusts the hitbox on the item
     pixel_size = { w = 62, h = 74 },
@@ -166,6 +167,7 @@ StockingStuffer.Present({
     key = 'coal', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 6, y = 0 },
     pixel_size = { w = 66, h = 52 },
+    artist = {'WilsontheWolf'},
 })
 
 
@@ -197,7 +199,7 @@ StockingStuffer.Present({
     can_use = function(self, card)
         return true
     end,
-
+    artist = {'Eremel'},
     calculate = function(self, card, context)
         if context.final_scoring_step and StockingStuffer.second_calculation then
             if card.ability.extra.state == 1 and card.ability.extra.crank > 0 then
