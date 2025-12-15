@@ -1,0 +1,23 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Increment music tracker var
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+match_indent = true
+position = "after"
+pattern = '''
+    SMODS.previous_track = desired_track
+else
+    MODULATE(G.ARGS.push)
+end
+'''
+payload = '''
+if G.STAGE == G.STAGES.RUN and G.GAME.ThunderEdgeData then
+    G.GAME.ThunderEdgeData.music_played[desired_track] = true
+end
+'''
+
