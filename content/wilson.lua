@@ -243,3 +243,36 @@ StockingStuffer.Present({
     end
 })
 
+StockingStuffer.Present({
+    developer = display_name,
+
+    key = 'walkie',
+    pos = { x = 5, y = 0 },
+    config = { extra = 15 },
+    -- Adjusts the hitbox on the item
+    pixel_size = { w = 40, h = 77 },
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_TAGS.tag_double
+        return {
+            vars = {
+                localize{type = "name_text", set = "Tag", key = "tag_double" },
+                card.ability.extra
+            },
+        }
+    end,
+
+    use = function(self, card)
+        SMODS.calculate_effect({message = localize('wilson_copy')}, card)
+        ease_dollars(-card.ability.extra)
+        add_tag(Tag("tag_double"))
+    end,
+
+    can_use = function(self, card)
+        return (G.GAME.dollars-G.GAME.bankrupt_at) - card.ability.extra >= 0
+    end,
+
+    keep_on_use = function(self, card) return true end,
+    disable_use_animation = true,
+})
+

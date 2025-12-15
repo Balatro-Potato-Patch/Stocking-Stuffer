@@ -12,6 +12,7 @@ return {
             wilson_lost = "Lost",
             wilson_success = "Success",
             wilson_ring = "Ring!",
+            wilson_copy = "Copy That!",
         }
     },
     descriptions = {
@@ -126,6 +127,16 @@ return {
                         '{stocking}after{}',
                     },
                     phoneShared,
+                }
+            },
+            WilsontheWolf_stocking_walkie = {
+                name = '2-Way Radio',
+                text = {
+                    {
+                        "Receive a {C:attention}#1#",
+                        "for {C:money}$#2#",
+                        '{stocking}usable{}',
+                    },
                 }
             },
         },
