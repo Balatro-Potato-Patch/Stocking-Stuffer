@@ -8,10 +8,11 @@ PotatoPatchUtils.CREDITS.generate_string = function(developers, prefix)
 
     for i, name in ipairs(developers) do
         local target_row = math.ceil(i/3)
+        local dev = PotatoPatchUtils.Developers[name]
         if target_row > #credit_string.nodes then table.insert(credit_string.nodes, {n=G.UIT.R, config={align='cm'}, nodes ={}}) end
         table.insert(credit_string.nodes[target_row].nodes, {n=G.UIT.O, config = {object = DynaText({
-                    string = PotatoPatchUtils.Developers[name] and PotatoPatchUtils.Developers[name].name or name,
-                    colours = { PotatoPatchUtils.Developers[name] and PotatoPatchUtils.Developers[name].colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
+                    string = dev.loc and localize(dev.loc) or dev.name or name,
+                    colours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
                     silent = true, shadow = true, y_offset = -0.6, 
                 })
             }
@@ -42,6 +43,7 @@ PotatoPatchUtils.Developers = {}
     function PotatoPatchUtils.Developer:init(args)
         self.name = args.name
         self.colour = args.colour
+        self.loc = args.loc and type(args.loc) == 'boolean' and 'PotatoPatchDev_'..args.name or args.loc
 
         PotatoPatchUtils.Developers[args.name] = self
     end

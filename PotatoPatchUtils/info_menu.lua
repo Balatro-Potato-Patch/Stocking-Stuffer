@@ -156,23 +156,25 @@ end
 
 function PotatoPatchUtils.LOC.init()
     for g_k, group in pairs(G.localization.PotatoPatch) do
-        for _, center in pairs(group) do
-          center.text_parsed = {}
-          if not center.text then else
-          for _, line in ipairs(center.text) do
-            table.insert(center.text_parsed, PotatoPatchUtils.LOC.recursive_parse(line))
-          end
-          center.name_parsed = {}
-          for _, line in ipairs(type(center.name) == 'table' and center.name or {center.name}) do
-            center.name_parsed[#center.name_parsed+1] = loc_parse_string(line)
-          end
-          if center.unlock then
-            center.unlock_parsed = {}
-            for _, line in ipairs(center.unlock) do
-              center.unlock_parsed[#center.unlock_parsed+1] = loc_parse_string(line)
+        for t, center in pairs(group) do
+            center.text_parsed = {}
+            if not center.text then else
+                for _, line in ipairs(center.text) do
+                    table.insert(center.text_parsed, PotatoPatchUtils.LOC.recursive_parse(line))
+                end
             end
-          end
-        end
+            center.name_parsed = {}
+            if not center.name then else
+                for _, line in ipairs(type(center.name) == 'table' and center.name or {center.name}) do
+                    center.name_parsed[#center.name_parsed+1] = loc_parse_string(line)
+                end
+            end
+            if center.unlock then
+                center.unlock_parsed = {}
+                for _, line in ipairs(center.unlock) do
+                center.unlock_parsed[#center.unlock_parsed+1] = loc_parse_string(line)
+                end
+            end
         end
     end
 end
