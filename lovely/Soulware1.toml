@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# code taken from paya's things
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = "eval.repetitions = eval.repetitions or 0"
+position = "after"
+payload = '''
+if eval.prevent_repetition == nil then
+    eval.prevent_repetition = false
+end
+if next(SMODS.find_card("Soulware1_stocking_stack_overflow")) and not eval.prevent_repetition then 
+    local stack_overflows = SMODS.find_card("Soulware1_stocking_stack_overflow")
+    stack_overflows = #stack_overflows+1
+    -- most people would think the effect would multiply each repetition, so
+	eval.repetitions = eval.repetitions*stack_overflows
+    eval.prevent_repetition = true
+end
+print(eval.repetitions) 
+'''
+match_indent = true
+times = 1
