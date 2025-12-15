@@ -15,6 +15,15 @@ return {
         }
     },
     descriptions = {
+        stocking_wrapped_present = {
+            WilsontheWolf_stocking_present = {
+                name = '{V:1}Present',
+                text = {
+                    '{C:inactive}Sounds like something',
+                    '{C:inactive}is just loose inside'
+                }
+            },
+        },
         stocking_present = {
             WilsontheWolf_stocking_walkman = {
                 name = 'Walkman',
