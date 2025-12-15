@@ -76,7 +76,7 @@ StockingStuffer.Developer({
 
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
-    artist = { "MissingNumber" },
+    artist = { "GARB" },
     coder = { "Nxkoo" },
     pos = { x = 0, y = 0 },
 })
@@ -111,11 +111,13 @@ StockingStuffer.Present({
                 end
             end
             if right_joker then
+                card:juice_up()
                 play_sound('stocking_presentskilled', 1, 1)
                 SMODS.destroy_cards(right_joker)
             end
         else
             if G.STAGE == G.STAGES.RUN then
+                card:juice_up()
                 play_sound('stocking_playerskilled', 1, 1)
                 G.STATE = G.STATES.GAME_OVER; G.STATE_COMPLETE = false
             end
@@ -195,7 +197,7 @@ StockingStuffer.Present({                       -- QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
     developer = display_name,                   -- QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
     key = 'dealmaker',                          -- QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
     pos = { x = 4, y = 0 },                     -- QQQQQQQQQQQQQQQQQQQWQQQQQWWWBBBHHHHHHHHHBWWWQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-    artist = { "Ruby" },                   -- QQQQQQQQQQQQQQQQD!`__ssaaaaaaaaaass_ass_s____.  -~""??9VWQQQQQQQQQQQQQQQQQQQ
+    artist = { "Ruby" },                        -- QQQQQQQQQQQQQQQQD!`__ssaaaaaaaaaass_ass_s____.  -~""??9VWQQQQQQQQQQQQQQQQQQQ
     coder = { "Nxkoo" },                        -- QQQQQQQQQQQQQQP'_wmQQQWWBWV?GwwwmmWQmwwwwwgmZUVVHAqwaaaac,"?9$QQQQQQQQQQQQQQ
     blueprint_compat = false,                   -- QQQQQQQQQQQW! aQWQQQQW?qw#TTSgwawwggywawwpY?T?TYTYTXmwwgZ$ma/-?4QQQQQQQQQQQ
     loc_vars = function(self, info_queue, card) -- QQQQQQQQQQQW' jQQQQWTqwDYauT9mmwwawww?WWWWQQQQQ@TT?TVTT9HQQQQQQw,-4QQQQQQQQQ
