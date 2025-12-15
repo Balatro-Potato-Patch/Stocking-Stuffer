@@ -112,8 +112,9 @@ return {
             Mysthaps_stocking_present = {
                 name = "Gift Capsule",
                 text = {
-                    "  {C:inactive}What could be inside?  ",
-                    "{C:inactive}Open me to find out!"
+                    "{C:inactive}It's a capsule held together",
+                    "{C:inactive}with tape and a ribbon.",
+                    "{C:inactive,E:1}Open it?"
                 }
             }
         }
