@@ -81,6 +81,8 @@ StockingStuffer.Present({
                 card.ability.trig = true
                 G.GAME.blind.chips = math.floor(G.GAME.blind.chips - G.GAME.blind.chips * 0.1)
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                card:juice_up(0.3, 0.5)
+                card.children.center:set_sprite_pos({ x = 13, y = 0 })
             end
         end
         if card.ability.rebate then
@@ -299,6 +301,8 @@ StockingStuffer.Present({
                             --11 Hikers Hiking
                             if StockingStuffer.GlobalPunk_Jimbmas == 1 and card.ability.trig == false then
                                 card.ability.trig = true
+                                card:juice_up(0.3, 0.5)
+                                card.children.center:set_sprite_pos({ x = 14, y = 0 })
                                 for i = 1, 11 do
                                     SMODS.add_card {
                                         set = 'Joker',
