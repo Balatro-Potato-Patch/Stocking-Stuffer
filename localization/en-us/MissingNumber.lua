@@ -16,7 +16,8 @@ return {
                 text = {{
                     "Use this {C:attention}Present{} to prevent death in the next round.",
                     "If you do not die while it is active, {C:red,E:1}self destructs{}",
-                    "and earn {C:money}$#1#{}"
+                    "and earn {C:money}$#1#{}",
+                    "{stocking}usable{}"
                 }, {
                     "{C:inactive,s:0.9}A pin with a yellow zinnia attached to it, worn in memory of the departed.",
                 }}
@@ -27,7 +28,8 @@ return {
                     "Use this {C:attention}Present{} to toggle it on or off",
                     "While active, {X:mult,C:white}X#1#{} Mult, but loses {X:mult,C:white}X#2#{} Mult when triggered",
                     "While inactive, gains {X:mult,C:white}X#3#{} Mult at end of round",
-                    "{C:inactive}(Currently {X:mult,C:white}X#4#{C:inactive} Mult and #5#)"
+                    "{C:inactive}(Currently {X:mult,C:white}X#4#{C:inactive} Mult and #5#)",
+                    "{stocking}usable{}"
                 }, {
                     "{C:inactive,s:0.9}A soul in a jar, well-preserved in ichor.",
                     "{C:inactive,s:0.9}Whoever is inside must be very powerful.",
@@ -39,7 +41,8 @@ return {
                 text = {{
                     "Use this {C:attention}Present{} to instantly",
                     "gain {C:attention}#1#%{} of the Blind Requirement as score",
-                    "{C:inactive}({C:attention}#2#{C:inactive} uses remaining)"
+                    "{C:inactive}({C:attention}#2#{C:inactive} uses remaining)",
+                    "{stocking}usable{}"
                 }, {
                     "{C:inactive,s:0.9}Miniature hard candies. Each one contains nearly 10,000 kilocalories.",
                     "{C:inactive,s:0.9}Not intended for human consumption.",
