@@ -47,12 +47,70 @@ return {
                         "Divides {C:mult}Mult{} by {X:attention,C:white} #1# ",
                         "{stocking}after"
                     },
+                    {
+                        "{C:inactive,E:1}The warm socks that belong",
+                        "{C:inactive,E:1}to an eternally loved one."
+                    },
+                }
+            },
+            Mysthaps_stocking_bunny_ears = {
+                name = "Bunny Ears",
+                text = {
+                    {
+                        "Costs {C:money}$#1#{}",
+                        "This Present gains {C:mult}+#1#{} Mult",
+                        "{stocking}usable"
+                    },
+                    {
+                        "{C:mult}+#2#{} Mult",
+                    },
+                    {
+                        "{C:inactive,E:1}Now, you too can become",
+                        "{C:inactive,E:1}a member of UPRPRC!",
+                    },
+                }
+            },
+            Mysthaps_stocking_game_cartridges = {
+                name = "Game Cartridges",
+                text = {
+                    {
+                        "Replaces all non-{C:dark_edition}Eternal{} {C:stocking_present}Presents",
+                        "with another {C:stocking_present}Present{} of the same developer",
+                        "{s:1.1,C:red,E:1}self destructs",
+                        "{stocking}usable"
+                    },
+                    {
+                        "{C:inactive,E:1}Together forever, my lovely",
+                        "{C:inactive,E:1}lovely video game cartridges.",
+                    },
+                }
+            },
+            Mysthaps_stocking_miracle_defibrillator = {
+                name = "Miracle Defibrillator",
+                text = {
+                    {
+                        "If {C:attention}final score{} is between",
+                        "Blind Size and {X:attention,C:white} X#1# {} Blind Size,",
+                        "earn {C:money}$#4#{} at the end of round",
+                        "{C:inactive}(Between {C:attention}#2# {C:inactive}and {C:attention}#3#{C:inactive})",
+                        "{stocking}before"
+                    },
+                    {
+                        "Cycles through difficulties",
+                        "of the {C:attention}Defibrillator",
+                        "{C:inactive}(Currently {C:attention}#5#{C:inactive})",
+                        "{stocking}usable"
+                    },
+                    {
+                        "{C:inactive,E:1}I've been waiting for so long...,",
+                        "{C:inactive,E:1}I'm the one that needs some he-e-e-elp!",
+                    }
                 }
             }
         },
         stocking_wrapped_present = {
             Mysthaps_stocking_present = {
-                name = "Present",
+                name = "Gift Capsule",
                 text = {
                     "  {C:inactive}What could be inside?  ",
                     "{C:inactive}Open me to find out!"

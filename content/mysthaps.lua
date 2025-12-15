@@ -15,6 +15,7 @@ StockingStuffer.Developer({
 StockingStuffer.WrappedPresent({
     developer = display_name,
     pos = { x = 0, y = 0 }, 
+    pixel_size = { w = 44, h = 52 }
 })
 
 --[[ FAUST PLUSHIE ]]--
@@ -124,5 +125,132 @@ StockingStuffer.Present({
     end,
     loc_vars = function(self, info_queue, card)
         return {vars = {number_format(card.ability.extra.div)}}
+    end
+})
+
+--[[ BUNNY EARS ]]--
+StockingStuffer.Present({
+    developer = display_name, 
+    key = 'bunny_ears',
+    pos = { x = 3, y = 0 },
+    pixel_size = { w = 71, h = 48 },
+    config = {extra = {
+        mult = 0, cost = 1.5, used = 0
+    }},
+    can_use = function(self, card)
+        return (G.GAME.dollars >= math.ceil(math.pow(card.ability.extra.cost, card.ability.extra.used)))
+    end,
+    use = function(self, card, area, copier) 
+        ease_dollars(-math.ceil(math.pow(card.ability.extra.cost, card.ability.extra.used)))
+        card.ability.extra.mult = card.ability.extra.mult + math.ceil(math.pow(card.ability.extra.cost, card.ability.extra.used))
+        card.ability.extra.used = card.ability.extra.used + 1
+        SMODS.calculate_effect({message = localize{type = 'variable', key = 'a_mult', vars = {number_format(card.ability.extra.mult)}}, colour = G.C.MULT}, card)
+    end,
+    keep_on_use = function(self, card)
+        return true
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main and card.ability.extra.mult > 0 then
+            return {
+                mult = card.ability.extra.mult
+            }
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {vars = {
+            number_format(math.ceil(math.pow(card.ability.extra.cost, card.ability.extra.used))),
+            number_format(card.ability.extra.mult)
+        }}
+    end
+})
+
+--[[ GAME CARTRIDGES ]]--
+StockingStuffer.Present({
+    developer = display_name, 
+    key = 'game_cartridges',
+    pos = { x = 4, y = 0 },
+    pixel_size = { w = 56, h = 46 },
+    can_use = function(self, card)
+        return true
+    end,
+    use = function(self, card, area, copier) 
+        for k, v in ipairs(G.stocking_present.cards) do
+            G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function()
+                if v ~= card and not SMODS.is_eternal(v, card) then
+                    v:set_ability(G.P_CENTERS[v.config.center.developer.."_stocking_present"])
+                end
+            return true end })) 
+        end
+        for k, v in ipairs(G.stocking_present.cards) do
+            G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function()
+                if v.ability.set == 'stocking_wrapped_present' then
+                    local gift = nil
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'before', delay = 0.2,
+                        func = function()
+                            local pool = get_current_pool('stocking_present')
+                            local key = pseudorandom_element(pool, 'stocking_present_open_cartridges', {in_pool = function(vv, args) return G.P_CENTERS[vv] and G.P_CENTERS[vv].developer == v.config.center.developer end})
+                            discover_card(G.P_CENTERS[key])
+                            gift = SMODS.add_card({ area = G.gift, set = 'stocking_present', key = key, bypass_discovery_center = true, bypass_discovery_ui = true })
+                            draw_card(G.gift, G.stocking_present, nil, 'up', nil, gift)
+                            return true
+                        end
+                    }))
+                end
+            return true end })) 
+            G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function()
+                if v.ability.set == 'stocking_wrapped_present' then
+                    v:start_dissolve()
+                end
+            return true end })) 
+        end
+    end,
+})
+
+--[[ MIRACLE DEFIBRILLATOR ]]--
+local difficulties = {
+    {"Unmissable", 10, 0.5},
+    {"Very Easy", 5, 1},
+    {"Easy", 2, 2},
+    {"Normal", 1.4, 4},
+    {"Hard", 1.15, 7},
+    {"Very Hard", 1.02, 10},
+}
+StockingStuffer.Present({
+    developer = display_name, 
+    key = 'miracle_defibrillator',
+    pos = { x = 5, y = 0 },
+    pixel_size = { w = 62, h = 59 },
+    config = {extra = {difficulty = 3, blind_chips = 0}},
+    can_use = function(self, card)
+        return true
+    end,
+    use = function(self, card, area, copier) 
+        card.ability.extra.difficulty = card.ability.extra.difficulty + 1
+        if card.ability.extra.difficulty > 6 then card.ability.extra.difficulty = 1 end
+        SMODS.calculate_effect({message = difficulties[card.ability.extra.difficulty][1], colour = G.C.FILTER}, card)
+    end,
+    keep_on_use = function(self, card)
+        return true
+    end,
+    calculate = function(self, card, context)
+        if context.end_of_round and StockingStuffer.second_calculation then
+            card.ability.extra.blind_chips = G.GAME.blind.chips
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        -- fuck you, go add talisman compat yourself
+        if G.GAME.chips <= math.ceil(card.ability.extra.blind_chips * difficulties[card.ability.extra.difficulty][2]) then
+            return difficulties[card.ability.extra.difficulty][3]
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {vars = {
+            difficulties[card.ability.extra.difficulty][2],
+            number_format((G.GAME.blind and G.GAME.blind.in_blind) and G.GAME.blind.chips or card.ability.extra.blind_chips),
+            number_format(math.ceil((G.GAME.blind and G.GAME.blind.in_blind) and G.GAME.blind.chips or card.ability.extra.blind_chips * difficulties[card.ability.extra.difficulty][2])),
+            difficulties[card.ability.extra.difficulty][3],
+            difficulties[card.ability.extra.difficulty][1]
+        }}
     end
 })
