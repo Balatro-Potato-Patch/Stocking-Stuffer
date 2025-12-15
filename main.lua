@@ -370,7 +370,8 @@ end
 G.FUNCS.toggle_jokers_presents = function(e)
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
-        PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true}
+        local sprite = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0})
+        PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true, image = sprite}
     end
     StockingStuffer.states.slot_visible = StockingStuffer.states.slot_visible * -1
     play_sound('paper1')
@@ -561,6 +562,12 @@ Game.init_game_object = function(self)
     return ret
 end
 
+SMODS.Atlas({
+    key = 'logo',
+    path = 'logo.png',
+    px = 231, py = 117
+})
+
 -- Gives player a Sack of Presents on shop enter when tracking var condition is met
 local update_shopref = Game.update_shop
 function Game.update_shop(self, dt)
@@ -568,7 +575,8 @@ function Game.update_shop(self, dt)
     G.GAME.stocking_last_pack = G.GAME.round_resets.ante
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
-        PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true}
+        local sprite = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0})
+        PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true, image = sprite}
     end
     update_shopref(self, dt)
     G.E_MANAGER:add_event(Event({
@@ -822,5 +830,6 @@ function eval_card(card, context)
 end
 
 G.FUNCS.stocking_stuffer_help = function()
-    PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true, back_func = 'your_collection_stocking_presents'}
+    local sprite = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0})
+    PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, image = sprite, colour = G.C.GREEN, page_colour = G.C.GREEN, no_first_time = true, back_func = 'your_collection_stocking_presents'}
 end

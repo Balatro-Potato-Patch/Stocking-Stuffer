@@ -52,14 +52,20 @@ function PotatoPatchUtils.INFO_MENU.create_UIBox_definition(args)
     local info_nodes = {}
     if loc then
         local temp_name_node = {}
-        localize{type = 'name', loc_target = loc, nodes = temp_name_node, scale = 1.5, text_colour = G.C.UI.TEXT_LIGHT, vars = args.vars or {}, stylize = true} 
-        temp_name_node = desc_from_rows(temp_name_node,true)
-        temp_name_node.config.align = "cm"
+        if args.image then 
+            temp_name_node = {n=G.UIT.O, config={object = args.image, align = 'cm '}}
+        else
+            localize{type = 'name', loc_target = loc, nodes = temp_name_node, scale = 1.5, text_colour = G.C.UI.TEXT_LIGHT, vars = args.vars or {}, stylize = true} 
+            temp_name_node = desc_from_rows(temp_name_node,true)
+            temp_name_node.config.align = "cm"
+        end
         name_nodes.nodes[1].nodes[#name_nodes.nodes[1].nodes+1] = {n = G.UIT.R, config = {align = "cm", colour = G.C.CLEAR}, nodes = {
             {n = G.UIT.C, config = {align = "cm"}, nodes = {
                 temp_name_node
             }},
         }}
+
+        
 
         local target = loc.text[page]
         if target then
@@ -113,20 +119,16 @@ function PotatoPatchUtils.INFO_MENU.create_UIBox_definition(args)
     }}
     if loc and loc.text and #loc.text > 1 then
         local pages = {n=G.UIT.C, config = {padding = 0.2}, nodes ={
-            {n = G.UIT.C, config = {align = "cm", minw = 0.5, minh = 0.3, maxh = 0.5, padding = 0.1, r = 0.1, hover = true, colour = args.page_colour or G.C.BLACK, shadow = true, button = "potato_patch_utils_info_menu_switch_page", page_change = -1, menu_type = menu_type, page = page, max_page = (#(loc.text or {}) or 1), back_func = back_func, no_first_time = no_first_time, args = args}, nodes = {
-                {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
-                    {n = G.UIT.T, config = {text = "<", scale = 0.4, colour = G.C.UI.TEXT_LIGHT}}
-                }}
+            {n = G.UIT.C, config = {align = "cm", minw = 2, maxh = 0.5, padding = 0.1, r = 0.1, hover = true, colour = args.page_colour or G.C.BLACK, shadow = true, button = "potato_patch_utils_info_menu_switch_page", page_change = -1, menu_type = menu_type, page = page, max_page = (#(loc.text or {}) or 1), back_func = back_func, no_first_time = no_first_time, args = args}, nodes = {
+                {n = G.UIT.T, config = {text = "<", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}}
             }},
-            {n = G.UIT.C, config = {align = "cm", minw = 0.5, minh = 0.3, maxh = 0.5, padding = 0.1, r = 0.1, hover = true, colour = args.page_colour or G.C.BLACK, shadow = true}, nodes = {
+            {n = G.UIT.C, config = {align = "cm", minw = 5, padding = 0.1, r = 0.1, hover = true, shadow = true}, nodes = {
                 {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
                     {n = G.UIT.T, config = {text = localize("k_page").." "..page.."/"..(#(loc.text or {}) or 1), scale = 0.4, colour = G.C.UI.TEXT_LIGHT}}
                 }}
             }}, 
-            {n = G.UIT.C, config = {align = "cm", minw = 0.5, minh = 0.3, maxh = 0.5, padding = 0.1, r = 0.1, hover = true, colour = args.page_colour or G.C.BLACK, shadow = true, button = "potato_patch_utils_info_menu_switch_page", page_change = 1, menu_type = menu_type, page = page, max_page = (#(loc.text or {}) or 1), back_func = back_func, no_first_time = no_first_time, args = args}, nodes = {
-                {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
-                    {n = G.UIT.T, config = {text = ">", scale = 0.4, colour = G.C.UI.TEXT_LIGHT}}
-                }}
+            {n = G.UIT.C, config = {align = "cm", minw = 2, maxh = 0.5, padding = 0.1, r = 0.1, hover = true, colour = args.page_colour or G.C.BLACK, shadow = true, button = "potato_patch_utils_info_menu_switch_page", page_change = 1, menu_type = menu_type, page = page, max_page = (#(loc.text or {}) or 1), back_func = back_func, no_first_time = no_first_time, args = args}, nodes = {
+                {n = G.UIT.T, config = {text = ">", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}}
             }},
         }}
             table.insert(ret.nodes[1].nodes[1].nodes[1].nodes[1].nodes[4].nodes, 1, pages)

@@ -307,18 +307,6 @@ payload = '''
 func = (function() if eval_func(card) then if not first or first then card.ability.no_stocking = true; card:juice_up(0.1, 0.1) end;juice_card_until(card, eval_func, nil, 0.8) end card.ability.no_stocking = nil; return true end)
 '''
 
-# don't reduce booster selection when using present
-[[patches]]
-[patches.pattern]
-target = 'functions/button_callbacks.lua'
-match_indent = true
-position = 'at'
-pattern = '''
-if area == G.consumeables then
-'''
-payload = '''
-if area ~= G.pack_cards then
-'''
 # Fix glitched booster animation with disable_use_animation
 # Note: this patches code we patched earlier since we are likely 
 #       upstreaming that into SMODS
