@@ -1,0 +1,33 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[vars]
+is_it_the_plush = "getmetatable(self.cursor_down.target) == Card and self.cursor_down.target.config.center.key == \"VMan_2002_stocking_plush\""
+
+# Plushie card click
+[[patches]]
+[patches.pattern]
+target = 'engine/controller.lua'
+match_indent = true
+position = 'after'
+pattern = '''if self.cursor_down.target.states.drag.can then'''
+payload = '''
+if {{lovely:is_it_the_plush}} then
+	play_sound("stocking_VMan_2002_squeaky1")
+	StockingStuffer.Developers.VMan_2002.plush_click_release = false
+	StockingStuffer.Developers.VMan_2002.plush_click_time = love.timer.getTime() + 0.172
+end
+'''
+[[patches]]
+[patches.pattern]
+target = 'engine/controller.lua'
+match_indent = true
+position = 'after'
+pattern = '''self.dragging.target:stop_drag()'''
+payload = '''
+if {{lovely:is_it_the_plush}} then
+	StockingStuffer.Developers.VMan_2002.plush_click_release = true
+end
+'''
