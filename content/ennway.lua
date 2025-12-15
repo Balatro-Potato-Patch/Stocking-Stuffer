@@ -2,7 +2,7 @@ local display_name = 'ENNWAY'
 
 SMODS.Atlas({
     key = display_name..'_presents',
-    path = display_name..'_presents.png',
+    path = 'ennway_presents.png',
     px = 71,
     py = 95
 })
