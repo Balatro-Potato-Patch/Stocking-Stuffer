@@ -169,7 +169,7 @@ StockingStuffer.Present({
 				delay = 0.4,
 				func = function()
 				play_sound('timpani')
-				_givenenhancement = SMODS.poll_enhancement({guaranteed = true})
+				local _givenenhancement = SMODS.poll_enhancement({guaranteed = true})
 				SMODS.add_card { set = "Base", enhancement = _givenenhancement, area = G.deck }
 				card:juice_up(0.3, 0.5)
 				return true
@@ -197,11 +197,24 @@ StockingStuffer.Present({
     end,
     calculate = function(self, card, context)
         if context.joker_main and StockingStuffer.second_calculation and pseudorandom('pipe_bomb') < G.GAME.probabilities.normal / card.ability.extra.odds then
-			SMODS.destroy_cards(context.full_hand)
-			SMODS.destroy_cards(card)
-            return {
-				message = localize('k_exploded_ex'),
-            }
+			
+			local destroy_cards = {}
+			for _, v in pairs(context.full_hand) do
+				if v and not v.getting_sliced then
+					table.insert(destroy_cards, v)
+				end
+			end
+
+			if next(destroy_cards) then
+				SMODS.destroy_cards(destroy_cards)
+				SMODS.destroy_cards(card)
+				return {
+					message = localize('k_exploded_ex'),
+					func = function()
+						StockingStuffer.freh_pipebomb_trigger = nil
+					end
+				}
+			end
         end
     end
 })
