@@ -41,7 +41,7 @@ return {
                 name = "Chest",
                 text = {
                     {
-                    "Use with a {C:attention}Consumable{} selected to store it,",
+                    "Use with a held {C:attention}Consumable{} selected to store it,",
                     "stored {C:attention}Consumable{} {C:red}can't be used{} until taken out",
                     "Use without selecting a {C:attention}Consumable{} to {C:attention}open the Chest{}",
                     "Storing space space: #1#",
