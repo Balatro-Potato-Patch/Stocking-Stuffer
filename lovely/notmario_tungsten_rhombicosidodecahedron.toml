@@ -1,0 +1,24 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "G.GAME.pack_choices = math.min((self.ability.choose or self.config.center.config.choose or 1) + (G.GAME.modifiers.booster_choice_mod or 0), self.ability.extra and math.max(1, self.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) or self.config.center.extra and math.max(1, self.config.center.extra + (G.GAME.modifiers.booster_size_mod or 0)) or 1)"
+position = "after"
+payload = '''
+if booster_obj.key == "p_stocking_present_select" then
+    for _, present in pairs(SMODS.find_card("notmario_stocking_tungsten_rhombicosidodecahedron")) do
+        self.ability.extra = self.ability.extra + present.ability.extra.present_limit
+    end
+else
+    for _, present in pairs(SMODS.find_card("notmario_stocking_tungsten_rhombicosidodecahedron")) do
+        self.ability.extra = self.ability.extra - present.ability.extra.pack_limit
+    end
+    self.ability.extra = math.max(1, self.ability.extra)
+    G.GAME.pack_choices = math.min(G.GAME.pack_choices, self.ability.extra)
+end
+'''
+match_indent = true
