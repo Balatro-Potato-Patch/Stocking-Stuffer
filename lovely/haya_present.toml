@@ -1,0 +1,21 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Prevent state from changing if the consumable we used is Irisu's Bat
+[[patches]]
+[patches.pattern]
+target = 'functions/button_callbacks.lua'
+match_indent = true
+position = 'at'
+pattern = '''
+G.STATE = prev_state
+G.TAROT_INTERRUPT=nil
+'''
+payload = '''
+if card.config.center.key ~= "haya_stocking_irisu_bat" then
+	G.STATE = prev_state
+	G.TAROT_INTERRUPT=nil
+end
+'''
