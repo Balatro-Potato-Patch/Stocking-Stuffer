@@ -79,12 +79,12 @@ StockingStuffer.Present({
             -- math bs
             local v = (2 * d * n) - (n * n)
             return {
-                numerator = map(v, 0, d*d, 0, d),
+                numerator = map(v, 0, d * d, 0, d),
                 denominator = d,
             }
         end
     end,
-    coder = {"Lily Felli"}
+    coder = { "Lily Felli" }
 })
 
 StockingStuffer.Present({
@@ -136,7 +136,7 @@ StockingStuffer.Present({
             end
         end
     end,
-    coder = {"Lily Felli"}
+    coder = { "Lily Felli" }
 })
 
 
@@ -165,16 +165,16 @@ StockingStuffer.Present({
     calculate = function(self, card, context)
         if context.joker_main and card.ability.extra.active then
             card.ability.extra.active = false
-            SMODS.calculate_effect({xmult = card.ability.extra.xmult}, card)
-            SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "xmult", scalar_value = "loss"})
+            SMODS.calculate_effect({ xmult = card.ability.extra.xmult }, card)
+            SMODS.scale_card(card, { ref_table = card.ability.extra, ref_value = "xmult", scalar_value = "loss" })
             card.ability.extra.xmult = math.max(card.ability.extra.xmult, card.ability.extra.xmult_base)
         end
 
         if context.end_of_round and context.main_eval and (not card.ability.extra.active) then
-            SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "xmult", scalar_value = "gain"})
+            SMODS.scale_card(card, { ref_table = card.ability.extra, ref_value = "xmult", scalar_value = "gain" })
         end
     end,
-    coder = {"Lily Felli"}
+    coder = { "Lily Felli" }
 })
 
 StockingStuffer.Present({
@@ -182,29 +182,40 @@ StockingStuffer.Present({
     key = "sugar_stars",
     pos = { x = 4, y = 0 },
     can_use = function(self, card)
-        return G.GAME.blind.in_blind and G.GAME.blind.chips > 0 
+        return G.GAME.blind.in_blind and G.GAME.blind.chips > 0 and G.STATE == G.STATES.SELECTING_HAND
     end,
     use = function(self, card, area, copier)
         card.ability.extra.uses = card.ability.extra.uses - 1
         -- 3=0
         -- 2=1
         -- 1=2
-        card.children.center:set_sprite_pos({x = 4, y = 3 - card.ability.extra.uses})
+        card.children.center:set_sprite_pos({ x = 4, y = 3 - card.ability.extra.uses })
         G.E_MANAGER:add_event(Event({
             func = function()
-                G.GAME.chips = G.GAME.chips + (G.GAME.blind.chips*card.ability.extra.percentage*0.01)
+                G.GAME.chips = G.GAME.chips + (G.GAME.blind.chips * card.ability.extra.percentage * 0.01)
                 G.hand_text_area.game_chips:juice_up()
                 card:juice_up()
 
                 if (G.GAME.chips >= G.GAME.blind.chips) then
-                    G.STATE = G.STATES.NEW_ROUND
-                    end_round()
+                    G.E_MANAGER:add_event( --stolen from cryptid because wilson allowed me to
+                        Event({
+                            trigger = "immediate",
+                            func = function()
+                                if G.STATE ~= G.STATES.SELECTING_HAND then
+                                    return false
+                                end
+                                G.STATE = G.STATES.HAND_PLAYED
+                                G.STATE_COMPLETE = true
+                                end_round()
+                                return true
+                            end,
+                        }),
+                        "other"
+                    )
                 end
                 return true
-            
             end
         }))
-        
     end,
     keep_on_use = function(self, card)
         return card.ability.extra.uses > 1
@@ -213,7 +224,7 @@ StockingStuffer.Present({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percentage, card.ability.extra.uses } }
     end,
-    coder = {"Lily Felli"}
+    coder = { "Lily Felli" }
 })
 
 StockingStuffer.Present({
@@ -226,21 +237,20 @@ StockingStuffer.Present({
     end,
     calculate = function(self, card, context)
         if context.fix_probability then
-
             if not context.from_roll then
                 return
             end
-            
+
             if pseudorandom("missingno_dried_apricot", 1, context.denominator) <= context.numerator then
-                SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "current", scalar_value = "gain"})
+                SMODS.scale_card(card, { ref_table = card.ability.extra, ref_value = "current", scalar_value = "gain" })
             end
 
-            return {numerator = 0} --no probabiliy
+            return { numerator = 0 } --no probabiliy
         end
 
         if context.joker_main then
-            return {xmult = card.ability.extra.current}
+            return { xmult = card.ability.extra.current }
         end
     end,
-    coder = {"Lily Felli"}
+    coder = { "Lily Felli" }
 })
