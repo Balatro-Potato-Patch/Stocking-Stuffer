@@ -8,9 +8,20 @@ SMODS.Atlas({
     py = 95
 })
 
+local colour = SMODS.Gradient{
+    key = "wilson_colour",
+    cycle = 60,
+    colours = {
+        G.C.GOLD,
+        lighten(G.C.PURPLE, 0.2),
+    }
+}
+
+colour:inject() -- For some reason it doesn't get injected soon enough and as such has no default values
+
 StockingStuffer.Developer({
     name = display_name,
-    colour = G.C.GOLD
+    colour = colour,
 })
 
 StockingStuffer.WrappedPresent({
@@ -150,3 +161,85 @@ StockingStuffer.Present({
         return (G.GAME.dollars-G.GAME.bankrupt_at) - card.ability.extra.money >= 0
     end
 })
+
+local function phoneRandom(card)
+    card.ability.extra.state = pseudorandom('stocking_wilson_phone', 0, 5)
+end
+
+StockingStuffer.Present({
+    developer = display_name,
+
+    key = 'phone',
+    pos = { x = 4, y = 0 },
+    config = { extra = { num = 9, state = 0 } },
+    -- Adjusts the hitbox on the item
+    pixel_size = { w = 61, h = 75 },
+
+    set_ability = function (self, card)
+        phoneRandom(card)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.num },
+            key = self.key .. "_" .. card.ability.extra.state
+        }
+    end,
+
+    calculate = function(self, card, context)
+        local state = card.ability.extra.state
+        local num = card.ability.extra.num
+
+        if StockingStuffer.second_calculation then
+            if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        phoneRandom(card)
+                        return true
+                    end
+                }))
+                return {
+                    message = localize('wilson_ring'),
+                }
+            end
+
+            if state == 1 and context.joker_main then
+                return {
+                    chips = num
+                }
+            end
+
+            if state == 4 and context.repetition and context.cardarea == G.play and context.other_card:get_id() == num then
+                return {
+                    repetitions = 1,
+                }
+            end
+
+            if state == 5 and context.individual and context.cardarea == G.play and context.other_card:get_id() == num then
+                return {
+                    mult = num,
+                }
+            end
+
+        elseif StockingStuffer.first_calculation then
+            if state == 0 and context.joker_main then
+                return {
+                    mult = num,
+                }
+            end
+
+            if state == 2 and context.end_of_round and context.game_over == false and context.main_eval then
+                return {
+                    dollars = num,
+                }
+            end
+
+            if state == 3 and context.individual and context.cardarea == G.play and context.other_card:get_id() == num then
+                return {
+                    chips = num,
+                }
+            end
+        end
+    end
+})
+
