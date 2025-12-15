@@ -17,11 +17,49 @@ StockingStuffer.second_calculation = true
 StockingStuffer.colours = {
     before = G.C.PURPLE,
     after = G.C.GOLD,
-    usable = G.C.ETERNAL
+    usable = G.C.ETERNAL,
+    primary = HEX('cf5d5d'),
+    secondary = HEX('549c5c')
 }
 
 -- Global Mod Calculate for hooking
 StockingStuffer.calculate = function(self, context) end
+
+--#region Menu
+
+local gmm = Game.main_menu
+function Game:main_menu(change_context)
+    local ret = gmm(self, change_context)
+
+    if StockingStuffer.config.menu then
+        -- make the title screen use different background colors
+        G.SPLASH_BACK:define_draw_steps({ {
+            shader = 'splash',
+            send = {
+                { name = 'time',       ref_table = G.TIMERS,  ref_value = 'REAL_SHADER' },
+                { name = 'vort_speed', val = 0.4 },
+                { name = 'colour_1',   ref_table = StockingStuffer.colours, ref_value = 'primary' },
+                { name = 'colour_2',   ref_table = StockingStuffer.colours, ref_value = 'secondary' },
+            }
+        } })
+
+        -- make the center card more festive
+        local title_card = self.title_top.cards[1]
+        local wrapped_pool = get_current_pool('stocking_wrapped_present')
+        local replace_present = wrapped_pool[math.random(#wrapped_pool)]
+        while replace_present == 'UNAVAILABLE' do
+            replace_present = wrapped_pool[math.random(#wrapped_pool)]
+        end 
+        title_card:set_ability(replace_present)
+        title_card.children.front = nil
+        title_card.T.w = title_card.T.w*1.2
+        title_card.T.h = title_card.T.h*1.2
+    end
+
+    return ret
+end
+
+--#endregion
 
 --#region Objects
 
@@ -634,6 +672,7 @@ function G.FUNCS.end_consumeable(e)
     end_consum(e)
 end
 
+-- Don't do hover effects on dummy objects
 local ch = Card.hover
 function Card:hover()
     if self.config.center_key ~= 'j_stocking_dummy' then
