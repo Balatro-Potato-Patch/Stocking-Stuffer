@@ -75,6 +75,14 @@ StockingStuffer.Present({
         if context.setting_blind then
             card.ability.trig = false
         end
+        if context.joker_main then
+            --10 Scores A'leaping
+            if StockingStuffer.GlobalPunk_Jimbmas == 2 and card.ability.trig == false then
+                card.ability.trig = true
+                G.GAME.blind.chips = math.floor(G.GAME.blind.chips - G.GAME.blind.chips * 0.1)
+                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+            end
+        end
         if card.ability.rebate then
             if context.discard and not context.other_card.debuff and context.other_card:get_id() == 8 then
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 8
@@ -285,9 +293,58 @@ StockingStuffer.Present({
                                     }
                                 end
                             end
-                            --10 Scores A'leaping
-                            if StockingStuffer.GlobalPunk_Jimbmas == 2 and card.ability.trig == false then
+                            --11 Hikers Hiking
+                            if StockingStuffer.GlobalPunk_Jimbmas == 1 and card.ability.trig == false then
                                 card.ability.trig = true
+                                for i = 1, 11 do
+                                    SMODS.add_card {
+                                        set = 'Joker',
+                                        key_append = 'stocking_gp_jimbmas',
+                                        key = 'j_hiker'
+                                    }
+                                end
+                            end
+                            --12 Clubbers Clubbing
+                            if StockingStuffer.GlobalPunk_Jimbmas == 0 and card.ability.trig == false then
+                                card.ability.trig = true
+                                local cards = {}
+                                for i = 1, 12 do
+                                    local _suit, _rank =
+                                        'Clubs', pseudorandom_element(SMODS.Ranks, pseudoseed('stocking_gp_jimbmas'))
+                                        .card_key
+                                    local additions, cen_pool = {}, {}
+                                    for _, en_cen in pairs(G.P_CENTER_POOLS["Enhanced"]) do
+                                        if en_cen.key ~= 'm_stone' and not en_cen.overrides_base_rank then
+                                            cen_pool[#cen_pool + 1] =
+                                                en_cen
+                                        end
+                                    end
+                                    cards[i] = create_playing_card(
+                                        {
+                                            front = G.P_CARDS[_suit .. '_' .. _rank],
+                                            center = pseudorandom_element(
+                                                cen_pool, pseudoseed('jimbmas_cartridge'))
+                                        },
+                                        G.play, nil, i ~= 1,
+                                        { G.C.SECONDARY_SET.Spectral })
+                                    cards[i]:set_seal(SMODS.poll_seal({ guaranteed = true, type_key = 'jimbmas_seal' }))
+                                    cards[i]:set_edition(poll_edition('jimbmas_edition', nil, true, true))
+                                    G.E_MANAGER:add_event(Event({
+                                        func = function()
+                                            cards[i]:start_materialize()
+                                            G.GAME.blind:debuff_card(cards[i])
+                                            if context.blueprint_card then
+                                                context.blueprint_card:juice_up()
+                                            else
+                                                card:juice_up()
+                                            end
+                                            SMODS.calculate_context({ playing_card_added = true, cards = { cards[i] } })
+                                            return true
+                                        end
+                                    }))
+                                    draw_card(G.play, G.deck, 90, 'up')
+                                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                                end
                             end
                         end
                         return true
