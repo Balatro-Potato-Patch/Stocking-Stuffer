@@ -114,7 +114,7 @@ return {
                     {
                         "Each scored {C:attention}#1#{}",
                         "gives {C:mult}+#1#{} Mult",
-                        '{stocking}before{}',
+                        '{stocking}after{}',
                     },
                     phoneShared,
                 }
