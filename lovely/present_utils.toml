@@ -472,7 +472,7 @@ if self.ability.name == 'The Wheel of Fortune' or self.ability.name == 'Ectoplas
 '''
 position = 'after'
 payload = '''
-    if StockingStuffer.states.slot_visible ~= 1 then
+    if StockingStuffer and StockingStuffer.states.slot_visible ~= 1 then
         G.FUNCS.toggle_jokers_presents()
         for i=1, 2 do
             G.E_MANAGER:add_event(Event({
