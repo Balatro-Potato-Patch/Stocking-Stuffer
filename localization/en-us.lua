@@ -7,6 +7,7 @@ return {
         dictionary = {
             k_stocking_present = 'Present',
             k_stocking_wrapped_present = 'Wrapped Present',
+            b_stocking_custom_menu = "Enable Custom Menu",
 			b_stocking_present_cards = 'Presents',
             b_stocking_wrapped_present_cards = 'Presents',
             stocking_stuffer_gift_tag = 'From ',

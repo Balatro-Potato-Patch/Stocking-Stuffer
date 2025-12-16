@@ -25,6 +25,41 @@ StockingStuffer.colours = {
 -- Global Mod Calculate for hooking
 StockingStuffer.calculate = function(self, context) end
 
+--#region Config
+StockingStuffer.config_tab = function()
+    return {
+        n = G.UIT.ROOT,
+        config = { align = "m", r = 0.1, padding = 0.1, colour = G.C.BLACK, minw = 8, minh = 6 },
+        nodes = {
+            { n = G.UIT.R, config = { align = "cl", padding = 0, minh = 0.1 },      nodes = {} },
+
+            -- Custom Menu Toggle
+            {
+                n = G.UIT.R,
+                config = { align = "cl", padding = 0 },
+                nodes = {
+                    {
+                        n = G.UIT.C,
+                        config = { align = "cl", padding = 0.05 },
+                        nodes = {
+                            create_toggle { col = true, label = "", scale = 1, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "menu" },
+                        }
+                    },
+                    {
+                        n = G.UIT.C,
+                        config = { align = "c", padding = 0 },
+                        nodes = {
+                            { n = G.UIT.T, config = { text = localize('b_stocking_custom_menu'), scale = 0.45, colour = G.C.UI.TEXT_LIGHT } },
+                        }
+                    },
+                }
+            },
+
+        }
+    }
+end
+--#endregion
+
 --#region Menu
 
 local gmm = Game.main_menu
