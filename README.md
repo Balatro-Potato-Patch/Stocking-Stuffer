@@ -64,4 +64,4 @@ Participants were tasked with creating up to 5 Presents for players to unwrap fr
 ### Non-participant Contributors
 - Spikeberd (a.k.a Lyman)
 - DigitalDetective47
-- lily
+- Lily Felli
