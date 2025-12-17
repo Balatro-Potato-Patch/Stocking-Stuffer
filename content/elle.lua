@@ -201,7 +201,9 @@ StockingStuffer.Present({
     end,
 	
 	update = function(self, card, dt)
-		card.children.center:set_sprite_pos({x = (card.ability.extra.card and 3 or 4), y = 0})
+		if (card.config.center.discovered or card.bypass_discovery_center) then
+			card.children.center:set_sprite_pos({x = (card.ability.extra.card and 3 or 4), y = 0})
+		end
 	end
 })
 

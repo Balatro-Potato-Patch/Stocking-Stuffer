@@ -174,7 +174,7 @@ SMODS.DrawStep(
     key = 'ditto',
     order = -25,
     func = function(card, layer)
-        if card.ditto or card.config.center.key == "[REDACTED]Autumn_stocking_ditto" then
+        if (card.ditto or card.config.center.key == "[REDACTED]Autumn_stocking_ditto") and (card.config.center.discovered or card.bypass_discovery_center) then
             card.children.particles = card.children.particles or Particles(1, 1, 0, 0, {
                 timer = 0.1, scale = 0.075, initialize = false,
                 speed = 0.25, padding = 1, attach = card,

@@ -141,7 +141,7 @@ function Game:main_menu(change_context)
         local replace_present = wrapped_pool[math.random(#wrapped_pool)]
         while replace_present == 'UNAVAILABLE' do
             replace_present = wrapped_pool[math.random(#wrapped_pool)]
-        end 
+        end
         title_card:set_ability(replace_present)
         title_card.children.front = nil
         title_card.T.w = title_card.T.w*1.1
