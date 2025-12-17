@@ -700,7 +700,7 @@ end
 -- Toggles Present and Joker areas depending on what cards are being juiced
 local stocking_stuffer_card_juice_up = Card.juice_up
 function Card:juice_up(scale, rot)
-    if self.area and not self.ability.no_stocking and not self.states.hover.is and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) then
+    if self.area and not self.ability.no_stocking and not self.states.hover.is and ((self.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (self.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) and not self.juicing_until then
         G.FUNCS.toggle_jokers_presents()
         for i=1, 2 do
             G.E_MANAGER:add_event(Event({
@@ -806,6 +806,24 @@ function eval_card(card, context)
         return {}, {}
     end
     return SS_eval_card(card, context)
+end
+
+-- Override juice_card_until because thunk made the event func not easy to patch
+function juice_card_until(card, eval_func, first, delay)
+    if not card.juicing_until then card.juicing_until = true end
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',delay = delay or 0.1, blocking = false, blockable = false, timer = 'REAL',
+        func = function()
+            if eval_func(card) then
+                if card and card.juice_up then
+                    card:juice_up(0.1, 0.1)
+                    card.juicing_until = nil
+                end
+                juice_card_until(card, eval_func, nil, 0.8)
+            end
+            return true
+        end
+    }))
 end
 
 --#endregion
