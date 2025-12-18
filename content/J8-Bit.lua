@@ -31,7 +31,7 @@ StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
 
     pos = { x = 0, y = 0 },   -- position of present sprite on your atlas
-    pixel_size = { w = 53, h = 56 },
+    pixel_size = { w = 55, h = 57 },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
 
     -- Your present will be given an automatically generated name and description. If you want to customise it you can, though we recommend keeping the {V:1} in the name
@@ -63,7 +63,7 @@ StockingStuffer.Present({
 
     key = 'booster_box',      -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 1, y = 0 },
-    pixel_size = { w = 58, h = 54 },
+    pixel_size = { w = 60, h = 56 },
     disable_use_animation = true,
     draw = function(self, card, layer)
         if card.config.center.discovered or card.bypass_discovery_center then
@@ -202,7 +202,7 @@ StockingStuffer.Present({
 
     key = 'christmas_crack',  -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 2, y = 0 },
-    pixel_size = { w = 66, h = 80 },
+    pixel_size = { w = 68, h = 82 },
     config = { extra = { xchips = 1, xchips_inc = 0.2, check_edition = "e_foil" } },
     disable_use_animation = true,
     loc_vars = function(self, info_queue, card)
@@ -268,7 +268,7 @@ StockingStuffer.Present({
 
     key = 'label_maker',      -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 3, y = 0 },
-    pixel_size = { w = 57, h = 61 },
+    pixel_size = { w = 59, h = 61 },
     config = { extra = { active = true } },
     loc_vars = function(self, info_queue, card)
         local main_end = nil
@@ -488,7 +488,7 @@ StockingStuffer.Present({
 
     key = 'tech_x',           -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 6, y = 0 },
-    pixel_size = { w = 60, h = 46 },
+    pixel_size = { w = 62, h = 48 },
     config = { extra = { charges = 0, charges_needed = 3, new_hand_type = 'Straight Flush', activated = false } },
     loc_vars = function(self, info_queue, card)
         local main_end = nil
