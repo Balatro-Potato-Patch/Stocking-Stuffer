@@ -60,6 +60,7 @@ StockingStuffer.Present({
     -- },
     pos = { x = 1, y = 0 },
     config = {
+        days = 0,
         trig = false,
         rebate = false
     },
@@ -77,7 +78,7 @@ StockingStuffer.Present({
         end
         if context.joker_main then
             --10 Scores A'leaping
-            if StockingStuffer.GlobalPunk_Jimbmas == 2 and card.ability.trig == false then
+            if card.ability.days == 2 and card.ability.trig == false then
                 card.ability.trig = true
                 G.GAME.blind.chips = math.floor(G.GAME.blind.chips - G.GAME.blind.chips * 0.1)
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
@@ -105,12 +106,12 @@ StockingStuffer.Present({
             if self.discovered or card.bypass_discovery_center then
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        if StockingStuffer.GlobalPunk_Jimbmas >= 0 then
-                            if StockingStuffer.GlobalPunk_Jimbmas >= 12 then
+                        if card.ability.days >= 0 and card.ability.trig == false then
+                            if card.ability.days >= 12 then
                                 card:start_dissolve({ G.C.RED }, nil, 1.6)
                             end
                             --AND A JOKER THAT RETRIGGEREDDDDD
-                            if StockingStuffer.GlobalPunk_Jimbmas == 11 and card.ability.trig == false then
+                            if card.ability.days == 11 then
                                 card.ability.trig = true
                                 local rejoke = {
                                     'j_hanging_chad',
@@ -135,7 +136,7 @@ StockingStuffer.Present({
                                 end
                             end
                             --2 Mediums
-                            if StockingStuffer.GlobalPunk_Jimbmas == 10 and card.ability.trig == false then
+                            if card.ability.days == 10 then
                                 card.ability.trig = true
                                 card:juice_up(0.3, 0.5)
                                 card.children.center:set_sprite_pos({ x = 3, y = 0 })
@@ -148,7 +149,7 @@ StockingStuffer.Present({
                                 end
                             end
                             --3 Fresh Eggs
-                            if StockingStuffer.GlobalPunk_Jimbmas == 9 and card.ability.trig == false then
+                            if card.ability.days == 9 then
                                 card.ability.trig = true
                                 card:juice_up(0.3, 0.5)
                                 card.children.center:set_sprite_pos({ x = 5, y = 0 })
@@ -161,7 +162,7 @@ StockingStuffer.Present({
                                 end
                             end
                             --4 Tarot Cards
-                            if StockingStuffer.GlobalPunk_Jimbmas == 8 and card.ability.trig == false then
+                            if card.ability.days == 8 then
                                 card.ability.trig = true
                                 for i = 1, 4 do
                                     SMODS.add_card {
@@ -171,14 +172,14 @@ StockingStuffer.Present({
                                 end
                             end
                             --FIIIIIIVE JOKER SLOTTTTSSSSS
-                            if StockingStuffer.GlobalPunk_Jimbmas == 7 and card.ability.trig == false then
+                            if card.ability.days == 7 then
                                 card.ability.trig = true
                                 card:juice_up(0.3, 0.5)
                                 card.children.center:set_sprite_pos({ x = 7, y = 0 })
                                 G.jokers.config.card_limit = G.jokers.config.card_limit + 5
                             end
                             --6 Wees Replaying
-                            if StockingStuffer.GlobalPunk_Jimbmas == 6 and card.ability.trig == false then
+                            if card.ability.days == 6 then
                                 card.ability.trig = true
                                 for i = 1, 6 do
                                     SMODS.add_card {
@@ -189,7 +190,7 @@ StockingStuffer.Present({
                                 end
                             end
                             --7 Scholars Acing
-                            if StockingStuffer.GlobalPunk_Jimbmas == 5 and card.ability.trig == false then
+                            if card.ability.days == 5 then
                                 card.ability.trig = true
                                 local cards = {}
                                 for i = 1, 7 do
@@ -232,14 +233,14 @@ StockingStuffer.Present({
                                 SMODS.add_card { set = 'Joker', key_append = 'stocking_gp_jimbmas', key = 'j_scholar' }
                             end
                             --8 Rebates Mailing
-                            if StockingStuffer.GlobalPunk_Jimbmas == 4 and card.ability.trig == false then
+                            if card.ability.days == 4 then
                                 card.ability.trig = true
                                 card.ability.rebate = true
                                 card:juice_up(0.3, 0.5)
                                 card.children.center:set_sprite_pos({ x = 10, y = 0 })
                             end
                             --9 Ladies Dancing
-                            if StockingStuffer.GlobalPunk_Jimbmas == 3 and card.ability.trig == false then
+                            if card.ability.days == 3 then
                                 card.ability.trig = true
                                 card:juice_up(0.3, 0.5)
                                 card.children.center:set_sprite_pos({ x = 11, y = 0 })
@@ -299,7 +300,7 @@ StockingStuffer.Present({
                                 end
                             end
                             --11 Hikers Hiking
-                            if StockingStuffer.GlobalPunk_Jimbmas == 1 and card.ability.trig == false then
+                            if card.ability.days == 1 then
                                 card.ability.trig = true
                                 card:juice_up(0.3, 0.5)
                                 card.children.center:set_sprite_pos({ x = 14, y = 0 })
@@ -312,12 +313,12 @@ StockingStuffer.Present({
                                 end
                             end
                             --12 Clubbers Clubbing
-                            if StockingStuffer.GlobalPunk_Jimbmas == 0 and card.ability.trig == false then
+                            if card.ability.days == 0 then
                                 card.ability.trig = true
                                 local cards = {}
                                 for i = 1, 12 do
                                     local _suit, _rank =
-                                        'Clubs', pseudorandom_element(SMODS.Ranks, pseudoseed('stocking_gp_jimbmas'))
+                                        'C', pseudorandom_element(SMODS.Ranks, pseudoseed('stocking_gp_jimbmas'))
                                         .card_key
                                     local additions, cen_pool = {}, {}
                                     for _, en_cen in pairs(G.P_CENTER_POOLS["Enhanced"]) do
@@ -353,6 +354,7 @@ StockingStuffer.Present({
                                     G.deck.config.card_limit = G.deck.config.card_limit + 1
                                 end
                             end
+                            card.ability.days = card.ability.days + 1
                         end
                         return true
                     end,
@@ -362,3 +364,5 @@ StockingStuffer.Present({
         end
     end
 })
+
+SMODS.draw_ignore_keys.stocking_gp_floating_sprite = true
