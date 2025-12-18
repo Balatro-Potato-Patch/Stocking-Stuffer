@@ -194,7 +194,7 @@ StockingStuffer.Present({
     keep_on_use = function(self, card)
         return true
     end,
-    calculate = function(self, card, context)
+--[[     calculate = function(self, card, context)
         if context.joker_main and StockingStuffer.first_calculation then
             SMODS.calculate_effect({message = localize('k_plus_joker')}, card)
             G.E_MANAGER:add_event(Event({
@@ -212,6 +212,6 @@ StockingStuffer.Present({
                     return true
                 end
             }))
-        end 
-    end
+        end
+    end ]]
 })
