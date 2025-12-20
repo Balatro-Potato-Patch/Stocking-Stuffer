@@ -158,7 +158,7 @@ StockingStuffer.Present({
     end,
 
     can_use = function(self, card)
-        return (G.GAME.dollars-G.GAME.bankrupt_at) - card.ability.extra.money >= 0
+        return to_big((G.GAME.dollars-G.GAME.bankrupt_at) - card.ability.extra.money) >= to_big(0)
     end
 })
 
@@ -275,7 +275,7 @@ StockingStuffer.Present({
     end,
 
     can_use = function(self, card)
-        return (G.GAME.dollars-G.GAME.bankrupt_at) - card.ability.extra >= 0
+        return to_big((G.GAME.dollars-G.GAME.bankrupt_at) - card.ability.extra) >= to_big(0)
     end,
 
     keep_on_use = function(self, card) return true end,
