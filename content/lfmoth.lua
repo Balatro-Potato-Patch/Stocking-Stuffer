@@ -135,7 +135,7 @@ StockingStuffer.Present({
     calculate = function(self, card, context)
         if context.joker_main and StockingStuffer.second_calculation then
             card.ability.extra.xmult = card.ability.extra.startingxmult - (card.ability.extra.decrease * (G.GAME.round_resets.ante - 1))
-            if G.GAME.round_resets.ante <= 8 then
+            if to_big(G.GAME.round_resets.ante) <= to_big(8) then
                 return {
                     xmult = card.ability.extra.xmult
                 }
