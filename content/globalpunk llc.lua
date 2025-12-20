@@ -84,6 +84,7 @@ StockingStuffer.Present({
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                 card:juice_up(0.3, 0.5)
                 card.children.center:set_sprite_pos({ x = 13, y = 0 })
+                card.ability.days = card.ability.days + 1
             end
         end
         if card.ability.rebate then
@@ -95,6 +96,7 @@ StockingStuffer.Present({
                         G.E_MANAGER:add_event(Event({
                             func = function()
                                 G.GAME.dollar_buffer = 0
+                                card.ability.days = card.ability.days + 1
                                 return true
                             end
                         }))
