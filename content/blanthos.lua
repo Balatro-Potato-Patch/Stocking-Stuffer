@@ -140,7 +140,7 @@ SMODS.Scoring_Parameter {
             if effect.card and effect.card ~= scored_card then juice_card(effect.card) end
             self:modify(amount)
             card_eval_status_text(scored_card, 'extra', nil, percent, nil,
-                { message = localize { type = 'variable', key = amount > 0 and 'a_chips' or 'a_chips_minus', vars = { amount } }, colour =
+                { message = localize { type = 'variable', key = to_big(amount) > to_big(0) and 'a_chips' or 'a_chips_minus', vars = { amount } }, colour =
                 self.colour })
             return true
         end
