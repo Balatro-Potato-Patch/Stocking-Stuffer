@@ -32,7 +32,8 @@ return {
             stocking_stuffer_art_credit = 'Art by ',
             stocking_stuffer_code_credit = 'Code by ',
             stocking_stuffer_and_spacer = ' and ',
-            stocking_stuffer_comma_spacer = ', '
+            stocking_stuffer_comma_spacer = ', ',
+            stocking_stuffer_received = ' received!'
         }
     },
     descriptions = {

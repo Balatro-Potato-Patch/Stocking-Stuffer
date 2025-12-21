@@ -373,7 +373,19 @@ end
                         func = (function(t) return t end)
                     }))
                     G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 1.5,
+                        trigger = 'after', delay = 0.4,
+                        func = function()
+                            local key = gift.config.center_key
+                            local vars = gift.config.center:loc_vars({}, gift)
+                            key = vars and vars.key or key
+                            attention_text({
+                                scale = 0.8, rotate = true, text = localize({type = 'name_text', key = key, set = 'stocking_present'})..localize('stocking_stuffer_received'), hold = 3, align = 'cm', offset = {x = 0,y = -1.7},major = G.play
+                            })               
+                            return true
+                        end
+                    }))
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after', delay = 2.5,
                         func = function()
                             card.children.particles:remove()
                             card.children.particles = nil

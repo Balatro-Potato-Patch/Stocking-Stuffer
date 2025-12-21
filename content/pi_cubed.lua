@@ -78,7 +78,16 @@ StockingStuffer.WrappedPresent({
                     func = (function(t) return t end)
                 }))
                 G.E_MANAGER:add_event(Event({
-                    trigger = 'after', delay = 1.5,
+                    trigger = 'after', delay = 0.4,
+                    func = function()
+                        attention_text({
+                            scale = 0.8, rotate = true, text = localize({type = 'name_text', key = gift.config.center_key, set = 'stocking_present'}).." received!", hold = 3, align = 'cm', offset = {x = 0,y = -1.7},major = G.play
+                        })               
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after', delay = 2.5,
                     func = function()
                         card.children.particles:remove()
                         card.children.particles = nil
@@ -90,6 +99,17 @@ StockingStuffer.WrappedPresent({
                     func = function()
                         draw_card(G.gift, G.stocking_present, nil, 'up', nil, gift)
                         G.SETTINGS.SOUND.music_volume = math.min(100, G.SETTINGS.SOUND.music_volume * 4)
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after', delay = 0.4,
+                    func = function()
+                        check_for_unlock({
+                            present_opened = true,
+                            developer = self.developer,
+                            current_gift = gift.config.center_key
+                        })                
                         return true
                     end
                 }))
