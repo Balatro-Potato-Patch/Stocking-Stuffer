@@ -550,8 +550,8 @@ end
         ease_background_colour = function(self)
             ease_colour(G.C.DYN_UI.MAIN, G.C.GREEN)
             ease_background_colour { new_colour = G.C.RED, special_colour = G.C.GREEN, contrast = 2 }
-            ease_value(G.HUD.alignment.offset, 'x', -7, nil, nil, nil, 1, 'elastic')
-            ease_value(G.christmas_tree.alignment.offset, 'x', 12, nil, nil, nil, 1, 'elastic')
+            ease_value(G.HUD.alignment.offset, 'x', -7, nil, nil, nil, 1)
+            ease_value(G.christmas_tree.alignment.offset, 'x', 12, nil, nil, nil, 1)
         end,
         draw_hand = false,
         create_card = function(self, card, i)
@@ -968,8 +968,8 @@ function G.FUNCS.end_consumeable(e)
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
             func = function()                
-                ease_value(G.HUD.alignment.offset, 'x', 7, nil, nil, nil, nil, 'elastic')
-                ease_value(G.christmas_tree.alignment.offset, 'x', -12, nil, nil, nil, nil, 'elastic')
+                ease_value(G.HUD.alignment.offset, 'x', 7, nil, nil, nil, nil)
+                ease_value(G.christmas_tree.alignment.offset, 'x', -12, nil, nil, nil, nil)
                 return true
             end
         }))
