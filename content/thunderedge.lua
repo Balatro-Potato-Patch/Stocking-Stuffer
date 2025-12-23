@@ -961,7 +961,7 @@ function StockingStuffer.ThunderEdge.diamond_rain()
 end
 
 function StockingStuffer.ThunderEdge.small_spades()
-	for i = 1, 16 do
+	for i = 1, 24 do
 		G.E_MANAGER:add_event(
 			Event({
 				func = function()
