@@ -21,7 +21,7 @@ return {
 			Freh_stocking_3d_printer = {
                 name = '3D Printer',
                 text = {
-                    {'{C:green}#2# in #1#{} chance to create',
+                    {'{C:green}#1# in #2#{} chance to create',
 					'a random {C:chips}#5#{C:attention}#3#',
                     '{stocking}before{}',},
                     {'Swaps mode to {C:attention}#4#',
