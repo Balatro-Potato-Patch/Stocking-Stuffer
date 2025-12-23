@@ -160,9 +160,9 @@ StockingStuffer.Present({
             and not context.consumeable.ability.stocking_aiko_activated then
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                 context.consumeable.ability.stocking_aiko_activated = true
+                G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
                 return {
                     func = function ()
-                        G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
                         StockingStuffer.aikoyori.simple_event_add(
                             function ()
                                 SMODS.add_card{ set = StockingStuffer.aikoyori.lower_tier_consumable_map[context.consumeable.ability.set]}
