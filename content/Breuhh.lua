@@ -126,44 +126,44 @@ StockingStuffer.Present({
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.chipsmul,
-                card.ability.chipsmul * card.ability.count,
-                card.ability.chance,
+                card.ability.extra.chipsmul,
+                card.ability.extra.chipsmul * card.ability.extra.count,
+                card.ability.extra.chance,
                 colours = {HEX("22A617")}
             }
         }
     end,
 
-    config = {chipsmul = 5, count = 0, chance = 4, skin = 0},
+    config = {extra = {chipsmul = 5, count = 0, chance = 4, skin = 0}},
     calculate = function(self, card, context)
         if context.joker_main then
             if StockingStuffer.first_calculation then
-                local delta = card.ability.count
+                local delta = card.ability.extra.count
                 for i=1, #G.stocking_present.cards do
-                    if SMODS.pseudorandom_probability(card, "gar", 1, card.ability.chance, "Breuhh_stocking_garland") then
-                        card.ability.count = card.ability.count+1
+                    if SMODS.pseudorandom_probability(card, "gar", 1, card.ability.extra.chance, "Breuhh_stocking_garland") then
+                        card.ability.extra.count = card.ability.extra.count+1
                     end
                 end
-                delta = card.ability.count - delta
+                delta = card.ability.extra.count - delta
                 if delta > 0 then
                     return {message = localize("k_upgrade_ex")}
                 end
             end
 
             if StockingStuffer.second_calculation and card.ability.extra.count > 0 then
-                return {chips = card.ability.chipsmul * card.ability.count}
+                return {chips = card.ability.extra.chipsmul * card.ability.extra.count}
             end
         end
     end,
 
     add_to_deck = function(self,card,from_debuff)
-        card.ability.skin = math.random(0,5)
+        card.ability.extra.skin = math.random(0,5)
         card.children.center:set_sprite_pos{x = card.ability.skin, y = 2}
     end,
 
     update = function(self, card, dt)
-        if card.config.center.pos.x ~= card.ability.skin then
-            card.children.center:set_sprite_pos{x = card.ability.skin, y = 2}
+        if card.config.center.pos.x ~= card.ability.extra.skin then
+            card.children.center:set_sprite_pos{x = card.ability.extra.skin, y = 2}
         end
     end
 })
