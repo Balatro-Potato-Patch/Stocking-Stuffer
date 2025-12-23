@@ -158,7 +158,7 @@ StockingStuffer.Present({
 
     add_to_deck = function(self,card,from_debuff)
         card.ability.extra.skin = math.random(0,5)
-        card.children.center:set_sprite_pos{x = card.ability.skin, y = 2}
+        card.children.center:set_sprite_pos{x = card.ability.extra.skin, y = 2}
     end,
 
     update = function(self, card, dt)
