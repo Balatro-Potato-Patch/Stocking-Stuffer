@@ -290,7 +290,7 @@ SMODS.DrawStep({
         if not G.stocking_camcorder_sprite then return nil end
         if not self.camcorder_targeted then return nil end
         G.stocking_camcorder_sprite.role.draw_major = self
-        G.stocking_camcorder_sprite:set_sprite_pos({x=(math.fmod(camcorder_timer, 2.0) > 1.0 and not StockingStuffer.disable_animations) and 1 or 0, y=0})
+        G.stocking_camcorder_sprite:set_sprite_pos({x=(math.fmod(camcorder_timer, 2.0) > 1.0 and not StockingStuffer.config.disable_animations) and 1 or 0, y=0})
         G.stocking_camcorder_sprite:draw_shader(shader, nil, nil, nil, self.children.center)
     end,
 	conditions = { vortex = false, facing = "front" },

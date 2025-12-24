@@ -8,6 +8,7 @@ return {
             -- Config Menu
             b_stocking_animate_areas = 'Card Area Animation Behavior',
             b_stocking_custom_menu = "Enable Custom Menu",
+            b_stocking_disable_animations = "Disable Animations",
             b_stocking_jumpscare = 'Enable Jumpscare',
             b_stocking_switch_on_trigger = "Switch Card Areas on Trigger",
             stocking_animate_areas_desc = {

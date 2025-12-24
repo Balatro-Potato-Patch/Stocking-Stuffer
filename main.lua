@@ -371,7 +371,7 @@ end
 StockingStuffer.config_tab = function()
     return {
         n = G.UIT.ROOT,
-        config = { align = "m", r = 0.1, padding = 0.1, colour = G.C.BLACK, minw = 8, minh = 6 },
+        config = { align = "m", r = 0.1, padding = 0.05, colour = G.C.BLACK, minw = 8, minh = 6 },
         nodes = {
             { n = G.UIT.R, config = { align = "cl", padding = 0, minh = 0.1 },      nodes = {} },
 
@@ -384,14 +384,36 @@ StockingStuffer.config_tab = function()
                         n = G.UIT.C,
                         config = { align = "cl", padding = 0.05 },
                         nodes = {
-                            create_toggle { col = true, label = "", scale = 1, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "menu" },
+                            create_toggle { col = true, label = "", scale = 0.8, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "menu" },
                         }
                     },
                     {
                         n = G.UIT.C,
                         config = { align = "c", padding = 0 },
                         nodes = {
-                            { n = G.UIT.T, config = { text = localize('b_stocking_custom_menu'), scale = 0.45, colour = G.C.UI.TEXT_LIGHT } },
+                            { n = G.UIT.T, config = { text = localize('b_stocking_custom_menu'), scale = 0.35, colour = G.C.UI.TEXT_LIGHT } },
+                        }
+                    },
+                },
+            },
+
+            -- Disable Animated Sprites Toggle
+            {
+                n = G.UIT.R,
+                config = { align = "cm", padding = 0 },
+                nodes = {
+                    {
+                        n = G.UIT.C,
+                        config = { align = "cl", padding = 0.05 },
+                        nodes = {
+                            create_toggle { col = true, label = "", scale = 0.8, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "disable_animations" },
+                        }
+                    },
+                    {
+                        n = G.UIT.C,
+                        config = { align = "c", padding = 0 },
+                        nodes = {
+                            { n = G.UIT.T, config = { text = localize('b_stocking_disable_animations'), scale = 0.35, colour = G.C.UI.TEXT_LIGHT } },
                         }
                     },
                 },
@@ -406,14 +428,14 @@ StockingStuffer.config_tab = function()
                         n = G.UIT.C,
                         config = { align = "cl", padding = 0.05 },
                         nodes = {
-                            create_toggle { col = true, label = "", scale = 1, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "enable_jumpscare" },
+                            create_toggle { col = true, label = "", scale = 0.8, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "enable_jumpscare" },
                         }
                     },
                     {
                         n = G.UIT.C,
                         config = { align = "c", padding = 0 },
                         nodes = {
-                            { n = G.UIT.T, config = { text = localize('b_stocking_jumpscare'), scale = 0.45, colour = G.C.UI.TEXT_LIGHT } },
+                            { n = G.UIT.T, config = { text = localize('b_stocking_jumpscare'), scale = 0.35, colour = G.C.UI.TEXT_LIGHT } },
                         }
                     },
                 },
@@ -428,14 +450,14 @@ StockingStuffer.config_tab = function()
                         n = G.UIT.C,
                         config = { align = "cl", padding = 0.05 },
                         nodes = {
-                            create_toggle { col = true, label = "", scale = 1, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "switch_on_trigger" },
+                            create_toggle { col = true, label = "", scale = 0.8, w = 0, shadow = true, ref_table = StockingStuffer.config, ref_value = "switch_on_trigger" },
                         }
                     },
                     {
                         n = G.UIT.C,
                         config = { align = "c", padding = 0 },
                         nodes = {
-                            { n = G.UIT.T, config = { text = localize('b_stocking_switch_on_trigger'), scale = 0.45, colour = G.C.UI.TEXT_LIGHT } },
+                            { n = G.UIT.T, config = { text = localize('b_stocking_switch_on_trigger'), scale = 0.35, colour = G.C.UI.TEXT_LIGHT } },
                         }
                     },
                 },
@@ -458,7 +480,8 @@ StockingStuffer.config_tab = function()
                                 ref_value = 'animate_areas',
                                 info = localize('stocking_animate_areas_desc'),
                                 colour = G.C.RED,
-                                opt_callback = 'stocking_cycle_update'
+                                opt_callback = 'stocking_cycle_update',
+                                scale = 0.8
                             })
                         }
                     },
@@ -474,6 +497,14 @@ G.FUNCS.stocking_cycle_update = function(args)
     if args.cycle_config and args.cycle_config.ref_table and args.cycle_config.ref_value then
         args.cycle_config.ref_table[args.cycle_config.ref_value] = args.to_key
     end
+end
+
+local animate = AnimatedSprite.animate
+function AnimatedSprite:animate()
+    if self.atlas.mod and self.atlas.mod.id == 'stocking' then
+        if StockingStuffer.config.disable_animations then return end
+    end
+    animate(self)
 end
 --#endregion
 
