@@ -22,7 +22,7 @@ return {
             ["blanthos_stocking_slime"] = {
                 name = 'Candy Cane Scented Slime',
                 text = {
-                    {'Scored cards give {C;green}+#1# Jolly Glop{}',
+                    {'Scored cards give {C:stocking_present}+#1# J{C:red}o{C:stocking_present}l{C:red}l{C:stocking_present}y {C:red}G{C:stocking_present}l{C:red}o{C:stocking_present}p{}',
                     '{stocking}after{}',}
 				}
 			},
