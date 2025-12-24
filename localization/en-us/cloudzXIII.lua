@@ -8,7 +8,7 @@ return {
     descriptions = {
         stocking_present = {
             cloudzXIII_stocking_yoyo = {
-                name = '    Yo-Yo    ',
+                name = 'Yo-Yo',
                 text = {
                     {
                     'Retrigger all',
@@ -50,7 +50,7 @@ return {
                 }
             },
             cloudzXIII_stocking_jimbostorm = {
-                name = '    Jimbostorm    ',
+                name = 'Jimbostorm',
                 text = {
                     {
                     'Played {C:attention}cards{} give',
