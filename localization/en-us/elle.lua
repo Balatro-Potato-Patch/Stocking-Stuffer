@@ -10,7 +10,7 @@ return {
                 name = 'Handheld Console',
                 text = {
 					'When {C:attention}Blind{} is selected,',
-                    'turn the {C:attention}Present{} to the right',
+                    'turn the {C:stocking_present}Present{} to the right',
 					'into a random other present',
 					'from the same {V:1}Developer',
 					'{C:inactive}(Can create duplicates)'
@@ -54,11 +54,13 @@ return {
                 name = 'Cluttered Blocks',
                 text = {
                     {'{C:chips}-#1#{} Chips',
-					'{C:inactive,s:0.8}(Will not enter negatives)',
+					'{C:inactive}(Will not cause',
+                    "{C:inactive}total {C:blue}Chips{C:inactive} to",
+                    "{C:inactive}become negative)",
 					'{stocking}after'},
-					{'Gains {C:chips}-#2#{} Chips',
+					{'Loses {C:chips}#2#{} Chips',
 					'every time you',
-					'{C:attention}Purchase{} a card'}
+					'{C:attention}purchase{} a card'}
                 }
             }
         }

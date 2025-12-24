@@ -76,7 +76,7 @@ StockingStuffer.Present({
     display_size = { w = 67 * 1.3, h = 54 * 1.3 },
 
     loc_vars = function(self, info_queue, card)
-		local c = G.C.FILTER
+		local c = HEX("22A617")
 		
 		if card.area and card.area == G.stocking_present then
 			local self_pos = 0
