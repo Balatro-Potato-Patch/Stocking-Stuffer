@@ -20,7 +20,7 @@ return {
                 }
             },
             ["blanthos_stocking_slime"] = {
-                name = '365 Daily Jokers Calendar',
+                name = 'Candy Cane Scented Slime',
                 text = {
                     {'Scored cards give {C;green}+#1# Jolly Glop{}',
                     '{stocking}after{}',}
