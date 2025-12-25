@@ -346,7 +346,7 @@ StockingStuffer.Present({
             }
         end
         -- Discard any diamonds held in hand after the hand has evaluated
-        if StockingStuffer.second_calculation and context.after then
+        if StockingStuffer.second_calculation and context.after and next(G.hand.cards) then
             local active = false
             for _, p_card in ipairs(G.hand.cards) do
                 if p_card:is_suit(card.ability.extra.suit) then
