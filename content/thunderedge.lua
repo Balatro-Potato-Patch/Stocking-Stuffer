@@ -325,8 +325,8 @@ StockingStuffer.ThunderEdge.player = nil
 StockingStuffer.ThunderEdge.BOUNDING_BOX_SIZE = 120
 StockingStuffer.ThunderEdge.BASE_GAME_DIMS = { x = 1536, y = 864 }
 
-local update_hook = G.update
-function G:update(dt)
+local update_hook = Game.update
+function Game:update(dt)
 	update_hook(self, dt)
 	if StockingStuffer.ThunderEdge.update_state then
 		for _, p in pairs(StockingStuffer.ThunderEdge.projectiles) do
