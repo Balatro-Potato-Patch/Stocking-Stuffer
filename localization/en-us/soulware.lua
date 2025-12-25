@@ -16,7 +16,7 @@ return {
             },
             Soulware1_stocking_glpyh = {
                 -- glyph, as in a representation of a character (just any typographic marking)
-                name = 'Glpyh',
+                name = 'Glyph',
                 text = {
                     {"{B:1,C:white}+#1#{} to all {V:1}+#3#{}",
                     "{B:1,C:white}+#2#{} to all {B:1,C:white}X#3#{}",
