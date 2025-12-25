@@ -39,6 +39,12 @@ function G.UIDEF.card_h_popup(card)
     return ret_val
 end
 
+if TMJ then
+    TMJ.SEARCH_FIELD_FUNCS[#TMJ.SEARCH_FIELD_FUNCS] = function(center)
+        return {unpack(center.coder or {}), unpack(center.artist or {})}
+    end
+end
+
 PotatoPatchUtils.Developers = {internal_count = 0}
     PotatoPatchUtils.Developer = Object:extend()
     function PotatoPatchUtils.Developer:init(args)
