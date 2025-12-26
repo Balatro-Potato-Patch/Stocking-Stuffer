@@ -125,6 +125,10 @@ function G:start_run(args)
 			return true
 		end,
 	}))
+	StockingStuffer.ThunderEdge.update_state = false
+	StockingStuffer.ThunderEdge.projectiles = {}
+	G.E_MANAGER:clear_queue("devilsknife")
+	StockingStuffer.ThunderEdge.devilsknife_state = false
 end
 
 local play_sound_hook = play_sound
@@ -2136,13 +2140,13 @@ StockingStuffer.Present({
 						set = "Joker",
 						legendary = true,
 						rarity = "Legendary",
-						skip_materialize = true
+						skip_materialize = true,
 					})
 				else
 					_c = SMODS.add_card({
 						set = "Joker",
 						rarity = "Rare",
-						skip_materialize = true
+						skip_materialize = true,
 					})
 				end
 				_c:start_materialize()
