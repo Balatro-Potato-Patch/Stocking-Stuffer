@@ -80,7 +80,7 @@ StockingStuffer.Present({
                 return {
                     message = "Aced!",
                     func = function()
-                        for i = 1,#non_aces>2 and 2 or #non_aces do
+                        for i = 1,#non_aces>=2 and 2 or #non_aces do -- change #non_aces>=2 to #non_aces>2 if that is intended behaviour
                             local ace = pseudorandom_element(non_aces);
                             
                             G.E_MANAGER:add_event(Event({

@@ -4,8 +4,8 @@ return {
             ["Edward Robinson_stocking_sticker"] = {
                 name = 'Eddy Sticker',
                 text = {
-                    'Convert up to 2 played cards',
-                    'to {C:attention}Aces{} if played hand',
+                    'Convert up to 2 scoring cards',
+                    'to {C:attention}Aces{} if scoring hand',
                     'contains at least {C:attention}2{} Aces',
                     '{stocking}after{}'
                 }
