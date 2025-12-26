@@ -872,7 +872,7 @@ end
                 modify_card = function(card) card.collection_present = true end})
 
             local nodes = collection.nodes[1].nodes
-            if SMODS.find_mod 'banner' then
+            if next(SMODS.find_mod 'banner') then
                 nodes = nodes[2].nodes[1].nodes
             end
 
