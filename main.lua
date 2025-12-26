@@ -840,6 +840,8 @@ end
         end
     })
 
+    StockingStuffer.add_help_to_collection_cycler = false
+
     -- Present ConsumableType init
     SMODS.ConsumableType({
         key = 'stocking_present',
@@ -868,27 +870,29 @@ end
                     table.insert(pool, G.P_CENTERS.j_stocking_dummy)
                 end
             end
+            StockingStuffer.add_help_to_collection_cycler = true
             local collection = SMODS.card_collection_UIBox(pool, self.collection_rows, { back_func = #type_buf>3 and 'your_collection_consumables' or nil, show_no_collection = true,
                 modify_card = function(card) card.collection_present = true end})
+            StockingStuffer.add_help_to_collection_cycler = false
 
-            local nodes = collection.nodes[1].nodes
-            if next(SMODS.find_mod 'banner') then
-                nodes = nodes[2].nodes[1].nodes
-            end
+            return collection
+        end,
+    })
 
-            table.insert(nodes[1].nodes[1].nodes[2].nodes[1].nodes,
-                {n=G.UIT.C, config = {align='cm'}, nodes = {
+    local createoptioncycle = create_option_cycle
+    function create_option_cycle(args)
+        local t = createoptioncycle(args)
+        if StockingStuffer.add_help_to_collection_cycler then
+            table.insert(t.nodes, {n=G.UIT.C, config = {align='cm'}, nodes = {
                     {n=G.UIT.R, config = {colour=G.C.WHITE, padding = 0.05, emboss = 0.05, maxh = 0.6, minh = 0.6, minw = 0.6, r=0.1, align='cm'}, nodes = {
                         {n=G.UIT.R, config = {align='cm', colour=HEX("22A617"), button = 'stocking_stuffer_help', hover = true, button_dist = 0, maxh = 0.5, minh = 0.5, minw = 0.5, r=0.1}, nodes = {
                             {n=G.UIT.T, config={text='?', scale = 0.4, colour = G.C.WHITE, shadow = true}}
                         }}
                     }}
-                }}
-            )
-
-            return collection
-        end,
-    })
+                }})
+        end
+        return t
+    end
 
     local CAsetranks = CardArea.set_ranks
     function CardArea:set_ranks()
