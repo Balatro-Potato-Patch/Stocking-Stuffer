@@ -93,6 +93,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "qr_code",
+    path = "qr_code.png",
+    px = 300,
+    py = 300
+})
+
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
 StockingStuffer.Developer({
@@ -736,7 +743,9 @@ StockingStuffer.Present({
     --         'Does nothing'
     --     }
     -- },
-    pos = { x = 3, y = 1 },
+    atlas = "qr_code",
+    display_size = {w = 100, h = 100},
+    pos = { x = 0, y = 0 },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
     config = {
         extra = {
