@@ -84,7 +84,8 @@ StockingStuffer.Present({
 })
 
 
-
+-- yes they are supposed to be created in the present slots
+-- im lowkey a dumbass for not putting this comment originally
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
     key = 'dailycalendar',    -- keys are prefixed with 'display_name_stocking_' for reference
@@ -115,7 +116,7 @@ StockingStuffer.Present({
                     G.E_MANAGER:add_event(Event({
                         trigger = 'immediate',
                         func = function()
-                            draw_card(G.gift, G.jokers, nil, 'up', nil, notgift)
+                            draw_card(G.gift, G.stocking_present, nil, 'up', nil, notgift)
                             G.GAME.joker_buffer = 0
                             return true
                         end
