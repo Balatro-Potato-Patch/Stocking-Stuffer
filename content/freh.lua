@@ -94,7 +94,8 @@ StockingStuffer.Present({
                 func = function()                
                         local _c = SMODS.add_card({ set = (card.ability.extra.state >= 3 and 'stocking_present') or 'Joker',
 						area = card.ability.extra.state >= 3 and G.stocking_present,
-						rarity = card.ability.extra.state < 3 and 0.5, skip_materialize = true})
+						rarity = card.ability.extra.state < 3 and 0.5, skip_materialize = true,
+						bypass_discovery_center = true })
                         _c:start_materialize()
                     return true
                 end
