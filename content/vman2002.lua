@@ -306,7 +306,7 @@ local mysterystar = StockingStuffer.Present({
     -- use and can_use are completely optional, delete if you do not need your present to be usable
     can_use = function(self, card)
         -- check for use condition here
-        return true
+        return G.hand and next(G.hand.cards)
     end,
     use = function(self, card, area, copier) 
         -- do stuff here
