@@ -47,14 +47,14 @@ StockingStuffer.Present({
     end,
     -- calculate is completely optional, delete if your present does not need it
     calculate = function(self, card, context)
-        if context.after then
+        if context.after and StockingStuffer.first_calculation then
             if card.ability.extra.count >= card.ability.extra.max then
                 card.ability.extra.count = 0
             else
-                card.ability.extra.count = card.ability.extra.count
+                card.ability.extra.count = card.ability.extra.count + 1
             end
         end
-        if context.destroy_card and card.ability.extra.count >= card.ability.extra.max and context.cardarea == G.play then
+        if context.destroy_card and card.ability.extra.count >= card.ability.extra.max and context.cardarea == G.play and StockingStuffer.first_calculation then
             return { remove = true }
         end
     end,
