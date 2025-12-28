@@ -130,8 +130,7 @@ StockingStuffer.Present({
     pronouns = 'it_its',
     config = { extra = { numerator = 1, denominator = 100, x = 100 } },
     loc_vars = function(self, info_queue, card)
-        local numerator, denominator = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator,
-            'stocking_locked_door')
+        local numerator, denominator = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator, 'stocking_locked_door', nil, true)
         return { vars = { numerator, denominator, card.ability.extra.x } }
     end,
     -- You are encouraged to use the localization file for your name and description, this is here as an example
@@ -148,7 +147,7 @@ StockingStuffer.Present({
         -- StockingStuffer.second_calculation is true after jokers are calculated
         if context.joker_main and StockingStuffer.second_calculation then
         local the_big_one = to_big(1)
-            if SMODS.pseudorandom_probability(card, 'stocking_locked_door', card.ability.extra.numerator, card.ability.extra.denominator) then
+            if SMODS.pseudorandom_probability(card, 'stocking_locked_door', card.ability.extra.numerator, card.ability.extra.denominator, nil, true) then
                 card.ability.extra.numerator = the_big_one
                 if to_big(card.ability.extra.denominator) <= the_big_one then
                     card.ability.extra.denominator = the_big_one
