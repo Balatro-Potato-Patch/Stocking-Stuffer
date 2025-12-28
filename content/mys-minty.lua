@@ -471,7 +471,7 @@ StockingStuffer.Present({ --feather from the wand
         },
     },
     calculate = function(self, card, context)
-        if context.mod_probability then
+        if context.mod_probability and StockingStuffer.first_calculation then
             return {
                 numerator = context.numerator + 1
             }
