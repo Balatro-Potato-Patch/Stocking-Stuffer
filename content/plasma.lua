@@ -37,9 +37,11 @@ StockingStuffer.Present({
             }
         end
         if StockingStuffer.second_calculation and context.end_of_round and context.main_eval then
-            local card_to_destroy = pseudorandom_element(G.hand.cards, 'random_destroy')
+            if #G.hand.cards > 0 then
+                local card_to_destroy = pseudorandom_element(G.hand.cards, 'random_destroy')
                 SMODS.destroy_cards(card_to_destroy)
                 delay(1)
+            end
         end
     end
 }
