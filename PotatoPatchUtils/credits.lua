@@ -48,8 +48,11 @@ function G.UIDEF.card_h_popup(card)
 end
 
 if TMJ then
+    local function get(x)
+        return type(x) == 'table' and unpack(x) or unpack {}
+    end
     TMJ.SEARCH_FIELD_FUNCS[#TMJ.SEARCH_FIELD_FUNCS+1] = function(center)
-        return {unpack(center.coder or {}), unpack(center.artist or {})}
+        return {get(center.coder), get(center.artist)}
     end
 end
 
