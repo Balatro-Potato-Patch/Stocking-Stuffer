@@ -550,9 +550,11 @@ StockingStuffer.Present({
     artist = { "pangaea47" },
     draw = function(self, card, layer)
         local function should_draw_3d() return enable_bonus_models end
-        card.children.center:set_sprite_pos({x = card.ability.extra.active and 1 or 7, y = should_draw_3d() and 99 or 0})
-        if (card.config.center.discovered or card.bypass_discovery_center) and should_draw_3d() then
-            draw_3d_model(card, 71, plushie_verts, plushie_cols, plushie_models)
+        if (card.config.center.discovered or card.bypass_discovery_center) then
+            card.children.center:set_sprite_pos({x = card.ability.extra.active and 1 or 7, y = should_draw_3d() and 99 or 0})
+            if should_draw_3d() then
+                draw_3d_model(card, 71, plushie_verts, plushie_cols, plushie_models)
+            end
         end
     end,
     blueprint_compat = false,
@@ -977,11 +979,13 @@ StockingStuffer.Present({
         return { vars = { card.ability.extra.pack_limit, card.ability.extra.present_limit, colours = { HEX("22A617") } } }
     end,
     draw = function(self, card, layer)
-        card.children.center:set_sprite_pos({x = 2, y = should_draw_3d() and 99 or 1})
-        if (card.config.center.discovered or card.bypass_discovery_center) and should_draw_3d() then
-            local x_scale = card.children.center.T.w * 30 / 71 * card.T.scale
-            local z_scale = card.children.center.T.h * 30 / 71 * card.T.scale
-            draw_3d_model(card, 85 * x_scale, 85 * z_scale, tungsten_verts, tungsten_cols, tungsten_models)
+        if (card.config.center.discovered or card.bypass_discovery_center) then
+            card.children.center:set_sprite_pos({x = 2, y = should_draw_3d() and 99 or 1})
+            if should_draw_3d() then
+                local x_scale = card.children.center.T.w * 30 / 71 * card.T.scale
+                local z_scale = card.children.center.T.h * 30 / 71 * card.T.scale
+                draw_3d_model(card, 85 * x_scale, 85 * z_scale, tungsten_verts, tungsten_cols, tungsten_models)
+            end
         end
     end,
 })
