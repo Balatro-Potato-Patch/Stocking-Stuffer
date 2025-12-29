@@ -121,12 +121,13 @@ StockingStuffer.Present({
             if prob_check then
                 local lowest_rank = nil;
                 for _, card in ipairs(G.playing_cards) do
-                    if lowest_rank == nil or (lowest_rank:get_id() > card:get_id()) then 
+                    if not (SMODS.has_no_rank(card) or card.magic_scrabble_tiled) and (lowest_rank == nil or (lowest_rank:get_id() > card:get_id())) then 
                         lowest_rank = card;
                     end
                 end
 
                 if lowest_rank then
+                    lowest_rank.magic_scrabble_tiled = true
                     return {
                         message = "Aced!",
                         func = function()
@@ -134,6 +135,7 @@ StockingStuffer.Present({
                                 trigger = "before",
                                 delay = 0.3,
                                 func = function()
+                                    lowest_rank.magic_scrabble_tiled = nil
                                     assert(SMODS.change_base(lowest_rank, nil, 'Ace'));
                                     
                                     play_sound('tarot1', 0.8);
