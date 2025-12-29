@@ -173,7 +173,7 @@ StockingStuffer.Present({
         }
     end,
     calculate = function(self, card, context)
-        card.ability.currentchips = math.floor(G.GAME.blind.chips * (card.ability.charge / 100))
+        card.ability.currentchips = math.floor((G.GAME.blind and G.GAME.blind.chips or 0) * (card.ability.charge / 100))
         if context.individual and context.cardarea == G.play and not context.end_of_round and StockingStuffer.first_calculation then
             if context.other_card:is_face() then
                 card.ability.everyOther = not card.ability.everyOther
