@@ -873,7 +873,7 @@ end
             local collection = SMODS.card_collection_UIBox(pool, self.collection_rows, {stocking_id = 'stocking_cycler', back_func = #type_buf>3 and 'your_collection_consumables' or nil, show_no_collection = true,
                 modify_card = function(card) card.collection_present = true end})
             local target_node = SMODS.deepfind(collection, "stocking_cycler", true)[1]
-            target_node = target_node.objtree[#nodes.objtree - 6]
+            target_node = target_node.objtree[#target_node.objtree - 6]
                 
             table.insert(target_node.nodes,
                 {n=G.UIT.C, config = {align='cm'}, nodes = {
