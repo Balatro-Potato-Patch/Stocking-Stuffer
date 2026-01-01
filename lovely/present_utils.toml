@@ -437,7 +437,7 @@ if type(args.operation) == 'function' then
 '''
 payload = '''
 for _, _c in ipairs(StockingStuffer_calculated) do
-    _c.calc_dollar_done = nil
+    _c.calc_scaling_done = nil
 end
 
 '''
