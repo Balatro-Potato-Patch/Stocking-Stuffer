@@ -17,6 +17,12 @@ local display_name = 'VMan_2002'
 
 local returnFalse = topuplib and topuplib.returnFalse or function() return false end
 
+local whoami
+do
+	local wha = SMODS.load_mod_config(SMODS.Mods.Multiplayer)
+	whoami = wha and string.lower(wha.username)
+end
+
 -- Present Atlas Template
 -- Note: You are allowed to create more than one atlas if you need to use weird dimensions
 -- We recommend you name your atlas with your display_name included
@@ -435,13 +441,17 @@ StockingStuffer.Present({
     end,
 
     loc_vars = function(self, info_queue, card)
-        return {
+		local result = {
             vars = {
 				card.ability.extra.gain,
 				card.ability.extra.xmult,
 				localize(card.ability.extra.readied == 0 and "vman_2002_plush_inactive" or "vman_2002_plush_active")
 			},
         }
+		if whoami == "drspectred" then
+			result.key = "VMan_2002_stocking_pIush"
+		end
+		return result
     end,
 
     -- calculate is completely optional, delete if your present does not need it

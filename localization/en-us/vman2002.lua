@@ -97,6 +97,26 @@ return {
 						'{stocking}usable{}'
 					}
                 }
+            },
+            VMan_2002_stocking_pIush = {
+                name = 'Huh?',
+                text = {
+					{
+						flavor .. "''help...''",
+						flavor .. "''i'm scared...''",
+					}, {
+						'Gains {X:mult,C:white}X#1#{} Mult per round',
+						'{C:attention}Resets{} to {X:mult,C:white}X1{} after use',
+						'{stocking}after{}',
+					}, {
+						flavor .. "Whack this plushie against the",
+						flavor .. "Blind in your next hand",
+						flavor .. "(It makes a loud thud...?)",
+						"{C:inactive}#3#",
+						"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+						'{stocking}usable{}'
+					}
+                }
             }
         },
         stocking_wrapped_present = {
