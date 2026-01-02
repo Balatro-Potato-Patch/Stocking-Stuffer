@@ -448,7 +448,7 @@ StockingStuffer.Present({
 				localize(card.ability.extra.readied == 0 and "vman_2002_plush_inactive" or "vman_2002_plush_active")
 			},
         }
-		if whoami == "drspectred" then
+		if string.lower(whoami) == "drspectred" then
 			result.key = "VMan_2002_stocking_pIush"
 		end
 		return result
