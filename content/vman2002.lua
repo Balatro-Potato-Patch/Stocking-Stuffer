@@ -90,9 +90,9 @@ vman.ranks = {
 	["9"] = 9
 }
 vman.randseed = function(str)
-	G.stocking_vman2002_rand = G.stocking_vman2002_rand or {}
-	G.stocking_vman2002_rand[str] = ((G.stocking_vman2002_rand[str] or 0) + 1) % 6e9 --nice
-	return pseudoseed(str) + G.stocking_vman2002_rand[str]
+	G.GAME.stocking_vman2002_rand = G.GAME.stocking_vman2002_rand or {}
+	G.GAME.stocking_vman2002_rand[str] = ((G.GAME.stocking_vman2002_rand[str] or 0) + 1) % 6e9 --nice
+	return pseudoseed(str) + G.GAME.stocking_vman2002_rand[str]
 end
 
 -- Wrapped Present Template
