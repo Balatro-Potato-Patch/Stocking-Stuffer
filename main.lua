@@ -7,11 +7,11 @@ PotatoPatchUtils.LOC.init()
 to_big = to_big or function(x)
     return x
 end
-to_number = to_number or function(x) 
+to_number = to_number or function(x)
     return x
 end
 
-SMODS.Atlas{
+SMODS.Atlas {
     key = "modicon",
     path = "modicon.png",
     px = 34,
@@ -44,22 +44,22 @@ StockingStuffer.calculate = function(self, context) end
 
 StockingStuffer.description_loc_vars = function()
     local key = {}
-    for i=1, 3 do
+    for i = 1, 3 do
         local str = 'Placeholder'
         while str == 'Placeholder' do
             local pres = pseudorandom_element(G.P_CENTER_POOLS.stocking_present)
-            str = localize({type='name_text', set='stocking_present', key=pres.key})
+            str = localize({ type = 'name_text', set = 'stocking_present', key = pres.key })
         end
         key[i] = str
     end
-    return {text_colour = G.C.WHITE, background_colour = G.C.BLACK, scale = 1.2, vars ={key[1], key[2], key[3], StockingStuffer.Developers.internal_count}}
+    return { text_colour = G.C.WHITE, background_colour = G.C.BLACK, scale = 1.2, vars = { key[1], key[2], key[3], StockingStuffer.Developers.internal_count } }
 end
 
 StockingStuffer.custom_ui = function(nodes)
     StockingStuffer.ui = nodes
     table.remove(nodes, 1)
     nodes[1].config.emboss = nil
-    nodes[#nodes] = {n=G.UIT.C, config={colour=G.C.CLEAR, padding = 0.1, r=0.1}, nodes ={nodes[1]}}
+    nodes[#nodes] = { n = G.UIT.C, config = { colour = G.C.CLEAR, padding = 0.1, r = 0.1 }, nodes = { nodes[1] } }
     return nodes
 end
 
@@ -86,30 +86,42 @@ function buildModDescTab(mod)
             tab.config.colour = G.C.CLEAR
             tab.nodes[1].n = G.UIT.C
             tab.nodes[1].nodes[1].config.padding = 0.2
-            
+
             -- Insert spacer
-            table.insert(tab.nodes[1].nodes, 1, {n=G.UIT.R, config={minh = 0.05}})
+            table.insert(tab.nodes[1].nodes, 1, { n = G.UIT.R, config = { minh = 0.05 } })
 
             -- Insert jolly quip
             local count, earned = StockingStuffer.count_achievements()
-            local quip = math.floor((earned/count) / 0.25) + 1
+            local quip = math.floor((earned / count) / 0.25) + 1
             local desc = {}
-            localize { type = 'descriptions', key = 'stocking_achievement_quip_'..quip, set = 'Other', nodes = desc, scale = 1.4, text_colour = G.C.UI.TEXT_LIGHT }
+            localize { type = 'descriptions', key = 'stocking_achievement_quip_' .. quip, set = 'Other', nodes = desc, scale = 1.4, text_colour = G.C.UI.TEXT_LIGHT }
             desc = desc_from_rows(desc)
             desc.config.colour = G.C.BLACK
             table.insert(tab.nodes[1].nodes, 1, desc)
 
             -- Insert spacer
-            table.insert(tab.nodes[1].nodes, {n=G.UIT.R, config={minh = 0.05}})
-            
+            table.insert(tab.nodes[1].nodes, { n = G.UIT.R, config = { minh = 0.05 } })
+
             -- Insert credit
             local team = {
-                'theAstra', 'Eremel', 'WilsontheWolf', 'Edward Robinson', 'ThunderEdge', 'Nxkoo', 'SDM_0', 'triple6lexi', 'pi_cubed', 'pangaea47', 'canicao',
+                'theAstra',
+                'Eremel',
+                'WilsontheWolf',
+                'Edward Robinson',
+                'ThunderEdge',
+                'Nxkoo',
+                'SDM_0',
+                'triple6lexi',
+                'pi_cubed',
+                'pangaea47',
+                'canicao',
                 colours = {}
             }
             for i, name in ipairs(team) do
-                team[i] = StockingStuffer.Developers[name] and StockingStuffer.Developers[name].loc and localize(StockingStuffer.Developers[name].loc) or name
-                team.colours[i] = StockingStuffer.Developers[name] and StockingStuffer.Developers[name].colour or HEX("22A617")
+                team[i] = StockingStuffer.Developers[name] and StockingStuffer.Developers[name].loc and
+                    localize(StockingStuffer.Developers[name].loc) or name
+                team.colours[i] = StockingStuffer.Developers[name] and StockingStuffer.Developers[name].colour or
+                    HEX("22A617")
             end
             local cred = {}
             localize { type = 'descriptions', key = 'stocking_credit', set = 'Other', nodes = cred, scale = 1, text_colour = G.C.UI.TEXT_LIGHT, vars = team }
@@ -154,22 +166,30 @@ function create_UIBox_mods(args)
         buttons[1].nodes[1].nodes[1].nodes[1].config.text = localize('b_stocking_present_cards')
 
         -- Change first button into sprite
-        tab_buttons.nodes[1].nodes[1] = {n = G.UIT.R, config = conf, nodes = {
-            {n=G.UIT.O, config={object = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0}), align = 'cm '}}
-        }}
+        tab_buttons.nodes[1].nodes[1] = {
+            n = G.UIT.R,
+            config = conf,
+            nodes = {
+                { n = G.UIT.O, config = { object = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 }), align = 'cm ' } }
+            }
+        }
         -- Add other buttons
-        table.insert(tab_buttons.nodes, {n=G.UIT.C, config = {minw = 0.5}})
-        table.insert(tab_buttons.nodes, {n=G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = buttons})
+        table.insert(tab_buttons.nodes, { n = G.UIT.C, config = { minw = 0.5 } })
+        table.insert(tab_buttons.nodes, { n = G.UIT.C, config = { align = 'cm', padding = 0.2 }, nodes = buttons })
 
         -- Configure main content
         internal[1].config.padding = 0.1
         internal[1].nodes[1].config.padding = nil
         internal[1].config.minw = 12.6
         box.nodes[1].nodes = {}
-        table.insert(box.nodes[1].nodes, {n=G.UIT.R, config={colour=HEX("22A617"), r=0.2, padding=0.1}, nodes = {
-            {n=G.UIT.R, config = {colour = G.C.BLACK, r = 0.2, padding = 0.15}, nodes = internal}
-        }}
-    )
+        table.insert(box.nodes[1].nodes, {
+            n = G.UIT.R,
+            config = { colour = HEX("22A617"), r = 0.2, padding = 0.1 },
+            nodes = {
+                { n = G.UIT.R, config = { colour = G.C.BLACK, r = 0.2, padding = 0.15 }, nodes = internal }
+            }
+        }
+        )
     end
     return box
 end
@@ -179,11 +199,11 @@ local triangle = get_chosen_triangle_from_rect
 function get_chosen_triangle_from_rect(x, y, w, h, vert)
     if vert == 'right' then
         local scale = 2
-        x = x - math.min(0.6*math.sin(G.TIMERS.REAL*9)*scale+0.2, 0)
+        x = x - math.min(0.6 * math.sin(G.TIMERS.REAL * 9) * scale + 0.2, 0)
         return {
-            x+w+3.5*scale, y+h/2 - 1.5*scale,
-            x+w+0.5*scale, y+h/2 + 0, 
-            x+w+3.5*scale,y+h/2 + 1.5*scale
+            x + w + 3.5 * scale, y + h / 2 - 1.5 * scale,
+            x + w + 0.5 * scale, y + h / 2 + 0,
+            x + w + 3.5 * scale, y + h / 2 + 1.5 * scale
         }
     end
     return triangle(x, y, w, h, vert)
@@ -213,38 +233,47 @@ end
 function stockingBuildAchievementsTab(mod, current_page)
     current_page = current_page or 1
     fetch_achievements()
-    local achievement_matrix = {{},{}}
+    local achievement_matrix = { {}, {} }
     local achievements_per_row = 2
     local achievements_pool = {}
     local achievement_original_order = {}
     for k, v in ipairs(SMODS.Achievement.obj_buffer) do
         local ach = SMODS.Achievements[v]
-        if ach then 
-            if ach.mod and ach.mod.id == mod.id then achievements_pool[#achievements_pool+1] = ach end
+        if ach then
+            if ach.mod and ach.mod.id == mod.id then achievements_pool[#achievements_pool + 1] = ach end
         end
     end
 
     local achievement_tab = {}
     for k, v in ipairs(achievements_pool) do
         achievement_original_order[v.key] = #achievement_tab
-        achievement_tab[#achievement_tab+1] = v
+        achievement_tab[#achievement_tab + 1] = v
     end
-    table.sort(achievement_tab, function(a, b) if a.order and b.order then return (a.order or 1) < (b.order or 1) else return achievement_original_order[a.key] < achievement_original_order[b.key] end end)
-    
+    table.sort(achievement_tab,
+        function(a, b)
+            if a.order and b.order then
+                return (a.order or 1) < (b.order or 1)
+            else
+                return
+                    achievement_original_order[a.key] < achievement_original_order[b.key]
+            end
+        end)
+
     local row = 1
     local max_lines = 2
     for i = 1, achievements_per_row do
-        local v = achievement_tab[i+((achievements_per_row)*(current_page-1))]
+        local v = achievement_tab[i + ((achievements_per_row) * (current_page - 1))]
         if not v then break end
-        local temp_achievement = SMODS.create_sprite(0, 0, 1.1, 1.1, v.atlas or "achievements", v.earned and v.pos or v.hidden_pos)
-        temp_achievement:define_draw_steps({{shader = 'dissolve', shadow_height = 0.05}, {shader = 'dissolve'}})
-        if i == 1 then 
+        local temp_achievement = SMODS.create_sprite(0, 0, 1.1, 1.1, v.atlas or "achievements",
+            v.earned and v.pos or v.hidden_pos)
+        temp_achievement:define_draw_steps({ { shader = 'dissolve', shadow_height = 0.05 }, { shader = 'dissolve' } })
+        if i == 1 then
             G.E_MANAGER:add_event(Event({
-            trigger = 'immediate',
-            func = (function()
-                G.CONTROLLER:snap_to{node = temp_achievement}
-                return true
-            end)
+                trigger = 'immediate',
+                func = (function()
+                    G.CONTROLLER:snap_to { node = temp_achievement }
+                    return true
+                end)
             }))
         end
         temp_achievement.float = true
@@ -252,14 +281,14 @@ function stockingBuildAchievementsTab(mod, current_page)
         temp_achievement.states.drag.can = false
         temp_achievement.states.collide.can = true
         temp_achievement.hover = function()
-            if not G.CONTROLLER.dragging.target or G.CONTROLLER.using_touch then 
+            if not G.CONTROLLER.dragging.target or G.CONTROLLER.using_touch then
                 if not temp_achievement.hovering and temp_achievement.states.visible then
                     temp_achievement.hovering = true
                     temp_achievement.hover_tilt = 3
                     temp_achievement:juice_up(0.05, 0.02)
-                    play_sound('chips1', math.random()*0.1 + 0.55, 0.12)
+                    play_sound('chips1', math.random() * 0.1 + 0.55, 0.12)
                     Node.hover(temp_achievement)
-                    if temp_achievement.children.alert then 
+                    if temp_achievement.children.alert then
                         temp_achievement.children.alert:remove()
                         temp_achievement.children.alert = nil
                         v.alerted = true
@@ -267,17 +296,19 @@ function stockingBuildAchievementsTab(mod, current_page)
                     end
                 end
             end
-            temp_achievement.stop_hover = function() temp_achievement.hovering = false; Node.stop_hover(temp_achievement); temp_achievement.hover_tilt = 0 end
+            temp_achievement.stop_hover = function()
+                temp_achievement.hovering = false; Node.stop_hover(temp_achievement); temp_achievement.hover_tilt = 0
+            end
         end
 
         -- Description
         local achievement_text = {}
         local maxCharsPerLine = 30
         local function wrapText(text, maxChars)
-            local wrappedText = {""}
+            local wrappedText = { "" }
             local curr_line = 1
             local currentLineLength = 0
-        
+
             for word in text:gmatch("%S+") do
                 if currentLineLength + #word <= maxChars then
                     wrappedText[curr_line] = wrappedText[curr_line] .. word .. ' '
@@ -290,46 +321,79 @@ function stockingBuildAchievementsTab(mod, current_page)
                     currentLineLength = #word + 1
                 end
             end
-        
+
             wrappedText[curr_line] = string.sub(wrappedText[curr_line], 0, -2)
             return wrappedText
         end
-    
+
         local loc_target
         if (v.hidden_text and not v.earned) then
-            loc_target = (localize(v.key.."_hidden", 'achievement_descriptions') ~= 'ERROR') and localize(v.key.."_hidden", 'achievement_descriptions') or {localize("hidden_achievement", 'achievement_descriptions')}
-        else loc_target = localize(v.key, 'achievement_descriptions') end
+            loc_target = (localize(v.key .. "_hidden", 'achievement_descriptions') ~= 'ERROR') and
+                localize(v.key .. "_hidden", 'achievement_descriptions') or
+                { localize("hidden_achievement", 'achievement_descriptions') }
+        else
+            loc_target = localize(v.key, 'achievement_descriptions')
+        end
         if type(loc_target) == 'string' then loc_target = wrapText(loc_target, maxCharsPerLine) end
         local loc_name
         if (v.hidden_name and not v.earned) then
-            loc_name = (localize(v.key.."_hidden", 'achievement_names') ~= 'ERROR') and localize(v.key.."_hidden", 'achievement_names') or localize("hidden_achievement", 'achievement_names')
-        else loc_name = localize(v.key, 'achievement_names') end
+            loc_name = (localize(v.key .. "_hidden", 'achievement_names') ~= 'ERROR') and
+                localize(v.key .. "_hidden", 'achievement_names') or localize("hidden_achievement", 'achievement_names')
+        else
+            loc_name = localize(v.key, 'achievement_names')
+        end
 
         local ability_text = {}
-        if loc_target then 
+        if loc_target then
             for k, v in ipairs(loc_target) do
-                ability_text[#ability_text + 1] = {n=G.UIT.R, config={align = "cm"}, nodes={{n=G.UIT.T, config={text = v, scale = 0.35, shadow = true, colour = G.C.WHITE}}}}
+                ability_text[#ability_text + 1] = { n = G.UIT.R, config = { align = "cm" }, nodes = { { n = G.UIT.T, config = { text = v, scale = 0.35, shadow = true, colour = G.C.WHITE } } } }
             end
         end
         max_lines = math.max(max_lines, #ability_text)
         achievement_text[#achievement_text + 1] =
-        {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, minw = 4, maxw = 4, padding = 0.05, colour = v.earned and mix_colours(G.C.WHITE, HEX("22A617"), 0.8) or G.C.WHITE, minh = 0.4*max_lines+0.1}, nodes={
-            ability_text[1] and {n=G.UIT.R, config={align = "cm", padding = 0.08, colour = v.earned and mix_colours(G.C.GREY, HEX("22A617"), 0.8) or G.C.GREY, r = 0.1, emboss = 0.05, minw = 3.9, maxw = 3.9, minh = 0.4*max_lines}, nodes=ability_text} or nil
-        }}
+        {
+            n = G.UIT.R,
+            config = { align = "cm", emboss = 0.05, r = 0.1, minw = 4, maxw = 4, padding = 0.05, colour = v.earned and mix_colours(G.C.WHITE, HEX("22A617"), 0.8) or G.C.WHITE, minh = 0.4 * max_lines + 0.1 },
+            nodes = {
+                ability_text[1] and
+                {
+                    n = G.UIT.R,
+                    config = { align = "cm", padding = 0.08, colour = v.earned and mix_colours(G.C.GREY, HEX("22A617"), 0.8) or G.C.GREY, r = 0.1, emboss = 0.05, minw = 3.9, maxw = 3.9, minh = 0.4 * max_lines },
+                    nodes =
+                        ability_text
+                } or nil
+            }
+        }
 
-        table.insert(achievement_matrix[row], {n = G.UIT.C, config = { align = "cm", padding = 0.1 }, nodes = {
-            {n=G.UIT.R, config = {align = "cm"}, nodes = {
-                {n=G.UIT.R, config = {align = "cm", padding = 0.1}, nodes = {{ n = G.UIT.O, config = { object = temp_achievement, focus_with_object = true }}}},
-                {n=G.UIT.R, config = {align = "cm", minw = 4, maxw = 4, padding = 0.05}, nodes = {
-                    {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, padding = 0.1, minh = 0.6, colour = v.earned and mix_colours(G.C.GREY, HEX("22A617"), 0.8) or G.C.GREY}, nodes={
-                        {n=G.UIT.O, config={align = "cm", maxw = 3.8, object = DynaText({string = loc_name, maxw = 3.8, colours = {G.C.UI.TEXT_LIGHT}, shadow = true, spacing = 1, bump = true, scale = 0.4})}},
-                    }},
-                    {n=G.UIT.R, config={align = "cm"}, nodes=achievement_text}
-                }}
-            }}
-        }})
-        
-        if #achievement_matrix[row] == achievements_per_row then 
+        table.insert(achievement_matrix[row], {
+            n = G.UIT.C,
+            config = { align = "cm", padding = 0.1 },
+            nodes = {
+                {
+                    n = G.UIT.R,
+                    config = { align = "cm" },
+                    nodes = {
+                        { n = G.UIT.R, config = { align = "cm", padding = 0.1 }, nodes = { { n = G.UIT.O, config = { object = temp_achievement, focus_with_object = true } } } },
+                        {
+                            n = G.UIT.R,
+                            config = { align = "cm", minw = 4, maxw = 4, padding = 0.05 },
+                            nodes = {
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = "cm", emboss = 0.05, r = 0.1, padding = 0.1, minh = 0.6, colour = v.earned and mix_colours(G.C.GREY, HEX("22A617"), 0.8) or G.C.GREY },
+                                    nodes = {
+                                        { n = G.UIT.O, config = { align = "cm", maxw = 3.8, object = DynaText({ string = loc_name, maxw = 3.8, colours = { G.C.UI.TEXT_LIGHT }, shadow = true, spacing = 1, bump = true, scale = 0.4 }) } },
+                                    }
+                                },
+                                { n = G.UIT.R, config = { align = "cm" }, nodes = achievement_text }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        if #achievement_matrix[row] == achievements_per_row then
             row = row + 1
             achievement_matrix[row] = {}
             max_lines = 2
@@ -337,30 +401,60 @@ function stockingBuildAchievementsTab(mod, current_page)
     end
 
     local achievements_options = {}
-    for i = 1, math.ceil(#achievements_pool/(achievements_per_row)) do
-        table.insert(achievements_options, localize('k_page')..' '..tostring(i)..'/'..tostring(math.ceil(#achievements_pool/(achievements_per_row))))
+    for i = 1, math.ceil(#achievements_pool / (achievements_per_row)) do
+        table.insert(achievements_options,
+            localize('k_page') .. ' ' .. tostring(i) ..
+            '/' .. tostring(math.ceil(#achievements_pool / (achievements_per_row))))
     end
 
-    local t = {{n=G.UIT.C, config={}, nodes={ 
-        {n=G.UIT.C, config={align = "cm"}, nodes={
-            {n=G.UIT.R, config={align = "cm"}, nodes={
-                {n=G.UIT.R, config={align = "cm", padding = 0.1, minh = 4 }, nodes=achievement_matrix[1]},
-                create_option_cycle({options = achievements_options, w = 4.5, cycle_shoulders = true, opt_callback = 'stocking_achievements', focus_args = {snap_to = true, nav = 'wide'},current_option = current_page, colour = HEX("22A617"), no_pips = true})
-            }}
-        }}
-    }}}
-    return {n = G.UIT.ROOT, config = {emboss = 0.05, minh = 6, r = 0.1, minw = 10, align = "cm", padding = 0.2,colour = G.C.BLACK}, nodes = t}
+    local t = { {
+        n = G.UIT.C,
+        config = {},
+        nodes = {
+            {
+                n = G.UIT.C,
+                config = { align = "cm" },
+                nodes = {
+                    {
+                        n = G.UIT.R,
+                        config = { align = "cm" },
+                        nodes = {
+                            { n = G.UIT.R, config = { align = "cm", padding = 0.1, minh = 4 }, nodes = achievement_matrix[1] },
+                            create_option_cycle({
+                                options = achievements_options,
+                                w = 4.5,
+                                cycle_shoulders = true,
+                                opt_callback =
+                                'stocking_achievements',
+                                focus_args = { snap_to = true, nav = 'wide' },
+                                current_option =
+                                    current_page,
+                                colour = HEX("22A617"),
+                                no_pips = true
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    } }
+    return {
+        n = G.UIT.ROOT,
+        config = { emboss = 0.05, minh = 6, r = 0.1, minw = 10, align = "cm", padding = 0.2, colour = G.C.BLACK },
+        nodes =
+            t
+    }
 end
 
 -- modified from smods
 G.FUNCS.stocking_achievements = function(args)
     if not args or not args.cycle_config then return end
-    achievement_matrix = {{},{}}
+    achievement_matrix = { {}, {} }
     local tab_contents = G.OVERLAY_MENU:get_UIE_by_ID('tab_contents')
     tab_contents.config.object:remove()
-    tab_contents.config.object = UIBox{
+    tab_contents.config.object = UIBox {
         definition = stockingBuildAchievementsTab(G.ACTIVE_MOD_UI, args.cycle_config.current_option),
-        config = {offset = {x=0,y=0}, parent = tab_contents, type = 'cm'}
+        config = { offset = { x = 0, y = 0 }, parent = tab_contents, type = 'cm' }
     }
     tab_contents.UIBox:recalculate()
 end
@@ -373,7 +467,7 @@ StockingStuffer.config_tab = function()
         n = G.UIT.ROOT,
         config = { align = "m", r = 0.1, padding = 0.05, colour = G.C.BLACK, minw = 8, minh = 6 },
         nodes = {
-            { n = G.UIT.R, config = { align = "cl", padding = 0, minh = 0.1 },      nodes = {} },
+            { n = G.UIT.R, config = { align = "cl", padding = 0, minh = 0.1 }, nodes = {} },
 
             -- Custom Menu Toggle
             {
@@ -468,7 +562,7 @@ StockingStuffer.config_tab = function()
                 n = G.UIT.R,
                 config = { align = "cm", padding = 0 },
                 nodes = {
-                    {     -- Animate Areas cycle
+                    { -- Animate Areas cycle
                         n = G.UIT.C,
                         config = { align = "cm", padding = 0.1 },
                         nodes = {
@@ -506,6 +600,7 @@ function AnimatedSprite:animate()
     end
     animate(self)
 end
+
 --#endregion
 
 --#region Menu
@@ -582,390 +677,447 @@ function Game:main_menu(change_context)
         G.SPLASH_BACK:define_draw_steps({ {
             shader = 'splash',
             send = {
-                { name = 'time',       ref_table = G.TIMERS,  ref_value = 'REAL_SHADER' },
+                { name = 'time',       ref_table = G.TIMERS,                ref_value = 'REAL_SHADER' },
                 { name = 'vort_speed', val = 0.4 },
                 { name = 'colour_1',   ref_table = StockingStuffer.colours, ref_value = 'primary' },
                 { name = 'colour_2',   ref_table = StockingStuffer.colours, ref_value = 'secondary' },
             }
         } })
+    end
 
-        -- make the center card more festive
-        local title_card = self.title_top.cards[1]
+    return ret
+end
+
+StockingStuffer.menu_cards = function()
+    if StockingStuffer.config.menu then
         local wrapped_pool = get_current_pool('stocking_wrapped_present')
         local replace_present = wrapped_pool[math.random(#wrapped_pool)]
         while replace_present == 'UNAVAILABLE' do
             replace_present = wrapped_pool[math.random(#wrapped_pool)]
         end
-        title_card:set_ability(replace_present)
-        title_card.children.front = nil
-        title_card.T.w = title_card.T.w*1.1
-        title_card.T.h = title_card.T.h*1.1
+        return {
+            remove_original = true,
+            { key = replace_present }
+        }
     end
-
-    return ret
 end
 --#endregion
 
 --#region Objects
 
-    --#region Developers
-    StockingStuffer.Developers = PotatoPatchUtils.Developers
-    StockingStuffer.Developer = PotatoPatchUtils.Developer
-    --#endregion
-    local achievement_inc = 0
+--#region Developers
+StockingStuffer.Developers = PotatoPatchUtils.Developers
+StockingStuffer.Developer = PotatoPatchUtils.Developer
+--#endregion
+local achievement_inc = 0
 
-    SMODS.Atlas({
-        key = 'achievements',
-        path = 'achievements.png',
-        px = 66, py = 66
-    })
-    --#region WrappedPresent
-    StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
-        required_params = {
-            'key',
-            'developer'
-        },
-        key = 'present',
-        set = 'stocking_wrapped_present',
-        atlas = false,
-        class_prefix = false,
-        discovered = true,
-        pos = { x = 0, y = 0 },
-        inject = function(self)
-            self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
-                darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(StockingStuffer.Developers[self.developer].colour, 0.5),
-                darken(G.C.RED, 0.2), G.C.GREEN
-            }
-            SMODS.Consumable.inject(self)
-            table.remove(G.P_CENTER_POOLS.Consumeables, #G.P_CENTER_POOLS.Consumeables)
-            local dev_name = StockingStuffer.Developers[self.developer].loc and localize(StockingStuffer.Developers[self.developer].loc) or StockingStuffer.Developers[self.developer].name
-            SMODS.Achievement({
-                key = 'stocking_open_'..self.developer,
-                loc_txt = {
-                    name = dev_name..'\'s Present',
-                    description = {
-                        'Open a present',
-                        'from '..dev_name
-                    }
-                },
-                atlas = 'stocking_achievements',
-                hidden_name = false,
-                bypass_all_unlocked = true,
-                order = achievement_inc,
-                developer = self.developer,
-                unlock_condition = function(self, args)
-                    if args.present_opened and args.developer == self.developer then return true end
-                end,
-                mod = StockingStuffer
-            })
-            achievement_inc = achievement_inc + 1
-            SMODS.Achievement({
-                key = 'stocking_collect_'..self.developer,
-                loc_txt = {
-                    name = dev_name..'\'s Collection',
-                    description = {
-                        'Collect all of',
-                        dev_name..'\'s presents'
-                    }
-                },
-                atlas = 'stocking_achievements',
-                loc_vars = function()
-                    print('test')
-                end,
-                hidden_name = false,
-                bypass_all_unlocked = true,
-                order = achievement_inc,
-                developer = self.developer,
-                unlock_condition = function(self, args)
-                    if args.present_opened and args.developer == self.developer then
-                        G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker = G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker or {}
-                        G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer] = G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer] or {}
-                        G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer][args.current_gift] = true
+SMODS.Atlas({
+    key = 'achievements',
+    path = 'achievements.png',
+    px = 66,
+    py = 66
+})
+--#region WrappedPresent
+StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
+    required_params = {
+        'key',
+        'developer'
+    },
+    key = 'present',
+    set = 'stocking_wrapped_present',
+    atlas = false,
+    class_prefix = false,
+    discovered = true,
+    pos = { x = 0, y = 0 },
+    inject = function(self)
+        self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
+            darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(
+            StockingStuffer.Developers[self.developer].colour, 0.5),
+            darken(G.C.RED, 0.2), G.C.GREEN
+        }
+        SMODS.Consumable.inject(self)
+        table.remove(G.P_CENTER_POOLS.Consumeables, #G.P_CENTER_POOLS.Consumeables)
+        local dev_name = StockingStuffer.Developers[self.developer].loc and
+            localize(StockingStuffer.Developers[self.developer].loc) or StockingStuffer.Developers[self.developer].name
+        SMODS.Achievement({
+            key = 'stocking_open_' .. self.developer,
+            loc_txt = {
+                name = dev_name .. '\'s Present',
+                description = {
+                    'Open a present',
+                    'from ' .. dev_name
+                }
+            },
+            atlas = 'stocking_achievements',
+            hidden_name = false,
+            bypass_all_unlocked = true,
+            order = achievement_inc,
+            developer = self.developer,
+            unlock_condition = function(self, args)
+                if args.present_opened and args.developer == self.developer then return true end
+            end,
+            mod = StockingStuffer
+        })
+        achievement_inc = achievement_inc + 1
+        SMODS.Achievement({
+            key = 'stocking_collect_' .. self.developer,
+            loc_txt = {
+                name = dev_name .. '\'s Collection',
+                description = {
+                    'Collect all of',
+                    dev_name .. '\'s presents'
+                }
+            },
+            atlas = 'stocking_achievements',
+            loc_vars = function()
+                print('test')
+            end,
+            hidden_name = false,
+            bypass_all_unlocked = true,
+            order = achievement_inc,
+            developer = self.developer,
+            unlock_condition = function(self, args)
+                if args.present_opened and args.developer == self.developer then
+                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker = G.PROFILES[G.SETTINGS.profile]
+                        .Stocking_Collected_Tracker or {}
+                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer] = G.PROFILES
+                        [G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer] or {}
+                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer][args.current_gift] = true
 
-                        local all_collected = true
-                        for _, present in ipairs(G.P_CENTER_POOLS.stocking_present) do
-                            if present.developer == self.developer and not present.no_collection then
-                                if not G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer][present.key] then
-                                    all_collected = false
-                                    break
-                                end
+                    local all_collected = true
+                    for _, present in ipairs(G.P_CENTER_POOLS.stocking_present) do
+                        if present.developer == self.developer and not present.no_collection then
+                            if not G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer][present.key] then
+                                all_collected = false
+                                break
                             end
                         end
-                        return all_collected
                     end
-                end,
-                mod = StockingStuffer
+                    return all_collected
+                end
+            end,
+            mod = StockingStuffer
+        })
+        achievement_inc = achievement_inc + 1
+    end,
+    pre_inject_class = function(self, func)
+        for _, obj in pairs(self.obj_table) do
+            if obj.set == 'stocking_wrapped_present' then
+                obj.atlas = obj.atlas or 'stocking_' .. StockingStuffer.Developers[obj.developer].name .. '_presents'
+            end
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { colours = { StockingStuffer.Developers[self.developer].colour } } }
+    end,
+    process_loc_text = function(self)
+        SMODS.process_loc_text(G.localization.descriptions[self.set], self.key,
+            G.localization.descriptions.stocking_wrapped_present[self.key] or
+            self.loc_txt or
+            G.localization.descriptions.stocking_wrapped_present.default_text)
+    end,
+    can_use = function(self, card)
+        return true
+    end,
+    use = function(self, card, area, copier)
+        local gift = nil
+        card.dissolve_colours = self.dissolve_colours
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            blocking = true,
+            func = function()
+                card.children.particles = Particles(1, 1, 0, 0, {
+                    timer = 0.01,
+                    scale = 0.2,
+                    initialize = true,
+                    speed = 3,
+                    padding = 1,
+                    attach = card,
+                    fill = true,
+                    colours = card.dissolve_colours,
+                })
+                card.children.particles.fade_alpha = 1
+                card.children.particles:fade(1, 0)
+                local eval = function(target) return card.children.particles end
+                juice_card_until(card, eval, true)
+                return true
+            end
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 2,
+            func = function()
+                G.gift.T.y = card.T.y
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.2,
+                    func = function()
+                        local pool = get_current_pool('stocking_present')
+                        local key = pseudorandom_element(pool, 'stocking_present_open',
+                            {
+                                in_pool = function(v, args)
+                                    return G.P_CENTERS[v] and
+                                        G.P_CENTERS[v].developer == self.developer
+                                end
+                            })
+                        discover_card(G.P_CENTERS[key])
+                        gift = SMODS.add_card({ area = G.gift, set = 'stocking_present', key = key, bypass_discovery_center = true, bypass_discovery_ui = true })
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'ease',
+                    delay = 1,
+                    ref_table = G.gift.T,
+                    ref_value = 'y',
+                    ease_to = G.play.T.y,
+                    func = (function(t) return t end)
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local key = gift.config.center_key
+                        gift.spawning = true
+                        local vars = gift.config.center:loc_vars({}, gift)
+                        gift.spawning = false
+                        key = vars and vars.key or key
+                        attention_text({
+                            scale = 0.8,
+                            rotate = true,
+                            text = localize({
+                                type = 'name_text',
+                                key = key,
+                                set =
+                                'stocking_present'
+                            }) .. localize('stocking_stuffer_received'),
+                            hold = 3,
+                            align = 'cm',
+                            offset = { x = 0, y = -1.7 },
+                            major =
+                                G.play
+                        })
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 2.5,
+                    func = function()
+                        card.children.particles:remove()
+                        card.children.particles = nil
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        draw_card(G.gift, G.stocking_present, nil, 'up', nil, gift)
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        check_for_unlock({
+                            present_opened = true,
+                            developer = self.developer,
+                            current_gift = gift.config.center_key
+                        })
+                        return true
+                    end
+                }))
+                return true
+            end
+        }))
+    end
+})
+
+--#endregion
+
+--#region Present
+
+StockingStuffer.Present = SMODS.Consumable:extend({
+    required_params = {
+        'key',
+        'developer',
+    },
+    atlas = false,
+    class_prefix = false,
+    set = 'stocking_present',
+    discovered = false,
+    inject = function(self)
+        self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
+            darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(
+            StockingStuffer.Developers[self.developer].colour, 0.5),
+            darken(G.C.RED, 0.2), G.C.GREEN
+        }
+        SMODS.Consumable.inject(self)
+        table.remove(G.P_CENTER_POOLS.Consumeables, #G.P_CENTER_POOLS.Consumeables)
+    end,
+    pre_inject_class = function(self, func)
+        for _, obj in pairs(self.obj_table) do
+            if obj.set == 'stocking_present' then
+                obj.atlas = obj.atlas or 'stocking_' .. StockingStuffer.Developers[obj.developer].name .. '_presents'
+            end
+        end
+    end,
+    process_loc_text = function(self)
+        SMODS.process_loc_text(G.localization.descriptions[self.set], self.key,
+            G.localization.descriptions.stocking_present[self.key] or
+            self.loc_txt or
+            G.localization.descriptions.stocking_present.default_text)
+    end,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { self.key } }
+    end
+})
+
+-- Present ConsumableType init
+SMODS.ConsumableType({
+    key = 'stocking_present',
+    primary_colour = HEX("22A617"),
+    secondary_colour = HEX("22A617"),
+    collection_rows = { 6, 6, 6 },
+    shop_rate = 0,
+    default = 'Santa Claus_stocking_coal',
+    create_UIBox_your_collection = function(self)
+        local type_buf = {}
+        for _, v in ipairs(SMODS.ConsumableType.visible_buffer) do
+            if not v.no_collection and (not G.ACTIVE_MOD_UI or modsCollectionTally(G.P_CENTER_POOLS[v]).of > 0) then
+                type_buf[#type_buf + 1] =
+                    v
+            end
+        end
+        local pool = {}
+        for _, present in ipairs(G.P_CENTER_POOLS.stocking_wrapped_present) do
+            table.insert(pool, present)
+            local count = 0
+            for _, filler in ipairs(G.P_CENTER_POOLS.stocking_present) do
+                if filler.developer == present.developer and not filler.no_collection then
+                    table.insert(pool, filler)
+                    count = count + 1
+                end
+                if count == 5 then break end
+            end
+            for i = count + 1, 5 do
+                table.insert(pool, G.P_CENTERS.j_stocking_dummy)
+            end
+        end
+        local collection = SMODS.card_collection_UIBox(pool, self.collection_rows,
+            {
+                stocking_id = 'stocking_cycler',
+                back_func = #type_buf > 3 and 'your_collection_consumables' or nil,
+                show_no_collection = true,
+                modify_card = function(card) card.collection_present = true end
             })
-            achievement_inc = achievement_inc + 1
-        end,
-        pre_inject_class = function(self, func)
-            for _, obj in pairs(self.obj_table) do
-                if obj.set == 'stocking_wrapped_present' then
-                    obj.atlas = obj.atlas or 'stocking_'..StockingStuffer.Developers[obj.developer].name..'_presents'
-                end
-            end
-        end,
-        loc_vars = function(self, info_queue, card)
-            return { vars = { colours = { StockingStuffer.Developers[self.developer].colour } } }
-        end,
-        process_loc_text = function(self)
-            SMODS.process_loc_text(G.localization.descriptions[self.set], self.key,
-                G.localization.descriptions.stocking_wrapped_present[self.key] or
-                self.loc_txt or
-                G.localization.descriptions.stocking_wrapped_present.default_text)
-        end,
-        can_use = function(self, card)
-            return true
-        end,
-        use = function(self, card, area, copier)
-            local gift = nil
-            card.dissolve_colours = self.dissolve_colours
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                blocking = true,
-                func = function()
-                    card.children.particles = Particles(1, 1, 0, 0, {
-                        timer = 0.01, scale = 0.2, initialize = true,
-                        speed = 3, padding = 1, attach = card,
-                        fill = true, colours = card.dissolve_colours,
-                    })
-                    card.children.particles.fade_alpha = 1
-                    card.children.particles:fade(1, 0)
-                    local eval = function(target) return card.children.particles end
-                    juice_card_until(card, eval, true)
-                    return true
-                end
-            }))
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 2,
-                func = function()
-                    G.gift.T.y = card.T.y
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 0.2,
-                        func = function()
-                            local pool = get_current_pool('stocking_present')
-                            local key = pseudorandom_element(pool, 'stocking_present_open', {in_pool = function(v, args) return G.P_CENTERS[v] and G.P_CENTERS[v].developer == self.developer end})
-                            discover_card(G.P_CENTERS[key])
-                            gift = SMODS.add_card({ area = G.gift, set = 'stocking_present', key = key, bypass_discovery_center = true, bypass_discovery_ui = true })
-                            return true
-                        end
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'ease', delay = 1,
-                        ref_table = G.gift.T, ref_value = 'y',
-                        ease_to = G.play.T.y,
-                        func = (function(t) return t end)
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 0.4,
-                        func = function()
-                            local key = gift.config.center_key
-                            gift.spawning = true
-                            local vars = gift.config.center:loc_vars({}, gift)
-                            gift.spawning = false
-                            key = vars and vars.key or key
-                            attention_text({
-                                scale = 0.8, rotate = true, text = localize({type = 'name_text', key = key, set = 'stocking_present'})..localize('stocking_stuffer_received'), hold = 3, align = 'cm', offset = {x = 0,y = -1.7},major = G.play
-                            })               
-                            return true
-                        end
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 2.5,
-                        func = function()
-                            card.children.particles:remove()
-                            card.children.particles = nil
-                            return true
-                        end
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'immediate',
-                        func = function()
-                            draw_card(G.gift, G.stocking_present, nil, 'up', nil, gift)
-                            return true
-                        end
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 0.4,
-                        func = function()
-                            check_for_unlock({
-                                present_opened = true,
-                                developer = self.developer,
-                                current_gift = gift.config.center_key
-                            })                
-                            return true
-                        end
-                    }))
-                    return true
-                end
-            }))
-        end
-    })
+        local target_node = SMODS.deepfind(collection, "stocking_cycler", true)[1]
+        target_node = target_node.objtree[#target_node.objtree - 6]
 
-    --#endregion
-
-    --#region Present
-
-    StockingStuffer.Present = SMODS.Consumable:extend({
-        required_params = {
-            'key',
-            'developer',
-        },
-        atlas = false,
-        class_prefix = false,
-        set = 'stocking_present',
-        discovered = false,
-        inject = function(self)
-            self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
-                darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(StockingStuffer.Developers[self.developer].colour, 0.5),
-                darken(G.C.RED, 0.2), G.C.GREEN
+        table.insert(target_node.nodes,
+            {
+                n = G.UIT.C,
+                config = { align = 'cm' },
+                nodes = {
+                    {
+                        n = G.UIT.R,
+                        config = { colour = G.C.WHITE, padding = 0.05, emboss = 0.05, maxh = 0.6, minh = 0.6, minw = 0.6, r = 0.1, align = 'cm' },
+                        nodes = {
+                            {
+                                n = G.UIT.R,
+                                config = { align = 'cm', colour = HEX("22A617"), button = 'stocking_stuffer_help', hover = true, button_dist = 0, maxh = 0.5, minh = 0.5, minw = 0.5, r = 0.1 },
+                                nodes = {
+                                    { n = G.UIT.T, config = { text = '?', scale = 0.4, colour = G.C.WHITE, shadow = true } }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            SMODS.Consumable.inject(self)
-            table.remove(G.P_CENTER_POOLS.Consumeables, #G.P_CENTER_POOLS.Consumeables)
-        end,
-        pre_inject_class = function(self, func)
-            for _, obj in pairs(self.obj_table) do
-                if obj.set == 'stocking_present' then
-                    obj.atlas = obj.atlas or 'stocking_'..StockingStuffer.Developers[obj.developer].name..'_presents'
-                end
-            end
-        end,
-        process_loc_text = function(self)
-            SMODS.process_loc_text(G.localization.descriptions[self.set], self.key,
-                G.localization.descriptions.stocking_present[self.key] or
-                self.loc_txt or
-                G.localization.descriptions.stocking_present.default_text)
-        end,
-        loc_vars = function(self, info_queue, card)
-            return {vars = {self.key}}
-        end
-    })
+        )
 
-    -- Present ConsumableType init
-    SMODS.ConsumableType({
-        key = 'stocking_present',
-        primary_colour = HEX("22A617"),
-        secondary_colour = HEX("22A617"),
-        collection_rows = {6, 6, 6},
-        shop_rate = 0,
-        default = 'Santa Claus_stocking_coal',
-        create_UIBox_your_collection = function(self)
-            local type_buf = {}
-            for _, v in ipairs(SMODS.ConsumableType.visible_buffer) do
-                if not v.no_collection and (not G.ACTIVE_MOD_UI or modsCollectionTally(G.P_CENTER_POOLS[v]).of > 0) then type_buf[#type_buf + 1] = v end
-            end
-            local pool = {}
-            for _, present in ipairs(G.P_CENTER_POOLS.stocking_wrapped_present) do
-                table.insert(pool, present)
-                local count = 0
-                for _, filler in ipairs(G.P_CENTER_POOLS.stocking_present) do
-                    if filler.developer == present.developer and not filler.no_collection then
-                        table.insert(pool, filler)
-                        count = count + 1
-                    end
-                    if count == 5 then break end
-                end
-                for i=count+1, 5 do
-                    table.insert(pool, G.P_CENTERS.j_stocking_dummy)
-                end
-            end
-            local collection = SMODS.card_collection_UIBox(pool, self.collection_rows, {stocking_id = 'stocking_cycler', back_func = #type_buf>3 and 'your_collection_consumables' or nil, show_no_collection = true,
-                modify_card = function(card) card.collection_present = true end})
-            local target_node = SMODS.deepfind(collection, "stocking_cycler", true)[1]
-            target_node = target_node.objtree[#target_node.objtree - 6]
-                
-            table.insert(target_node.nodes,
-                {n=G.UIT.C, config = {align='cm'}, nodes = {
-                    {n=G.UIT.R, config = {colour=G.C.WHITE, padding = 0.05, emboss = 0.05, maxh = 0.6, minh = 0.6, minw = 0.6, r=0.1, align='cm'}, nodes = {
-                        {n=G.UIT.R, config = {align='cm', colour=HEX("22A617"), button = 'stocking_stuffer_help', hover = true, button_dist = 0, maxh = 0.5, minh = 0.5, minw = 0.5, r=0.1}, nodes = {
-                            {n=G.UIT.T, config={text='?', scale = 0.4, colour = G.C.WHITE, shadow = true}}
-                        }}
-                    }}
-                }}
-            )
+        return collection
+    end,
+})
 
-            return collection
-        end,
-    })
-
-    local CAsetranks = CardArea.set_ranks
-    function CardArea:set_ranks()
-        CAsetranks(self)
-        for _, card in pairs(self.cards) do
-            if card.collection_present then
-                card.states.drag.can = false
-            end
+local CAsetranks = CardArea.set_ranks
+function CardArea:set_ranks()
+    CAsetranks(self)
+    for _, card in pairs(self.cards) do
+        if card.collection_present then
+            card.states.drag.can = false
         end
     end
+end
 
-    --#endregion
+--#endregion
 
-    --#region Miscellaneous
+--#region Miscellaneous
 
-    -- Present_Select Booster init
-    SMODS.Booster({
-        key = 'stocking_present_select',
-        group_key = 'stocking_stuffer_under_the_tree',
-        atlas = 'sack',
-        discovered = true,
-        config = { choose = 1, extra = 3 },
-        display_size = {w = 71 *  2.5, h = 95 * 2.5},
-        ease_background_colour = function(self)
-            ease_colour(G.C.DYN_UI.MAIN, HEX("22A617"))
-            ease_background_colour { new_colour = G.C.RED, special_colour = HEX("22A617"), contrast = 2 }
-            ease_value(G.HUD.alignment.offset, 'x', -7, nil, nil, nil, 1)
-            ease_value(G.christmas_tree.alignment.offset, 'x', 12, nil, nil, nil, 1)
-        end,
-        draw_hand = false,
-        create_card = function(self, card, i)
-            return create_card('stocking_wrapped_present', G.pack_cards, nil, nil, true, true, nil, "stocking_present")
-        end,
-        no_collection = true,
-        in_pool = function() return false end
-    })
+-- Present_Select Booster init
+SMODS.Booster({
+    key = 'stocking_present_select',
+    group_key = 'stocking_stuffer_under_the_tree',
+    atlas = 'sack',
+    discovered = true,
+    config = { choose = 1, extra = 3 },
+    display_size = { w = 71 * 2.5, h = 95 * 2.5 },
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("22A617"))
+        ease_background_colour { new_colour = G.C.RED, special_colour = HEX("22A617"), contrast = 2 }
+        ease_value(G.HUD.alignment.offset, 'x', -7, nil, nil, nil, 1)
+        ease_value(G.christmas_tree.alignment.offset, 'x', 12, nil, nil, nil, 1)
+    end,
+    draw_hand = false,
+    create_card = function(self, card, i)
+        return create_card('stocking_wrapped_present', G.pack_cards, nil, nil, true, true, nil, "stocking_present")
+    end,
+    no_collection = true,
+    in_pool = function() return false end
+})
 
-    -- Booster OST (Thank you ThunderEdge!)
-    SMODS.Sound({
-        key = 'music_under_the_tree',
-        path = 'core/ChristmasSpirit.ogg',
-        volume = 0.25,
-        pitch = 1,
-        select_music_track = function(self)
-            if not G.screenwipe and G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER and booster_obj and booster_obj.key == 'p_stocking_present_select' then
-                return 1339
-            end
-        end,
-        sync = {
-            ['music1'] = true,
-            ['music2'] = true,
-            ['music3'] = true,
-            ['music4'] = true,
-            ['music5'] = true
-        }
-    })
+-- Booster OST (Thank you ThunderEdge!)
+SMODS.Sound({
+    key = 'music_under_the_tree',
+    path = 'core/ChristmasSpirit.ogg',
+    volume = 0.25,
+    pitch = 1,
+    select_music_track = function(self)
+        if not G.screenwipe and G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER and booster_obj and booster_obj.key == 'p_stocking_present_select' then
+            return 1339
+        end
+    end,
+    sync = {
+        ['music1'] = true,
+        ['music2'] = true,
+        ['music3'] = true,
+        ['music4'] = true,
+        ['music5'] = true
+    }
+})
 
-    -- Present ConsumableType init
-    SMODS.ConsumableType({
-        key = 'stocking_wrapped_present',
-        primary_colour = HEX("22A617"),
-        secondary_colour = HEX("22A617"),
-        shop_rate = 0,
-        no_collection = true,
-        default = 'Santa Claus_stocking_present',
-    })
+-- Present ConsumableType init
+SMODS.ConsumableType({
+    key = 'stocking_wrapped_present',
+    primary_colour = HEX("22A617"),
+    secondary_colour = HEX("22A617"),
+    shop_rate = 0,
+    no_collection = true,
+    default = 'Santa Claus_stocking_present',
+})
 
-    -- Dummy object for Collection organization
-    SMODS.Joker({
-        key = 'dummy',
-        atlas = 'presents',
-        pos = {x = 0, y=1},
-        discovered = true,
-        in_pool = function() return false end,
-        no_collection = true
-    })
+-- Dummy object for Collection organization
+SMODS.Joker({
+    key = 'dummy',
+    atlas = 'presents',
+    pos = { x = 0, y = 1 },
+    discovered = true,
+    in_pool = function() return false end,
+    no_collection = true
+})
 
-    --#endregion
+--#endregion
 
 --#endregion
 
@@ -989,7 +1141,8 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'christmas_tree',
     path = 'tree.png',
-    px = 550, py = 800,
+    px = 550,
+    py = 800,
     atlas_table = 'ANIMATION_ATLAS',
     frames = 4,
     fps = 5
@@ -1012,7 +1165,7 @@ StockingStuffer.custom_card_areas = function(game)
         5.3 * G.CARD_W, 0.95 * G.CARD_H,
         { card_limit = 1, type = 'play' }
     )
-    
+
     game.stocking_present = CardArea(
         game.jokers.T.x, game.jokers.T.y - 4,
         game.jokers.T.w, game.jokers.T.h,
@@ -1022,15 +1175,15 @@ StockingStuffer.custom_card_areas = function(game)
     game.stocking_flipper = CardArea(game.jokers.T.x, game.jokers.T.y - 4,
         game.jokers.T.w, game.jokers.T.h,
         { card_limit = 1, type = 'discard', highlight_limit = 1 })
-    
-    local c = SMODS.create_card({key = 'j_stocking_dummy', area = game.stocking_flipper, no_edition = true, skip_materialize = true})
+
+    local c = SMODS.create_card({ key = 'j_stocking_dummy', area = game.stocking_flipper, no_edition = true, skip_materialize = true })
     game.stocking_flipper:emplace(c)
-    
-    game.christmas_tree = UIBox{
+
+    game.christmas_tree = UIBox {
         definition = create_tree_hud(),
-        config = {align=('cl'), offset = {x=-7,y=0.5},major = G.ROOM_ATTACH}
+        config = { align = ('cl'), offset = { x = -7, y = 0.5 }, major = G.ROOM_ATTACH }
     }
-    
+
     StockingStuffer.states.slot_visible = 1
     StockingStuffer.animate_areas()
 end
@@ -1039,8 +1192,8 @@ end
 G.FUNCS.toggle_jokers_presents = function(e)
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
-        local sprite = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0})
-        PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = {StockingStuffer.Developers.internal_count}}
+        local sprite = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 })
+        PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = { StockingStuffer.Developers.internal_count } }
     end
     StockingStuffer.states.slot_visible = StockingStuffer.states.slot_visible * -1
     play_sound('paper1')
@@ -1085,7 +1238,9 @@ function ease_alignment(area, value, hide, instant)
     if not G[area] then return end
     if instant then
         G.E_MANAGER:add_event(Event({
-            trigger = 'immediate', blocking = true, blockable = false,
+            trigger = 'immediate',
+            blocking = true,
+            blockable = false,
             func = function()
                 G[area].T.y = value
                 G[area].VT.y = value
@@ -1098,21 +1253,31 @@ function ease_alignment(area, value, hide, instant)
             G[area].VT.y = -4
             G[area].T.y = -4
             G.E_MANAGER:add_event(Event({
-                trigger = 'immediate', blocking = true, blockable = false,
+                trigger = 'immediate',
+                blocking = true,
+                blockable = false,
                 func = function()
                     G[area].config.type = 'joker'
                     return true
                 end
             }))
         end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'ease', delay = 0.7, blocking = false, blockable = false,
-                ref_table = G[area].T, ref_value = 'y', ease_to = value,
-                func = (function(t) return t end)
-            }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'ease',
+            delay = 0.7,
+            blocking = false,
+            blockable = false,
+            ref_table = G[area].T,
+            ref_value = 'y',
+            ease_to = value,
+            func = (function(t) return t end)
+        }))
         if hide then
             G.E_MANAGER:add_event(Event({
-                trigger = 'after', delay = 0.7, blocking = true, blockable = false,
+                trigger = 'after',
+                delay = 0.7,
+                blocking = true,
+                blockable = false,
                 func = function()
                     G[area].config.type = 'stocking_stuffer_hide'
                     G[area].T.y = 0
@@ -1126,7 +1291,7 @@ end
 -- Emplace Presents in Present Area (naturally)
 local stocking_stuffer_card_area_emplace = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
-    if self == G.consumeables and card.ability.set == "stocking_present" then 
+    if self == G.consumeables and card.ability.set == "stocking_present" then
         card:remove_from_area()
         G.stocking_present:emplace(card, location, stay_flipped)
         return
@@ -1154,16 +1319,24 @@ end
 function create_tree_hud()
     local tree_sprite = AnimatedSprite(0, 0, 7, 12, G.ANIMATION_ATLAS.stocking_christmas_tree)
 
-    return {n=G.UIT.ROOT, config = {align = "cm", padding = 0.03, colour = G.C.CLEAR}, nodes={
-      {n=G.UIT.R, config = {align = "cl", padding= 0.05, colour = G.C.CLEAR, r=0.1}, nodes={
-        {n=G.UIT.O, config = {object = tree_sprite}}
-      }}
-    }}
+    return {
+        n = G.UIT.ROOT,
+        config = { align = "cm", padding = 0.03, colour = G.C.CLEAR },
+        nodes = {
+            {
+                n = G.UIT.R,
+                config = { align = "cl", padding = 0.05, colour = G.C.CLEAR, r = 0.1 },
+                nodes = {
+                    { n = G.UIT.O, config = { object = tree_sprite } }
+                }
+            }
+        }
+    }
 end
 
 G.FUNCS.stocking_stuffer_help = function()
-    local sprite = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0})
-    PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, image = sprite, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, back_func = 'your_collection_stocking_presents', vars = {StockingStuffer.Developers.internal_count}}
+    local sprite = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 })
+    PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, image = sprite, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, back_func = 'your_collection_stocking_presents', vars = { StockingStuffer.Developers.internal_count } }
 end
 
 --#endregion
@@ -1191,18 +1364,30 @@ G.FUNCS.can_skip_booster = function(e)
     return skip_booster(e)
 end
 
-local buttons =  G.UIDEF.use_and_sell_buttons
+local buttons = G.UIDEF.use_and_sell_buttons
 function G.UIDEF.use_and_sell_buttons(card)
     if card.area and card.area == G.pack_cards and card.ability.set == 'stocking_wrapped_present' then
-        return 
-        {n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
-                {n=G.UIT.R, config={mid = true}, nodes={
-            }},
-            {n=G.UIT.R, config={ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5*card.T.w - 0.15, minh = 0.65*card.T.h, maxw = 0.7*card.T.w - 0.15, hover = true, shadow = true, colour = StockingStuffer.Developers[card.config.center.developer].colour, one_press = true, button = 'use_card'}, nodes={
-                {n=G.UIT.T, config={text = localize('b_open'),colour = G.C.UI.TEXT_LIGHT, scale = 0.35, shadow = true}}
-            }},
-            {n=G.UIT.R, config = {minh = 0.1*card.T.h}}
-        }}
+        return
+        {
+            n = G.UIT.ROOT,
+            config = { padding = 0, colour = G.C.CLEAR },
+            nodes = {
+                {
+                    n = G.UIT.R,
+                    config = { mid = true },
+                    nodes = {
+                    }
+                },
+                {
+                    n = G.UIT.R,
+                    config = { ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * card.T.w - 0.15, minh = 0.65 * card.T.h, maxw = 0.7 * card.T.w - 0.15, hover = true, shadow = true, colour = StockingStuffer.Developers[card.config.center.developer].colour, one_press = true, button = 'use_card' },
+                    nodes = {
+                        { n = G.UIT.T, config = { text = localize('b_open'), colour = G.C.UI.TEXT_LIGHT, scale = 0.35, shadow = true } }
+                    }
+                },
+                { n = G.UIT.R, config = { minh = 0.1 * card.T.h } }
+            }
+        }
     end
     return buttons(card)
 end
@@ -1210,8 +1395,11 @@ end
 -- Prevents materialize colours when spawing dummies and sets materialize colours of a present's defined colour
 local csm = Card.start_materialize
 function Card:start_materialize(dissolve_colours, silent, timefac)
-    if self.config.center_key == 'j_stocking_dummy' then dissolve_colours = {G.C.CLEAR} end
-    if self.config.center.set == 'stocking_present' or self.config.center.set == 'stocking_wrapped_present' then dissolve_colours = self.config.center.dissolve_colours end
+    if self.config.center_key == 'j_stocking_dummy' then dissolve_colours = { G.C.CLEAR } end
+    if self.config.center.set == 'stocking_present' or self.config.center.set == 'stocking_wrapped_present' then
+        dissolve_colours =
+            self.config.center.dissolve_colours
+    end
     csm(self, dissolve_colours, silent, timefac)
 end
 
@@ -1263,19 +1451,22 @@ end
 -- Gives player a Sack of Presents on shop enter when tracking var condition is met
 local update_shopref = Game.update_shop
 function Game.update_shop(self, dt)
-    if not G.GAME.stocking_last_pack or G.GAME.round_resets.ante <= G.GAME.stocking_last_pack then update_shopref(self, dt) return end
+    if not G.GAME.stocking_last_pack or G.GAME.round_resets.ante <= G.GAME.stocking_last_pack then
+        update_shopref(self, dt)
+        return
+    end
     G.GAME.stocking_last_pack = G.GAME.round_resets.ante
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
-        local sprite = SMODS.create_sprite(0,0, 3*(231/117), 3, 'stocking_logo', {x=0,y=0})
-        PotatoPatchUtils.INFO_MENU.create_menu{menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = {StockingStuffer.Developers.internal_count}}
+        local sprite = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 })
+        PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = { StockingStuffer.Developers.internal_count } }
     end
     update_shopref(self, dt)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         func = function()
             if G.STATE_COMPLETE and not G.OVERLAY_MENU then
-                local card = SMODS.add_card({area = G.play, key = 'p_stocking_present_select', skip_materialize = true})
+                local card = SMODS.add_card({ area = G.play, key = 'p_stocking_present_select', skip_materialize = true })
                 card.cost = 0
                 G.FUNCS.use_card({ config = { ref_table = card } })
                 return true
@@ -1291,7 +1482,8 @@ function Card:juice_up(scale, rot)
         if not Talisman or Talisman and not Talisman.config_file.disable_anims then
             G.FUNCS.toggle_jokers_presents()
             G.E_MANAGER:add_event(Event({
-                trigger = 'after', delay = 0.7,
+                trigger = 'after',
+                delay = 0.7,
                 func = function()
                     return true
                 end
@@ -1307,7 +1499,8 @@ function Card:start_dissolve(...)
         if not Talisman or Talisman and not Talisman.config_file.disable_anims then
             G.FUNCS.toggle_jokers_presents()
             G.E_MANAGER:add_event(Event({
-                trigger = 'after', delay = 0.7,
+                trigger = 'after',
+                delay = 0.7,
                 func = function()
                     return true
                 end
@@ -1321,13 +1514,14 @@ local stocking_stuffer_card_eval_status_text = card_eval_status_text
 function card_eval_status_text(card, ...)
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
-        func = function()  
+        func = function()
             if ((card.area == G.jokers and StockingStuffer.states.slot_visible ~= 1) or (card.area == G.stocking_present and StockingStuffer.states.slot_visible ~= -1)) and StockingStuffer.config.switch_on_trigger then
                 if not Talisman or Talisman and not Talisman.config_file.disable_anims then
                     G.FUNCS.toggle_jokers_presents()
                     G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 0.7,
-                        func = function()                
+                        trigger = 'after',
+                        delay = 0.7,
+                        func = function()
                             return true
                         end
                     }), nil, true)
@@ -1345,8 +1539,9 @@ function Card:explode(colours, time)
     if self.config.center_key == 'p_stocking_present_select' then
         self:juice_up()
         G.E_MANAGER:add_event(Event({
-            trigger = 'after', delay = 1.8,
-            func = function()                
+            trigger = 'after',
+            delay = 1.8,
+            func = function()
                 self:start_dissolve()
                 return true
             end
@@ -1359,10 +1554,10 @@ end
 -- Toggles Christmas Tree UI after end of selecting present
 local end_consum = G.FUNCS.end_consumeable
 function G.FUNCS.end_consumeable(e)
-    if booster_obj and booster_obj.key == 'p_stocking_present_select' then 
+    if booster_obj and booster_obj.key == 'p_stocking_present_select' then
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
-            func = function()                
+            func = function()
                 ease_value(G.HUD.alignment.offset, 'x', 7, nil, nil, nil, nil)
                 ease_value(G.christmas_tree.alignment.offset, 'x', -12, nil, nil, nil, nil)
                 return true
@@ -1399,7 +1594,11 @@ end
 function juice_card_until(card, eval_func, first, delay)
     if not card.juicing_until then card.juicing_until = true end
     G.E_MANAGER:add_event(Event({
-        trigger = 'after',delay = delay or 0.1, blocking = false, blockable = false, timer = 'REAL',
+        trigger = 'after',
+        delay = delay or 0.1,
+        blocking = false,
+        blockable = false,
+        timer = 'REAL',
         func = function()
             if eval_func(card) then
                 if card and card.juice_up then
@@ -1444,13 +1643,13 @@ local function load_file_native(path)
     local file_content, err = NFS.read(file_path)
     if not file_content then
         return nil,
-        "Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
+            "Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
     end
     local short_path = string.sub(path, path_len, path:len())
     local chunk, err = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. short_path .. '"]')
     if not chunk then
         return nil,
-        "Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
+            "Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
     end
     return chunk
 end
@@ -1482,6 +1681,7 @@ if Balatest then
         Balatest.wait_for_input()
         Balatest.q(function() end)
     end
+
     load_files(SMODS.current_mod.path .. '/tests')
 end
 
@@ -1496,7 +1696,7 @@ end
 
 local function mergeTables(dest, source)
     if dest == nil then return source end
-    for k,v in pairs(source) do
+    for k, v in pairs(source) do
         if dest[k] == nil then
             dest[k] = v
         else
@@ -1515,7 +1715,8 @@ local function loadLang(path)
     local ret = nil
     for _, v in ipairs(files) do
         if v.type == "file" then
-            local loc_table = assert(loadstring(nativefs.read(path .. v.name), ('=[SMODS %s "%s"]'):format(StockingStuffer.id, string.match(v.name, '[^/]+/[^/]+$'))))()
+            local loc_table = assert(loadstring(nativefs.read(path .. v.name),
+                ('=[SMODS %s "%s"]'):format(StockingStuffer.id, string.match(v.name, '[^/]+/[^/]+$'))))()
             ret = mergeTables(ret, loc_table)
         end
     end
@@ -1552,4 +1753,3 @@ function StockingStuffer.process_loc_text()
 end
 
 --#endregion
-
