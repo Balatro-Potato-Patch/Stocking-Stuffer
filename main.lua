@@ -1016,7 +1016,7 @@ StockingStuffer.custom_card_areas = function(game)
     game.stocking_present = CardArea(
         game.jokers.T.x, game.jokers.T.y - 4,
         game.jokers.T.w, game.jokers.T.h,
-        { card_limit = 1, type = 'stocking_stuffer_hide', highlight_limit = 1 }
+        { card_limit = 1, type = 'stocking_stuffer_hide', highlight_limit = 1, align_buttons = true }
     )
 
     game.stocking_flipper = CardArea(game.jokers.T.x, game.jokers.T.y - 4,

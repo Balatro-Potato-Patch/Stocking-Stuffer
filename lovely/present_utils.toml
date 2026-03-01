@@ -107,31 +107,6 @@ payload = '''
 '''
 match_indent = true
 
-# Present button alignment (This could potentially lead to some incompatibilities, not sure what better option there is apart from a janky hook)
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-match_indent = true
-position = 'at'
-pattern = '''
-config = {align=
-        ((self.area == G.jokers) or (self.area == G.consumeables)) and "cr" or
-        "bmi"
-    , offset = 
-        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off - 0.4,y=0} or
-        {x=0,y=0.65},
-    parent =self}
-'''
-payload = '''
-config = {align=
-        ((self.area == G.jokers) or (self.area == G.consumeables) or (self.area == G.stocking_present)) and "cr" or
-        "bmi"
-    , offset = 
-        ((self.area == G.jokers) or (self.area == G.consumeables) or (self.area == G.stocking_present)) and {x=x_off - 0.4,y=0} or
-        {x=0,y=0.65},
-    parent =self}
-'''
-
 # Adds present area to calculation pipeline
 [[patches]]
 [patches.pattern]
