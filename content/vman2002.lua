@@ -301,6 +301,11 @@ local mysterystar = StockingStuffer.Present({
     config = { extra = {count = 2} },
 	vman_ch_icon = 2, --vichie
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
+	topuplib_anim = {
+		vars = {x = true},
+		frameCount = 8,
+		rate = 12
+	},
 
 
     -- use and can_use are completely optional, delete if you do not need your present to be usable
@@ -337,12 +342,22 @@ local mysterystar = StockingStuffer.Present({
 
 --Update func
 local updateref = Game.update
-function Game.update(...)
-	updateref(...)
-	mysterystar.pos.x = math.floor(love.timer.getTime() * 12) % 8
-	if vman.plush_click_release and love.timer.getTime() > vman.plush_click_time then
-		play_sound("stocking_VMan_2002_squeaky2")
-		vman.plush_click_release = false
+if topuplib then
+	function Game.update(...)
+		updateref(...)
+		if vman.plush_click_release and love.timer.getTime() > vman.plush_click_time then
+			play_sound("stocking_VMan_2002_squeaky2")
+			vman.plush_click_release = false
+		end
+	end
+else
+	function Game.update(...)
+		updateref(...)
+		mysterystar.pos.x = math.floor(love.timer.getTime() * 12) % 8
+		if vman.plush_click_release and love.timer.getTime() > vman.plush_click_time then
+			play_sound("stocking_VMan_2002_squeaky2")
+			vman.plush_click_release = false
+		end
 	end
 end
 
