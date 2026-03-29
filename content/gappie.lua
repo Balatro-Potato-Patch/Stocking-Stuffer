@@ -17,7 +17,7 @@ SMODS.Atlas({
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
 
     -- Replace '000000' with your own hex code
@@ -25,7 +25,7 @@ StockingStuffer.Developer({
     colour = HEX('d7a64d')
 })
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = 'Gappie',
     colour = HEX('7BF2FF')
 })

@@ -30,7 +30,7 @@ SMODS.Sound({
 })
 
 -- Developer ENNWAY!
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
     colour = HEX('009FAE')
 })

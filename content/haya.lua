@@ -33,7 +33,7 @@ local irisu = love.graphics.newImage(irisu_data)
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
 	name = display_name, -- DO NOT CHANGE
 
 	-- Replace '000000' with your own hex code
@@ -43,7 +43,7 @@ StockingStuffer.Developer({
 
 -- Just in case if Aiko's name is not yet loaded...
 if not StockingStuffer.aikoyori then
-	StockingStuffer.Developer({
+	PotatoPatchUtils.Developer({
 		name = 'Aikoyori', -- DO NOT CHANGE
 		colour = HEX('5ebb55')
 	})

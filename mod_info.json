@@ -11,6 +11,7 @@
     "priority": 0,
     "badge_colour": "22A617",
     "dependencies": [
-        "Steamodded (>=1.0.0~BETA-1501a)"
+        "Steamodded (>=1.0.0~BETA-1503a)",
+		"PotatoPatchUtils (>=1.0.0)"
     ]
 }

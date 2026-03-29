@@ -108,7 +108,7 @@ SMODS.Atlas({
 })
 
 -- Linkage of Wrapped & Presents
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
 	name = display_name, -- DO NOT CHANGE
 	colour = blood_gradient,
 })

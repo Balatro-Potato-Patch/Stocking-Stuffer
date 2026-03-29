@@ -14,7 +14,7 @@ SMODS.Atlas({
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
     colour = HEX('ff90c8')
 })
@@ -86,7 +86,7 @@ StockingStuffer.Present({
 			
 			if G.stocking_present.cards[self_pos+1] then
 				local dev = G.stocking_present.cards[self_pos+1].config.center.developer
-				c = StockingStuffer.Developers[dev].colour
+				c = PotatoPatchUtils.Developers[dev].colour
 			end
 		end
 		

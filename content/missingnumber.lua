@@ -30,7 +30,7 @@ G.ARGS.LOC_COLOURS.MissingNumber_crystal = gradient
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
 
     -- Replace '000000' with your own hex code
@@ -38,7 +38,7 @@ StockingStuffer.Developer({
     colour = HEX('FF9FFF')
 })
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = "Lily Felli",
     colour = HEX('FFAD31')
 })

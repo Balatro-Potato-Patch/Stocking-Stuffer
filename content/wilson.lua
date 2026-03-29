@@ -19,7 +19,7 @@ local colour = SMODS.Gradient{
 
 colour:inject() -- For some reason it doesn't get injected soon enough and as such has no default values
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name,
     colour = colour,
 })

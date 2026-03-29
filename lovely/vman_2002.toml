@@ -16,8 +16,8 @@ pattern = '''if self.cursor_down.target.states.drag.can then'''
 payload = '''
 if {{lovely:is_it_the_plush}} then
 	play_sound("stocking_VMan_2002_squeaky1")
-	StockingStuffer.Developers.VMan_2002.plush_click_release = false
-	StockingStuffer.Developers.VMan_2002.plush_click_time = love.timer.getTime() + 0.172
+	PotatoPatchUtils.Developers.VMan_2002.plush_click_release = false
+	PotatoPatchUtils.Developers.VMan_2002.plush_click_time = love.timer.getTime() + 0.172
 end
 '''
 [[patches]]
@@ -28,6 +28,6 @@ position = 'after'
 pattern = '''self.dragging.target:stop_drag()'''
 payload = '''
 if {{lovely:is_it_the_plush}} then
-	StockingStuffer.Developers.VMan_2002.plush_click_release = true
+	PotatoPatchUtils.Developers.VMan_2002.plush_click_release = true
 end
 '''

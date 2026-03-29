@@ -55,7 +55,7 @@ end
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-local vman = StockingStuffer.Developer({
+local vman = PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
 
     -- Replace '000000' with your own hex code

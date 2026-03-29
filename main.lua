@@ -1,8 +1,7 @@
 StockingStuffer = SMODS.current_mod
 SMODS.handle_loc_file(SMODS.current_mod.path, SMODS.current_mod.id)
-assert(SMODS.load_file('PotatoPatchUtils/info_menu.lua'))()
-assert(SMODS.load_file('PotatoPatchUtils/credits.lua'))()
 PotatoPatchUtils.LOC.init()
+PotatoPatchUtils.LOC.process_loc_text(SMODS.current_mod.path .. '/localization')
 
 to_big = to_big or function(x)
     return x
@@ -52,7 +51,13 @@ StockingStuffer.description_loc_vars = function()
         end
         key[i] = str
     end
-    return { text_colour = G.C.WHITE, background_colour = G.C.BLACK, scale = 1.2, vars = { key[1], key[2], key[3], StockingStuffer.Developers.internal_count } }
+    local thisModDevs = 0
+    for k, v in pairs(PotatoPatchUtils.Developers) do
+        if v.mod_id == StockingStuffer.id then
+            thisModDevs = thisModDevs + 1
+        end
+    end
+    return { text_colour = G.C.WHITE, background_colour = G.C.BLACK, scale = 1.2, vars = { key[1], key[2], key[3], thisModDevs } }
 end
 
 StockingStuffer.custom_ui = function(nodes)
@@ -118,9 +123,9 @@ function buildModDescTab(mod)
                 colours = {}
             }
             for i, name in ipairs(team) do
-                team[i] = StockingStuffer.Developers[name] and StockingStuffer.Developers[name].loc and
-                    localize(StockingStuffer.Developers[name].loc) or name
-                team.colours[i] = StockingStuffer.Developers[name] and StockingStuffer.Developers[name].colour or
+                team[i] = PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. name] and PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. name].loc and
+                    localize(PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. name].loc) or name
+                team.colours[i] = PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. name] and PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. name].colour or
                     HEX("22A617")
             end
             local cred = {}
@@ -705,10 +710,6 @@ end
 
 --#region Objects
 
---#region Developers
-StockingStuffer.Developers = PotatoPatchUtils.Developers
-StockingStuffer.Developer = PotatoPatchUtils.Developer
---#endregion
 local achievement_inc = 0
 
 SMODS.Atlas({
@@ -730,15 +731,16 @@ StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
     discovered = true,
     pos = { x = 0, y = 0 },
     inject = function(self)
-        self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
-            darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(
-            StockingStuffer.Developers[self.developer].colour, 0.5),
+        self.dissolve_colours = { PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour,
+            darken(PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour, 0.5), lighten(
+            PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour, 0.5),
             darken(G.C.RED, 0.2), G.C.GREEN
         }
         SMODS.Consumable.inject(self)
         table.remove(G.P_CENTER_POOLS.Consumeables, #G.P_CENTER_POOLS.Consumeables)
-        local dev_name = StockingStuffer.Developers[self.developer].loc and
-            localize(StockingStuffer.Developers[self.developer].loc) or StockingStuffer.Developers[self.developer].name
+        local dev_name = PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].loc and
+            localize(PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].loc) or
+            PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].name
         SMODS.Achievement({
             key = 'stocking_open_' .. self.developer,
             loc_txt = {
@@ -780,14 +782,15 @@ StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
                 if args.present_opened and args.developer == self.developer then
                     G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker = G.PROFILES[G.SETTINGS.profile]
                         .Stocking_Collected_Tracker or {}
-                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer] = G.PROFILES
-                        [G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer] or {}
-                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer][args.current_gift] = true
+                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[StockingStuffer.prefix .. '_' .. self.developer] =
+                        G.PROFILES
+                        [G.SETTINGS.profile].Stocking_Collected_Tracker[StockingStuffer.prefix .. '_' .. self.developer] or {}
+                    G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[StockingStuffer.prefix .. '_' .. self.developer][args.current_gift] = true
 
                     local all_collected = true
                     for _, present in ipairs(G.P_CENTER_POOLS.stocking_present) do
                         if present.developer == self.developer and not present.no_collection then
-                            if not G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[self.developer][present.key] then
+                            if not G.PROFILES[G.SETTINGS.profile].Stocking_Collected_Tracker[StockingStuffer.prefix .. '_' .. self.developer][present.key] then
                                 all_collected = false
                                 break
                             end
@@ -803,12 +806,14 @@ StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
     pre_inject_class = function(self, func)
         for _, obj in pairs(self.obj_table) do
             if obj.set == 'stocking_wrapped_present' then
-                obj.atlas = obj.atlas or 'stocking_' .. StockingStuffer.Developers[obj.developer].name .. '_presents'
+                obj.atlas = obj.atlas or
+                    'stocking_' ..
+                    PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. obj.developer].name .. '_presents'
             end
         end
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = { colours = { StockingStuffer.Developers[self.developer].colour } } }
+        return { vars = { colours = { PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour } } }
     end,
     process_loc_text = function(self)
         SMODS.process_loc_text(G.localization.descriptions[self.set], self.key,
@@ -948,9 +953,9 @@ StockingStuffer.Present = SMODS.Consumable:extend({
     set = 'stocking_present',
     discovered = false,
     inject = function(self)
-        self.dissolve_colours = { StockingStuffer.Developers[self.developer].colour,
-            darken(StockingStuffer.Developers[self.developer].colour, 0.5), lighten(
-            StockingStuffer.Developers[self.developer].colour, 0.5),
+        self.dissolve_colours = { PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour,
+            darken(PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour, 0.5), lighten(
+            PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. self.developer].colour, 0.5),
             darken(G.C.RED, 0.2), G.C.GREEN
         }
         SMODS.Consumable.inject(self)
@@ -959,7 +964,9 @@ StockingStuffer.Present = SMODS.Consumable:extend({
     pre_inject_class = function(self, func)
         for _, obj in pairs(self.obj_table) do
             if obj.set == 'stocking_present' then
-                obj.atlas = obj.atlas or 'stocking_' .. StockingStuffer.Developers[obj.developer].name .. '_presents'
+                obj.atlas = obj.atlas or
+                    'stocking_' ..
+                    PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. obj.developer].name .. '_presents'
             end
         end
     end,
@@ -1193,7 +1200,13 @@ G.FUNCS.toggle_jokers_presents = function(e)
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
         local sprite = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 })
-        PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = { StockingStuffer.Developers.internal_count } }
+        local thisModDevs = 0
+        for k, v in pairs(PotatoPatchUtils.Developers) do
+            if v.mod_id == StockingStuffer.id then
+                thisModDevs = thisModDevs + 1
+            end
+        end
+        PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = { thisModDevs } }
     end
     StockingStuffer.states.slot_visible = StockingStuffer.states.slot_visible * -1
     play_sound('paper1')
@@ -1336,7 +1349,13 @@ end
 
 G.FUNCS.stocking_stuffer_help = function()
     local sprite = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 })
-    PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, image = sprite, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, back_func = 'your_collection_stocking_presents', vars = { StockingStuffer.Developers.internal_count } }
+    local thisModDevs = 0
+    for k, v in pairs(PotatoPatchUtils.Developers) do
+        if v.mod_id == StockingStuffer.id then
+            thisModDevs = thisModDevs + 1
+        end
+    end
+    PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, image = sprite, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, back_func = 'your_collection_stocking_presents', vars = { thisModDevs } }
 end
 
 --#endregion
@@ -1348,7 +1367,7 @@ local smods_add_prefixes = SMODS.add_prefixes
 function SMODS.add_prefixes(cls, obj, from_take_ownership)
     smods_add_prefixes(cls, obj, from_take_ownership)
     if cls == StockingStuffer.WrappedPresent or cls == StockingStuffer.Present then
-        SMODS.modify_key(obj, StockingStuffer.Developers[obj.developer].name, nil, 'key')
+        SMODS.modify_key(obj, PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. obj.developer].name, nil, 'key')
     end
 end
 
@@ -1380,7 +1399,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 },
                 {
                     n = G.UIT.R,
-                    config = { ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * card.T.w - 0.15, minh = 0.65 * card.T.h, maxw = 0.7 * card.T.w - 0.15, hover = true, shadow = true, colour = StockingStuffer.Developers[card.config.center.developer].colour, one_press = true, button = 'use_card' },
+                    config = { ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * card.T.w - 0.15, minh = 0.65 * card.T.h, maxw = 0.7 * card.T.w - 0.15, hover = true, shadow = true, colour = PotatoPatchUtils.Developers[card.config.center.developer].colour, one_press = true, button = 'use_card' },
                     nodes = {
                         { n = G.UIT.T, config = { text = localize('b_open'), colour = G.C.UI.TEXT_LIGHT, scale = 0.35, shadow = true } }
                     }
@@ -1411,7 +1430,7 @@ function G.UIDEF.card_h_popup(card)
     local obj = card.config.center
     if obj and obj.set and (obj.set == 'stocking_present' or obj.set == 'stocking_wrapped_present') then
         ret_val.nodes[1].nodes[1].nodes[1].config.colour = G.C.L_BLACK
-        local dev = StockingStuffer.Developers[obj.developer]
+        local dev = PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. obj.developer]
         local tag = {
             n = G.UIT.R,
             config = { align = 'tm' },
@@ -1459,7 +1478,13 @@ function Game.update_shop(self, dt)
     if not G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed then
         G.PROFILES[G.SETTINGS.profile].stocking_stuffer_completed = true
         local sprite = SMODS.create_sprite(0, 0, 3 * (231 / 117), 3, 'stocking_logo', { x = 0, y = 0 })
-        PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = { StockingStuffer.Developers.internal_count } }
+        local thisModDevs = 0
+        for k, v in pairs(PotatoPatchUtils.Developers) do
+            if v.mod_id == StockingStuffer.id then
+                thisModDevs = thisModDevs + 1
+            end
+        end
+        PotatoPatchUtils.INFO_MENU.create_menu { menu_type = 'stocking_stuffer', outline_colour = G.C.RED, colour = HEX("22A617"), page_colour = HEX("22A617"), no_first_time = true, image = sprite, vars = { thisModDevs } }
     end
     update_shopref(self, dt)
     G.E_MANAGER:add_event(Event({
@@ -1630,50 +1655,8 @@ end
 
 --#endregion
 
---#region File Loading (Totally stolen from Hot Potato)
-local nativefs = NFS
-
-local path_len = string.len(SMODS.current_mod.path) + 1
-
-local function load_file_native(path)
-    if not path or path == "" then
-        error("No path was provided to load.")
-    end
-    local file_path = path
-    local file_content, err = NFS.read(file_path)
-    if not file_content then
-        return nil,
-            "Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
-    end
-    local short_path = string.sub(path, path_len, path:len())
-    local chunk, err = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. short_path .. '"]')
-    if not chunk then
-        return nil,
-            "Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
-    end
-    return chunk
-end
-local blacklist = {
-    ["template.lua"] = true,
-}
-local function load_files(path)
-    local info = nativefs.getDirectoryItemsInfo(path)
-    table.sort(info, function(a, b)
-        return a.name < b.name
-    end)
-    for _, v in ipairs(info) do
-        if string.find(v.name, ".lua") and not blacklist[v.name] then -- no X.lua.txt files or whatever unless they are also lua files
-            local f, err = load_file_native(path .. "/" .. v.name)
-            if f then
-                f()
-            else
-                error("error in file " .. v.name .. ": " .. err)
-            end
-        end
-    end
-end
-local path = SMODS.current_mod.path .. '/content'
-load_files(path)
+--#region File Loading
+PotatoPatchUtils.load_files(SMODS.current_mod.path .. '/content')
 
 if Balatest then
     function Balatest.open_present(key)
@@ -1682,74 +1665,7 @@ if Balatest then
         Balatest.q(function() end)
     end
 
-    load_files(SMODS.current_mod.path .. '/tests')
-end
-
---#endregion
-
---#region Localization Folder Loading
--- This is resposible for loading localization from folder in localization
--- This assumes the follwing:
--- - These files do not replace other localization strings (or if they do they have more lines)
--- - JSON files are not used (only lua)
--- - There are not nested localization files (it probably wouldn't be hard if you really wanted them)
-
-local function mergeTables(dest, source)
-    if dest == nil then return source end
-    for k, v in pairs(source) do
-        if dest[k] == nil then
-            dest[k] = v
-        else
-            if type(v) ~= "table" or type(dest[k]) ~= "table" then
-                dest[k] = v
-            else
-                dest[k] = mergeTables(dest[k], v)
-            end
-        end
-    end
-    return dest
-end
-
-local function loadLang(path)
-    local files = nativefs.getDirectoryItemsInfo(path)
-    local ret = nil
-    for _, v in ipairs(files) do
-        if v.type == "file" then
-            local loc_table = assert(loadstring(nativefs.read(path .. v.name),
-                ('=[SMODS %s "%s"]'):format(StockingStuffer.id, string.match(v.name, '[^/]+/[^/]+$'))))()
-            ret = mergeTables(ret, loc_table)
-        end
-    end
-    return ret
-end
-
-local function processLoc()
-    local locPath = StockingStuffer.path .. "localization/"
-    local info = nativefs.getDirectoryItemsInfo(locPath)
-    table.sort(info, function(a, b)
-        return a.name < b.name
-    end)
-    local ret = {}
-    for _, v in ipairs(info) do
-        if v.type == "directory" then
-            ret[v.name] = loadLang(locPath .. v.name .. "/")
-        end
-    end
-    return ret
-end
-
-local function injectLoc(loc)
-    if not loc then return end
-    mergeTables(G.localization, loc)
-end
-
-function StockingStuffer.process_loc_text()
-    local txt = processLoc()
-
-    injectLoc(txt['en-us'])
-    injectLoc(txt['default'])
-    injectLoc(txt[G.SETTINGS.language])
-    injectLoc(txt[G.SETTINGS.real_language])
+    PotatoPatchUtils.load_files(SMODS.current_mod.path .. '/tests')
 end
 
 --#endregion

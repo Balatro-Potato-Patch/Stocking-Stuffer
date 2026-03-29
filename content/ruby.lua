@@ -34,7 +34,7 @@ local RUBY_GRADIENT = SMODS.Gradient {
     }
 }
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name,
     colour = RUBY_GRADIENT
 })
