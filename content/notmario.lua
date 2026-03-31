@@ -547,7 +547,7 @@ StockingStuffer.Present({
     config = { extra = { old_x_tilt = 0, old_y_tilt = 0, active = true } },
     pos = { x = 1, y = 0 },
     pixel_size = { w = 54, h = 61 },
-    artist = { "pangaea47" },
+    ppu_artist = { "pangaea47" },
     draw = function(self, card, layer)
         local function should_draw_3d() return enable_bonus_models end
         if (card.config.center.discovered or card.bypass_discovery_center) then
@@ -619,7 +619,7 @@ StockingStuffer.Present({
     config = { extra = 5 },
     pixel_size = { w = 64, h = 24 },
     display_size = { w = 64 * 1.25, h = 24 * 1.25 },
-    artist = { "pangaea47" },
+    ppu_artist = { "pangaea47" },
     blueprint_compat = false,
     calc_scaling = function(self, _self, card, initial, scalar_value, args)
         if args.operation == 'X' then
@@ -646,7 +646,7 @@ StockingStuffer.Present({
     config = { extra = { antes_left = 4 } },
     pos = { x = 3, y = 0 },
     pixel_size = { w = 57, h = 81 },
-    artist = { "pangaea47" },
+    ppu_artist = { "pangaea47" },
     blueprint_compat = false,
 
     loc_vars = function(self, info_queue, card)
@@ -684,7 +684,7 @@ StockingStuffer.Present({
     config = { extra = { mult = 1 } },
     pos = { x = 4, y = 0 },
     pixel_size = { w = 61, h = 52 },
-    artist = { "pangaea47" },
+    ppu_artist = { "pangaea47" },
     blueprint_compat = true,
 
     no_collection = true,
@@ -757,7 +757,7 @@ StockingStuffer.Present({
     config = { extra = { times_used = 0 } },
     pixel_size = { w = 22, h = 46 },
     display_size = { w = 22 * 1.5, h = 46 * 1.5 },
-    artist = { "pangaea47" },
+    ppu_artist = { "pangaea47" },
     blueprint_compat = false,
     can_use = function(self, card)
         -- check for use condition here

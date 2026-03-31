@@ -46,7 +46,7 @@ StockingStuffer.WrappedPresent({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'instant_yuri', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 1, y = 0 },
     pixel_size = { w = 69, h = 78 },
@@ -113,7 +113,7 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
     key = 'can_of_chips', -- keys are prefixed with 'display_name_stocking_' for reference
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     pos = { x = 2, y = 0 },
     config = { extra = { chips = 10, chips_loss = 1 } },
     pixel_size = { w = 38, h = 82 },
@@ -144,7 +144,7 @@ StockingStuffer.Present({
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
     key = 'enchanted_coal', -- keys are prefixed with 'display_name_stocking_' for reference
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     pos = { x = 3, y = 0 },
     config = { extra = { active = false, canuse = true } },
     pixel_size = { w = 64, h = 82 },

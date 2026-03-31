@@ -47,8 +47,8 @@ StockingStuffer.WrappedPresent({
 -- Present Template - Replace 'template' with your name
 -- Note: You should make up to 5 Presents to fill your Wrapped Present!
 StockingStuffer.Present({
-    artist = { 'deadbeet' },
-    coder = { 'deadbeet' },
+    ppu_artist = { 'deadbeet' },
+    ppu_coder = { 'deadbeet' },
     developer = display_name,  -- DO NOT CHANGE
     key = 'jimbmas_cartridge', -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example

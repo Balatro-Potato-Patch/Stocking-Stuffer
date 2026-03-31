@@ -26,7 +26,7 @@ PotatoPatchUtils.Developer({
 -- Wrapped Present
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     pos = { x = 0, y = 0 },
     pixel_size = {w=63, h=71},
 })
@@ -34,7 +34,7 @@ StockingStuffer.WrappedPresent({
 -- Present Template
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'hat',
     pos = { x = 1, y = 0 },
     pixel_size = {w=64, h=72},
@@ -54,7 +54,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'scarf',
     pos = { x = 2, y = 0 },
     pixel_size = {w=57, h=81},
@@ -86,7 +86,7 @@ end
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'coffee',
     pos = { x = 3, y = 0 },
     pixel_size = {w=51, h=48},
@@ -139,7 +139,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'laptop',
     pos = { x = 4, y = 0 },
     pixel_size = {w=56, h=76},
@@ -171,7 +171,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'gloves',
     disable_animation = true,
     pos = { x = 5, y = 0 },

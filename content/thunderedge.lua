@@ -50,7 +50,7 @@ StockingStuffer.WrappedPresent({
 	pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
 	atlas = display_name .. "_wrapped",
 	display_size = { w = 71, h = 71 },
-	artist = { "George the Rat" },
+	ppu_artist = { "George the Rat" },
 })
 
 -- Present Template - Replace 'template' with your name
@@ -59,7 +59,7 @@ StockingStuffer.WrappedPresent({
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "leek", -- keys are prefixed with 'display_name_stocking_' for reference
-	artist = { "MissingNumber" },
+	ppu_artist = { "MissingNumber" },
 	pos = { x = 0, y = 0 },
 	config = { extra = { chips = 15, xmult = 0.5 } },
 	loc_vars = function(self, info_queue, card)
@@ -142,7 +142,7 @@ end
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "cappy", -- keys are prefixed with 'display_name_stocking_' for reference
-	artist = { "MissingNumber" },
+	ppu_artist = { "MissingNumber" },
 	pos = { x = 1, y = 0 },
 	config = { extra = { hand_size_penalty = 1, penalty_increment = 1 } },
 	loc_vars = function(self, info_queue, card)
@@ -194,7 +194,7 @@ StockingStuffer.ThunderEdge.devilsknife_state = false
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "devilsknife", -- keys are prefixed with 'display_name_stocking_' for reference
-	artist = { "MissingNumber" },
+	ppu_artist = { "MissingNumber" },
 	pos = { x = 2, y = 0 },
 	config = { extra = { xmult = 2, xmult_gain = 0.2, xmult_loss = 1 } },
 	loc_vars = function(self, info_queue, card)
@@ -2100,7 +2100,7 @@ end
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "void_heart", -- keys are prefixed with 'display_name_stocking_' for reference
-	artist = { "MissingNumber" },
+	ppu_artist = { "MissingNumber" },
 	pos = { x = 3, y = 0 },
 	config = { extra = { used = false } },
 	loc_vars = function(self, info_queue, card)
@@ -2165,7 +2165,7 @@ StockingStuffer.Present({
 StockingStuffer.Present({
 	developer = display_name, -- DO NOT CHANGE
 	key = "meowmere", -- keys are prefixed with 'display_name_stocking_' for reference
-	artist = { "MissingNumber" },
+	ppu_artist = { "MissingNumber" },
 	pos = { x = 4, y = 0 },
 	config = { extra = { chips = 30 } },
 	loc_vars = function(self, info_queue, card)

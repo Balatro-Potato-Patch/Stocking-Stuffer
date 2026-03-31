@@ -36,13 +36,13 @@ PotatoPatchUtils.Developer({
 -- key defaults to 'display_name_stocking_present'
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
-    artist = {"Gappie"},
+    ppu_artist = {"Gappie"},
     pos = { x = 0, y = 0 },
 })
 
 StockingStuffer.Present({ --cute little jingle ball
     developer = display_name,
-    artist = {"Gappie"},
+    ppu_artist = {"Gappie"},
     key = 'ball',
     pos = { x = 1, y = 0 },
 
@@ -145,7 +145,7 @@ StockingStuffer.Present({ --cute little jingle ball
 
 StockingStuffer.Present({ --nip toy
     developer = display_name,
-    artist = {"Gappie"},
+    ppu_artist = {"Gappie"},
     key = 'catnip',
     pos = { x = 2, y = 0 },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
@@ -222,7 +222,7 @@ end
 
 StockingStuffer.Present({ --fishy treat :9
     developer = display_name,
-    artist = {"Gappie"},
+    ppu_artist = {"Gappie"},
     key = 'treat',
     pos = { x = 3, y = 0 },
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
@@ -310,7 +310,7 @@ local wandfuncs = { --kinda useful? or needlessly overcomplicated? you deiside!
 
 StockingStuffer.Present({ --mysterious object (the wand, upside down)
     developer = display_name,
-    -- artist = {"LocalThunk", "jen"}, --LocalThunk did the original general spectral design, this specific placeholder (base) appears to be jen's doing (https://canary.discord.com/channels/1116389027176787968/1224362333208444989/1246647658441998437), and the wand (soul) is my pencil-tool doodle
+    -- ppu_artist = {"LocalThunk", "jen"}, --LocalThunk did the original general spectral design, this specific placeholder (base) appears to be jen's doing (https://canary.discord.com/channels/1116389027176787968/1224362333208444989/1246647658441998437), and the wand (soul) is my pencil-tool doodle
     key = 'thewand',
     pos = { x = 4, y = 0 },
     soul_pos = { x = 4, y = 1 },
@@ -394,7 +394,7 @@ StockingStuffer.Present({ --mysterious object (the wand, upside down)
 
 StockingStuffer.Present({ --string from the wand
     developer = display_name,
-    artist = {"Gappie"},
+    ppu_artist = {"Gappie"},
     key = 'wandpiece_string',
     pos = { x = 4, y = 2 },
     yes_pool_flag = "disassembly only :D", --Flag that never gets set, obviously
@@ -437,7 +437,7 @@ StockingStuffer.Present({ --string from the wand
 
 StockingStuffer.Present({ --feather from the wand
     developer = display_name,
-    artist = {"Gappie"},
+    ppu_artist = {"Gappie"},
     key = 'wandpiece_feather',
     pos = { x = 5, y = 2 },
     yes_pool_flag = "disassembly only :D", --Flag that never gets set, obviously
@@ -473,7 +473,7 @@ StockingStuffer.Present({ --feather from the wand
 
 StockingStuffer.Present({ --pitfall seed (joke on my choice of placeholder sprites)
     developer = display_name,
-    artist = {"Animal Crossing devteam"}, --literally the sprite from ACGC
+    ppu_artist = {"Animal Crossing devteam"}, --literally the sprite from ACGC
     key = 'pitfall_seed',
     pos = { x = 5, y = 0 },
 

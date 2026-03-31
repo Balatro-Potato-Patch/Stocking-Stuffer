@@ -15,7 +15,7 @@ PotatoPatchUtils.Developer({
 StockingStuffer.WrappedPresent({
     developer = display_name,
     pos = { x = 0, y = 0 },
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
 })
 
 StockingStuffer.Present({
@@ -27,7 +27,7 @@ StockingStuffer.Present({
 
     pixel_size = { w = 55, h = 38 },
     display_size = { w = 55 * 1.25, h = 38 * 1.25 },
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
 
     loc_vars = function(self, info_queue, card)
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'SDM_0_stocking_grandmas_itchy_sweater')
@@ -113,7 +113,7 @@ StockingStuffer.Present({
 
     pixel_size = { w = 53, h = 61 },
     display_size = { w = 53 * 1.25, h = 61 * 1.25 },
-    artist = {'pangaea47', display_name},
+    ppu_artist = {'pangaea47', display_name},
 
     loc_vars = function(self, info_queue, card)
         return {
@@ -183,7 +183,7 @@ StockingStuffer.Present({
     pos = { x = 3, y = 0 },
 
     pixel_size = { w = 44, h = 63 },
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
 
     disable_use_animation = true,
     use = function(self, card)
@@ -263,7 +263,7 @@ StockingStuffer.Present({
     config = { extra = { dollars = 2 } },
 
     pixel_size = { w = 67, h = 65 },
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
 
     loc_vars = function(self, info_queue, card)
         return {
@@ -287,7 +287,7 @@ StockingStuffer.Present({
     config = { extra = { state = 1, highlight = 1, money = 5 } },
 
     pixel_size = { w = 70, h = 82 },
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
 
     loc_vars = function(self, info_queue, card)
         return {

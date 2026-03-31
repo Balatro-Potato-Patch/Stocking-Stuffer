@@ -115,8 +115,8 @@ PotatoPatchUtils.Developer({
 
 StockingStuffer.WrappedPresent({
 	developer = display_name, -- DO NOT CHANGE
-	artist = { "Garb" },
-	coder = { "Nxkoo" },
+	ppu_artist = { "Garb" },
+	ppu_coder = { "Nxkoo" },
 	pos = { x = 0, y = 0 },
 })
 
@@ -125,8 +125,8 @@ StockingStuffer.Present({
 	key = "gun",
 	pos = { x = 1, y = 0 },
 	config = { extra = { odds = 4 } },
-	artist = { "MissingNumber" },
-	coder = { "notmario" },
+	ppu_artist = { "MissingNumber" },
+	ppu_coder = { "notmario" },
 	blueprint_compat = false,
 	loc_vars = function(self, info_queue, card)
 		local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "whatever")
@@ -172,8 +172,8 @@ StockingStuffer.Present({
 	developer = display_name,
 	key = "numerosloppen",
 	pos = { x = 2, y = 0 },
-	artist = { "MissingNumber" },
-	coder = { "Nxkoo" },
+	ppu_artist = { "MissingNumber" },
+	ppu_coder = { "Nxkoo" },
 	blueprint_compat = true,
 	config = { extra = { emult = 1.5 } },
 	loc_vars = function(self, info_queue, card)
@@ -198,8 +198,8 @@ StockingStuffer.Present({
 	developer = display_name,
 	key = "monstercan",
 	pos = { x = 3, y = 0 },
-	artist = { "Ruby" },
-	coder = { "Nxkoo" },
+	ppu_artist = { "Ruby" },
+	ppu_coder = { "Nxkoo" },
 	blueprint_compat = false,
 	use = function(self, card)
 		for _, c in ipairs(G.hand.highlighted) do
@@ -225,8 +225,8 @@ StockingStuffer.Present({                       -- QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 	developer = display_name,                   -- QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 	key = "dealmaker",                          -- QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 	pos = { x = 4, y = 0 },                     -- QQQQQQQQQQQQQQQQQQQWQQQQQWWWBBBHHHHHHHHHBWWWQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-	artist = { "Ruby" },                        -- QQQQQQQQQQQQQQQQD!`__ssaaaaaaaaaass_ass_s____.  -~""??9VWQQQQQQQQQQQQQQQQQQQ
-	coder = { "Nxkoo" },                        -- QQQQQQQQQQQQQQP'_wmQQQWWBWV?GwwwmmWQmwwwwwgmZUVVHAqwaaaac,"?9$QQQQQQQQQQQQQQ
+	ppu_artist = { "Ruby" },                        -- QQQQQQQQQQQQQQQQD!`__ssaaaaaaaaaass_ass_s____.  -~""??9VWQQQQQQQQQQQQQQQQQQQ
+	ppu_coder = { "Nxkoo" },                        -- QQQQQQQQQQQQQQP'_wmQQQWWBWV?GwwwmmWQmwwwwwgmZUVVHAqwaaaac,"?9$QQQQQQQQQQQQQQ
 	blueprint_compat = false,                   -- QQQQQQQQQQQW! aQWQQQQW?qw#TTSgwawwggywawwpY?T?TYTYTXmwwgZ$ma/-?4QQQQQQQQQQQQ
 	loc_vars = function(self, info_queue, card) -- QQQQQQQQQQQW' jQQQQWTqwDYauT9mmwwawww?WWWWQQQQQ@TT?TVTT9HQQQQQQw,-4QQQQQQQQQ
 	end,                                        -- QQQQQQQQQQQ[ jQQQQQyWVw2$wWWQQQWWQWWWW7WQQQQQQQQPWWQQQWQQw7WQQQWWc)WWQQQQQQQ
@@ -239,8 +239,8 @@ StockingStuffer.Present({
 	developer = display_name,
 	key = "ps5",
 	pos = { x = 6, y = 0 },
-	artist = { "MissingNumber" },
-	coder = { "Nxkoo" },
+	ppu_artist = { "MissingNumber" },
+	ppu_coder = { "Nxkoo" },
 	config = { extra = { percent = -50 } },
 	blueprint_compat = false,
 	loc_vars = function (self, info_queue, card)

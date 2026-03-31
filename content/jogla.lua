@@ -36,7 +36,7 @@ PotatoPatchUtils.Developer({
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
     atlas = display_name..'_presents_gf',
-    artist = {'[REDACTED]Autumn'},
+    ppu_artist = {'[REDACTED]Autumn'},
     pos = { x = 0, y = 0 },
 })
 
@@ -46,7 +46,7 @@ StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
     key = 'e_magic', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 1, y = 0 },
-    artist = {'Jogla'},
+    ppu_artist = {'Jogla'},
     config = {
         extra = {
             is_releasing = false,
@@ -114,7 +114,7 @@ StockingStuffer.Present({
 -- Note: You should make up to 5 Presents to fill your Wrapped Present!
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Jogla'},
+    ppu_artist = {'Jogla'},
     key = 'magnet', -- keys are prefixed with 'display_name_stocking_' for reference
     pos = { x = 4, y = 0 },
     config = {
@@ -180,7 +180,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'[REDACTED]Autumn'},
+    ppu_artist = {'[REDACTED]Autumn'},
     key = 'shuffler', -- keys are prefixed with 'display_name_stocking_' for reference
     config = {
         extra = {

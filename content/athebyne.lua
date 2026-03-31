@@ -40,7 +40,7 @@ The Jolly Roger
 
 StockingStuffer.Present({
     developer = display_name,
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'roger',
     pos = { x = 1, y = 0 },
 
@@ -465,7 +465,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name,
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'ranchers',
     pos = { x = 4, y = 0 },
     pixel_size = {w = 59, h = 40},
@@ -508,7 +508,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name,
-    artist = {'pangaea47'},
+    ppu_artist = {'pangaea47'},
     key = 'giant',
     pos = { x = 5, y = 0 },
     pixel_size = {w = 32, h = 84},

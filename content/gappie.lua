@@ -35,7 +35,7 @@ PotatoPatchUtils.Developer({
 -- key defaults to 'display_name_stocking_present'
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Gappie'},
+    ppu_artist = {'Gappie'},
     pos = { x = 0, y = 0 }, -- position of present sprite on your atlas
     -- atlas defaults to 'stocking_display_name_presents' as created earlier but can be overriden
 
@@ -60,8 +60,8 @@ SMODS.Atlas({
 -- Note: You should make up to 5 Presents to fill your Wrapped Present!
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Gappie'},
-    coder = {'Eremel'},
+    ppu_artist = {'Gappie'},
+    ppu_coder = {'Eremel'},
     key = 'peashooter',
     pos = { x = 1, y = 0 },
     config = {extra = {suit = 'Clubs', mult_gain = 4, health = 3, health_loss = 1, active = true}},
@@ -147,8 +147,8 @@ SMODS.Atlas({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Gappie'},
-    coder = {'Eremel'},
+    ppu_artist = {'Gappie'},
+    ppu_coder = {'Eremel'},
     key = 'power_up_jar',
     pos = { x = 2, y = 0 },
     config = {extra = {cost = 20, hand_size = 1, xmult_gain = 0.2, used = {toss = false, zap = false, snow = false}}},
@@ -330,8 +330,8 @@ end
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Gappie'},
-    coder = {'Eremel'},
+    ppu_artist = {'Gappie'},
+    ppu_coder = {'Eremel'},
     key = 'star_fruit',
     pos = { x = 3, y = 0 },
     config = {extra = {suit = 'Diamonds', rank = 5, dollars = 1, mult = 1}},
@@ -385,8 +385,8 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Gappie'},
-    coder = {'Eremel'},
+    ppu_artist = {'Gappie'},
+    ppu_coder = {'Eremel'},
     key = 'wallnut',
     pos = { x = 0, y = 1 },
     config = {extra = {chips = 40, gain = 4, chip_loss = 2, suit = 'Hearts', loss = 5, xmult = 2, evolved = false}},
@@ -490,8 +490,8 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    artist = {'Gappie'},
-    coder = {'Eremel'},
+    ppu_artist = {'Gappie'},
+    ppu_coder = {'Eremel'},
     key = 'fume_shroom',
     pos = { x = 2, y = 1 },
     config = {extra = {evolved = false, denom = 2, suit = 'Spades', options = {gloom = 15, ice = 20}}},

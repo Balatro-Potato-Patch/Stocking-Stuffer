@@ -27,8 +27,8 @@ StockingStuffer.Present({
     pixel_size = { w = 47, h = 82 },
     config = { extra = { current_chance = 0, denominator = 7 } },
     blueprint_compat = true,
-    coder = { "notmario" },
-    artist = { "pangaea47", "hollowedgraphix" },
+    ppu_coder = { "notmario" },
+    ppu_artist = { "pangaea47", "hollowedgraphix" },
 
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, card.ability.extra.current_chance, card.ability.extra.denominator, 'spectral_key')
@@ -74,7 +74,7 @@ StockingStuffer.Present({
     pixel_size = { w = 56, h = 77 },
     config = { extra = { target = nil, joker_target = nil } },
     blueprint_compat = true,
-    coder = { "notmario" },
+    ppu_coder = { "notmario" },
 
     loc_vars = function(self, info_queue, card)
         if card.ability.extra.target then
@@ -180,7 +180,7 @@ StockingStuffer.Present({
     pixel_size = { w = 64, h = 64 },
     config = { extra = { target = nil, uses = 1, odds = 2, } },
     blueprint_compat = false,
-    coder = { "notmario" },
+    ppu_coder = { "notmario" },
 
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'camcorder')
@@ -501,7 +501,7 @@ StockingStuffer.Present({
     display_size = { w = 63 * 1.25, h = 24 * 1.25 },
     config = { extra = { target = nil, odds = 3 } },
     blueprint_compat = true,
-    coder = { "notmario" },
+    ppu_coder = { "notmario" },
 
     loc_vars = function(self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'dish')
@@ -566,7 +566,7 @@ StockingStuffer.Present({
     pixel_size = { w = 44, h = 82 },
     config = { extra = { target = nil, odds = 2 } },
     blueprint_compat = false,
-    coder = { "notmario" },
+    ppu_coder = { "notmario" },
 
     loc_vars = function(self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'rose')
