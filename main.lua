@@ -722,7 +722,7 @@ SMODS.Atlas({
 StockingStuffer.WrappedPresent = SMODS.Consumable:extend({
     required_params = {
         'key',
-        'developer'
+        'ppu_developer'
     },
     key = 'present',
     set = 'stocking_wrapped_present',
