@@ -233,21 +233,6 @@ payload = '''
 end
 '''
 
-# comment
-[[patches]]
-[patches.pattern]
-target = 'functions/misc_functions.lua'
-match_indent = true
-position = 'at'
-pattern = '''
-if args.type == 'other' then
-'''
-payload = '''
-if args.loc_target then
-    loc_target = args.loc_target
-elseif args.type == 'other' then
-'''
-
 # juice_card_until support
 [[patches]]
 [patches.pattern]
