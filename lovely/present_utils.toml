@@ -358,7 +358,7 @@ target = 'functions/state_events.lua'
 match_indent = true
 position = 'before'
 pattern = '''
-local ret = _card:calculate_dollar_bonus()
+local ret, ret_opts = _card:calculate_dollar_bonus()
 '''
 payload = '''
 if not _card.calc_dollar_done then
@@ -367,15 +367,16 @@ if not _card.calc_dollar_done then
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-match_indent = true
+match_indent = false
 position = 'after'
 pattern = '''
     dollars = dollars + ret
 end
 '''
 payload = '''
-end
+        end
 '''
+times = 1
 
 # Stop calc_scaling duplicate calls
 [[patches]]
