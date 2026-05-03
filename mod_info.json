@@ -12,5 +12,6 @@
     "badge_colour": "22A617",
     "dependencies": [
         "Steamodded (>=1.0.0~BETA-1501a)"
-    ]
+    ],
+	"allow_redistribution": true
 }
