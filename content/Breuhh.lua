@@ -17,7 +17,7 @@ SMODS.Atlas({
     fps = 2,
 })
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name,
     colour = HEX('e303fc')
 })

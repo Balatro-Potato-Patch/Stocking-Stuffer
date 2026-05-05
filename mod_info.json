@@ -2,7 +2,7 @@
     "name": "Stocking Stuffer",
     "no_marquee": true,
     "id": "stocking",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "website_url": "https://github.com/Balatro-Potato-Patch/Stocking-Stuffer",
     "description": "A mod jam hosted by the Potato Patch to celebrate the Holiday season",
     "prefix": "stocking",
@@ -11,7 +11,8 @@
     "priority": 0,
     "badge_colour": "22A617",
     "dependencies": [
-        "Steamodded (>=1.0.0~BETA-1501a)"
+        "Steamodded (>=1.0.0~BETA-1503a)",
+		"PotatoPatchUtils (>=1.0.0)"
     ],
 	"allow_redistribution": true
 }

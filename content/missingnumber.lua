@@ -30,7 +30,7 @@ G.ARGS.LOC_COLOURS.MissingNumber_crystal = gradient
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
 
     -- Replace '000000' with your own hex code
@@ -38,7 +38,7 @@ StockingStuffer.Developer({
     colour = HEX('FF9FFF')
 })
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = "Lily Felli",
     colour = HEX('FFAD31')
 })
@@ -84,7 +84,7 @@ StockingStuffer.Present({
             }
         end
     end,
-    coder = { "Lily Felli" }
+    ppu_coder = { "Lily Felli" }
 })
 
 StockingStuffer.Present({
@@ -136,7 +136,7 @@ StockingStuffer.Present({
             end
         end
     end,
-    coder = { "Lily Felli" }
+    ppu_coder = { "Lily Felli" }
 })
 
 
@@ -174,7 +174,7 @@ StockingStuffer.Present({
             SMODS.scale_card(card, { ref_table = card.ability.extra, ref_value = "xmult", scalar_value = "gain" })
         end
     end,
-    coder = { "Lily Felli" }
+    ppu_coder = { "Lily Felli" }
 })
 
 StockingStuffer.Present({
@@ -224,7 +224,7 @@ StockingStuffer.Present({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percentage, card.ability.extra.uses } }
     end,
-    coder = { "Lily Felli" }
+    ppu_coder = { "Lily Felli" }
 })
 
 StockingStuffer.Present({
@@ -252,5 +252,5 @@ StockingStuffer.Present({
             return { xmult = card.ability.extra.current }
         end
     end,
-    coder = { "Lily Felli" }
+    ppu_coder = { "Lily Felli" }
 })

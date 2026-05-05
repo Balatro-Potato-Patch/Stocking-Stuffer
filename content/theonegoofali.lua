@@ -18,7 +18,7 @@ SMODS.Atlas({
 SMODS.Sound({key = "duck", path = "duck.ogg"}) -- quack
 SMODS.Sound({key = "kcud", path = "kcud.ogg"}) -- kcauq
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
 	name = display_name,
 	colour = HEX('FD9712')
 })

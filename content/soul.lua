@@ -17,7 +17,7 @@ SMODS.Atlas({
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
 
     -- Replace '000000' with your own hex code
@@ -25,7 +25,7 @@ StockingStuffer.Developer({
     colour = G.C.SECONDARY_SET.Spectral
 })
 
-StockingStuffer.Developer{
+PotatoPatchUtils.Developer{
     name = "DigitalDetective47",
     colour = G.C.GREEN
 }
@@ -38,7 +38,7 @@ end })
 -- key defaults to 'display_name_stocking_present'
 StockingStuffer.WrappedPresent({
     developer = display_name, -- DO NOT CHANGE
-    coder = { "DigitalDetective47" },
+    ppu_coder = { "DigitalDetective47" },
 
     pos = { x = 0, y = 9 },   -- position of present sprite on your atlas
     prefix_config = { atlas = false },
@@ -74,7 +74,7 @@ StockingStuffer.WrappedPresent({
 -- Note: You should make up to 5 Presents to fill your Wrapped Present!
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    coder = { "DigitalDetective47" },
+    ppu_coder = { "DigitalDetective47" },
 
     key = 'rapier',           -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example
@@ -116,7 +116,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    coder = { "DigitalDetective47" },
+    ppu_coder = { "DigitalDetective47" },
 
     key = 'skull',            -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example
@@ -170,7 +170,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    coder = { "DigitalDetective47" },
+    ppu_coder = { "DigitalDetective47" },
 
     key = 'chalice',          -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example
@@ -232,7 +232,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    coder = { "DigitalDetective47" },
+    ppu_coder = { "DigitalDetective47" },
 
     key = 'knife',            -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example
@@ -282,7 +282,7 @@ StockingStuffer.Present({
 
 StockingStuffer.Present({
     developer = display_name, -- DO NOT CHANGE
-    coder = { "DigitalDetective47" },
+    ppu_coder = { "DigitalDetective47" },
 
     key = 'crown',            -- keys are prefixed with 'display_name_stocking_' for reference
     -- You are encouraged to use the localization file for your name and description, this is here as an example

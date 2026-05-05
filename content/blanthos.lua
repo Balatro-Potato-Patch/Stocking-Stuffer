@@ -7,7 +7,7 @@ SMODS.Atlas({
     py = 95
 })
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
     colour = HEX('6D83E8')
 })

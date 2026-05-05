@@ -9,7 +9,7 @@ local aiko_atlas = SMODS.Atlas({
 })
 
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name, -- DO NOT CHANGE
     colour = HEX('5ebb55')
 })

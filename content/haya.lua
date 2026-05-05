@@ -33,7 +33,7 @@ local irisu = love.graphics.newImage(irisu_data)
 
 -- Developer Template
 -- Note: This object is how your WrappedPresent and Presents get linked
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
 	name = display_name, -- DO NOT CHANGE
 
 	-- Replace '000000' with your own hex code
@@ -43,7 +43,7 @@ StockingStuffer.Developer({
 
 -- Just in case if Aiko's name is not yet loaded...
 if not StockingStuffer.aikoyori then
-	StockingStuffer.Developer({
+	PotatoPatchUtils.Developer({
 		name = 'Aikoyori', -- DO NOT CHANGE
 		colour = HEX('5ebb55')
 	})
@@ -81,7 +81,7 @@ StockingStuffer.Present({
 	pos = { x = 1, y = 0 },
 	pixel_size = { w = 56, h = 74 },
 	config = { extra = { disabled = false } },
-	artist = { 'Aikoyori' },
+	ppu_artist = { 'Aikoyori' },
 	disable_use_animation = true, -- We manually move the various things ourselves so disable thissss
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -347,7 +347,7 @@ StockingStuffer.Present({
 	pixel_size = { w = 38, h = 48 },
 	display_size = { w = 38 * 1.25, h = 48 * 1.25 },
 	config = { extra = { ante = 1 } },
-	artist = { 'Aikoyori' },
+	ppu_artist = { 'Aikoyori' },
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.ante }
@@ -429,7 +429,7 @@ StockingStuffer.Present({
 	pos = { x = 3, y = 0 },
 	pixel_size = { w = 71, h = 84 },
 	config = { extra = { count = 7, remaining = 0, remove = false } },
-	artist = { 'Aikoyori' },
+	ppu_artist = { 'Aikoyori' },
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.count, card.ability.extra.remaining }
@@ -594,7 +594,7 @@ StockingStuffer.Present({
 	pos = { x = 4, y = 0 },
 	pixel_size = { w = 37, h = 85 },
 	config = { extra = { rounds = 3, reduce = 0.75 } },
-	artist = { 'Aikoyori' },
+	ppu_artist = { 'Aikoyori' },
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.reduce, card.ability.extra.rounds },
@@ -641,7 +641,7 @@ StockingStuffer.Present({
 	pos = { x = 5, y = 0 },
 	pixel_size = { w = 57, h = 92 },
 	config = { extra = { used = false } },
-	artist = { 'Aikoyori' },
+	ppu_artist = { 'Aikoyori' },
 	can_use = function(self, card)
 		return G.GAME.blind.boss and G.STATE == G.STATES.SELECTING_HAND and not card.ability.extra.used
 	end,

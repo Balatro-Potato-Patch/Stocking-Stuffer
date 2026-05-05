@@ -16,7 +16,7 @@ SMODS.Atlas({
     frames = 25
 })
 
-StockingStuffer.Developer({
+PotatoPatchUtils.Developer({
     name = display_name,
     colour = HEX('FCCF50'),
 })
