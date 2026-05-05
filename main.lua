@@ -1,7 +1,7 @@
 StockingStuffer = SMODS.current_mod
 SMODS.handle_loc_file(SMODS.current_mod.path, SMODS.current_mod.id)
 PotatoPatchUtils.LOC.init()
-PotatoPatchUtils.LOC.process_loc_text(SMODS.current_mod.path .. '/localization')
+PotatoPatchUtils.LOC.process_loc_text(SMODS.current_mod.path .. 'localization/')
 
 to_big = to_big or function(x)
     return x
