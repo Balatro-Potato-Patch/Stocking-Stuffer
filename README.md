@@ -10,7 +10,6 @@ Participants were tasked with creating up to 5 Presents for players to unwrap fr
 ### Enjoy the mod, and have a happy holiday!
 
 ## Stocking Stuffer depends on PotatoPatchUtils, which you can download here: https://github.com/Balatro-Potato-Patch/Potato-Patch-Utils
-
 <br></br>
 ## Credits:
 ### Organizers:
