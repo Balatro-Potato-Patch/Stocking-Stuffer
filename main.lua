@@ -1399,7 +1399,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 },
                 {
                     n = G.UIT.R,
-                    config = { ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * card.T.w - 0.15, minh = 0.65 * card.T.h, maxw = 0.7 * card.T.w - 0.15, hover = true, shadow = true, colour = PotatoPatchUtils.Developers[card.config.center.developer].colour, one_press = true, button = 'use_card' },
+                    config = { ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * card.T.w - 0.15, minh = 0.65 * card.T.h, maxw = 0.7 * card.T.w - 0.15, hover = true, shadow = true, colour = PotatoPatchUtils.Developers[StockingStuffer.prefix .. '_' .. card.config.center.developer].colour, one_press = true, button = 'use_card' },
                     nodes = {
                         { n = G.UIT.T, config = { text = localize('b_open'), colour = G.C.UI.TEXT_LIGHT, scale = 0.35, shadow = true } }
                     }
