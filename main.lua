@@ -3,6 +3,9 @@ SMODS.handle_loc_file(SMODS.current_mod.path, SMODS.current_mod.id)
 PotatoPatchUtils.LOC.init()
 PotatoPatchUtils.LOC.process_loc_text(SMODS.current_mod.path .. 'localization/')
 
+assert(SMODS.current_mod.lovely,
+    "Lovely modules were not loaded.\nMake sure your Stocking Stuffer folder is not nested (there should be a bunch of files in the Stocking Stuffer folder and not just another folder).")
+
 to_big = to_big or function(x)
     return x
 end
