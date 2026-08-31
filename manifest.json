@@ -1,0 +1,10 @@
+{
+    "name": "Stocking Stuffer",
+    "version_number": "1.1.1",
+    "website_url": "https://github.com/Balatro-Potato-Patch/Stocking-Stuffer",
+    "description": "A mod jam hosted by the Potato Patch to celebrate the Holiday season",
+    "dependencies": [
+        "Steamodded-1.1503.0",
+		"PotatoPatchUtils-1.0.0"
+    ]
+}
