@@ -5,6 +5,6 @@
     "description": "A mod jam hosted by the Potato Patch to celebrate the Holiday season",
     "dependencies": [
 		"Steamodded-Steamodded-26.829.0",
-		"ThePotatoPatch-PotatoPatchUtils-1.0.0"
+		"ThePotatoPatch-Potato_Patch_Utils-1.0.0"
     ]
 }
