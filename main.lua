@@ -10,13 +10,6 @@ to_number = to_number or function(x)
     return x
 end
 
-SMODS.Atlas {
-    key = "modicon",
-    path = "modicon.png",
-    px = 34,
-    py = 34,
-}
-
 -- State for Present Area visibility
 StockingStuffer.states = {
     slot_visible = 1,

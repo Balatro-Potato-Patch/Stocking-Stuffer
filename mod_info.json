@@ -14,5 +14,6 @@
         "Steamodded (>=1.0.0~BETA-1503a)",
 		"PotatoPatchUtils (>=1.0.0)"
     ],
-	"allow_redistribution": true
+	"allow_redistribution": true,
+    "icon_path": "modicon.png"
 }
