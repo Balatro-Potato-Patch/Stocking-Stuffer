@@ -10,7 +10,7 @@ target = 'functions/common_events.lua'
 match_indent = true
 position = 'before'
 pattern = '''
-return base + G.GAME.hands[hand]['l_' .. parameter] * amount
+return base + G.GAME.hands[hand]['l_' .. parameter] * level_up
 '''
 payload = '''
 if parameter == 'stocking_jolly_glop' then return end --don't upgrade jolly glop

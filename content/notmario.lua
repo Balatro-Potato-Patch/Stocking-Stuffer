@@ -621,19 +621,23 @@ StockingStuffer.Present({
     display_size = { w = 64 * 1.25, h = 24 * 1.25 },
     ppu_artist = { "pangaea47" },
     blueprint_compat = false,
-    calc_scaling = function(self, _self, card, initial, scalar_value, args)
-        if args.operation == 'X' then
-            local sqrt = 1
-            -- if we get a negative value for this i have no fucking clue
-            -- what it should do so just ignore it
-            if scalar_value >= 0 then sqrt = math.sqrt(scalar_value) end
-            return {
-                override_scalar_value = { value = scalar_value * sqrt }
-            }
-        else
-            return {
-                override_scalar_value = { value = scalar_value * 1.5 }
-            }
+    calculate = function(self, card, context)
+        local stg = card.ability.extra
+    
+        if context.scaling_card and context.card.ability.set == 'Joker' then
+            if context.operation == 'X' then
+                local sqrt = 1
+                -- if we get a negative value for this i have no fucking clue
+                -- what it should do so just ignore it
+                if context.scalar >= 0 then sqrt = math.sqrt(context.scalar) end
+                return {
+                    override_scalar = context.scalar * sqrt
+                }
+            else
+                return {
+                    override_scalar = context.scalar * 1.5
+                }
+            end
         end
     end
 })
