@@ -21,7 +21,7 @@ return {
                     'Permanently exchange {C:attention}#1#{} of either',
                     '{C:blue}Hands{}, {C:red}Discards{} or {C:attention}Hand Size{}',
                     'for {C:money}$#2#{}',
-                    '{stocking}usable{}',
+                    '{ppu_bubble:usable}{}',
                     "{C:inactive,s:0.8}How did this get here?",
                 },
             },
@@ -39,13 +39,13 @@ return {
                 text = {
                     {
                         "{V:1}#2#{} {C:inactive}(Use to #3#)",
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                     {
                         'If first played hand contains {C:attention}exactly 4 unscored{} cards',
                         'Destroy all {C:attention}scored{} cards and gain {C:money}$#1#{}',
                         "{C:inactive,s:0.8}oops i think i put one {C:inactive,s:0.8}too many words in the name",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                 },
             },
@@ -58,7 +58,7 @@ return {
                     {
                         'Apply {C:dark_edition}Eternal{} to first Joker',
                         '{C:inactive}(Once per round)',
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                     {
                         '{C:dark_edition}Eternal{} Jokers give',

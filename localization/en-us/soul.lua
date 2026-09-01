@@ -7,13 +7,13 @@ return {
                     "If played hand contains",
                     "a single card, increase",
                     "blind requirement by {C:attention}#1#%",
-                    "{stocking}before"
+                    "{ppu_bubble:stocking_before}"
                 }, {
                     "Earn {C:money}$#2#{} at end",
                     "of round for each time",
                     "this present triggered",
                     "{C:inactive}(Currently {C:money}$#3#{C:inactive})",
-                    "{stocking}after"
+                    "{ppu_bubble:stocking_after}"
                 } }
             },
             Kitty_stocking_skull = {
@@ -21,11 +21,11 @@ return {
                 text = { {
                     "{C:green}#1# in #2#{} chance to {C:red}discard",
                     "each card held in hand",
-                    "{stocking}before"
+                    "{ppu_bubble:stocking_before}"
                 }, {
                     "{X:mult,C:white}X#3#{} Mult per card",
                     "{C:red}discarded{} by this effect",
-                    "{stocking}after"
+                    "{ppu_bubble:stocking_after}"
                 } }
             },
             Kitty_stocking_chalice = {
@@ -33,13 +33,13 @@ return {
                 text = { {
                     "{C:green}#1# in #2#{} chance to apply",
                     "{C:dark_edition}Negative{} to a random consumable",
-                    "{stocking}before"
+                    "{ppu_bubble:stocking_before}"
                 }, {
                     "On {C:attention}first hand{} after being acquired,",
                     "fills your consumable slots",
                     "with random consumables",
                     "{C:inactive}(Can create duplicates)",
-                    "{stocking}after"
+                    "{ppu_bubble:stocking_after}"
                 } }
             },
             Kitty_stocking_knife = {
@@ -49,7 +49,7 @@ return {
                     "for every {C:attention}face card{}",
                     "discarded this round",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
-                    "{stocking}after"
+                    "{ppu_bubble:stocking_after}"
                 }, {
                     "If played hand contains a",
                     "{C:attention}Pair of face cards{},",
@@ -61,11 +61,11 @@ return {
                 name = "Fool's Crown",
                 text = { {
                     "Played #1#s give {C:money}$#3#{} when scored",
-                    "{stocking}before"
+                    "{ppu_bubble:stocking_before}"
                 }, {
                     "Gains {X:mult,C:white}X#4#{} Mult per scored #2#",
                     "{C:inactive}(Currently {X:mult,C:white}X#5#{C:inactive})",
-                    "{stocking}after"
+                    "{ppu_bubble:stocking_after}"
                 }, {
                     "Ranks switch at end of round"
                 } }

@@ -22,7 +22,7 @@ return {
 					{
 						"Reroll all cards held in hand",
 						"when a card is {C:attention}sold{}",
-						"{stocking}before{}",
+						"{ppu_bubble:stocking_before}{}",
 					},
 					{ "{C:inactive}You wouldn't download a car!" },
 				},
@@ -34,7 +34,7 @@ return {
 						"When a playing card is {C:attention}destroyed{},",
 						"also destroy all other cards with",
 						"the {C:attention}same Rank and Suit{} as it",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 					{
 						"{C:inactive}TO THE ONE WHO +8 MULTS FOR PAIRS",
@@ -58,7 +58,7 @@ return {
 						"Earn {C:money}$1{} at end of",
 						"round for every {C:attention}4{} cards",
 						"remaining in {C:attention}deck",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 					{
 						"{C:inactive}WELL, SPRING CHANGED TO SUMMER,",
@@ -79,7 +79,7 @@ return {
                         "Played cards give their",
                         "total {C:chips}Chips{} as {C:mult}Mult",
                         "when scored",
-						"{stocking}before{}",
+						"{ppu_bubble:stocking_before}{}",
 					},
 					{
 						"{C:inactive}WELL, SPRING CHANGED TO SUMMER,",
@@ -100,7 +100,7 @@ return {
 						"When hand is played,",
 						"the {C:attention}rightmost scored card{}",
 						"gains a random {C:attention}Enhancement{}",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 					{
 						"{C:inactive}WELL, SPRING CHANGED TO SUMMER,",
@@ -120,7 +120,7 @@ return {
 					{
                         "When hand is played,",
 						"gain {C:red}+1{} discard",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 					{
 						"{C:inactive}WELL, SPRING CHANGED TO SUMMER,",
@@ -137,7 +137,7 @@ return {
 						"of creating the next",
 						"{C:purple}Tarot{} card in sequence",
 						"{C:inactive}(Must have room){}",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 					{
 						"{C:inactive}The solution has been found.",
@@ -154,7 +154,7 @@ return {
 						"Swap the base {C:blue}Chips{}",
 						"and {C:mult}Mult{} of {C:attention}Pair{} with",
 						"{C:attention}Four of a Kind{} when scoring",
-						"{stocking}before{}",
+						"{ppu_bubble:stocking_before}{}",
 					},
 					{
 						"{C:inactive}He is green because",

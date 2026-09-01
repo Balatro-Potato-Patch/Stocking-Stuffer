@@ -17,7 +17,7 @@ return {
                         '{C:inactive}(Can be used multiple times in a row){}',
                         '{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult stored){}',
                         '{C:inactive}(Currently {C:attention}#3#%{} {X:mult,C:white}X#2#{C:inactive} Mult loaded){}',
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                 }
             },
@@ -27,7 +27,7 @@ return {
                     'Holds #1# cards',
                     'Replenishes after boss blind defeated',
                     '{C:attention}Use{} to draw 1 random card',
-                    '{stocking}usable{}',
+                    '{ppu_bubble:usable}{}',
                     'Cards:'
                 }
             },
@@ -36,12 +36,12 @@ return {
                 text = {
                     {
                         'Swaps {C:chips}Chips{} and {C:mult}Mult{}.',
-                        '{stocking}before{}'
+                        '{ppu_bubble:stocking_before}{}'
                     },
                     {
                         'Change trigger time',
                         '{C:inactive}(Currently: {C:attention}#1#{C:inactive}){}',
-                        '{stocking}usable{}'
+                        '{ppu_bubble:usable}{}'
                     },
                 }
             },

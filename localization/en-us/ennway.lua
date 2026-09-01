@@ -7,14 +7,14 @@ return {
                     'Adds {C:mult}#2#{} levels to',
                     '{C:attention}last played poker hand',
                     '{C:inactive}(Currently: #1#)',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["ENNWAY_stocking_twelveMonthGrok"] = {
                 name = '12-Month Grok Subscription',
                 text = {
                     '{C:mult}+1{} {C:attention}Rotoscoped Dancing Robot',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["ENNWAY_stocking_coolEmoji"] = {
@@ -28,16 +28,16 @@ return {
                     'percentage of {C:attention}current',
                     '{C:attention}Blind',
                     '{c:inactive}(Currently {V:1}#1#%{c:inactive} / {C:chips}#2#{} Chips{c:inactive})',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["ENNWAY_stocking_lapisLazuli"] = {
                 name = 'Lapis Lazuli',
                 text = {
                     {'{C:chips}-#1#{} Chips',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'{X:chips,C:white}X#2#{} Chips',
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
             ["ENNWAY_stocking_gamingChair"] = {
@@ -50,7 +50,7 @@ return {
                     ' ',
                     '{C:atttention}Can only be used',
                     '{C:atttention}once per Ante',
-                    '{stocking}before{}'
+                    '{ppu_bubble:stocking_before}{}'
                 }
             },
             ["ENNWAY_stocking_gamingChair_alt"] = {

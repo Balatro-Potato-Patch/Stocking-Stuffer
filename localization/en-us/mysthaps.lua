@@ -14,19 +14,19 @@ return {
                         "{C:diamonds}Diamonds{}: {V:2}$#2#",
                         "{C:spades}Spades{}: {V:3}+#3# {V:4}chips",
                         "{C:clubs}Clubs{}: {V:5}+#4# {V:6}Mult",
-                        "{stocking}before{}"
+                        "{ppu_bubble:stocking_before}{}"
                     },
                     {
-                        "{C:attention}Aces{}: {V:7}Triggers {stocking}before{V:7} effect again",
+                        "{C:attention}Aces{}: {V:7}Triggers {ppu_bubble:stocking_before}{V:7} effect again",
                         "{C:attention}Faces{}: {V:8}$#5#",
                         "{C:attention}6s to 10s{}: {V:9}Doubles {V:10}all {V:11}odds",
                         "{C:attention}2s to 5s{}: {V:12}Becomes {V:13}destroyed",
-                        "{stocking}after{}"
+                        "{ppu_bubble:stocking_after}{}"
                     },
                     {
                         "That card is {C:attention}discarded",
                         "after hand is played",
-                        "{stocking}after{}"
+                        "{ppu_bubble:stocking_after}{}"
                     },
                     {
                         "{C:inactive,E:1}\"Plaust knows all outcomes.\"",
@@ -41,11 +41,11 @@ return {
                         "Open the {C:attention}presents sack{}, then",
                         "add {C:dark_edition}Eternal{} to this",
                         "and {C:attention}doubles{} its values",
-                        "{stocking}usable"
+                        "{ppu_bubble:usable}"
                     },
                     {
                         "Divides {C:mult}Mult{} by {X:attention,C:white} #1# ",
-                        "{stocking}after"
+                        "{ppu_bubble:stocking_after}"
                     },
                     {
                         "{C:inactive,E:1}The warm socks that belong",
@@ -59,7 +59,7 @@ return {
                     {
                         "Costs {C:money}$#1#{}",
                         "This Present gains {C:mult}+#1#{} Mult",
-                        "{stocking}usable"
+                        "{ppu_bubble:usable}"
                     },
                     {
                         "{C:mult}+#2#{} Mult",
@@ -77,7 +77,7 @@ return {
                         "Replaces all non-{C:dark_edition}Eternal{} {C:stocking_present}Presents",
                         "with another {C:stocking_present}Present{} of the same developer",
                         "{s:1.1,C:red,E:1}self destructs",
-                        "{stocking}usable"
+                        "{ppu_bubble:usable}"
                     },
                     {
                         "{C:inactive,E:1}Together forever, my lovely",
@@ -93,13 +93,13 @@ return {
                         "Blind Size and {X:attention,C:white} X#1# {} Blind Size,",
                         "earn {C:money}$#4#{} at the end of round",
                         "{C:inactive}(Between {C:attention}#2# {C:inactive}and {C:attention}#3#{C:inactive})",
-                        "{stocking}before"
+                        "{ppu_bubble:stocking_before}"
                     },
                     {
                         "Cycles through difficulties",
                         "of the {C:attention}Defibrillator",
                         "{C:inactive}(Currently {C:attention}#5#{C:inactive})",
-                        "{stocking}usable"
+                        "{ppu_bubble:usable}"
                     },
                     {
                         "{C:inactive,E:1}I've been waiting for so long...,",

@@ -21,7 +21,7 @@ return {
                     "copy of the most recently",
                     "opened {C:attention}Booster Pack",
                     "{s:0.75}(excluding copied Booster Packs)",
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["J8-Bit_stocking_christmas_crack"] = {
@@ -30,9 +30,9 @@ return {
                     { 'Gains {X:chips,C:white}X#2#{} Chips',
                         'per scoring {C:dark_edition}#3#{} card,',
                         'removes its Edition',
-                        '{stocking}before{}', },
+                        '{ppu_bubble:stocking_before}{}', },
                     { '{X:chips,C:white}X#1#{} Chips',
-                        '{stocking}after{}', }
+                        '{ppu_bubble:stocking_after}{}', }
                 }
             },
             ["J8-Bit_stocking_label_maker"] = {
@@ -40,7 +40,7 @@ return {
                 text = {
                     "Creates a random {C:attention}Tag",
                     "once per {C:attention}Ante",
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["J8-Bit_stocking_water_cooler_a"] = {
@@ -50,7 +50,7 @@ return {
                     "with a {C:attention}Seal{} to {C:attention}store{} it,",
                     "removes {C:attention}Seal{} from card",
                     "{C:inactive,s:0.75}(Must wait one Blind between uses)",
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["J8-Bit_stocking_water_cooler_b"] = {
@@ -60,7 +60,7 @@ return {
                     "card without a {C:attention}Seal",
                     "to {C:attention}add{} it to the card",
                     "{C:inactive,s:0.75}(Must wait one Blind between uses)",
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["J8-Bit_stocking_tech_x"] = {
@@ -71,7 +71,7 @@ return {
                     "{C:red}use{} this card to turn",
                     "the next played hand",
                     "into a {C:attention}#3#",
-                    '{stocking}usable{}{}{stocking}before'
+                    '{ppu_bubble:usable}{}{}{ppu_bubble:stocking_before}'
                 }
             }
         },

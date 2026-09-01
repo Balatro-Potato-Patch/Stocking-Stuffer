@@ -10,7 +10,7 @@ return {
                     {
                     'Use this to destroy',
                     '{C:stocking_present}Presents{} to the right',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                     },
                     {
                         "{C:green}#1# in #2#{} chance to",
@@ -27,7 +27,7 @@ return {
                     {
                     "Played {C:attention}unscoring{} numbered",
                     "cards give {X:dark_edition,C:white}^#1#{} Mult",
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_after}{}'
                     }
                 }
             },
@@ -43,7 +43,7 @@ return {
                     'all {C:attention}selected{} cards',
                     'into {C:attention}Queens{}',
                     '{s:0.8}(Only works once per round)',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                     }
                 }
             },

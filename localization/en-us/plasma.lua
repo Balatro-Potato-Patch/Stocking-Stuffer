@@ -7,11 +7,11 @@ return {
                     {'Every played {C:attention}card{}',
                     "permanently gains",
                     "{C:mult}+#1#{} Mult when scored",
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'Destroy {C:attention}1{} random',
                     "card in your hand",
                     "at the end of round",
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
             ["Plasma_stocking_the_manger"] = {
@@ -19,7 +19,7 @@ return {
                 text = {
                     {'{C:attention}Boss Blind{}',
                     "is set to {C:attention}X1{} Base",
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                 }
             },
                 ["Plasma_stocking_holy_night"] = {
@@ -28,7 +28,7 @@ return {
                     {'{X:mult,C:white}X#1#{} Mult every time',
                     "a {C:attention}Present{} is opened",
                     "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
                 ["Plasma_stocking_three_wise_men"] = {
@@ -37,7 +37,7 @@ return {
                     {'If played hand contains',
                     "{C:attention}3{} cards, all cards receive",
                     "a {C:attention}random enhancement{}",
-                    '{stocking}before{}',}
+                    '{ppu_bubble:stocking_before}{}',}
                 }
             },
                 ["Plasma_stocking_trinity"] = {
@@ -48,7 +48,7 @@ return {
                     "of the round {C:attention}three times{}",
                     "{C:inactive}...in the name of the Father,{}", 
                     "{C:inactive}Son and Holy Spirit{}",
-                    '{stocking}before{}',}
+                    '{ppu_bubble:stocking_before}{}',}
                 }
             },
     }

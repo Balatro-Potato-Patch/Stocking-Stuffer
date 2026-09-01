@@ -44,7 +44,7 @@ return {
 					"{C:red}Destroys{} a selected Joker",
 					"to {C:attention}prematurely visit{} the",
 					"{C:green}Christmas Tree{} once per ante",
-					"{stocking}usable{} {stocking}#1#{}",
+					"{ppu_bubble:usable}{} {stocking}#1#{}",
 					"{C:inactive,s:0.8}A reminder of the past",
 				}
 			},
@@ -76,7 +76,7 @@ return {
 					"Every {C:attention}#1#th{} scored card",
 					"has a {C:dark_edition,E:1}random effect{}",
 					"{C:inactive}(#2#/#1# cards)",
-					"{stocking}after{}"
+					"{ppu_bubble:stocking_after}{}"
 				}
 			},
 			haya_stocking_murasama_1 = {
@@ -88,7 +88,7 @@ return {
 					{
 						"{X:attention,C:white}X#1#{} blind requirement",
 						"upon {C:attention}entering{} a blind",
-						"{stocking}before{}"
+						"{ppu_bubble:stocking_before}{}"
 					},
 					{
 						"Effect changes after",
@@ -104,7 +104,7 @@ return {
 				text = {
 					"{X:attention,C:white}X#1#{} blind requirement",
 					"upon {C:attention}playing{} a hand",
-					"{stocking}before{}"
+					"{ppu_bubble:stocking_before}{}"
 				}
 			},
 			haya_stocking_toxomister = {
@@ -116,7 +116,7 @@ return {
 					"{C:attention}Disables{} the Boss Blind and",
 					"{C:red}debuffs{} all cards {C:attention}held in hand",
 					"for the {C:attention}duration{} of the blind",
-					"{stocking}usable{}",
+					"{ppu_bubble:usable}{}",
 				}
 			}
 		}

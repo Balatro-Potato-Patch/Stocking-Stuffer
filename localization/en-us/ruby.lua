@@ -7,7 +7,7 @@ return {
                     'Scored {C:attention}face{} cards',
                     'Gain a random {C:attention}Enhancement{}',
                     "{C:attention}Seal{} or {C:dark_edition}Edition{}",
-                    "{stocking}before"
+                    "{ppu_bubble:stocking_before}"
                 }
             },
             Ruby_stocking_bag_of_gems = {
@@ -17,7 +17,7 @@ return {
                     "permanently gains {C:mult}+#1#{} Mult,",
                     "{C:chips}+#2#{} Chips, {X:mult,C:white}X#3#{} Mult",
                     "or {X:chips,C:white}X#4#{} Chips",
-                    '{stocking}before{}'
+                    '{ppu_bubble:stocking_before}{}'
                 }
             },
             Ruby_stocking_fuzzy_dice = {
@@ -28,7 +28,7 @@ return {
                     "Increases by {X:green,C:white}X#2#{} for the",
                     "rest of the current round when",
                     "a card is scored",
-                    "{stocking}before{}"
+                    "{ppu_bubble:stocking_before}{}"
                 }
             },
             Ruby_stocking_merchandise = {
@@ -39,7 +39,7 @@ return {
                     "or {C:red}Rare{} Joker from the collection",
                     "{C:red}Randomizes{} when entering the shop",
                     "{C:inactive}(Currently: #1#)",
-                    "{stocking}before{} & {stocking}after{}",
+                    "{ppu_bubble:stocking_before}{} & {ppu_bubble:stocking_after}{}",
                 }
             },
             Ruby_stocking_lavalamp = {
@@ -49,17 +49,17 @@ return {
                         "This Present gains {X:mult,C:white}X#2#{}",
                         "Mult per discarded card",
                         "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
-                        "{stocking}before{}"
+                        "{ppu_bubble:stocking_before}{}"
                     },
                     {
                         "This Present {C:red}self destructs{}",
                         "when reaching {X:mult,C:white}X4{} Mult",
-                        "{stocking}after"
+                        "{ppu_bubble:stocking_after}"
                     },
                     {
                         "Use This Present to",
                         "reset Mult to {X:mult,C:white}X1{}",
-                        "{stocking}usable"
+                        "{ppu_bubble:usable}"
                     }
                 }
             }

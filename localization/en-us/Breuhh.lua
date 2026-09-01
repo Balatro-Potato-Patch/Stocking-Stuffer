@@ -9,7 +9,7 @@ return {
                     "Increases the further this {V:1}Ornament",
                     "is from the {C:attention}middle",
                     '{C:inactive}(Currently {C:red}+#1#{C:inactive} Mult)',
-                    "{stocking}before{}"
+                    "{ppu_bubble:stocking_before}{}"
                 }
             },
 
@@ -21,7 +21,7 @@ return {
                     "of the {C:attention}present area",
                     "Otherwise, {X:chips,C:white}X#2#{} Chips",
                     "{C:inactive}(may not share the middle)",
-                    "{stocking}after{}"
+                    "{ppu_bubble:stocking_after}{}"
                 }
             },
 
@@ -29,11 +29,11 @@ return {
                 name = 'Garland',
                 text = {
                     {"{C:chips}+#2#{} Chips",
-                    "{stocking}after{}"},
+                    "{ppu_bubble:stocking_after}{}"},
                     {"Has a {E:1,C:green}#3# in #4#{} chance",
                      "to {C:attention}gain {C:chips}+#1#{} Chips",
                      "once for {C:attention}every {V:1}present",
-                     "{stocking}before{}"}
+                     "{ppu_bubble:stocking_before}{}"}
                 }
             },
 
@@ -44,11 +44,11 @@ return {
                      "{C:attention}rightmost{} {V:1}present{} to the",
                      "{C:attention}left{} of this without",
                      "a light already applied",
-                     "{stocking}before{}"},
+                     "{ppu_bubble:stocking_before}{}"},
                     {"Gives {C:mult}+Mult{} equal to {C:attention}double",
                      "the {C:attention}product{} of every strip of",
                      "{V:1}presents{} with light {C:attention}applied",
-                     "{stocking}after{}"}
+                     "{ppu_bubble:stocking_after}{}"}
                 }
             },
 
@@ -60,7 +60,7 @@ return {
                     "{C:chips}+#2#{} Chips for {C:attention}every {V:1}present",
                     "to the left of this",
                     '{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult and {C:blue}+#4#{C:inactive} Chips)',
-                    "{stocking}after{}"
+                    "{ppu_bubble:stocking_after}{}"
                 }
             },
         },

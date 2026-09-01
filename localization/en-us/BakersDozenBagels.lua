@@ -14,11 +14,11 @@ return {
                 text = {
                     {
                         '{C:white,X:mult}÷#1#{} Mult',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         '{C:white,X:mult}X#2#{} Mult',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     }
                 }
             },
@@ -34,7 +34,7 @@ return {
                     'Redeem for a',
                     '{C:common}Common {C:attention}Joker',
                     '{C:inactive}(Upgrades in 1 round)',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             BakersDozenBagels_stocking_IOU_B = {
@@ -43,7 +43,7 @@ return {
                     'Redeem for an',
                     '{C:uncommon}Uncommon {C:attention}Joker',
                     '{C:inactive}(Upgrades in 2 rounds)',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             BakersDozenBagels_stocking_IOU_C = {
@@ -52,7 +52,7 @@ return {
                     'Redeem for an',
                     '{C:uncommon}Uncommon {C:attention}Joker',
                     '{C:inactive}(Upgrades in 1 round)',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             BakersDozenBagels_stocking_IOU_D = {
@@ -61,7 +61,7 @@ return {
                     'Redeem for a',
                     '{C:rare}Rare {C:attention}Joker',
                     '{C:inactive}(Upgrades in #1# rounds)',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             BakersDozenBagels_stocking_IOU_E = {
@@ -70,7 +70,7 @@ return {
                     'Redeem for a',
                     '{C:rare}Rare {C:attention}Joker',
                     '{C:inactive}(Upgrades in 1 round)',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             BakersDozenBagels_stocking_IOU_F = {
@@ -78,14 +78,14 @@ return {
                 text = {
                     'Redeem for a',
                     '{C:legendary}Legendary {C:attention}Joker',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             BakersDozenBagels_stocking_CashMoney = {
                 name = 'Cash Money',
                 text = {
                     'Sets money to {C:money}$#1#',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             }
         },

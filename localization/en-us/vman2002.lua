@@ -38,7 +38,7 @@ return {
 					'the last scored card',
 					'without a seal gains',
 					'a {C:vman_kittyseal}Kitty Seal{}',
-					'{stocking}before{}'
+					'{ppu_bubble:stocking_before}{}'
                 }
             },
             VMan_2002_stocking_mechanicalpencil = {
@@ -50,7 +50,7 @@ return {
 					"into {C:attention}ascending ranks{},",
 					"starting from the",
 					"first card's rank",
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             VMan_2002_stocking_mysterystar = {
@@ -60,7 +60,7 @@ return {
                     'Convert #1# random base',
 					"edition cards in hand",
 					"to {C:dark_edition}Negative{} edition",
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             VMan_2002_stocking_mossblade = {
@@ -72,12 +72,12 @@ return {
 						'Loses {C:mult}-#3#{} Mult when played',
 						'hand {C:attention}doesn\'t{} contain a Straight',
 						'{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)',
-						'{stocking}before{}'
+						'{ppu_bubble:stocking_before}{}'
 					}, {
 						flavor .. "Critical Hit to the enemy's Weak Point!",
 						'{C:mult}Mult{} is applied as {X:mult,C:white}XMult{C:mult} + 1{} when',
 						'played hand is a {C:attention}Straight Flush',
-						'{stocking}after{}'
+						'{ppu_bubble:stocking_after}{}'
 					}
                 }
             },
@@ -87,14 +87,14 @@ return {
 					{
 						'Gains {X:mult,C:white}X#1#{} Mult per round',
 						'{C:attention}Resets{} to {X:mult,C:white}X1{} after use',
-						'{stocking}after{}',
+						'{ppu_bubble:stocking_after}{}',
 					}, {
 						flavor .. "Whack this plushie against the",
 						flavor .. "Blind in your next hand",
 						flavor .. "(It makes a loud thud...?)",
 						"{C:inactive}#3#",
 						"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-						'{stocking}usable{}'
+						'{ppu_bubble:usable}{}'
 					}
                 }
             }

@@ -9,7 +9,7 @@ return {
                     'when a {C:spectral}Spectral{} card is used',
                     '{C:inactive}(Resets at end of round, greater',
                     '{C:inactive}than #2# in #2# retriggers multiple times)',
-                    '{stocking}before{}'
+                    '{ppu_bubble:stocking_before}{}'
                 }
             },
             ["pangaea47_stocking_orbitoclast"] = {
@@ -19,7 +19,7 @@ return {
                     'copy a random {V:1}Present{} until',
                     'end of round',
                     '{C:inactive}(currently copying {C:attention}#1#{C:inactive})',
-                    '{stocking}usable{}',
+                    '{ppu_bubble:usable}{}',
                 }
             },
             ["pangaea47_stocking_camcorder"] = {
@@ -29,7 +29,7 @@ return {
                     'selected playing card until next use',
                     'regains {C:attention}1{} use at end of round',
                     '{C:inactive}(currently has {C:attention}#3#{C:inactive} uses)',
-                    '{stocking}usable{}',
+                    '{ppu_bubble:usable}{}',
                 }, {
                     '{C:red}Recorded{} cards ignore',
                     'consumeable selection limits'
@@ -44,7 +44,7 @@ return {
                     'it until next {C:green}successful{} trigger',
                     '{C:inactive}(currently copying {C:attention}#3#{C:inactive})',
                 }, {
-                    '{C:inactive}(The copy triggers {stocking}after{}{C:inactive})',
+                    '{C:inactive}(The copy triggers {ppu_bubble:stocking_after}{}{C:inactive})',
                 }}
             },
             ["pangaea47_stocking_rose"] = {

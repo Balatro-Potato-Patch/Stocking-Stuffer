@@ -13,9 +13,9 @@ return {
                     {'{C:attention}Consumes{} all scoring {C:hearts}Heart{}',
 					'cards and gains {X:mult,C:white}X#2#{} Mult',
 					'per {C:chips}Chip{} consumed cards had',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'{X:mult,C:white}X#1#{} Mult',
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
 			Freh_stocking_3d_printer = {
@@ -23,18 +23,18 @@ return {
                 text = {
                     {'{C:green}#1# in #2#{} chance to create',
 					'a random {C:chips}#5#{C:attention}#3#',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'Swaps mode to {C:attention}#4#',
-                    '{stocking}usable{}',}
+                    '{ppu_bubble:usable}{}',}
                 }
             },
 			Freh_stocking_model_kit = {
                 name = 'Model Kit',
                 text = {
                     {'{C:attention}Convert{} all {X:chips,C:white}Chips{} into {X:mult,C:white}Mult',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'{C:attention}Balance{} {X:chips,C:white}Chips{} and {X:mult,C:white}Mult',
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
 			Freh_stocking_pipe_bomb = {
@@ -42,7 +42,7 @@ return {
                 text = {
                     {'{C:green}#2# in #1#{} chance to {C:attention}explode',
 					'and destroy played hand',
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
 			Freh_stocking_structure_deck = {
@@ -51,7 +51,7 @@ return {
                     {'Fills {C:attention}Jokers{} and {C:attention}consumables{},',
 					'adds {C:attention}#1#{} random {C:attention}enhanced{}',
 					'cards to your deck',
-                    '{stocking}usable{}',}
+                    '{ppu_bubble:usable}{}',}
                 }
             },
         },

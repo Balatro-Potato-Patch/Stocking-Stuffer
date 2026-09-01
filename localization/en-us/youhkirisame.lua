@@ -37,7 +37,7 @@ return {
                     {"{X:mult,C:white}X#1#{} Mult for",
                     "every {V:1}#2#{} card in scoring hand",
                     "{s:0.8,C:inactive}Suit changes at end of round{}",
-                    "{stocking}after{}"
+                    "{ppu_bubble:stocking_after}{}"
                     }
                 }
             },
@@ -46,8 +46,8 @@ return {
                 text = {
                     {"Destroys all {C:attention}#2#s{} in scoring hand,",
                     "cools off for {C:attention}#1#{} round after use",
-                    "{stocking}before{}"},
-                    {"Use to unload the weapon.", "{stocking}usable{}"}
+                    "{ppu_bubble:stocking_before}{}"},
+                    {"Use to unload the weapon.", "{ppu_bubble:usable}{}"}
                 }
             },
             ["Youh Kirisame_stocking_cane_gun_two"] = {
@@ -56,7 +56,7 @@ return {
                     {"The weapon is unloaded",
                     "{s:0.8,C:inactive}(Does nothing){}"
                     },
-                    {"Use to load the weapon.", "{stocking}usable{}"}
+                    {"Use to load the weapon.", "{ppu_bubble:usable}{}"}
                 }
             },
             ["Youh Kirisame_stocking_corncob"] = {
@@ -65,7 +65,7 @@ return {
                     {"Gives {C:money}$#3#{} every {C:attention}#2#{} rounds,",
                     "resets on use",
                     "{s:0.8,C:inactive}(currently #1#/#2#){}",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                     }
                 }
             },

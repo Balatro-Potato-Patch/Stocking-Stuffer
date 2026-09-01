@@ -14,7 +14,7 @@ return {
                     'When a {C:attention}#1#{} is selected, add a',
                     'permanent {C:attention}#2#2{} of {C:hearts}Hearts{}',
                     'to your hand, then {C:planet,E:1}upgrade{} this effect',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                     '{C:inactive,s:0.8}Anthropos sword accessory included!'
                 }
             },
@@ -24,7 +24,7 @@ return {
                     'When a {C:attention}#1#{} is selected, add a',
                     'permanent {C:attention}#2#{}',
                     '{C:attention}2{} of {C:hearts}Hearts{} to your hand',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                     '{C:inactive,s:0.8}This is even its final form!'
                 }
             },
@@ -34,7 +34,7 @@ return {
                     'Played cards with {C:hearts}Heart{} suit',
                     'have a {C:green}#1# in #2#{} chance',
                     'to upgrade played {C:attention}poker hand',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                     '{C:inactive,s:0.8}With real {}{C:spades}Spades{}{C:inactive,s:0.8} swapping action!'
                 }
             },
@@ -44,7 +44,7 @@ return {
                     'Played cards with {C:spades}Spade{} suit',
                     'have a {C:green}#1# in #2#{} chance',
                     'to be {C:attention}destroyed{} after scoring',
-                    '{stocking}after{}',
+                    '{ppu_bubble:stocking_after}{}',
                     "{C:inactive,s:0.8}With real {}{C:hearts}Hearts{}{C:inactive,s:0.8} swapping action!"
                 }
             },
@@ -63,7 +63,7 @@ return {
                 text = {
                     '{C:eternal}Use{} to replace all {C:stocking_present}Presents{} with',
                     'random {C:stocking_present}Presents{}, including this one',
-                    '{stocking}usable{}',
+                    '{ppu_bubble:usable}{}',
                     '{C:inactive,s:0.8}Feel the POWER!',
                     '{C:inactive,s:0.8}(Yes, you opened it. He just looks like that.)'
                 }
@@ -74,7 +74,7 @@ return {
                     'Once per {C:attention}Blind{}, upgrade level',
                     'of played {C:attention}poker hand{} if it was',
                     'previously played this round',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                     '{C:inactive,s:0.8}tony from streetlight'
                 }
             }

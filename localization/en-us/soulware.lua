@@ -23,7 +23,7 @@ return {
                     "{B:1,C:white}+(#2#/N){} to all {C:attention}higher-operation{} #3#",
                     "{C:inactive,s:0.85}N being 10^ the used operation{}"},
                     {'Use to switch modes',
-                    '{stocking}usable{}',}
+                    '{ppu_bubble:usable}{}',}
                 }
             },
             Soulware1_stocking_lump_of_clay = {
@@ -32,7 +32,7 @@ return {
                 text = {
                     "{C:attention}Transforms{} into the",
                     "{C:stocking_present}Present{} to the right",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }
             },
             Soulware1_stocking_locked_door = {
@@ -44,7 +44,7 @@ return {
                     "{C:attention}Successful rolls{} reset numerator",
                     "and decrease denominator by 1",
                     "{C:inactive,s:0.85} not affected by probablity modifications",
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_after}{}'
                 }
             },
             Soulware1_stocking_stack_overflow = {
@@ -66,8 +66,8 @@ return {
                     "{C:inactive,s:0.85}(e.g if this present",
                     "{C:inactive,s:0.85}is in the first slot, it copies the joker",
                     "{C:inactive,s:0.85}in the joker card area slot)",
-                    '{stocking}before{}',
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_before}{}',
+                    '{ppu_bubble:stocking_after}{}'
                 }
             },
         },

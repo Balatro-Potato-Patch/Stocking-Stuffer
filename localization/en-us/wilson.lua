@@ -2,7 +2,7 @@ local phoneName = "Rotary Phone"
 local phoneShared = {
     "Ability changes",
     "at end of round",
-    '{stocking}after{}',
+    '{ppu_bubble:stocking_after}{}',
 }
 
 return {
@@ -33,7 +33,7 @@ return {
                     'for each {C:attention}played{} card',
                     'that {C:attention}does not{} score',
                     '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                 }
             },
             WilsontheWolf_stocking_flash_drive = {
@@ -41,11 +41,11 @@ return {
                 text = {
                     {
                         "{C:mult}+#1#{} Mult",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     },
                     {
                         "{C:mult}-#1#{} Mult",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                 }
             },
@@ -56,12 +56,12 @@ return {
                         "{C:green}#1# in #2#{} chance",
                         "for a free {C:attention}#4#",
                         "otherwise lose {C:money}$#3#",
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                     {
                         "{C:green}#1# in #2#{} chance this Present",
                         "is destroyed at end of round",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                 }
             },
@@ -70,7 +70,7 @@ return {
                 text = {
                     {
                         "{C:mult}+#1#{} Mult",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     },
                     phoneShared,
                 }
@@ -80,7 +80,7 @@ return {
                 text = {
                     {
                         "{C:chips}+#1#{} Chips",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                     phoneShared,
                 }
@@ -91,7 +91,7 @@ return {
                     {
                         "Earn {C:money}$#1#{} at",
                         "end of round",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     },
                     phoneShared,
                 }
@@ -102,7 +102,7 @@ return {
                     {
                         "Each scored {C:attention}#1#{}",
                         "gives {C:chips}+#1#{} Chips",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     },
                     phoneShared,
                 }
@@ -113,7 +113,7 @@ return {
                     {
                         "Retrigger all",
                         "played {C:attention}#1#{} cards",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                     phoneShared,
                 }
@@ -124,7 +124,7 @@ return {
                     {
                         "Each scored {C:attention}#1#{}",
                         "gives {C:mult}+#1#{} Mult",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     },
                     phoneShared,
                 }
@@ -135,7 +135,7 @@ return {
                     {
                         "Receive a {C:attention}#1#",
                         "for {C:money}$#2#",
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                 }
             },

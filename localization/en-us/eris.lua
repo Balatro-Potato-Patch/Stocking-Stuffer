@@ -6,7 +6,7 @@ return {
                 text = {
                     "Every {C:attention}#1# {C:inactive}(#2#){} played hands",
                     "{C:attention}destroys{} all played cards",
-                    "{stocking}before"
+                    "{ppu_bubble:stocking_before}"
                 }
             },
             Eris_stocking_bananas = {
@@ -17,7 +17,7 @@ return {
                         "Each individual {C:mult}Mult{} has a",
                         "{C:green}#2# in #3#{} chance to be lost",
                         "at the end of round",
-                        "{stocking}before"
+                        "{ppu_bubble:stocking_before}"
                     }
                 }
             },
@@ -26,11 +26,11 @@ return {
                 text = {
                     {
                         "Copies leftmost Joker",
-                        "{stocking}before"
+                        "{ppu_bubble:stocking_before}"
                     },
                     {
                         "Copies rightmost Joker",
-                        "{stocking}after"
+                        "{ppu_bubble:stocking_after}"
                     },
                     {
                         "Can only copy {C:blue}Common",
@@ -45,13 +45,13 @@ return {
                         "{C:chips}+#2#{} Chips",
                         "Increases by {C:chips}+#1#{} when a",
                         "booster pack is {C:attention}skipped",
-                        "{stocking}before"
+                        "{ppu_bubble:stocking_before}"
                     },
                     {
                         "{C:mult}+#3#{} Mult",
                         "Increases by {C:mult}+#1#{} when",
                         "a blind is {C:attention}skipped",
-                        "{stocking}after"
+                        "{ppu_bubble:stocking_after}"
                     }
                 }
             },
@@ -61,7 +61,7 @@ return {
                     "{C:blue}+#1#{} Chips, then",
                     "{C:attention}swaps{} {C:blue}Chips{} and {C:mult}Mult{}",
                     "{C:inactive}i ran out of coal",
-                    "{stocking}before{} {stocking}after{}",
+                    "{ppu_bubble:stocking_before}{} {ppu_bubble:stocking_after}{}",
                 }
             },
             Eris_stocking_present = {

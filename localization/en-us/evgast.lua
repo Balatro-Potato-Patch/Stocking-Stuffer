@@ -7,11 +7,11 @@ return {
                     {
                     "Takes a {C:attention}present{} to the right",
                     "Gains {X:mult,C:white}X#2#{} Mult",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                     },
                     {
                     "{X:mult,C:white}X#1#{} Mult",
-                    "{stocking}after{}"
+                    "{ppu_bubble:stocking_after}{}"
                 }
                 }
             },
@@ -34,7 +34,7 @@ return {
                 text = {
                     "Once per {C:attention}shop{}, set price of",
                     "a selected {C:attention}Booster Pack{} to {C:money}$0{}",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }
             },
             Evgast_stocking_chest = {
@@ -45,13 +45,13 @@ return {
                     "stored {C:attention}Consumable{} {C:red}can't be used{} until taken out",
                     "Use without selecting a {C:attention}Consumable{} to {C:attention}open the Chest{}",
                     "Storing space space: #1#",
-                    "{stocking}usable{}",
+                    "{ppu_bubble:usable}{}",
                     },
                     {
                     "Using another copy of Chest will destroy it",
                     "and increase storing space by #2#",
                     "{C:inactive}No duplicates for you!{}",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                     }
                 }
             },
@@ -64,7 +64,7 @@ return {
                     },
                     {
                     "{X:mult,C:white}X#1#{} Mult",
-                    "{stocking}after{}"
+                    "{ppu_bubble:stocking_after}{}"
                 }
                 }
             },

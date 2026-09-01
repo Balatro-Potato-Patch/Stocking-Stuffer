@@ -23,7 +23,7 @@ return {
                     "used, {C:green}Recharges{} when boss",
                     "blind is {C:attention}defeated",
                     '{C:inactive}Reroll Your Destiny',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ["RattlingSnow353_stocking_butter"] = {
@@ -33,7 +33,7 @@ return {
                     '{C:dark_edition}#1#%{} chance for a random {C:attention}Joker{} to become',
                     '{C:attention}slippery{} and take up {C:attention}0{} Joker slots',
                     "{C:inactive}Can't Hold It",
-                    '{stocking}before{}'
+                    '{ppu_bubble:stocking_before}{}'
                 }
             },
             ["RattlingSnow353_stocking_portable_slot"] = {
@@ -43,7 +43,7 @@ return {
                     'into a random {C:stocking_present}Present{}, {C:green}Recharges',
                     "when blind is {C:attention}defeated",
                     '{C:inactive}Gamble 24/7',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
 
                 }
             },
@@ -54,7 +54,7 @@ return {
                     'cards to trigger {C:attention}held in hand',
                     'abilities',
                     '{C:inactive}???',
-                    '{stocking}before{}'
+                    '{ppu_bubble:stocking_before}{}'
 
                 }
             },
@@ -65,7 +65,7 @@ return {
                     'and {C:red}debuff{} all {C:attention}Jokers{} this',
                     'round',
                     '{C:inactive}Fear Him',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             }
         },

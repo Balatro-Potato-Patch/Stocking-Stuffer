@@ -11,9 +11,9 @@ return {
                 name = 'Snow Globe',
                 text = {
                     {'{C:mult}+#1#{} Mult',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'{C:chips}+#2#{} Chips',
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
             ["Santa Claus_stocking_toy_train"] = {
@@ -23,7 +23,7 @@ return {
                     'permanently gain',
                     '{C:chips}+#1#{} Chips when scored',
                     'in a {C:attention}Straight',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                 }
             },
             ["Santa Claus_stocking_coal"] = {
@@ -38,7 +38,7 @@ return {
                 text = {
                     '{C:green}Reroll{} the {C:attention}entire{} shop for {C:money}free',
                     '{C:inactive}Can only be used once per shop',
-                    '{stocking}usable{}'
+                    '{ppu_bubble:usable}{}'
                 }
             },
             ['Santa Claus_stocking_jack_in_box_A'] = {
@@ -48,10 +48,10 @@ return {
                         '{C:white,X:red}X#4#{} Mult when',
                         'scoring is complete',
                         'then {C:attention}reset{} to {C:white,X:red}X#5#',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     },{
                         'Close the box!',
-                        '{stocking}usable{}'
+                        '{ppu_bubble:usable}{}'
                     }
                 }
             },
@@ -67,7 +67,7 @@ return {
                         'and lose all {C:red}XMult',
                     },{
                         'Open the box!',
-                        '{stocking}usable{}'
+                        '{ppu_bubble:usable}{}'
                     }
                 }
             }

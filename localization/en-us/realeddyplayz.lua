@@ -7,7 +7,7 @@ return {
                     'Convert up to 2 scoring cards',
                     'to {C:attention}Aces{} if scoring hand',
                     'contains at least {C:attention}2{} Aces',
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_after}{}'
                 }
             },
             ["Edward Robinson_stocking_tile"] = {
@@ -16,7 +16,7 @@ return {
                     '{C:green}#1# in #2#{} chance to convert',
                     'one card of {C:attention}lowest{} rank',
                     'to an Ace at {C:attention}end of round{}',
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_after}{}'
                 }
             },
             ["Edward Robinson_stocking_nature_valley_dark_chocolate_peanut_and_almond_granola_bar"] = {
@@ -31,7 +31,7 @@ return {
 
                     {
                         '{C:tarot}#1#{} bite#2# remaining',
-                        '{stocking}usable{}'
+                        '{ppu_bubble:usable}{}'
                     }
                 }
             },
@@ -41,7 +41,7 @@ return {
                     'Scored {C:attention}Aces{} give between',
                     '{X:mult,C:white}X#1#{} and {X:mult,C:white}X#2#{} Mult,',
                     'Mult {C:green}randomizes{} for each scored Ace',
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_after}{}'
                 }
             },
             ["Edward Robinson_stocking_christmas_card"] = {
@@ -50,11 +50,11 @@ return {
                     {
                         "{C:green}Retriggers{} all scored Aces once",
                         "{s:0.8,C:inactive}an Eddy Rob Christmas!",
-                        "{stocking}after{}"
+                        "{ppu_bubble:stocking_after}{}"
                     },
                     {
                         "{C:attention}#1#{}#2#",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     }
                 }
             }

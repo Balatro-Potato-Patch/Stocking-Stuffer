@@ -29,9 +29,9 @@ return {
                     "this Present",
                     "{C:inactive,s:0.8}(Latest Enhancement: #1#)",
                     "{C:inactive,s:0.8}(Amount of stored Enhancments: #2#)",
-                    '{stocking}after{}',},
+                    '{ppu_bubble:stocking_after}{}',},
                     {'Switch to the {C:attention}Paintbrush',
-                    '{stocking}usable{}',}
+                    '{ppu_bubble:usable}{}',}
                 }
             },
             ["[REDACTED]Autumn_stocking_improvised_painter_paint"] = {
@@ -44,9 +44,9 @@ return {
                     "this Present",
                     "{C:inactive,s:0.8}(Latest Enhancement: #1#)",
                     "{C:inactive,s:0.8}(Amount of stored Enhancments: #2#)",
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'Switch to {C:attention}White-Out',
-                    '{stocking}usable{}',}
+                    '{ppu_bubble:usable}{}',}
                 }
             },
             ["[REDACTED]Autumn_stocking_gic"] = {
@@ -81,12 +81,12 @@ return {
                     {'{C:mult}+/-#1#{} Mult',
                     "based on if you",
                     "are a {C:attention}grinch{} or a {C:attention}saint",
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'Reroll {C:green}Grinchness',
                     'with a cost of {C:gold}$#2#',
                     '{C:inactive,s:0.7}(Price increases',
                     '{C:inactive,s:0.7}by 1 per roll)',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                     {'{C:attention}At the end of round,',
                     'randomize {C:green}grinchness',
                     'and reduce {C:attention}reroll price{}',

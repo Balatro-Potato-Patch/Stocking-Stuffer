@@ -17,7 +17,7 @@ return {
                     "Use this {C:attention}Present{} to prevent death in the next round.",
                     "If you do not die while it is active, {C:red,E:1}self destructs{}",
                     "and earn {C:money}$#1#{}",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }, {
                     "{C:inactive,s:0.9}A pin with a yellow zinnia attached to it, worn in memory of the departed.",
                 }}
@@ -29,7 +29,7 @@ return {
                     "While {C:attention}inactive{}, gains {X:mult,C:white}X#3#{} Mult at end of round",
                     "While {C:attention}active{}, score current {X:mult,C:white}XMult{}, then loses {X:mult,C:white}X#2#{} Mult",
                     "{C:inactive}(Currently {X:mult,C:white}X#4#{C:inactive} Mult and {C:attention}#5#{}{C:inactive}){}",
-                    "{stocking}after{} {stocking}usable{}",
+                    "{ppu_bubble:stocking_after}{} {ppu_bubble:usable}{}",
                 }, {
                     "{C:inactive,s:0.9}A soul in a jar, well-preserved in ichor.",
                     "{C:inactive,s:0.9}Whoever is inside must be very powerful.",
@@ -42,7 +42,7 @@ return {
                     "Use this {C:attention}Present{} to instantly",
                     "gain {C:attention}#1#%{} of the Blind Requirement as score",
                     "{C:inactive}({C:attention}#2#{C:inactive} uses remaining)",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }, {
                     "{C:inactive,s:0.9}Miniature hard candies. Each one contains nearly 10,000 kilocalories.",
                     "{C:inactive,s:0.9}Not intended for human consumption.",
@@ -56,7 +56,7 @@ return {
                     "Rolls the original probability on this {C:attention}Present{}",
                     "Gains {X:mult,C:white}X#1#{} Mult if roll succeeds",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                    "{stocking}after{}",
+                    "{ppu_bubble:stocking_after}{}",
                 }, {
                     "{C:inactive,s:0.9}These fruits are considered bad luck in many places.",
                     "{C:inactive,s:0.9}Giving a handful of them to someone is said to condemn them to misfortune.",

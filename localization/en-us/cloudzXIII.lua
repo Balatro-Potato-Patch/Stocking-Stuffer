@@ -13,11 +13,11 @@ return {
                     {
                     'Retrigger all',
                     'played {C:attention}cards{}',
-                    '{stocking}before{}'},
+                    '{ppu_bubble:stocking_before}{}'},
                     {'{C:red,E:2}Destroy a random',
                     '{C:red,E:2}played card',
                     '{C:money,s:0.75}no strings attached!',
-                    '{stocking}after{}',
+                    '{ppu_bubble:stocking_after}{}',
                     }
                 }
             },
@@ -31,7 +31,7 @@ return {
                     '{C:attention}most played{} poker hand',
                     '{C:inactive}(Most Played: {C:attention}#2#{}{C:inactive})',
                     '{C:money,s:0.75}may your heart be your guiding key',
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -45,7 +45,7 @@ return {
                     '{C:inactive,s:0.9}(Must Have Room)',
                     '{C:inactive,s:0.9}Can only be used once per round',
                     "{C:money,s:0.75}some doors are luckier than others",
-                    '{stocking}usable{}',
+                    '{ppu_bubble:usable}{}',
                     }
                 }
             },
@@ -56,7 +56,7 @@ return {
                     'Played {C:attention}cards{} give',
                     'random {C:attention}bonuses{}',
                     'when scored:',
-                    '{stocking}before{}'},
+                    '{ppu_bubble:stocking_before}{}'},
                     {'{s:0.8,X:mult,C:white}X#3#{} {s:0.8}Mult, {s:0.8,C:red}-$#4#{}',
 					'{s:0.8,C:mult}+#1#{} {s:0.8}Mult, {s:0.8,C:chips}+#2#{} {s:0.8}Chips',
                     '{C:money,s:0.75}eat my shorts.',
@@ -71,7 +71,7 @@ return {
                     'discarded this round',
                     '{C:inactive}(Currently {C:chips}+#1#{} {C:inactive}Chips)',
                     "{C:money,s:0.75}...i thought this was Terry's?",
-                    '{stocking}before{}',
+                    '{ppu_bubble:stocking_before}{}',
                 }
             },
         },

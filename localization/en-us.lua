@@ -34,10 +34,9 @@ return {
             PotatoPatchUtils_first_time_disable = "Do not show again",
             stocking_stuffer_received = ' received!',
 
-            -- Formatting
-            stocking_stuffer_before = 'before',
-            stocking_stuffer_after = 'after',
-            stocking_stuffer_usable = 'usable',
+            -- Bubbles
+            ppu_bubble_stocking_before = 'before',
+            ppu_bubble_stocking_after = 'after',
 
             -- Credits
             stocking_stuffer_gift_tag = 'From ',
@@ -171,12 +170,12 @@ return {
                         name = "{C:red,u:red}Triggering Presents",
                         text = {
                             {
-                                "Presents have a unique property of being evaluated {stocking}before{} Jokers",
-                                "and {stocking}after{} Jokers. This means you can get their effect twice per hand,",
+                                "Presents have a unique property of being evaluated {ppu_bubble:stocking_before}{} Jokers",
+                                "and {ppu_bubble:stocking_after}{} Jokers. This means you can get their effect twice per hand,",
                                 "or that they can have a variety of differing effects.",
                             },
                             {
-                                "Some presents are {stocking}usable{} and can be activated when you meet their criteria.",
+                                "Some presents are {ppu_bubble:usable}{} and can be activated when you meet their criteria.",
                                 "These may expire when used, or be able to be used multiple times."
                             },
                         }

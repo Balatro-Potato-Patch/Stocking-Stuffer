@@ -17,13 +17,13 @@ return {
                 text = {
                     {
                         "{C:inactive}Gotcha!{}",
-                        "{stocking}usable{}",
+                        "{ppu_bubble:usable}{}",
                     },
                     {
                         "When Blind is selected,",
                         "{C:green}#1# in #2#{} chance to get energized",
                         "with {C:chips}+1{} Hand for the round",
-                        "{stocking}before{}",
+                        "{ppu_bubble:stocking_before}{}",
                     }
                 }
             },
@@ -63,7 +63,7 @@ return {
                     },
                     {
                         "...{C:attention}Trade it{} for some other {C:stocking_present}Present{}?",
-                        "{stocking}usable{}",
+                        "{ppu_bubble:usable}{}",
                     },
                 }
             },
@@ -75,7 +75,7 @@ return {
                     },
                     {
                         "...{C:attention}Tear it to pieces{} and play with the pieces?",
-                        "{stocking}usable{}",
+                        "{ppu_bubble:usable}{}",
                     },
                 }
             },
@@ -86,10 +86,10 @@ return {
                         "{C:inactive,E:1}Wheeeeeeee!",
                     },
                     {
-                        "{C:mult}+#1#{} Mult {stocking}before{}",
+                        "{C:mult}+#1#{} Mult {ppu_bubble:stocking_before}{}",
                     },
                     {
-                        "{C:white,X:mult}X#2#{} Mult {stocking}after{}",
+                        "{C:white,X:mult}X#2#{} Mult {ppu_bubble:stocking_after}{}",
                     },
                 }
             },
@@ -113,7 +113,7 @@ return {
                         "{C:inactive}Sure is {C:attention}shiny{}, though!",
                     },
                     {
-                        "{C:chips}+#1#{} Chips {stocking}before{}",
+                        "{C:chips}+#1#{} Chips {ppu_bubble:stocking_before}{}",
                         "and {C:gold}$#2#{} at end of round",
                         "for being so shiny!"
                     },
@@ -130,7 +130,7 @@ return {
                     {
                         "Get {C:mult}distracted{}!",
                         "{C:inactive,s:0.8}Can be used once per round{}",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     }
                 }
             },
@@ -159,7 +159,7 @@ return {
                     {
                         "Get {C:mult}distracted{}! {C:attention}Discard{} held cards!",
                         "{C:inactive,s:0.8}Can be used once per round{}",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     }
                 }
             },
@@ -187,7 +187,7 @@ return {
                     {
                         "{s:0.8,C:attention}Nomnomnom{} {s:0.8}this treat for some",
                         "{s:0.8,C:chips}energy{s:0.8} when you need it",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     }
                 }
             },
@@ -201,7 +201,7 @@ return {
                     {
                         "{s:0.8,C:red}Nomnomnom{} {s:0.8}this treat for",
                         "{s:0.8,C:chips}+1 hand{s:0.8} when you need it",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     }
                 }
             },
@@ -228,7 +228,7 @@ return {
                         "{C:green}#1# in #2#{} chance to",
                         "make the Blind {C:mult}fall down{}",
                         "when hand is played",
-                        "{stocking}before{}"
+                        "{ppu_bubble:stocking_before}{}"
                     }
                 }
             },
@@ -338,7 +338,7 @@ return {
                     },
                     {
                         "Trade it for some other present!",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     },
                 }
             },
@@ -348,7 +348,7 @@ return {
                     "Whoa! This is entirely unrecognizeable!",
                     " ",
                     "Trade it for some other present!",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }
             },
             ["mys. minty_stocking_thewand_dismantle"] = {
@@ -359,7 +359,7 @@ return {
                     },
                     {
                         "Tear it to pieces and play with the pieces!",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     },
                 }
             },
@@ -369,7 +369,7 @@ return {
                     "Whoa! This is entirely unrecognizable!",
                     " ",
                     "Tear it to pieces and play with the pieces!",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }
             },
             ["mys. minty_stocking_wandpiece_string"] = {
@@ -380,11 +380,11 @@ return {
                     },
                     {
                         "{C:mult}+#1#{} Mult",
-                        "{stocking}before{}",
+                        "{ppu_bubble:stocking_before}{}",
                     },
                     {
                         "{C:white,X:mult}X#2#{} Mult",
-                        "{stocking}after{}",
+                        "{ppu_bubble:stocking_after}{}",
                     },
                 }
             },
@@ -394,10 +394,10 @@ return {
                     "Wheeeeeeee!",
                     " ",
                     "{C:mult}+#1#{} Mult",
-                    "{stocking}before{}",
+                    "{ppu_bubble:stocking_before}{}",
                     " ",
                     "{C:white,X:mult}X#2#{} Mult",
-                    "{stocking}after{}",
+                    "{ppu_bubble:stocking_after}{}",
                 }
             },
             ["mys. minty_stocking_wandpiece_feather"] = {
@@ -428,7 +428,7 @@ return {
                         "Sure is shiny, though!",
                     },
                     {
-                        "{C:chips}+#1#{} Chips {stocking}before{}",
+                        "{C:chips}+#1#{} Chips {ppu_bubble:stocking_before}{}",
                         "and {C:gold}$#2#{} at end of round",
                         "for being so shiny!"
                     },
@@ -440,7 +440,7 @@ return {
                     "Whoa! This is entirely unrecognizable!",
                     "Sure is shiny, though!",
                     " ",
-                    "{C:mult}+#1#{} Chips {stocking}before{}",
+                    "{C:mult}+#1#{} Chips {ppu_bubble:stocking_before}{}",
                     "and {C:gold}$#2#{} at end of round",
                     "for being so shiny!"
                 }
@@ -457,7 +457,7 @@ return {
                         "Use it once per round to",
                         "{C:red}get distracted{} and {C:red}discard",
                         "your entire hand",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     }
                 }
             },
@@ -471,7 +471,7 @@ return {
                     "Use it once per round to",
                     "{C:red}get distracted{} and {C:red}discard",
                     "your entire hand",
-                    "{stocking}usable{}"
+                    "{ppu_bubble:usable}{}"
                 }
             },
             ["mys. minty_stocking_catnip_inactive"] = {

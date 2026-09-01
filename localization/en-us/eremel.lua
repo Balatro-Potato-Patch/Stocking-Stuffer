@@ -11,11 +11,11 @@ return {
                 text = {
                     {
                         '{C:red}-#1#{} Mult',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         '{C:red}+#2#{} Mult',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     }
                 }
             },
@@ -34,7 +34,7 @@ return {
                     'Gain {C:money}#2#{} for each hand',
                     'lost this way',
                     '{C:inactive,s:0.9}(Currently {C:money,s:0.9}#3#{C:inactive,s:0.9})',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             Eremel_stocking_gloves_gain = {
@@ -44,7 +44,7 @@ return {
                     'Lose {C:money}#2#{} for each hand',
                     'gained this way',
                     '{C:inactive,s:0.9}(Currently {C:money,s:0.9}#3#{C:inactive,s:0.9})',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             Eremel_stocking_gloves_no = {
@@ -62,7 +62,7 @@ return {
                     'Gain {C:attention}#1#%{} of',
                     'required score {C:inactive,s:0.9}[#5#]',
                     '{C:purple}#2#/#3#{} uses',
-                    '{stocking}usable'
+                    '{ppu_bubble:usable}'
                 }
             },
             Eremel_stocking_coffee_empty = {
@@ -79,7 +79,7 @@ return {
                     'each {C:stocking_present}Present{} from a',
                     'different {C:stocking_present}Developer',
                     '{C:inactive,s:0.9}(Currently {C:red,s:0.9}+#2#{C:inactive,s:0.9} Mult)',
-                    '{stocking}before'
+                    '{ppu_bubble:stocking_before}'
                 }
             }
         },

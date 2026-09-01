@@ -136,56 +136,6 @@ payload = '''
 if args.show_no_collection then pool = _pool end
 '''
 
-# Add before/after badge support
-[[patches]]
-[patches.pattern]
-target = 'functions/misc_functions.lua'
-match_indent = true
-position = 'before'
-pattern = '''
-elseif part.control.X or part.control.B then
-'''
-payload = '''
-elseif part.control.stocking then
-     final_line[#final_line+1] = {n=G.UIT.C, config={align = "m", colour = StockingStuffer.colours[assembled_string] or G.C.RED, r = 0.05, padding = 0.06, res = 0.45}, nodes={
-              {n=G.UIT.T, config={
-                text = ' '..localize('stocking_stuffer_'..assembled_string)..' ',
-                colour = G.C.UI.TEXT_LIGHT,
-                scale = 0.24}},
-          }}
-'''
-# Add before/after badge support
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/utils.lua"]'
-match_indent = true
-position = 'before'
-pattern = '''
-elseif part.control.X or part.control.B then
-'''
-payload = '''
-elseif part.control.stocking then
-     final_line[#final_line+1] = {n=G.UIT.C, config={align = "m", colour = StockingStuffer.colours[assembled_string] or G.C.RED, r = 0.05, padding = 0.06, res = 0.45}, nodes={
-              {n=G.UIT.T, config={
-                text = ' '..localize('stocking_stuffer_'..assembled_string)..' ',
-                colour = G.C.UI.TEXT_LIGHT,
-                scale = 0.24}},
-          }}
-'''
-
-# Allow {stocking} to be a valid control
-[[patches]]
-[patches.pattern]
-target = 'functions/misc_functions.lua'
-match_indent = true
-position = 'after'
-pattern = '''
-local char = line:sub(i,i)
-'''
-payload = '''
-if _c and char == '}' then _c_val = _c_val or true end
-'''
-
 # Enable disable_use_animation functionality
 [[patches]]
 [patches.pattern]

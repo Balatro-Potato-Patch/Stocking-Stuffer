@@ -10,10 +10,10 @@ return {
                 name = 'Coral Wreath',
                 text = {
                     {'{C:attention}Retrigger{} played {C:clubs}Club{} cards',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'Add a random {C:attention}Seal{} to',
                     'a random scoring {C:clubs}Club{} card',
-                    '{stocking}after{}',}
+                    '{ppu_bubble:stocking_after}{}',}
                 }
             },
             pi_cubed_stocking_festivepartycone = {
@@ -23,7 +23,7 @@ return {
                     '{C:attention}Three of a Kind{} with',
                     'random enhancements',
                     '{s:0.8,C:inactive}Can only be used once per round',
-                    '{stocking}usable{}',}
+                    '{ppu_bubble:usable}{}',}
                 }
             },
             pi_cubed_stocking_victoriabitter = {
@@ -32,10 +32,10 @@ return {
                     {'{C:attention}Flip and shuffle{} all',
                     'cards held in hand',
                     '{s:0.8,C:inactive}Can only be used once per round',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                     {'{C:attention}Right-most face down{} card',
                     'held in hand gives {C:white,X:red}X#1#{} Mult',
-                    '{stocking}after{}',},
+                    '{ppu_bubble:stocking_after}{}',},
                 }
             },
             pi_cubed_stocking_fruitmincepie = {
@@ -43,9 +43,9 @@ return {
                 text = {
                     {'{C:attention}Destroy{} left-most held',
                     'Consumable, and gain {C:mult}+#1#{} Mult',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                     {'{C:mult}+#2#{} Mult',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                 }
             },
             pi_cubed_stocking_smallerwrappedpresent = {
@@ -54,7 +54,7 @@ return {
                     {'{C:green}#1# in #2#{} chance to create a',
                     'random {V:1}Present{} if played',
                     'hand contains a scoring {C:attention}2{}',
-                    '{stocking}after{}',},
+                    '{ppu_bubble:stocking_after}{}',},
                 }
             },
         },

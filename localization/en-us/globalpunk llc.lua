@@ -17,7 +17,7 @@ return {
                     },
                     {
                         '..{C:attention}12{} {C:clubs}Club{}bers Clubbing...',
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -30,7 +30,7 @@ return {
                     },
                     {
                         '..{C:attention}11{} {C:attention}Hikers{} Hiking...',
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -43,7 +43,7 @@ return {
                     },
                     {
                         "..{C:attention}10%{} Blind lowering...",
-                        '{stocking}after{}',
+                        '{ppu_bubble:stocking_after}{}',
                     }
                 }
             },
@@ -56,7 +56,7 @@ return {
                     },
                     {
                         "..{C:attention}9{} {C:attention}Ladies{} Dancing...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -69,7 +69,7 @@ return {
                     },
                     {
                         "..{C:attention}8{}'s Mail-in Rebating...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -82,7 +82,7 @@ return {
                     },
                     {
                         "..{C:attention}7{} {C:attention}Scholars{} Acing...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -95,7 +95,7 @@ return {
                     },
                     {
                         "..{C:attention}6{} {C:attention}Wees{} Replaying...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -120,7 +120,7 @@ return {
                     },
                     {
                         "..{C:attention}4{} {C:tarot}Tarot{} cards...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -133,7 +133,7 @@ return {
                     },
                     {
                         "..{C:attention}3{} fresh {C:attention}Eggs{}...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -146,7 +146,7 @@ return {
                     },
                     {
                         "..{C:attention}2{} {C:Spectral}Mediums{}...",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },
@@ -159,7 +159,7 @@ return {
                     },
                     {
                         "..AND A JOKER THAT {C:attention}RETRIGGEREDDDDD{}!!!",
-                        '{stocking}before{}',
+                        '{ppu_bubble:stocking_before}{}',
                     }
                 }
             },

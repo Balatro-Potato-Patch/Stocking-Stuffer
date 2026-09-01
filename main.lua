@@ -31,10 +31,12 @@ StockingStuffer.second_calculation = true
 StockingStuffer.colours = {
     before = G.C.PURPLE,
     after = G.C.GOLD,
-    usable = G.C.ETERNAL,
     primary = HEX('cf5d5d'),
     secondary = HEX('549c5c')
 }
+
+PotatoPatchUtils.Bubble_Colours["stocking_before"] = G.C.PURPLE
+PotatoPatchUtils.Bubble_Colours["stocking_after"] = G.C.GOLD
 
 -- Global Mod Calculate for hooking
 StockingStuffer.calculate = function(self, context) end

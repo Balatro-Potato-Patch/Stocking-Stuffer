@@ -17,13 +17,13 @@ return {
 						"{C:chips}+#1#{} Chips per distinct",
 						"{C:attention}sound effect{} played this run",
 						"{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
-						"{stocking}before{}",
+						"{ppu_bubble:stocking_before}{}",
 					},
 					{
 						"{C:white,X:mult}X#3#{} Mult per distinct",
 						"{C:attention}music track{} played this run",
 						"{C:inactive}(Currently {C:white,X:mult}X#4#{C:inactive} Mult)",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 				},
 			},
@@ -36,7 +36,7 @@ return {
 						"{C:inactive}(Hand size penalty increases",
 						"{C:inactive}by {C:red}#2#{C:inactive} per use of this Present)",
 						"{C:inactive}(Cannot duplicate itself)",
-						"{stocking}usable{}",
+						"{ppu_bubble:usable}{}",
 					},
 				},
 			},
@@ -55,7 +55,7 @@ return {
 					{
 						"Currently gives {X:mult,C:white}X#3#{} Mult",
 						"{C:inactive}(Cannot go below {X:mult,C:white}X1{C:inactive} Mult)",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					}
 				},
 			},
@@ -69,7 +69,7 @@ return {
 						"{C:inactive}(Must have room)",
 						"{C:inactive}(Can only be used once per Ante)",
 						"{C:inactive}(#1# this Ante)",
-						"{stocking}usable{}",
+						"{ppu_bubble:usable}{}",
 					},
 				},
 			},
@@ -80,13 +80,13 @@ return {
 						"{C:attention}First{} and {C:attention}last{} played",
 						"cards become {C:attention}Wild Cards{}",
 						"when scored",
-						"{stocking}after{}"
+						"{ppu_bubble:stocking_after}{}"
 					},
 					{
 						"{C:chips}+#1#{} Chips per {C:attention}Wild",
 						"{C:attention}Card{} in full deck",
 						"{C:inactive}(Currently {C:blue}+#2#{C:inactive} Chips)",
-						"{stocking}before{}"
+						"{ppu_bubble:stocking_before}{}"
 					},
 				},
 			},

@@ -30,10 +30,10 @@ return {
                 text = {
                     {'{C:attention}#1#{} hand size,',
                     '{C:white,X:mult}X#2#{} Mult',
-                    '{stocking}after{}',},
+                    '{ppu_bubble:stocking_after}{}',},
                     {'Scratch yourself',
                     '{C:inactive}(Once per {C:attention}Ante{C:inactive}, {C:attention}#5#{C:inactive}#6#){}',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                 }
             },
             SDM_0_stocking_grandmas_itchy_sweater_2 = {
@@ -42,18 +42,18 @@ return {
                     {'{C:white,X:mult}X#2#{} Mult,',
                     '{C:green}#3# in #4#{} chance to',
                     'become {C:attention}itchy{}',
-                    '{stocking}after{}',},
+                    '{ppu_bubble:stocking_after}{}',},
                 }
             },
             SDM_0_stocking_calendar = {
                 name = "Calendar",
                 text = {
                     {'{C:chips}+#1#{} #2#',
-                    '{stocking}before{}',},
+                    '{ppu_bubble:stocking_before}{}',},
                     {'This present gains',
                     '{C:chips}+#3#{} Chips each {C:attention}hand{},',
                     'resets after {C:chips}#4#{} Chips',
-                    '{stocking}after{}',},
+                    '{ppu_bubble:stocking_after}{}',},
                 }
             },
             SDM_0_stocking_toy_box = {
@@ -70,21 +70,21 @@ return {
                 text = {
                     {'Transforms into a {C:attention}copy{}',
                     'of a random {C:stocking_present}Present{}',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                 }
             },
             SDM_0_stocking_trailblazer_lifecard_1 = {
                 name = "Trailblazer LifeCard",
                 text = {
                     {'Destroy {C:attention}#1#{} selected #3#',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                 }
             },
             SDM_0_stocking_trailblazer_lifecard_2 = {
                 name = "Trailblazer LifeCard",
                 text = {
                     {'Spend {C:money}$#2#{} to reload',
-                    '{stocking}usable{}',},
+                    '{ppu_bubble:usable}{}',},
                 }
             },
         },

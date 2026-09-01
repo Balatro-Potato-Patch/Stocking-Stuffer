@@ -25,7 +25,7 @@ return {
                 text = {
                     'Applies a random {C:attention}enhancement{} to',
                     'the next {C:attention}#1#{} played {C:attention}unenhanced{} cards',
-                    '{stocking}before{}'
+                    '{ppu_bubble:stocking_before}{}'
                 }
             },
             ["UnusedParadox_stocking_hot_chocolate"] = {
@@ -34,7 +34,7 @@ return {
                     '{X:mult,C:white}X#1#{} Mult',
                     'Loses {X:mult,C:white}X#2#{} Mult',
                     'if played hand {C:attention}lights on fire{}',
-                    '{stocking}after'
+                    '{ppu_bubble:stocking_after}'
                 }
             },
             ["UnusedParadox_stocking_candy_cane_active"] = {
@@ -45,7 +45,7 @@ return {
                     'While active:',
                     '{C:mult}+#1#{} Mult',
                     '{C:mult}-#2#{} Mult when a hand is played',
-                    '{stocking}before{} {stocking}unusedparadox_active{}'
+                    '{ppu_bubble:stocking_before}{} {stocking}unusedparadox_active{}'
                 }
             },
             ["UnusedParadox_stocking_candy_cane_inactive"] = {
@@ -56,7 +56,7 @@ return {
                     'While active:',
                     '{C:mult}+#1#{} Mult',
                     '{C:mult}-#2#{} Mult when a hand is played',
-                    '{stocking}before{} {stocking}unusedparadox_inactive{}'
+                    '{ppu_bubble:stocking_before}{} {stocking}unusedparadox_inactive{}'
                 }
             },
             ["UnusedParadox_stocking_gingerbread_house"] = {

@@ -28,7 +28,7 @@ return {
                     "Plays {C:attention,E:1}Balatro Christmas Drip Music{}",
                     "{s:0.8}Also... ummm.. {X:red,C:white,s:0.8}X#1#{s:0.8} Mult ig",
                     "{C:inactive}(use to toggle, {stocking}#3#{}{C:inactive}){}",
-                    "{stocking}after{s:0.8} {stocking}usable{}",
+                    "{ppu_bubble:stocking_after}{s:0.8} {ppu_bubble:usable}{}",
                 }
             },
             ProdByProto_stocking_wyr = {
@@ -38,18 +38,18 @@ return {
                         "{C:mult}+#1#{} Mult,",
                         "Increases by 1 per {C:stocking_present}Present",
                         "owned at end of round",
-                        "{stocking}before{} {stocking}#4#{}",
+                        "{ppu_bubble:stocking_before}{} {stocking}#4#{}",
                     },
                     {
                         "{C:chips}+#2#{} Chips,",
                         "Increases by 5 per {C:stocking_present}Present",
                         "owned at end of round",
-                        "{stocking}after{} {stocking}#3#{}",
+                        "{ppu_bubble:stocking_after}{} {stocking}#3#{}",
                     },
                     {
                         "Use to toggle active effect,",
                         "values {C:red}reset{} when used",
-                        "{stocking}usable{}",
+                        "{ppu_bubble:usable}{}",
                     }
                 }
             },
@@ -66,7 +66,7 @@ return {
                         "If a {C:planet}Planet{} card was",
                         "sold this round, {C:green}#3# in #4#{} chance",
                         "to lose {C:red}1{} discard when hand is played",
-                        "{stocking}after{}"
+                        "{ppu_bubble:stocking_after}{}"
                     }
                 }
             },
@@ -77,7 +77,7 @@ return {
                         "{C:green}#1# in #2#{} for",
                         "{X:stocking_xcheerback,C:stocking_xcheerfront}X#3#{} {X:stocking_xcheerback,C:stocking_xcheerfront}Festive Cheer{}",
                         "when hand is played",
-                        "{stocking}before{}",
+                        "{ppu_bubble:stocking_before}{}",
                     },
                     {
                         "{C:inactive}What does that mean???{}"
@@ -104,13 +104,13 @@ return {
                     {
                         "Cards held in hand",
                         "gain {C:chips}+#2# Chips",
-                        "{stocking}before{}"
+                        "{ppu_bubble:stocking_before}{}"
                     },
                     {
                         "{C:chips}+#1#{} Chips",
                         "{C:chips}-#3#{} Chips for every",
                         "previously upgraded card",
-                        "{stocking}after{}"
+                        "{ppu_bubble:stocking_after}{}"
                     },
                     {
                         "{C:inactive}Spa Set instruction manual:{}",
@@ -128,7 +128,7 @@ return {
                     "{C:blue}Cleanses{} the {C:attention}current Blind{} when used:",
                     "either {C:attention}disables{} the Boss Blind (if applicable)", 
                     "or reduces the score requirement by {C:attention}half{}",
-                    "{stocking}usable{}",
+                    "{ppu_bubble:usable}{}",
                     },
                     {
                     "{C:inactive}I'm kinda getting mixed{}",
@@ -147,7 +147,7 @@ return {
                         "instead becomes {C:dark_edition}Foil{}, {C:dark_edition}Polychrome{},",
                         "or {C:dark_edition}Negative{} scented",
                         "{C:inactive,s:0.8}(Can override existing editions)",
-                        "{stocking}usable{}"
+                        "{ppu_bubble:usable}{}"
                     },
                     {
                         "{C:inactive}We at Jimbo Fast Food sincerely{}",
@@ -169,7 +169,7 @@ return {
                     },
                     {
                         "{C:inactive}(use to toggle music, {stocking}#1#{}{C:inactive}){}",
-                        "{stocking}usable{}",
+                        "{ppu_bubble:usable}{}",
                     }
                 }
             }

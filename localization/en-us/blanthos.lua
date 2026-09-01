@@ -9,7 +9,7 @@ return {
 						"{C:green}#1# in #2#{} chance to create",
 						"a random {C:stocking_present}Present{}, then",
 						"increase {C:green}denominator{} by {C:attention}#3#{}",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 				},
 			},
@@ -19,7 +19,7 @@ return {
 					{
 						"Create a {C:attention}Joker{}",
 						"with a random {C:attention}Edition{}",
-						"{stocking}before{}",
+						"{ppu_bubble:stocking_before}{}",
 					},
 				},
 			},
@@ -28,7 +28,7 @@ return {
 				text = {
 					{
 						"Scored cards give {C:stocking_present}+#1# J{C:red}o{C:stocking_present}l{C:red}l{C:stocking_present}y {C:red}G{C:stocking_present}l{C:red}o{C:stocking_present}p{}",
-						"{stocking}after{}",
+						"{ppu_bubble:stocking_after}{}",
 					},
 				},
 			},

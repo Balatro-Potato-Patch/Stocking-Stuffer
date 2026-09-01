@@ -22,7 +22,7 @@ return {
                     '{X:mult,C:white}X#1#{} Mult',
 					'Loses {X:mult,C:white}-X#2#{} Mult',
 					'every hand',
-                    '{stocking}after{}'
+                    '{ppu_bubble:stocking_after}{}'
                 }
             },
             ["ellestuff._stocking_choc_box"] = {
@@ -30,7 +30,7 @@ return {
                 text = {
                     'Store a {C:attention}Consumable',
 					'or {C:attention}Playing Card',
-					'{stocking}usable'
+					'{ppu_bubble:usable}'
                 }
             },
             ["ellestuff._stocking_choc_box_full"] = {
@@ -39,7 +39,7 @@ return {
                     'Release the held {C:attention}Consumable',
 					'or {C:attention}Playing Card',
 					'{C:inactive,s:0.7}At least it\'s not sewing supplies...',
-					'{stocking}usable'
+					'{ppu_bubble:usable}'
                 }
             },
             ["ellestuff._stocking_bootleg"] = {
@@ -47,7 +47,7 @@ return {
                 text = {
                     'Pay {C:money}$#1#{} to {C:attention}Draw{} a card',
 					'and increase the cost by {C:money}$#2#',
-					'{stocking}usable'
+					'{ppu_bubble:usable}'
                 }
             },
 			["ellestuff._stocking_clutter"] = {
@@ -57,7 +57,7 @@ return {
 					'{C:inactive}(Will not cause',
                     "{C:inactive}total {C:blue}Chips{C:inactive} to",
                     "{C:inactive}become negative)",
-					'{stocking}after'},
+					'{ppu_bubble:stocking_after}'},
 					{'Loses {C:chips}#2#{} Chips',
 					'every time you',
 					'{C:attention}purchase{} a card'}

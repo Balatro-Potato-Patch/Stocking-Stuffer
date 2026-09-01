@@ -11,7 +11,7 @@ return {
                     'Earn {C:money}$#1#{}',
                     'for each {C:stocking_present}Present{}',
                     'you have',
-                    '{stocking}before'
+                    '{ppu_bubble:stocking_before}'
                 }
             },
             ["LFMoth_stocking_giftapult"] = {
@@ -19,7 +19,7 @@ return {
                 text = {
                     'Creates a {C:stocking_present}present',
                     'when {C:attention}Ante{} changes',
-                    '{stocking}before'
+                    '{ppu_bubble:stocking_before}'
                 }
             },
             ["LFMoth_stocking_underwear"] = {
@@ -28,7 +28,7 @@ return {
                         '{C:white,X:red}X#1#{} {C:red}Mult{}',
                         'if a {C:attention}Pair{} or {C:attention}Two Pair{}',
                         'is played',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                 }
             },
             ["LFMoth_stocking_turron"] = {
@@ -36,7 +36,7 @@ return {
                 text = {
                         '{C:blue}+#1# Chips{}',
                         'if the hand contains a {C:attention}Stone Card{}',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                 }
             },
             ["LFMoth_stocking_8crazyantes"] = {
@@ -47,7 +47,7 @@ return {
                         "passed this run",
                         '{C:inactive}(Currently {C:white,X:red}X#3#{C:inactive} Mult){}',
                         '{C:inactive}(Minimum of {C:white,X:red}X1{C:inactive} Mult){}',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                 }
             }
         },

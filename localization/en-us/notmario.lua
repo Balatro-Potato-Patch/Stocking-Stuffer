@@ -13,7 +13,7 @@ return {
                         'only {C:attention}Three of a Kind{} and',
                         'contain no other hands',
                         '{C:inactive}(use to toggle, {C:attention}active{C:inactive}){}',
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                 }
             },
@@ -25,7 +25,7 @@ return {
                         '{C:inactive}only Three of a Kind and',
                         '{C:inactive}contain no other hands',
                         '{C:inactive}(use to toggle, {C:attention}inactive{C:inactive}){}',
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                 }
             },
@@ -48,7 +48,7 @@ return {
                 text = {
                     {'Retrigger all played cards',
                     'they each give {C:mult}+#1#{} Mult',
-                    '{stocking}before{}'},
+                    '{ppu_bubble:stocking_before}{}'},
                 }
             },
             ["notmario_stocking_basepaul_bat"] = {
@@ -58,7 +58,7 @@ return {
                         'Converts {C:attention}Boss Blind{} into',
                         '{C:red,s:1.1}The Paul{}',
                         "{C:inactive}(Who's Paul?)",
-                        '{stocking}usable{}',
+                        '{ppu_bubble:usable}{}',
                     },
                 }
             },

@@ -8,11 +8,11 @@ return {
                         '{V:1}#1#{} held in hand give',
                         '{C:money}#2#{} and {C:mult}+#3#{} Mult',
                         'for each {C:attention}#4#{} in your deck',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         '{C:red}Discard{} all {V:1}#1#{} in hand',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     }
                 }
             },
@@ -23,12 +23,12 @@ return {
                         'When a hand is {C:attention}played',
                         '{C:red}destroy{} a random card held in hand',
                         'and become {C:attention}passive',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         'Played and held in hand {V:1}#2#{}',
                         'permanently gain {C:mult}+#3#{} Mult',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     }
                 }
             },
@@ -50,7 +50,7 @@ return {
                 text = {
                     {
                         'Spend {C:money}#1#{} to use a {e:1,c:dark_edition}power up',
-                        '{stocking}usable',
+                        '{ppu_bubble:usable}',
                     },
                     {
                         '{u:black}Power Toss',
@@ -73,18 +73,18 @@ return {
                 text = {
                     {
                         '{C:blue}+#1#{} Chips',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         'Gains {C:blue}+#2#{} Chips when a',
                         '{V:1}#3#{} card is triggered',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         'Loses {C:blue}-#4#{} Chips each hand',
                         'and an extra {C:blue}-#6#{} Chips for each',
                         'played non-{V:1}#3#{} card',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     },
                 }
             },
@@ -93,11 +93,11 @@ return {
                 text = {
                     {
                         '{C:blue}+#1#{} Chips',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         '{C:white,X:red}X#5#{} Mult',
-                        '{stocking}after'
+                        '{ppu_bubble:stocking_after}'
                     },
                 }
             },
@@ -109,12 +109,12 @@ return {
                         'Flush of {V:1}#3#',
                         '{C:green}#1# in #2#{} chance to',
                         '{C:attention}upgrade{} poker hand',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     },
                     {
                         'Gloom Shroom: {C:money}#4#{} to upgrade',
                         'Frost Shroom: {C:money}#5#{} to upgrade',
-                        '{stocking}usable'
+                        '{ppu_bubble:usable}'
                     }
                 }
             },
@@ -125,11 +125,11 @@ return {
                         'If played hand is a',
                         'Flush of {V:1}#3#',
                         '{C:attention}upgrade{} poker hand',
-                        '{stocking}before',
+                        '{ppu_bubble:stocking_before}',
                     },{
                         '{C:green}#1# in #2#{} chance to add',
                         'a {C:blue}Blue{} seal to each card',
-                        '{stocking}before',
+                        '{ppu_bubble:stocking_before}',
                     }
                 }
             },
@@ -140,7 +140,7 @@ return {
                         'If played hand is a',
                         'Flush of {V:1}#3#',
                         '{C:attention}upgrade{} poker hand {C:attention}twice',
-                        '{stocking}before'
+                        '{ppu_bubble:stocking_before}'
                     }
                 }
             }
