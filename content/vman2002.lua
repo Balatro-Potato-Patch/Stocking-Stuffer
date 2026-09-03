@@ -7,7 +7,6 @@
 --	Emki Plush (YES)
 --TODO do Kitty Seal / Kitty Stickers work with Splash??????????
 	--answer NO they dont(?)
---TODO replace math.random
 --TODO see other todos within this file
 
 -- Developer name - Replace 'template' with your display name
@@ -90,6 +89,11 @@ vman.ranks = {
 	["8"] = 8,
 	["9"] = 9
 }
+vman.randseed = function(str)
+	G.GAME.stocking_vman2002_rand = G.GAME.stocking_vman2002_rand or {}
+	G.GAME.stocking_vman2002_rand[str] = ((G.GAME.stocking_vman2002_rand[str] or 0) + 1) % 6e9 --nice
+	return pseudoseed(str) + G.GAME.stocking_vman2002_rand[str]
+end
 
 -- Wrapped Present Template
 -- key defaults to 'display_name_stocking_present'
@@ -172,7 +176,7 @@ local kittyseal = SMODS.Seal{
 			context.before
 			and context.cardarea == G.play
 			and card.config.center.set == "Enhanced"
-			and SMODS.pseudorandom_probability(card, pseudoseed('stocking_VMan_2002_kittyseal'), 1, card.ability.seal.extra.odds, "stocking_VMan_2002_kittyseal")
+			and SMODS.pseudorandom_probability(card, vman.randseed('kittyseal_prob'), 1, card.ability.seal.extra.odds, "stocking_VMan_2002_kittyseal")
 		then
 			if scoredCards(context, card) then
 				local candidates = {}
@@ -186,7 +190,7 @@ local kittyseal = SMODS.Seal{
 				end
 				if #candidates == 0 then return --[[ print("Kitty seal no candidates") ]] end
 				--print("Kitty seal success")
-				local target = candidates[math.random(#candidates)]
+				local target = pseudorandom_element(candidates, vman.randseed("kittyseal"))
 				target:set_ability(G.P_CENTERS[card.config.center.key], nil, true)
 				target:juice_up()
 				return {
@@ -320,7 +324,8 @@ local mysterystar = StockingStuffer.Present({
 		local card
 		while i > 0 do
 			i = i - 1
-			card = table.remove(candidates, math.random(#candidates))
+			card, k = pseudorandom_element(candidates, vman.randseed("star"))
+			table.remove(candidates, k)
 			card:set_edition("e_negative")
 		end
     end,
